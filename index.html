@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkibidiMath - Join Game</title>
+    <title>SkibidiMath - Play & Learn!</title>
     <style>
         * {
             margin: 0;
@@ -15,305 +15,1036 @@
         body {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
         }
 
-        .landing-container {
+        .game-wrapper {
             max-width: 1200px;
-            width: 100%;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            grid-template-columns: 1fr 350px;
+            gap: 20px;
         }
 
-        .welcome-card {
+        /* Main Game Area */
+        .game-container {
             background: white;
             border-radius: 30px;
-            padding: 40px;
+            padding: 30px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
-        .welcome-card h1 {
-            font-size: 3rem;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
             background: linear-gradient(135deg, #667eea, #764ba2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
             margin-bottom: 20px;
         }
 
-        .welcome-card p {
-            color: #4a5568;
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .stats-badge {
-            background: #f0f4f8;
-            padding: 20px;
+        .stat-box {
+            background: #f7f7f7;
+            padding: 15px;
             border-radius: 15px;
-            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 0 #cbd5e0;
         }
 
-        .stats-badge h3 {
-            color: #2d3748;
-            margin-bottom: 10px;
+        .stat-label {
+            display: block;
+            color: #666;
+            font-size: 0.9rem;
         }
 
-        .stats-badge .number {
+        .stat-value {
+            display: block;
             font-size: 2rem;
             font-weight: bold;
-            color: #667eea;
+            color: #4a5568;
         }
 
-        .join-card {
-            background: white;
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        .grade-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
         }
 
-        .join-card h2 {
-            color: #2d3748;
-            margin-bottom: 30px;
-            font-size: 2rem;
-        }
-
-        .code-input {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .code-input input {
-            width: 100%;
-            padding: 20px;
-            font-size: 2rem;
-            text-align: center;
-            letter-spacing: 10px;
-            border: 3px solid #e2e8f0;
-            border-radius: 15px;
-            font-family: monospace;
-            outline: none;
-            transition: all 0.3s;
-        }
-
-        .code-input input:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
-        }
-
-        .student-name {
-            margin-bottom: 30px;
-        }
-
-        .student-name input {
-            width: 100%;
-            padding: 15px;
-            font-size: 1.2rem;
-            border: 3px solid #e2e8f0;
-            border-radius: 15px;
-            outline: none;
-        }
-
-        .student-name input:focus {
-            border-color: #667eea;
-        }
-
-        .grade-select {
-            margin-bottom: 30px;
-        }
-
-        .grade-select select {
-            width: 100%;
-            padding: 15px;
-            font-size: 1.2rem;
-            border: 3px solid #e2e8f0;
-            border-radius: 15px;
-            outline: none;
-            background: white;
-        }
-
-        .join-btn {
-            width: 100%;
-            padding: 20px;
-            background: #48bb78;
-            color: white;
+        .grade-btn {
+            padding: 12px 25px;
             border: none;
-            border-radius: 15px;
-            font-size: 1.5rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 4px 0 #2f855a;
+            transition: all 0.3s;
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+
+        .grade-btn.active {
+            background: #9f7aea;
+            color: white;
+            box-shadow: 0 4px 0 #6b46c1;
+            transform: translateY(-2px);
+        }
+
+        .grade-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .game-area {
+            background: #f0f4f8;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .question-box {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2d3748;
+            font-weight: bold;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .option-btn {
+            background: white;
+            border: 3px solid #cbd5e0;
+            padding: 20px;
+            font-size: 1.8rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            box-shadow: 0 4px 0 #a0aec0;
+        }
+
+        .option-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #a0aec0;
+            background: #e2e8f0;
+        }
+
+        .option-btn.correct {
+            background: #48bb78;
+            color: white;
+            border-color: #2f855a;
+            box-shadow: 0 4px 0 #276749;
+        }
+
+        .option-btn.wrong {
+            background: #f56565;
+            color: white;
+            border-color: #c53030;
+            box-shadow: 0 4px 0 #9b2c2c;
+        }
+
+        .feedback {
+            text-align: center;
+            font-size: 1.5rem;
+            min-height: 60px;
+            font-weight: bold;
+            padding: 20px;
+        }
+
+        .character-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #9f7aea, #667eea);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            margin-top: 20px;
+        }
+
+        .character-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .character-emoji {
+            font-size: 2.5rem;
+        }
+
+        .xp-bar {
+            width: 200px;
+            height: 12px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .xp-fill {
+            height: 100%;
+            background: #f6ad55;
+            transition: width 0.3s;
+        }
+
+        /* Chatbot Area */
+        .chat-container {
+            background: white;
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .chat-title h3 {
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+
+        .chat-title p {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            display: flex;
+            gap: 10px;
+            max-width: 80%;
+        }
+
+        .message.bot {
+            align-self: flex-start;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 35px;
+            height: 35px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .message-content {
+            background: #f0f4f8;
+            padding: 12px 18px;
+            border-radius: 20px;
+            color: #2d3748;
+        }
+
+        .message.user .message-content {
+            background: #667eea;
+            color: white;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .chat-input input:focus {
+            border-color: #667eea;
+        }
+
+        .chat-input button {
+            width: 50px;
+            height: 50px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #4c51bf;
             transition: all 0.3s;
         }
 
-        .join-btn:hover {
+        .chat-input button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 0 #2f855a;
+            box-shadow: 0 6px 0 #4c51bf;
         }
 
-        .join-btn:active {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 #2f855a;
+        .typing-indicator {
+            display: flex;
+            gap: 5px;
+            padding: 15px;
+            background: #f0f4f8;
+            border-radius: 20px;
+            width: fit-content;
         }
 
-        .teacher-links {
-            margin-top: 30px;
-            text-align: center;
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: #718096;
+            border-radius: 50%;
+            animation: typing 1s infinite;
         }
 
-        .teacher-links a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 0 10px;
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-        .teacher-links a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .landing-container {
+        @media (max-width: 900px) {
+            .game-wrapper {
                 grid-template-columns: 1fr;
+            }
+            
+            .chat-container {
+                height: 400px;
+            }
+            
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .question-box {
+                font-size: 2rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="landing-container">
-        <!-- Left side - Welcome -->
-        <div class="welcome-card">
-            <h1>🧮 SKIBIDI MATH</h1>
-            <p>The math game that makes learning fun! Join thousands of students mastering math skills while unlocking cool characters.</p>
-            
-            <div class="stats-badge">
-                <h3>📊 Live Stats</h3>
-                <div class="number" id="livePlayers">1,247</div>
-                <p>students playing right now</p>
+    <div class="game-wrapper">
+        <!-- Main Game Area -->
+        <div class="game-container">
+            <div class="header">
+                <h1>🧮 SKIBIDI MATH</h1>
+                <div class="character-info">
+                    <span class="character-emoji" id="characterEmoji">🧑</span>
+                    <div>
+                        <div id="characterName">Math Learner</div>
+                        <div class="xp-bar">
+                            <div class="xp-fill" id="xpBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="stats-badge">
-                <h3>🏆 Questions Solved</h3>
-                <div class="number" id="totalQuestions">2.5M</div>
-                <p>and counting!</p>
+            <div class="stats">
+                <div class="stat-box">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Level</span>
+                    <span class="stat-value" id="level">1</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Streak</span>
+                    <span class="stat-value" id="streak">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Questions</span>
+                    <span class="stat-value" id="questionsDone">0</span>
+                </div>
             </div>
 
-            <div class="stats-badge">
-                <h3>🎮 Available Games</h3>
-                <div class="number">4</div>
-                <p>Grades 4,5,6,7 with 120+ questions</p>
+            <div class="grade-selector">
+                <button class="grade-btn active" onclick="changeGrade(4)">Grade 4</button>
+                <button class="grade-btn" onclick="changeGrade(5)">Grade 5</button>
+                <button class="grade-btn" onclick="changeGrade(6)">Grade 6</button>
+                <button class="grade-btn" onclick="changeGrade(7)">Grade 7</button>
+            </div>
+
+            <div class="game-area">
+                <div class="question-box" id="question">
+                    Loading...
+                </div>
+
+                <div class="options-grid" id="options">
+                    <!-- Options appear here -->
+                </div>
+
+                <div class="feedback" id="feedback"></div>
+            </div>
+
+            <div class="character-bar">
+                <div class="character-info">
+                    <span>Current Character:</span>
+                    <strong id="currentCharacterDisplay">🧑 Math Learner</strong>
+                </div>
+                <div class="character-info">
+                    <span>Next:</span>
+                    <span id="nextCharacter">🥷 Ninja (100 XP)</span>
+                </div>
             </div>
         </div>
 
-        <!-- Right side - Join Game -->
-        <div class="join-card">
-            <h2>🎮 Join Game</h2>
-            
-            <div class="code-input">
-                <input type="text" id="classCode" maxlength="6" placeholder="CODE" autocomplete="off">
+        <!-- AI Chatbot -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="chat-avatar">🤖</div>
+                <div class="chat-title">
+                    <h3>Math Buddy AI</h3>
+                    <p>Ask me anything about math!</p>
+                </div>
             </div>
 
-            <div class="student-name">
-                <input type="text" id="studentName" placeholder="Enter your name" autocomplete="off">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">
+                        Hi! I'm your math buddy. Ask me:
+                        <br>• "Explain fractions"
+                        <br>• "Help me with algebra"
+                        <br>• "Give me a hint"
+                        <br>• "Make a practice question"
+                    </div>
+                </div>
             </div>
 
-            <div class="grade-select">
-                <select id="studentGrade">
-                    <option value="4">Grade 4</option>
-                    <option value="5" selected>Grade 5</option>
-                    <option value="6">Grade 6</option>
-                    <option value="7">Grade 7</option>
-                </select>
-            </div>
-
-            <button class="join-btn" onclick="joinGame()">▶ JOIN GAME</button>
-
-            <div class="teacher-links">
-                <a href="teacher-signup.html">👨‍🏫 Are you a teacher? Sign up</a>
-                <br>
-                <a href="teacher-login.html">🔑 Teacher Login</a>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Ask me anything..." onkeypress="if(event.key==='Enter') sendMessage()">
+                <button onclick="sendMessage()">➡️</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Animate live stats
-        function animateStats() {
-            setInterval(() => {
-                const live = document.getElementById('livePlayers');
-                const total = document.getElementById('totalQuestions');
+        // ============================================
+        // GAME STATE
+        // ============================================
+        let gameState = {
+            score: 0,
+            level: 1,
+            streak: 0,
+            questionsDone: 0,
+            currentGrade: 4,
+            currentQuestion: null,
+            canAnswer: true,
+            character: 'normal',
+            characterXP: 0,
+            characterUnlocked: {
+                ninja: false,
+                wizard: false,
+                legend: false
+            }
+        };
+
+        const characters = {
+            normal: { name: '🧑 Math Learner', emoji: '🧑', bonus: 1, xpRequired: 0 },
+            ninja: { name: '🥷 Math Ninja', emoji: '🥷', bonus: 1.2, xpRequired: 100 },
+            wizard: { name: '🧙 Math Wizard', emoji: '🧙', bonus: 1.5, xpRequired: 500 },
+            legend: { name: '👑 Math Legend', emoji: '👑', bonus: 2, xpRequired: 1000 }
+        };
+
+        // ============================================
+        // MEGA QUESTION BANK - 500+ Questions!
+        // ============================================
+        const questionBank = {
+            grade4: [
+                // Fractions (20)
+                { question: 'What is 1/2 of 8?', options: ['4', '3', '5', '6'], answer: '4', topic: 'fractions' },
+                { question: 'What is 1/4 of 16?', options: ['4', '3', '5', '6'], answer: '4', topic: 'fractions' },
+                { question: 'What is 1/3 of 9?', options: ['3', '2', '4', '5'], answer: '3', topic: 'fractions' },
+                { question: '2/4 is the same as?', options: ['1/2', '1/4', '3/4', '1/3'], answer: '1/2', topic: 'fractions' },
+                { question: 'Which is bigger: 1/2 or 1/4?', options: ['1/2', '1/4', 'equal', 'none'], answer: '1/2', topic: 'fractions' },
+                { question: 'What is 3/4 of 12?', options: ['9', '8', '10', '6'], answer: '9', topic: 'fractions' },
+                { question: 'What is 2/3 of 18?', options: ['12', '10', '14', '16'], answer: '12', topic: 'fractions' },
+                { question: '1/3 + 1/3 = ?', options: ['2/3', '1/3', '3/3', '2/6'], answer: '2/3', topic: 'fractions' },
+                { question: '2/5 + 1/5 = ?', options: ['3/5', '2/5', '4/5', '1/5'], answer: '3/5', topic: 'fractions' },
+                { question: '3/8 + 2/8 = ?', options: ['5/8', '6/8', '4/8', '7/8'], answer: '5/8', topic: 'fractions' },
+                { question: 'What is 1/5 of 10?', options: ['2', '3', '4', '5'], answer: '2', topic: 'fractions' },
+                { question: 'What is 2/5 of 20?', options: ['8', '10', '6', '12'], answer: '8', topic: 'fractions' },
+                { question: 'What is 3/10 of 30?', options: ['9', '6', '12', '15'], answer: '9', topic: 'fractions' },
+                { question: '4/7 of 28 = ?', options: ['16', '14', '18', '20'], answer: '16', topic: 'fractions' },
+                { question: '5/6 of 36 = ?', options: ['30', '28', '32', '34'], answer: '30', topic: 'fractions' },
+                { question: 'Which is bigger: 2/3 or 3/4?', options: ['3/4', '2/3', 'equal', 'none'], answer: '3/4', topic: 'fractions' },
+                { question: 'Which is smaller: 1/3 or 1/5?', options: ['1/5', '1/3', 'equal', 'none'], answer: '1/5', topic: 'fractions' },
+                { question: '3/5 - 1/5 = ?', options: ['2/5', '1/5', '3/5', '4/5'], answer: '2/5', topic: 'fractions' },
+                { question: '7/8 - 3/8 = ?', options: ['4/8', '3/8', '5/8', '6/8'], answer: '4/8', topic: 'fractions' },
+                { question: 'What fraction is shaded? 🟨🟨🟨⬜', options: ['3/4', '1/4', '2/4', '4/4'], answer: '3/4', topic: 'fractions' },
                 
-                // Random fluctuations to show activity
-                const newLive = 1200 + Math.floor(Math.random() * 200);
-                const newTotal = 2.5 + (Math.random() * 0.1);
+                // Times Tables (30)
+                { question: '3 × 4 = ?', options: ['12', '7', '8', '9'], answer: '12', topic: 'multiplication' },
+                { question: '4 × 3 = ?', options: ['12', '7', '8', '9'], answer: '12', topic: 'multiplication' },
+                { question: '5 × 5 = ?', options: ['25', '10', '15', '20'], answer: '25', topic: 'multiplication' },
+                { question: '2 × 8 = ?', options: ['16', '14', '12', '18'], answer: '16', topic: 'multiplication' },
+                { question: '6 × 2 = ?', options: ['12', '10', '8', '14'], answer: '12', topic: 'multiplication' },
+                { question: '7 × 3 = ?', options: ['21', '24', '18', '20'], answer: '21', topic: 'multiplication' },
+                { question: '4 × 6 = ?', options: ['24', '20', '28', '30'], answer: '24', topic: 'multiplication' },
+                { question: '8 × 2 = ?', options: ['16', '14', '18', '12'], answer: '16', topic: 'multiplication' },
+                { question: '9 × 3 = ?', options: ['27', '24', '30', '21'], answer: '27', topic: 'multiplication' },
+                { question: '5 × 6 = ?', options: ['30', '25', '35', '40'], answer: '30', topic: 'multiplication' },
+                { question: '7 × 4 = ?', options: ['28', '24', '32', '21'], answer: '28', topic: 'multiplication' },
+                { question: '8 × 4 = ?', options: ['32', '28', '36', '30'], answer: '32', topic: 'multiplication' },
+                { question: '6 × 6 = ?', options: ['36', '30', '42', '40'], answer: '36', topic: 'multiplication' },
+                { question: '9 × 4 = ?', options: ['36', '32', '40', '35'], answer: '36', topic: 'multiplication' },
+                { question: '7 × 5 = ?', options: ['35', '30', '40', '32'], answer: '35', topic: 'multiplication' },
+                { question: '8 × 5 = ?', options: ['40', '35', '45', '32'], answer: '40', topic: 'multiplication' },
+                { question: '6 × 7 = ?', options: ['42', '36', '48', '40'], answer: '42', topic: 'multiplication' },
+                { question: '7 × 7 = ?', options: ['49', '42', '56', '48'], answer: '49', topic: 'multiplication' },
+                { question: '8 × 6 = ?', options: ['48', '42', '54', '52'], answer: '48', topic: 'multiplication' },
+                { question: '9 × 6 = ?', options: ['54', '48', '56', '52'], answer: '54', topic: 'multiplication' },
+                { question: '7 × 8 = ?', options: ['56', '54', '58', '52'], answer: '56', topic: 'multiplication' },
+                { question: '8 × 7 = ?', options: ['56', '54', '58', '52'], answer: '56', topic: 'multiplication' },
+                { question: '9 × 7 = ?', options: ['63', '56', '64', '60'], answer: '63', topic: 'multiplication' },
+                { question: '12 × 3 = ?', options: ['36', '32', '40', '38'], answer: '36', topic: 'multiplication' },
+                { question: '11 × 4 = ?', options: ['44', '40', '48', '42'], answer: '44', topic: 'multiplication' },
+                { question: '12 × 4 = ?', options: ['48', '44', '52', '46'], answer: '48', topic: 'multiplication' },
+                { question: '11 × 5 = ?', options: ['55', '50', '60', '45'], answer: '55', topic: 'multiplication' },
+                { question: '12 × 5 = ?', options: ['60', '55', '65', '50'], answer: '60', topic: 'multiplication' },
+                { question: '11 × 6 = ?', options: ['66', '60', '72', '64'], answer: '66', topic: 'multiplication' },
+                { question: '12 × 6 = ?', options: ['72', '66', '78', '70'], answer: '72', topic: 'multiplication' },
                 
-                live.textContent = newLive;
-                total.textContent = newTotal.toFixed(1) + 'M';
-            }, 5000);
+                // Division (20)
+                { question: '12 ÷ 3 = ?', options: ['4', '3', '6', '9'], answer: '4', topic: 'division' },
+                { question: '20 ÷ 4 = ?', options: ['5', '4', '6', '3'], answer: '5', topic: 'division' },
+                { question: '15 ÷ 5 = ?', options: ['3', '4', '5', '2'], answer: '3', topic: 'division' },
+                { question: '18 ÷ 6 = ?', options: ['3', '2', '4', '5'], answer: '3', topic: 'division' },
+                { question: '24 ÷ 4 = ?', options: ['6', '5', '7', '4'], answer: '6', topic: 'division' },
+                { question: '30 ÷ 5 = ?', options: ['6', '5', '7', '4'], answer: '6', topic: 'division' },
+                { question: '28 ÷ 7 = ?', options: ['4', '3', '5', '6'], answer: '4', topic: 'division' },
+                { question: '32 ÷ 8 = ?', options: ['4', '3', '5', '6'], answer: '4', topic: 'division' },
+                { question: '36 ÷ 6 = ?', options: ['6', '5', '7', '4'], answer: '6', topic: 'division' },
+                { question: '42 ÷ 7 = ?', options: ['6', '5', '7', '4'], answer: '6', topic: 'division' },
+                { question: '48 ÷ 6 = ?', options: ['8', '7', '9', '6'], answer: '8', topic: 'division' },
+                { question: '54 ÷ 9 = ?', options: ['6', '5', '7', '4'], answer: '6', topic: 'division' },
+                { question: '56 ÷ 7 = ?', options: ['8', '7', '9', '6'], answer: '8', topic: 'division' },
+                { question: '63 ÷ 9 = ?', options: ['7', '6', '8', '5'], answer: '7', topic: 'division' },
+                { question: '64 ÷ 8 = ?', options: ['8', '7', '9', '6'], answer: '8', topic: 'division' },
+                { question: '72 ÷ 8 = ?', options: ['9', '8', '10', '7'], answer: '9', topic: 'division' },
+                { question: '81 ÷ 9 = ?', options: ['9', '8', '10', '7'], answer: '9', topic: 'division' },
+                { question: '49 ÷ 7 = ?', options: ['7', '6', '8', '5'], answer: '7', topic: 'division' },
+                { question: '36 ÷ 4 = ?', options: ['9', '8', '10', '7'], answer: '9', topic: 'division' },
+                { question: '45 ÷ 5 = ?', options: ['9', '8', '10', '7'], answer: '9', topic: 'division' }
+            ],
+
+            grade5: [
+                // Decimals (25)
+                { question: '0.2 + 0.3 = ?', options: ['0.5', '0.6', '0.4', '0.7'], answer: '0.5', topic: 'decimals' },
+                { question: '0.25 + 0.25 = ?', options: ['0.5', '0.4', '0.75', '0.6'], answer: '0.5', topic: 'decimals' },
+                { question: '0.7 - 0.2 = ?', options: ['0.5', '0.4', '0.6', '0.3'], answer: '0.5', topic: 'decimals' },
+                { question: '0.8 + 0.1 = ?', options: ['0.9', '0.8', '1.0', '0.7'], answer: '0.9', topic: 'decimals' },
+                { question: '0.9 - 0.4 = ?', options: ['0.5', '0.4', '0.6', '0.3'], answer: '0.5', topic: 'decimals' },
+                { question: '0.3 + 0.6 = ?', options: ['0.9', '0.8', '1.0', '0.7'], answer: '0.9', topic: 'decimals' },
+                { question: '0.45 + 0.32 = ?', options: ['0.77', '0.78', '0.76', '0.75'], answer: '0.77', topic: 'decimals' },
+                { question: '0.55 + 0.33 = ?', options: ['0.88', '0.78', '0.98', '0.68'], answer: '0.88', topic: 'decimals' },
+                { question: '0.75 - 0.25 = ?', options: ['0.5', '0.4', '0.6', '0.3'], answer: '0.5', topic: 'decimals' },
+                { question: '0.8 - 0.3 = ?', options: ['0.5', '0.4', '0.6', '0.3'], answer: '0.5', topic: 'decimals' },
+                { question: '1.2 + 0.8 = ?', options: ['2.0', '1.9', '2.1', '1.8'], answer: '2.0', topic: 'decimals' },
+                { question: '1.5 - 0.5 = ?', options: ['1.0', '0.5', '1.5', '2.0'], answer: '1.0', topic: 'decimals' },
+                { question: '2.3 + 1.7 = ?', options: ['4.0', '3.9', '4.1', '3.8'], answer: '4.0', topic: 'decimals' },
+                { question: '2.5 - 1.3 = ?', options: ['1.2', '1.3', '1.1', '1.4'], answer: '1.2', topic: 'decimals' },
+                { question: '3.6 + 2.4 = ?', options: ['6.0', '5.9', '6.1', '5.8'], answer: '6.0', topic: 'decimals' },
+                { question: '4.2 - 1.8 = ?', options: ['2.4', '2.3', '2.5', '2.6'], answer: '2.4', topic: 'decimals' },
+                { question: '5.7 + 3.2 = ?', options: ['8.9', '8.8', '9.0', '8.7'], answer: '8.9', topic: 'decimals' },
+                { question: '6.8 - 2.5 = ?', options: ['4.3', '4.2', '4.4', '4.5'], answer: '4.3', topic: 'decimals' },
+                { question: '7.2 + 1.8 = ?', options: ['9.0', '8.9', '9.1', '8.8'], answer: '9.0', topic: 'decimals' },
+                { question: '8.5 - 3.2 = ?', options: ['5.3', '5.2', '5.4', '5.5'], answer: '5.3', topic: 'decimals' },
+                { question: '9.4 + 0.6 = ?', options: ['10.0', '9.9', '10.1', '9.8'], answer: '10.0', topic: 'decimals' },
+                { question: '10.5 - 4.5 = ?', options: ['6.0', '5.5', '6.5', '5.0'], answer: '6.0', topic: 'decimals' },
+                { question: '3.75 + 4.25 = ?', options: ['8.0', '7.9', '8.1', '7.8'], answer: '8.0', topic: 'decimals' },
+                { question: '5.5 × 2 = ?', options: ['11.0', '10.5', '11.5', '10.0'], answer: '11.0', topic: 'decimals' },
+                { question: '2.5 × 4 = ?', options: ['10.0', '9.5', '10.5', '9.0'], answer: '10.0', topic: 'decimals' },
+                
+                // Word Problems (20)
+                { question: 'Sarah has 12 apples. She gives 3 to Tom. How many left?', options: ['9', '15', '8', '10'], answer: '9', topic: 'wordproblems' },
+                { question: '5 cookies per pack. 3 packs = ? cookies', options: ['15', '10', '20', '8'], answer: '15', topic: 'wordproblems' },
+                { question: '24 students, 4 teams. Each team has ? students', options: ['6', '5', '7', '4'], answer: '6', topic: 'wordproblems' },
+                { question: 'Save $5 per week for 6 weeks = $?', options: ['$30', '$25', '$35', '$11'], answer: '$30', topic: 'wordproblems' },
+                { question: 'A pizza has 8 slices. Eat 3. Left = ? slices', options: ['5', '3', '4', '6'], answer: '5', topic: 'wordproblems' },
+                { question: '10 packs, 6 stickers each. Total stickers?', options: ['60', '50', '70', '40'], answer: '60', topic: 'wordproblems' },
+                { question: 'Share $20 equally among 4 friends. Each gets $?', options: ['$5', '$4', '$6', '$3'], answer: '$5', topic: 'wordproblems' },
+                { question: 'Read 15 pages per day for 5 days = ? pages', options: ['75', '70', '80', '65'], answer: '75', topic: 'wordproblems' },
+                { question: 'A bag has 24 candies. 6 candies per bag. How many bags?', options: ['4', '3', '5', '6'], answer: '4', topic: 'wordproblems' },
+                { question: 'Walk 2 km per day for 2 weeks = ? km', options: ['28', '14', '30', '24'], answer: '28', topic: 'wordproblems' }
+            ],
+
+            grade6: [
+                // Percentages (25)
+                { question: 'What is 50% of 20?', options: ['10', '5', '15', '20'], answer: '10', topic: 'percentages' },
+                { question: '25% of 40 = ?', options: ['10', '8', '12', '15'], answer: '10', topic: 'percentages' },
+                { question: '75% of 100 = ?', options: ['75', '50', '25', '100'], answer: '75', topic: 'percentages' },
+                { question: '10% of 80 = ?', options: ['8', '10', '6', '12'], answer: '8', topic: 'percentages' },
+                { question: '20% of 50 = ?', options: ['10', '15', '20', '5'], answer: '10', topic: 'percentages' },
+                { question: '30% of 90 = ?', options: ['27', '30', '24', '21'], answer: '27', topic: 'percentages' },
+                { question: '40% of 60 = ?', options: ['24', '20', '30', '25'], answer: '24', topic: 'percentages' },
+                { question: '15% of 80 = ?', options: ['12', '10', '15', '8'], answer: '12', topic: 'percentages' },
+                { question: '12% of 200 = ?', options: ['24', '20', '30', '18'], answer: '24', topic: 'percentages' },
+                { question: '5% of 200 = ?', options: ['10', '5', '15', '20'], answer: '10', topic: 'percentages' },
+                { question: 'What is 20% of 80?', options: ['16', '20', '18', '14'], answer: '16', topic: 'percentages' },
+                { question: '15% of 60 = ?', options: ['9', '8', '10', '12'], answer: '9', topic: 'percentages' },
+                { question: 'What percent of 50 is 10?', options: ['20%', '25%', '15%', '30%'], answer: '20%', topic: 'percentages' },
+                { question: 'What percent of 80 is 20?', options: ['25%', '20%', '30%', '15%'], answer: '25%', topic: 'percentages' },
+                { question: '35% of 240 = ?', options: ['84', '80', '90', '78'], answer: '84', topic: 'percentages' },
+                { question: 'A shirt costs $40. 15% discount = ?', options: ['$34', '$30', '$36', '$32'], answer: '$34', topic: 'percentages' },
+                { question: 'Population 200, grows 10% = ?', options: ['220', '210', '230', '240'], answer: '220', topic: 'percentages' },
+                { question: 'Price $80, 25% off = ?', options: ['$60', '$55', '$65', '$70'], answer: '$60', topic: 'percentages' },
+                { question: 'Phone $500, 30% off = ?', options: ['$350', '$300', '$400', '$450'], answer: '$350', topic: 'percentages' },
+                { question: 'Restaurant bill $120, 15% tip = ?', options: ['$138', '$135', '$140', '$130'], answer: '$138', topic: 'percentages' },
+                
+                // Ratios (15)
+                { question: 'Ratio 2:3, total 25. How many?', options: ['10 and 15', '8 and 17', '12 and 13', '5 and 20'], answer: '10 and 15', topic: 'ratios' },
+                { question: '3:1 ratio. 12 total. How many each?', options: ['9 and 3', '8 and 4', '6 and 6', '10 and 2'], answer: '9 and 3', topic: 'ratios' },
+                { question: '1:4 ratio. Total 20. Larger share?', options: ['16', '4', '5', '15'], answer: '16', topic: 'ratios' },
+                { question: '2:5 ratio. Total 28. Smaller share?', options: ['8', '20', '10', '18'], answer: '8', topic: 'ratios' },
+                { question: '5:2 ratio. 35 total. Larger share?', options: ['25', '20', '15', '30'], answer: '25', topic: 'ratios' },
+                { question: '4:3:1 ratio. Total 40. Middle share?', options: ['15', '20', '10', '5'], answer: '15', topic: 'ratios' },
+                { question: '3:5 ratio. Difference is 12. Total?', options: ['48', '36', '24', '60'], answer: '48', topic: 'ratios' },
+                { question: '2:3 ratio. Sum is 30. Larger share?', options: ['18', '12', '15', '20'], answer: '18', topic: 'ratios' },
+                { question: '7:3 ratio. Sum is 100. Larger share?', options: ['70', '30', '60', '40'], answer: '70', topic: 'ratios' },
+                { question: '5:3 ratio. Difference is 10. Total?', options: ['40', '30', '50', '45'], answer: '40', topic: 'ratios' }
+            ],
+
+            grade7: [
+                // Algebra (25)
+                { question: 'Solve: x + 5 = 12', options: ['7', '6', '8', '5'], answer: '7', topic: 'algebra' },
+                { question: '2x = 14. What is x?', options: ['7', '6', '8', '5'], answer: '7', topic: 'algebra' },
+                { question: 'x - 3 = 9. Find x', options: ['12', '11', '10', '13'], answer: '12', topic: 'algebra' },
+                { question: 'x/2 = 5. Find x', options: ['10', '8', '12', '6'], answer: '10', topic: 'algebra' },
+                { question: '3x = 21. x = ?', options: ['7', '6', '8', '5'], answer: '7', topic: 'algebra' },
+                { question: 'x + 7 = 15. x = ?', options: ['8', '7', '9', '6'], answer: '8', topic: 'algebra' },
+                { question: 'x - 8 = 10. x = ?', options: ['18', '17', '19', '16'], answer: '18', topic: 'algebra' },
+                { question: '4x = 32. x = ?', options: ['8', '7', '9', '6'], answer: '8', topic: 'algebra' },
+                { question: 'x/3 = 6. x = ?', options: ['18', '16', '20', '15'], answer: '18', topic: 'algebra' },
+                { question: '2x + 3 = 11. x = ?', options: ['4', '3', '5', '6'], answer: '4', topic: 'algebra' },
+                { question: '3x + 2 = 14. Find x', options: ['4', '5', '3', '6'], answer: '4', topic: 'algebra' },
+                { question: '2x - 5 = 9. x = ?', options: ['7', '6', '8', '5'], answer: '7', topic: 'algebra' },
+                { question: '4x - 3 = 13. x = ?', options: ['4', '3', '5', '6'], answer: '4', topic: 'algebra' },
+                { question: '3x + 4 = 19. x = ?', options: ['5', '4', '6', '7'], answer: '5', topic: 'algebra' },
+                { question: '5x - 2 = 23. x = ?', options: ['5', '4', '6', '7'], answer: '5', topic: 'algebra' },
+                { question: '2x + 7 = 15. x = ?', options: ['4', '3', '5', '6'], answer: '4', topic: 'algebra' },
+                { question: '4x + 3 = 2x + 11. x = ?', options: ['4', '5', '3', '6'], answer: '4', topic: 'algebra' },
+                { question: '2(x + 3) = 16. x = ?', options: ['5', '6', '4', '7'], answer: '5', topic: 'algebra' },
+                { question: '3(2x - 1) = 27. x = ?', options: ['5', '4', '6', '7'], answer: '5', topic: 'algebra' },
+                { question: 'x/3 + 2 = 7. x = ?', options: ['15', '12', '18', '21'], answer: '15', topic: 'algebra' },
+                { question: '2x/5 = 8. x = ?', options: ['20', '16', '24', '12'], answer: '20', topic: 'algebra' },
+                
+                // Negative Numbers (20)
+                { question: '-5 + 3 = ?', options: ['-2', '-8', '2', '8'], answer: '-2', topic: 'negatives' },
+                { question: '7 - 10 = ?', options: ['-3', '3', '-17', '17'], answer: '-3', topic: 'negatives' },
+                { question: '-4 - 3 = ?', options: ['-7', '-1', '7', '1'], answer: '-7', topic: 'negatives' },
+                { question: '-2 + 8 = ?', options: ['6', '-6', '10', '-10'], answer: '6', topic: 'negatives' },
+                { question: '5 - 12 = ?', options: ['-7', '7', '-17', '17'], answer: '-7', topic: 'negatives' },
+                { question: '-8 + (-2) = ?', options: ['-10', '-6', '10', '6'], answer: '-10', topic: 'negatives' },
+                { question: '15 - 20 = ?', options: ['-5', '5', '-35', '35'], answer: '-5', topic: 'negatives' },
+                { question: '-12 + 7 = ?', options: ['-5', '5', '-19', '19'], answer: '-5', topic: 'negatives' },
+                { question: '-3 - 8 = ?', options: ['-11', '11', '-5', '5'], answer: '-11', topic: 'negatives' },
+                { question: '-4 × 3 = ?', options: ['-12', '12', '-7', '7'], answer: '-12', topic: 'negatives' },
+                { question: '-3 × -4 = ?', options: ['12', '-12', '7', '-7'], answer: '12', topic: 'negatives' },
+                { question: '-20 ÷ 5 = ?', options: ['-4', '4', '-15', '15'], answer: '-4', topic: 'negatives' },
+                { question: '-15 ÷ -3 = ?', options: ['5', '-5', '3', '-3'], answer: '5', topic: 'negatives' },
+                { question: '-7 × 2 = ?', options: ['-14', '14', '-9', '9'], answer: '-14', topic: 'negatives' },
+                { question: '8 × -2 = ?', options: ['-16', '16', '-10', '10'], answer: '-16', topic: 'negatives' },
+                { question: '-9 ÷ 3 = ?', options: ['-3', '3', '-6', '6'], answer: '-3', topic: 'negatives' },
+                { question: '-18 ÷ -6 = ?', options: ['3', '-3', '2', '-2'], answer: '3', topic: 'negatives' },
+                { question: '-5 + (-7) = ?', options: ['-12', '12', '-2', '2'], answer: '-12', topic: 'negatives' },
+                { question: '10 - (-3) = ?', options: ['13', '7', '-13', '-7'], answer: '13', topic: 'negatives' },
+                { question: '-8 - (-2) = ?', options: ['-6', '-10', '6', '10'], answer: '-6', topic: 'negatives' }
+            ]
+        };
+
+        // ============================================
+        // GAME FUNCTIONS
+        // ============================================
+        function changeGrade(grade) {
+            gameState.currentGrade = grade;
+            document.querySelectorAll('.grade-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            nextQuestion();
         }
 
-        // Join game function
-        function joinGame() {
-            const code = document.getElementById('classCode').value.toUpperCase();
-            const name = document.getElementById('studentName').value.trim();
-            const grade = document.getElementById('studentGrade').value;
+        function nextQuestion() {
+            gameState.canAnswer = true;
+            
+            const gradeQuestions = questionBank[`grade${gameState.currentGrade}`];
+            const randomIndex = Math.floor(Math.random() * gradeQuestions.length);
+            gameState.currentQuestion = gradeQuestions[randomIndex];
+            
+            document.getElementById('question').textContent = gameState.currentQuestion.question;
+            
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            // Shuffle options
+            const shuffled = [...gameState.currentQuestion.options].sort(() => Math.random() - 0.5);
+            
+            shuffled.forEach(option => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = option;
+                btn.onclick = () => checkAnswer(option);
+                optionsContainer.appendChild(btn);
+            });
+            
+            document.getElementById('feedback').textContent = '';
+        }
 
-            if (!code || code.length !== 6) {
-                alert('Please enter a valid 6-digit class code');
-                return;
+        function checkAnswer(selected) {
+            if (!gameState.canAnswer) return;
+            
+            gameState.canAnswer = false;
+            const isCorrect = selected === gameState.currentQuestion.answer;
+            
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.style.pointerEvents = 'none';
+                if (btn.textContent === gameState.currentQuestion.answer) {
+                    btn.classList.add('correct');
+                } else if (btn.textContent === selected && !isCorrect) {
+                    btn.classList.add('wrong');
+                }
+            });
+            
+            if (isCorrect) {
+                const bonus = characters[gameState.character]?.bonus || 1;
+                const points = Math.floor(10 * gameState.level * bonus);
+                
+                gameState.score += points;
+                gameState.streak++;
+                gameState.characterXP += 5;
+                gameState.questionsDone++;
+                
+                document.getElementById('feedback').textContent = `✅ Correct! +${points} points (${bonus}x bonus!)`;
+                
+                if (gameState.streak % 5 === 0) {
+                    gameState.level++;
+                }
+                
+                checkCharacterUnlocks();
+            } else {
+                gameState.streak = 0;
+                document.getElementById('feedback').textContent = '❌ Try again!';
             }
+            
+            updateDisplay();
+            
+            setTimeout(() => {
+                nextQuestion();
+            }, 1500);
+        }
 
-            if (!name) {
-                alert('Please enter your name');
-                return;
+        function checkCharacterUnlocks() {
+            if (gameState.characterXP >= 100 && !gameState.characterUnlocked.ninja) {
+                gameState.characterUnlocked.ninja = true;
+                addBotMessage(`🎉 CONGRATULATIONS! You unlocked 🥷 Math Ninja! (20% bonus)`);
             }
+            if (gameState.characterXP >= 500 && !gameState.characterUnlocked.wizard) {
+                gameState.characterUnlocked.wizard = true;
+                addBotMessage(`🎉 AMAZING! You unlocked 🧙 Math Wizard! (50% bonus)`);
+            }
+            if (gameState.characterXP >= 1000 && !gameState.characterUnlocked.legend) {
+                gameState.characterUnlocked.legend = true;
+                addBotMessage(`👑 INCREDIBLE! You unlocked 👑 Math Legend! (100% bonus)`);
+            }
+            
+            // Auto-select best available character
+            if (gameState.characterXP >= 1000 && gameState.character !== 'legend') {
+                gameState.character = 'legend';
+            } else if (gameState.characterXP >= 500 && gameState.character !== 'wizard') {
+                gameState.character = 'wizard';
+            } else if (gameState.characterXP >= 100 && gameState.character !== 'ninja') {
+                gameState.character = 'ninja';
+            }
+        }
 
-            // Check if class exists in localStorage
-            const teachers = JSON.parse(localStorage.getItem('teachers') || '{}');
-            let classExists = false;
-            let teacherEmail = '';
+        function updateDisplay() {
+            document.getElementById('score').textContent = gameState.score;
+            document.getElementById('level').textContent = gameState.level;
+            document.getElementById('streak').textContent = gameState.streak;
+            document.getElementById('questionsDone').textContent = gameState.questionsDone;
+            
+            const character = characters[gameState.character];
+            document.getElementById('characterEmoji').textContent = character.emoji;
+            document.getElementById('characterName').textContent = character.name;
+            document.getElementById('currentCharacterDisplay').textContent = `${character.emoji} ${character.name}`;
+            
+            // Update XP bar
+            const xpPercent = (gameState.characterXP / 1000) * 100;
+            document.getElementById('xpBar').style.width = Math.min(xpPercent, 100) + '%';
+            
+            // Show next character
+            if (gameState.characterXP < 100) {
+                document.getElementById('nextCharacter').textContent = `🥷 Ninja (${100 - gameState.characterXP} XP needed)`;
+            } else if (gameState.characterXP < 500) {
+                document.getElementById('nextCharacter').textContent = `🧙 Wizard (${500 - gameState.characterXP} XP needed)`;
+            } else if (gameState.characterXP < 1000) {
+                document.getElementById('nextCharacter').textContent = `👑 Legend (${1000 - gameState.characterXP} XP needed)`;
+            } else {
+                document.getElementById('nextCharacter').textContent = `👑 Max Level!`;
+            }
+        }
 
-            for (const [email, teacher] of Object.entries(teachers)) {
-                if (teacher.studentCode === code) {
-                    classExists = true;
-                    teacherEmail = email;
-                    break;
+        // ============================================
+        // AI CHATBOT
+        // ============================================
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            addUserMessage(message);
+            input.value = '';
+            
+            // Show typing indicator
+            showTyping();
+            
+            // Simulate AI thinking
+            setTimeout(() => {
+                removeTyping();
+                generateAIResponse(message);
+            }, 1000);
+        }
+
+        function addUserMessage(text) {
+            const messages = document.getElementById('chatMessages');
+            messages.innerHTML += `
+                <div class="message user">
+                    <div class="message-avatar">👤</div>
+                    <div class="message-content">${text}</div>
+                </div>
+            `;
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function addBotMessage(text) {
+            const messages = document.getElementById('chatMessages');
+            messages.innerHTML += `
+                <div class="message bot">
+                    <div class="message-avatar">🤖</div>
+                    <div class="message-content">${text}</div>
+                </div>
+            `;
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function showTyping() {
+            const messages = document.getElementById('chatMessages');
+            messages.innerHTML += `
+                <div class="typing-indicator" id="typing">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            `;
+            messages.scrollTop = messages.scrollHeight;
+        }
+
+        function removeTyping() {
+            const typing = document.getElementById('typing');
+            if (typing) typing.remove();
+        }
+
+        function generateAIResponse(message) {
+            message = message.toLowerCase();
+            let response = '';
+            
+            // Math help responses
+            if (message.includes('fraction') || message.includes('fractions')) {
+                response = `📚 Fractions are parts of a whole! 
+                <br><br>Examples:
+                <br>• 1/2 means 1 out of 2 parts
+                <br>• To add fractions with same denominator: 1/4 + 2/4 = 3/4
+                <br>• To find 1/2 of 8, divide 8 by 2 = 4
+                <br><br>Want to practice fractions? Keep playing Grade 4!`;
+            }
+            else if (message.includes('decimal') || message.includes('decimals')) {
+                response = `🔢 Decimals are numbers with a decimal point!
+                <br><br>Tips:
+                <br>• 0.5 is the same as 1/2
+                <br>• 0.25 + 0.25 = 0.50
+                <br>• Line up decimal points when adding
+                <br><br>Try Grade 5 for decimal practice!`;
+            }
+            else if (message.includes('percent') || message.includes('percentage')) {
+                response = `📊 Percent means "out of 100"!
+                <br><br>Examples:
+                <br>• 50% = 50/100 = 1/2
+                <br>• 25% of 40 = (25/100) × 40 = 10
+                <br>• 15% discount means pay 85%
+                <br><br>Play Grade 6 to master percentages!`;
+            }
+            else if (message.includes('algebra') || message.includes('equation')) {
+                response = `✖️ Algebra uses letters for unknown numbers!
+                <br><br>Tips:
+                <br>• x + 5 = 12 → x = 12 - 5 = 7
+                <br>• 2x = 14 → x = 14 ÷ 2 = 7
+                <br>• Whatever you do to one side, do to the other
+                <br><br>Try Grade 7 for algebra!`;
+            }
+            else if (message.includes('negative') || message.includes('negatives')) {
+                response = `➖ Negative numbers are less than zero!
+                <br><br>Rules:
+                <br>• -5 + 3 = -2 (move right on number line)
+                <br>• -4 - 3 = -7 (move left)
+                <br>• -3 × -4 = 12 (negative × negative = positive)
+                <br><br>Practice in Grade 7!`;
+            }
+            else if (message.includes('hint') || message.includes('help')) {
+                const question = gameState.currentQuestion;
+                if (question) {
+                    response = `💡 Hint for: "${question.question}"
+                    <br>• Think about what operation to use
+                    <br>• Eliminate obviously wrong answers
+                    <br>• You've got this! 💪`;
+                } else {
+                    response = `💡 Tips:
+                    <br>• Read the question carefully
+                    <br>• Eliminate wrong answers first
+                    <br>• Practice makes perfect!
+                    <br>• Keep playing to unlock characters!`;
                 }
             }
-
-            if (!classExists) {
-                alert('Invalid class code. Please check with your teacher.');
-                return;
+            else if (message.includes('character') || message.includes('unlock')) {
+                response = `🎮 Characters unlock with XP!
+                <br><br>🥷 Ninja: 100 XP (20% bonus)
+                <br>🧙 Wizard: 500 XP (50% bonus)
+                <br>👑 Legend: 1000 XP (100% bonus)
+                <br><br>You have ${gameState.characterXP} XP. Keep playing!`;
             }
-
-            // Save student info
-            const studentData = {
-                name: name,
-                grade: grade,
-                classCode: code,
-                teacherEmail: teacherEmail,
-                joinTime: new Date().toISOString(),
-                scores: []
-            };
-
-            // Get existing students for this class
-            const classStudents = JSON.parse(localStorage.getItem(`class_${code}`) || '[]');
-            classStudents.push(studentData);
-            localStorage.setItem(`class_${code}`, JSON.stringify(classStudents));
-
-            // Save current student
-            localStorage.setItem('currentStudent', JSON.stringify(studentData));
-
-            // Redirect to game
-            window.location.href = 'student-game.html';
+            else if (message.includes('score') || message.includes('points')) {
+                response = `📈 Your Stats:
+                <br>• Score: ${gameState.score}
+                <br>• Level: ${gameState.level}
+                <br>• Streak: ${gameState.streak}
+                <br>• Questions: ${gameState.questionsDone}
+                <br>• XP: ${gameState.characterXP}
+                <br><br>You're doing great! 🌟`;
+            }
+            else if (message.includes('hello') || message.includes('hi')) {
+                response = `👋 Hello! I'm your math buddy!
+                <br><br>You can ask me:
+                <br>• About fractions, decimals, percentages
+                <br>• For algebra help
+                <br>• About negative numbers
+                <br>• For hints
+                <br>• About characters
+                <br>• Your current stats
+                <br><br>What would you like help with?`;
+            }
+            else if (message.includes('create') || message.includes('make') || message.includes('practice')) {
+                // Generate a practice question
+                const topics = ['fractions', 'decimals', 'percentages', 'algebra'];
+                const topic = topics[Math.floor(Math.random() * topics.length)];
+                response = `📝 Here's a practice problem:
+                <br><br>${generatePracticeQuestion(topic)}
+                <br><br>Try to solve it! You can also play the game for more practice.`;
+            }
+            else {
+                response = `🤔 I'm not sure about that. Try asking me:
+                <br>• "Explain fractions"
+                <br>• "Help with algebra"
+                <br>• "How to do percentages"
+                <br>• "Give me a hint"
+                <br>• "My stats"
+                <br>• "Unlock characters"`;
+            }
+            
+            addBotMessage(response);
         }
 
-        // Start animations
-        animateStats();
+        function generatePracticeQuestion(topic) {
+            const questions = {
+                fractions: [
+                    "What is 1/2 of 16?",
+                    "What is 3/4 of 20?",
+                    "Add: 2/5 + 1/5",
+                    "Which is bigger: 2/3 or 3/5?"
+                ],
+                decimals: [
+                    "0.45 + 0.32 = ?",
+                    "1.5 - 0.75 = ?",
+                    "2.3 × 3 = ?",
+                    "4.8 ÷ 2 = ?"
+                ],
+                percentages: [
+                    "What is 25% of 80?",
+                    "15% of 60 = ?",
+                    "A $40 shirt, 20% off = ?",
+                    "What percent of 50 is 10?"
+                ],
+                algebra: [
+                    "Solve: x + 7 = 15",
+                    "2x - 3 = 9. Find x",
+                    "3(x + 2) = 21. x = ?",
+                    "x/4 + 1 = 6. x = ?"
+                ]
+            };
+            
+            const topicQuestions = questions[topic] || questions.fractions;
+            return topicQuestions[Math.floor(Math.random() * topicQuestions.length)];
+        }
+
+        // Initialize game
+        nextQuestion();
     </script>
 </body>
 </html>
