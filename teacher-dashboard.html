@@ -19,7 +19,7 @@
         }
 
         .dashboard-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -34,6 +34,7 @@
         .header h1 {
             color: #2d3748;
             margin-bottom: 10px;
+            font-size: 2.5rem;
         }
 
         .teacher-info {
@@ -52,11 +53,18 @@
             background: #f56565;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 10px 25px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 1rem;
             box-shadow: 0 4px 0 #c53030;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #c53030;
         }
 
         .codes-section {
@@ -67,32 +75,36 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
+        .codes-section h2 {
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+
         .codes-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
-            margin-top: 20px;
         }
 
         .code-card {
-            padding: 20px;
+            padding: 30px;
             border-radius: 15px;
             text-align: center;
+            color: white;
         }
 
         .code-card.student {
             background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
         }
 
         .code-card.parent {
             background: linear-gradient(135deg, #48bb78, #38a169);
-            color: white;
         }
 
         .code-card .label {
             font-size: 1.2rem;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            opacity: 0.9;
         }
 
         .code-card .code {
@@ -100,20 +112,26 @@
             font-weight: bold;
             letter-spacing: 5px;
             font-family: monospace;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .copy-btn {
             background: rgba(255,255,255,0.2);
             color: white;
             border: none;
-            padding: 8px 20px;
-            border-radius: 20px;
+            padding: 10px 25px;
+            border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s;
         }
 
-        .stats-grid {
+        .copy-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .live-stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
@@ -122,7 +140,7 @@
 
         .stat-card {
             background: white;
-            padding: 20px;
+            padding: 25px;
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             text-align: center;
@@ -135,9 +153,55 @@
         }
 
         .stat-card .number {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: bold;
             color: #4a5568;
+        }
+
+        .stat-card .small {
+            color: #a0aec0;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .filter-section {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-section select, .filter-section input {
+            padding: 12px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .filter-section select:focus, .filter-section input:focus {
+            border-color: #667eea;
+        }
+
+        .refresh-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 0 #4c51bf;
+            transition: all 0.3s;
+        }
+
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #4c51bf;
         }
 
         .students-section {
@@ -152,6 +216,10 @@
             margin-bottom: 20px;
         }
 
+        .table-container {
+            overflow-x: auto;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -163,6 +231,11 @@
             text-align: left;
             color: #4a5568;
             font-weight: 600;
+            cursor: pointer;
+        }
+
+        th:hover {
+            background: #edf2f7;
         }
 
         td {
@@ -183,16 +256,45 @@
             display: inline-block;
         }
 
+        .online {
+            color: #48bb78;
+            font-weight: bold;
+        }
+
+        .offline {
+            color: #a0aec0;
+        }
+
+        .topic-progress {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .topic-tag {
+            background: #e2e8f0;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+        }
+
         .export-btn {
-            background: #667eea;
+            background: #48bb78;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
+            padding: 12px 30px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 1rem;
             margin-top: 20px;
-            box-shadow: 0 4px 0 #4c51bf;
+            box-shadow: 0 4px 0 #2f855a;
+            transition: all 0.3s;
+        }
+
+        .export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #2f855a;
         }
 
         @media (max-width: 768px) {
@@ -200,16 +302,16 @@
                 grid-template-columns: 1fr;
             }
             
-            .stats-grid {
+            .live-stats {
                 grid-template-columns: repeat(2, 1fr);
             }
             
-            table {
-                font-size: 0.9rem;
+            .filter-section {
+                flex-direction: column;
             }
             
-            td, th {
-                padding: 10px;
+            .filter-section select, .filter-section input, .refresh-btn {
+                width: 100%;
             }
         }
     </style>
@@ -224,7 +326,7 @@
                     <h2 id="teacherName">Loading...</h2>
                     <p id="teacherSchool"></p>
                 </div>
-                <button class="logout-btn" onclick="logout()">Log Out</button>
+                <button class="logout-btn" onclick="logout()">🚪 Log Out</button>
             </div>
         </div>
 
@@ -233,61 +335,81 @@
             <h2>📋 Your Class Codes</h2>
             <div class="codes-grid">
                 <div class="code-card student">
-                    <div class="label">👨‍🎓 Student Code</div>
-                    <div class="code" id="studentCode">ABC123</div>
-                    <button class="copy-btn" onclick="copyCode('student')">Copy Code</button>
+                    <div class="label">👨‍🎓 Student Join Code</div>
+                    <div class="code" id="studentCode">------</div>
+                    <button class="copy-btn" onclick="copyCode('student')">📋 Copy Code</button>
                 </div>
                 <div class="code-card parent">
-                    <div class="label">👪 Parent Code</div>
-                    <div class="code" id="parentCode">PARENT123</div>
-                    <button class="copy-btn" onclick="copyCode('parent')">Copy Code</button>
+                    <div class="label">👪 Parent Access Code</div>
+                    <div class="code" id="parentCode">------</div>
+                    <button class="copy-btn" onclick="copyCode('parent')">📋 Copy Code</button>
                 </div>
             </div>
-            <p style="color: #718096; margin-top: 20px; text-align: center;">
-                Share Student Code with your class. Parents use Parent Code to track progress.
-            </p>
         </div>
 
-        <!-- Quick Stats -->
-        <div class="stats-grid">
+        <!-- Live Stats -->
+        <div class="live-stats">
             <div class="stat-card">
                 <h3>Total Students</h3>
                 <div class="number" id="totalStudents">0</div>
+                <div class="small">ever joined</div>
             </div>
             <div class="stat-card">
-                <h3>Active Today</h3>
-                <div class="number" id="activeToday">0</div>
+                <h3>🟢 Online Now</h3>
+                <div class="number" id="onlineNow">0</div>
+                <div class="small">active in last 5 min</div>
             </div>
             <div class="stat-card">
-                <h3>Questions Solved</h3>
+                <h3>📊 Questions Solved</h3>
                 <div class="number" id="totalQuestions">0</div>
+                <div class="small">total all time</div>
             </div>
             <div class="stat-card">
-                <h3>Avg Score</h3>
+                <h3>⭐ Average Score</h3>
                 <div class="number" id="avgScore">0</div>
+                <div class="small">class average</div>
             </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-section">
+            <select id="gradeFilter" onchange="filterStudents()">
+                <option value="all">All Grades</option>
+                <option value="4">Grade 4</option>
+                <option value="5">Grade 5</option>
+                <option value="6">Grade 6</option>
+                <option value="7">Grade 7</option>
+            </select>
+            <select id="statusFilter" onchange="filterStudents()">
+                <option value="all">All Students</option>
+                <option value="online">Online Now</option>
+                <option value="offline">Offline</option>
+            </select>
+            <input type="text" id="searchStudent" placeholder="🔍 Search student..." onkeyup="filterStudents()">
+            <button class="refresh-btn" onclick="loadData()">🔄 Refresh Data</button>
         </div>
 
         <!-- Students List -->
         <div class="students-section">
-            <h2>📊 Your Students</h2>
-            <div style="overflow-x: auto;">
+            <h2>📊 Your Students <span id="studentCount" style="font-size: 1rem; color: #718096; margin-left: 10px;"></span></h2>
+            <div class="table-container">
                 <table id="studentsTable">
                     <thead>
                         <tr>
-                            <th>Student</th>
-                            <th>Grade</th>
-                            <th>Joined</th>
-                            <th>Last Active</th>
-                            <th>Questions</th>
-                            <th>Avg Score</th>
-                            <th>Status</th>
+                            <th onclick="sortTable(0)">Student ⬇️</th>
+                            <th onclick="sortTable(1)">Grade</th>
+                            <th onclick="sortTable(2)">Last Active</th>
+                            <th onclick="sortTable(3)">Questions</th>
+                            <th onclick="sortTable(4)">Score</th>
+                            <th onclick="sortTable(5)">Streak</th>
+                            <th>Topics</th>
                         </tr>
                     </thead>
                     <tbody id="studentsBody">
                         <tr>
-                            <td colspan="7" style="text-align: center; padding: 30px;">
-                                Loading students...
+                            <td colspan="7" style="text-align: center; padding: 40px;">
+                                <div style="font-size: 1.2rem; color: #718096;">Loading students...</div>
+                                <div style="font-size: 0.9rem; color: #a0aec0; margin-top: 10px;">Waiting for students to join with code: <span id="waitingCode"></span></div>
                             </td>
                         </tr>
                     </tbody>
@@ -298,8 +420,10 @@
     </div>
 
     <script>
+        // Current teacher data
         let currentTeacher = null;
-        let students = [];
+        let allStudents = [];
+        let filteredStudents = [];
 
         // Load teacher data
         function loadTeacher() {
@@ -315,73 +439,152 @@
             document.getElementById('teacherSchool').textContent = currentTeacher.school;
             document.getElementById('studentCode').textContent = currentTeacher.studentCode;
             document.getElementById('parentCode').textContent = currentTeacher.parentCode;
+            document.getElementById('waitingCode').textContent = currentTeacher.studentCode;
 
-            loadStudents();
+            loadData();
         }
 
-        // Load students for this class
-        function loadStudents() {
+        // Load student data
+        function loadData() {
+            if (!currentTeacher) return;
+
+            // Get students for this class
             const classStudents = JSON.parse(
                 localStorage.getItem(`class_${currentTeacher.studentCode}`) || '[]'
             );
             
-            students = classStudents;
-            
-            // Update stats
-            document.getElementById('totalStudents').textContent = students.length;
-            
-            const activeToday = students.filter(s => {
-                const lastActive = new Date(s.lastActive || s.joinTime);
-                const today = new Date();
-                return lastActive.toDateString() === today.toDateString();
-            }).length;
-            
-            document.getElementById('activeToday').textContent = activeToday;
+            allStudents = classStudents.map(student => {
+                // Calculate if online (active in last 5 minutes)
+                const lastActive = student.lastActive ? new Date(student.lastActive) : null;
+                const fiveMinAgo = new Date(Date.now() - 5 * 60 * 1000);
+                const isOnline = lastActive && lastActive > fiveMinAgo;
 
-            const totalQuestions = students.reduce((sum, s) => sum + (s.questionsSolved || 0), 0);
-            document.getElementById('totalQuestions').textContent = totalQuestions;
+                return {
+                    ...student,
+                    isOnline: isOnline,
+                    avgScore: student.avgScore || 0,
+                    questionsSolved: student.questionsSolved || 0,
+                    correctAnswers: student.correctAnswers || 0,
+                    currentStreak: student.currentStreak || 0
+                };
+            });
 
-            const avgScore = students.length > 0 
-                ? Math.round(students.reduce((sum, s) => sum + (s.avgScore || 0), 0) / students.length)
+            updateStats();
+            filterStudents();
+        }
+
+        // Update live stats
+        function updateStats() {
+            const totalStudents = allStudents.length;
+            const onlineNow = allStudents.filter(s => s.isOnline).length;
+            const totalQuestions = allStudents.reduce((sum, s) => sum + (s.questionsSolved || 0), 0);
+            const avgScore = allStudents.length > 0 
+                ? Math.round(allStudents.reduce((sum, s) => sum + (s.avgScore || 0), 0) / allStudents.length)
                 : 0;
-            document.getElementById('avgScore').textContent = avgScore;
 
-            // Display students
+            document.getElementById('totalStudents').textContent = totalStudents;
+            document.getElementById('onlineNow').textContent = onlineNow;
+            document.getElementById('totalQuestions').textContent = totalQuestions.toLocaleString();
+            document.getElementById('avgScore').textContent = avgScore;
+        }
+
+        // Filter students
+        function filterStudents() {
+            const gradeFilter = document.getElementById('gradeFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const searchTerm = document.getElementById('searchStudent').value.toLowerCase();
+
+            filteredStudents = allStudents.filter(student => {
+                // Grade filter
+                if (gradeFilter !== 'all' && student.grade !== gradeFilter) return false;
+                
+                // Status filter
+                if (statusFilter === 'online' && !student.isOnline) return false;
+                if (statusFilter === 'offline' && student.isOnline) return false;
+                
+                // Search filter
+                if (searchTerm && !student.name.toLowerCase().includes(searchTerm)) return false;
+                
+                return true;
+            });
+
+            document.getElementById('studentCount').textContent = `(${filteredStudents.length} students)`;
+            displayStudents();
+        }
+
+        // Display students in table
+        function displayStudents() {
             const tbody = document.getElementById('studentsBody');
             
-            if (students.length === 0) {
+            if (filteredStudents.length === 0) {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="7" style="text-align: center; padding: 30px;">
-                            No students yet. Share your class code: <strong>${currentTeacher.studentCode}</strong>
+                        <td colspan="7" style="text-align: center; padding: 40px;">
+                            <div style="font-size: 1.2rem; color: #718096;">No students match your filters</div>
+                            <div style="font-size: 0.9rem; color: #a0aec0; margin-top: 10px;">Share code: <strong>${currentTeacher?.studentCode || '------'}</strong> for students to join</div>
                         </td>
                     </tr>
                 `;
                 return;
             }
 
-            tbody.innerHTML = students.map(student => {
-                const joined = new Date(student.joinTime).toLocaleDateString();
+            tbody.innerHTML = filteredStudents.map(student => {
                 const lastActive = student.lastActive 
-                    ? new Date(student.lastActive).toLocaleDateString()
+                    ? new Date(student.lastActive).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
                     : 'Never';
-                const status = student.lastActive && 
-                    new Date(student.lastActive).toDateString() === new Date().toDateString()
-                    ? '🟢 Online'
-                    : '⚪ Offline';
+                
+                const accuracy = student.questionsSolved > 0 
+                    ? Math.round((student.correctAnswers / student.questionsSolved) * 100)
+                    : 0;
+
+                // Generate topic tags
+                const topics = student.topicProgress || {};
+                const topicTags = Object.entries(topics)
+                    .filter(([_, data]) => data.total > 0)
+                    .map(([topic, data]) => {
+                        const percent = Math.round((data.correct / data.total) * 100);
+                        return `<span class="topic-tag" title="${topic}: ${percent}% correct">${topic.substring(0,3)}:${percent}%</span>`;
+                    })
+                    .join(' ');
 
                 return `
                     <tr>
-                        <td><strong>${student.name}</strong></td>
+                        <td><strong>${student.name}</strong> ${student.isOnline ? '🟢' : '⚪'}</td>
                         <td><span class="grade-badge">Grade ${student.grade}</span></td>
-                        <td>${joined}</td>
                         <td>${lastActive}</td>
                         <td>${student.questionsSolved || 0}</td>
                         <td>${student.avgScore || 0}</td>
-                        <td>${status}</td>
+                        <td>${student.currentStreak || 0} 🔥</td>
+                        <td><div class="topic-progress">${topicTags || 'No data'}</div></td>
                     </tr>
                 `;
             }).join('');
+        }
+
+        // Sort table
+        let sortDirection = true;
+        function sortTable(column) {
+            const headers = ['name', 'grade', 'lastActive', 'questionsSolved', 'avgScore', 'currentStreak'];
+            const sortBy = headers[column];
+            
+            filteredStudents.sort((a, b) => {
+                let valA = a[sortBy] || 0;
+                let valB = b[sortBy] || 0;
+                
+                if (sortBy === 'lastActive') {
+                    valA = a.lastActive ? new Date(a.lastActive) : new Date(0);
+                    valB = b.lastActive ? new Date(b.lastActive) : new Date(0);
+                }
+                
+                if (sortDirection) {
+                    return valA > valB ? 1 : -1;
+                } else {
+                    return valA < valB ? 1 : -1;
+                }
+            });
+            
+            sortDirection = !sortDirection;
+            displayStudents();
         }
 
         // Copy code to clipboard
@@ -391,16 +594,20 @@
                 : currentTeacher.parentCode;
             
             navigator.clipboard.writeText(code).then(() => {
-                alert(`Code copied: ${code}`);
+                alert(`✅ Code copied: ${code}`);
             });
         }
 
         // Export to CSV
         function exportData() {
-            let csv = 'Student,Grade,Joined,Last Active,Questions Solved,Avg Score\n';
+            let csv = 'Student Name,Grade,Last Active,Questions Solved,Avg Score,Correct Answers,Accuracy\n';
             
-            students.forEach(s => {
-                csv += `${s.name},${s.grade},${s.joinTime},${s.lastActive || ''},${s.questionsSolved || 0},${s.avgScore || 0}\n`;
+            allStudents.forEach(s => {
+                const accuracy = s.questionsSolved > 0 
+                    ? Math.round((s.correctAnswers / s.questionsSolved) * 100) + '%'
+                    : '0%';
+                
+                csv += `${s.name},${s.grade},${s.lastActive || 'Never'},${s.questionsSolved || 0},${s.avgScore || 0},${s.correctAnswers || 0},${accuracy}\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv' });
@@ -417,8 +624,8 @@
             window.location.href = 'teacher-login.html';
         }
 
-        // Auto-refresh every 30 seconds
-        setInterval(loadStudents, 30000);
+        // Auto-refresh every 10 seconds
+        setInterval(loadData, 10000);
 
         // Initial load
         loadTeacher();
