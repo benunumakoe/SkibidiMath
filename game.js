@@ -51,7 +51,8 @@ const progressAdd = document.getElementById('progressAdd');
 const progressSub = document.getElementById('progressSub');
 const progressMul = document.getElementById('progressMul');
 const progressComp = document.getElementById('progressComp');
-const progressDiv = document.getElementById('progressDiv');
+const progressDiv = document.getElementById('progressDiv'); // ADDED
+
 // ============================================
 // GRADE 4 CONTENT (Easier fractions, times tables)
 // ============================================
@@ -200,7 +201,7 @@ function getQuestionsForGrade(grade) {
     }
 }
 
-// Original Question Bank (keep your existing one)
+// Original Question Bank
 const questionBank = {
     fractions: {
         easy: [
@@ -320,6 +321,12 @@ const questionBank = {
 
 // Grade selector function
 function showGradeSelector() {
+    // Stop timer when showing selector
+    if (gameState.timerInterval) {
+        clearInterval(gameState.timerInterval);
+        gameState.timerInterval = null;
+    }
+    
     const gradeHTML = `
         <div class="character-select">
             <h3>Choose Your Grade!</h3>
@@ -355,11 +362,23 @@ function selectGrade(grade) {
     gameState.currentGrade = grade;
     document.getElementById('currentGrade').innerHTML = `Grade ${grade}`;
     document.getElementById('headerGrade').innerHTML = `Grade ${grade}`;
+    
+    // Reset and start new game
+    if (gameState.timerInterval) {
+        clearInterval(gameState.timerInterval);
+        gameState.timerInterval = null;
+    }
     newGame();
 }
 
 // Character selection function
 function showCharacterSelect() {
+    // Stop timer when showing selector
+    if (gameState.timerInterval) {
+        clearInterval(gameState.timerInterval);
+        gameState.timerInterval = null;
+    }
+    
     const charHTML = `
         <div class="character-select">
             <h3>Choose Your Character!</h3>
@@ -401,7 +420,16 @@ function selectCharacter(char) {
     if (char === 'normal' || gameState.characterXP >= getRequiredXP(char)) {
         gameState.character = char;
         updateCharacterDisplay();
+        
+        // Reset timer and start new game
+        if (gameState.timerInterval) {
+            clearInterval(gameState.timerInterval);
+            gameState.timerInterval = null;
+        }
+        gameState.timer = 60;
+        timerEl.textContent = '60';
         generateQuestion();
+        startTimer();
     }
 }
 
@@ -419,14 +447,19 @@ function updateCharacterDisplay() {
 
 // Start timer
 function startTimer() {
-    if (gameState.timerInterval) clearInterval(gameState.timerInterval);
+    if (gameState.timerInterval) {
+        clearInterval(gameState.timerInterval);
+    }
     
     gameState.timerInterval = setInterval(() => {
-        gameState.timer--;
-        timerEl.textContent = gameState.timer;
+        if (gameState.timer > 0) {
+            gameState.timer--;
+            timerEl.textContent = gameState.timer;
+        }
         
         if (gameState.timer <= 0) {
             clearInterval(gameState.timerInterval);
+            gameState.timerInterval = null;
             endGame();
         }
     }, 1000);
@@ -554,7 +587,7 @@ function updateProgressBars() {
     if (progressSub) progressSub.style.width = (gameState.progress.subtraction || 0) + '%';
     if (progressMul) progressMul.style.width = (gameState.progress.multiplication || 0) + '%';
     if (progressComp) progressComp.style.width = (gameState.progress.comparison || 0) + '%';
-    if (progressDiv) progressDiv.style.width = (gameState.progress.division || 0) + '%';
+    if (progressDiv) progressDiv.style.width = (gameState.progress.division || 0) + '%'; // ADDED
 }
 
 // End game
@@ -567,6 +600,12 @@ function endGame() {
 
 // New game
 function newGame() {
+    // Clear any existing timer
+    if (gameState.timerInterval) {
+        clearInterval(gameState.timerInterval);
+        gameState.timerInterval = null;
+    }
+    
     gameState = {
         score: 0,
         timer: 60,
@@ -604,9 +643,8 @@ function newGame() {
     updateProgressBars();
     updateCharacterDisplay();
     
-    if (gameState.timerInterval) clearInterval(gameState.timerInterval);
-    startTimer();
     generateQuestion();
+    startTimer();
 }
 
 // Event listeners
@@ -637,8 +675,6 @@ window.addEventListener('load', () => {
     const saved = localStorage.getItem('mathGameProgress');
     if (saved) {
         const data = JSON.parse(saved);
-        // Restore progress if desired
+        // You could restore progress here
     }
 });
-
-
