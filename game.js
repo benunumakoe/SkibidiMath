@@ -354,7 +354,8 @@ function showGradeSelector() {
 function selectGrade(grade) {
     gameState.currentGrade = grade;
     document.getElementById('currentGrade').innerHTML = `Grade ${grade}`;
-    newGame(); // Restart with new grade
+    document.getElementById('headerGrade').innerHTML = `Grade ${grade}`;
+    newGame();
 }
 
 // Character selection function
@@ -639,4 +640,5 @@ window.addEventListener('load', () => {
         // Restore progress if desired
     }
 });
+
 
