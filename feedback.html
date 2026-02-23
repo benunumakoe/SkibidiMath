@@ -1,1 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkibidiMath - Feedback Survey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .survey-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0 #4c51bf;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .audience-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            background: white;
+            color: #4a5568;
+            box-shadow: 0 4px 0 #cbd5e0;
+        }
+
+        .tab-btn.active {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 4px 0 #4c51bf;
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.teacher.active { background: #9f7aea; box-shadow: 0 4px 0 #6b46c1; }
+        .tab-btn.parent.active { background: #48bb78; box-shadow: 0 4px 0 #2f855a; }
+        .tab-btn.student.active { background: #f6ad55; box-shadow: 0 4px 0 #dd6b20; }
+
+        .survey-card {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            display: none;
+        }
+
+        .survey-card.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .survey-card h2 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .survey-card .subtitle {
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .section h3 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .question {
+            margin-bottom: 25px;
+        }
+
+        .question label {
+            display: block;
+            color: #2d3748;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: #f7fafc;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .radio-option:hover, .checkbox-option:hover {
+            background: #edf2f7;
+        }
+
+        .radio-option input, .checkbox-option input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .radio-option label, .checkbox-option label {
+            margin: 0;
+            font-weight: normal;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .rating-scale {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .rating-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .rating-item input {
+            display: none;
+        }
+
+        .rating-item label {
+            display: block;
+            padding: 15px 5px;
+            background: #f7fafc;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.5rem;
+            transition: all 0.2s;
+            margin: 0;
+        }
+
+        .rating-item input:checked + label {
+            background: #667eea;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .rating-item label:hover {
+            background: #e2e8f0;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #4c51bf;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #4c51bf;
+        }
+
+        .submit-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #4c51bf;
+        }
+
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 30px;
+            color: #2d3748;
+        }
+
+        .success-message h2 {
+            font-size: 2.5rem;
+            color: #48bb78;
+            margin-bottom: 20px;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .matrix-table th {
+            padding: 10px;
+            text-align: center;
+            color: #4a5568;
+        }
+
+        .matrix-table td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .matrix-table input[type="radio"] {
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 600px) {
+            .survey-card {
+                padding: 20px;
+            }
+            
+            .rating-scale {
+                flex-wrap: wrap;
+            }
+            
+            .rating-item {
+                min-width: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-container">
+        <div class="header">
+            <h1>📊 SkibidiMath Feedback</h1>
+            <p>Help us make math more fun for everyone!</p>
+        </div>
+
+        <!-- Audience Tabs -->
+        <div class="audience-tabs">
+            <button class="tab-btn teacher active" onclick="showSurvey('teacher')">👨‍🏫 I'm a Teacher</button>
+            <button class="tab-btn parent" onclick="showSurvey('parent')">👪 I'm a Parent</button>
+            <button class="tab-btn student" onclick="showSurvey('student')">🧒 I'm a Student</button>
+        </div>
+
+        <!-- TEACHER SURVEY -->
+        <div id="teacher-survey" class="survey-card active">
+            <h2>👨‍🏫 Teacher Feedback</h2>
+            <p class="subtitle">Help us understand how SkibidiMath works in your classroom</p>
+
+            <div class="section">
+                <h3>📚 Classroom Impact</h3>
+                
+                <div class="question">
+                    <label>1. How does SkibidiMath fit into your teaching? (Select all that apply)</label>
+                    <div class="options">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="teacher-use-1">
+                            <label for="teacher-use-1">Math center activity</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="teacher-use-2">
+                            <label for="teacher-use-2">Early finisher task</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="teacher-use-3">
+                            <label for="teacher-use-3">Whole class practice</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="teacher-use-4">
+                            <label for="teacher-use-4">Homework assignment</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="teacher-use-5">
+                            <label for="teacher-use-5">Reward/Free time</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="teacher-use-6">
+                            <label for="teacher-use-6">Assessment tool</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label>2. What learning objectives are your students achieving? (Select all that apply)</label>
+                    <div class="options">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="teacher-objective-1">
+                            <label for="teacher-objective-1">Fact fluency</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="teacher-objective-2">
+                            <label for="teacher-objective-2">Problem-solving skills</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="teacher-objective-3">
+                            <label for="teacher-objective-3">Confidence in math</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="teacher-objective-4">
+                            <label for="teacher-objective-4">Grade-level mastery</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="teacher-objective-5">
+                            <label for="teacher-objective-5">Identifying weak areas</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label>3. Do you see transfer to classroom work?</label>
+                    <div class="options">
+                        <div class="radio-option">
+                            <input type="radio" name="teacher-transfer" id="transfer-yes" value="yes">
+                            <label for="transfer-yes">✅ Yes - better test scores</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="teacher-transfer" id="transfer-confident" value="confident">
+                            <label for="transfer-confident">✅ Yes - more confident</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="teacher-transfer" id="transfer-somewhat" value="somewhat">
+                            <label for="transfer-somewhat">🟡 Somewhat</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="teacher-transfer" id="transfer-not" value="not">
+                            <label for="transfer-not">🔴 Not yet</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>🎯 Differentiation</h3>
+                
+                <div class="question">
+                    <label>4. How well does it serve different skill levels?</label>
+                    <table class="matrix-table">
+                        <tr>
+                            <th></th>
+                            <th>Works Well</th>
+                            <th>Needs Work</th>
+                            <th>Not Sure</th>
+                        </tr>
+                        <tr>
+                            <td>Struggling students</td>
+                            <td><input type="radio" name="level-struggling" value="works"></td>
+                            <td><input type="radio" name="level-struggling" value="needs"></td>
+                            <td><input type="radio" name="level-struggling" value="unsure"></td>
+                        </tr>
+                        <tr>
+                            <td>On-grade students</td>
+                            <td><input type="radio" name="level-ongrade" value="works"></td>
+                            <td><input type="radio" name="level-ongrade" value="needs"></td>
+                            <td><input type="radio" name="level-ongrade" value="unsure"></td>
+                        </tr>
+                        <tr>
+                            <td>Advanced students</td>
+                            <td><input type="radio" name="level-advanced" value="works"></td>
+                            <td><input type="radio" name="level-advanced" value="needs"></td>
+                            <td><input type="radio" name="level-advanced" value="unsure"></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="question">
+                    <label>5. What teacher features would help you most? (Rank 1-5)</label>
+                    <div class="options">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="teacher-feature-1">
+                            <label for="teacher-feature-1">See struggling students in real-time</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="teacher-feature-2">
+                            <label for="teacher-feature-2">Identify difficult topics for class</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="teacher-feature-3">
+                            <label for="teacher-feature-3">Print progress reports</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="teacher-feature-4">
+                            <label for="teacher-feature-4">Share with parents</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="teacher-feature-5">
+                            <label for="teacher-feature-5">Compare to other classes</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>💡 Open Feedback</h3>
+                
+                <div class="question">
+                    <label>6. What do you LIKE most about SkibidiMath?</label>
+                    <textarea id="teacher-like" placeholder="Tell us what's working well..."></textarea>
+                </div>
+
+                <div class="question">
+                    <label>7. What would you CHANGE or IMPROVE?</label>
+                    <textarea id="teacher-change" placeholder="What could be better..."></textarea>
+                </div>
+
+                <div class="question">
+                    <label>8. What's MISSING that you'd like to see?</label>
+                    <textarea id="teacher-missing" placeholder="What features would you add?..."></textarea>
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="submitSurvey('teacher')">📬 Submit Teacher Feedback</button>
+        </div>
+
+        <!-- PARENT SURVEY -->
+        <div id="parent-survey" class="survey-card">
+            <h2>👪 Parent Feedback</h2>
+            <p class="subtitle">Help us understand how your child experiences SkibidiMath</p>
+
+            <div class="section">
+                <h3>🏠 Home Experience</h3>
+                
+                <div class="question">
+                    <label>1. Does your child enjoy playing SkibidiMath?</label>
+                    <div class="rating-scale">
+                        <div class="rating-item">
+                            <input type="radio" name="parent-enjoy" id="enjoy-1" value="1">
+                            <label for="enjoy-1">😫 No</label>
+                        </div>
+                        <div class="rating-item">
+                            <input type="radio" name="parent-enjoy" id="enjoy-2" value="2">
+                            <label for="enjoy-2">😕 A little</label>
+                        </div>
+                        <div class="rating-item">
+                            <input type="radio" name="parent-enjoy" id="enjoy-3" value="3">
+                            <label for="enjoy-3">😐 Okay</label>
+                        </div>
+                        <div class="rating-item">
+                            <input type="radio" name="parent-enjoy" id="enjoy-4" value="4">
+                            <label for="enjoy-4">🙂 Like it</label>
+                        </div>
+                        <div class="rating-item">
+                            <input type="radio" name="parent-enjoy" id="enjoy-5" value="5">
+                            <label for="enjoy-5">😍 LOVE it!</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label>2. How often does your child play at home?</label>
+                    <div class="options">
+                        <div class="radio-option">
+                            <input type="radio" name="parent-frequency" id="freq-daily" value="daily">
+                            <label for="freq-daily">Daily</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="parent-frequency" id="freq-weekly" value="weekly">
+                            <label for="freq-weekly">A few times a week</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="parent-frequency" id="freq-occasional" value="occasional">
+                            <label for="freq-occasional">Occasionally</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="parent-frequency" id="freq-never" value="never">
+                            <label for="freq-never">Never</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label>3. Do they play:</label>
+                    <div class="options">
+                        <div class="radio-option">
+                            <input type="radio" name="parent-when" id="when-voluntary" value="voluntary">
+                            <label for="when-voluntary">Voluntarily (they choose to)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="parent-when" id="when-asked" value="asked">
+                            <label for="when-asked">When asked/reminded</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="parent-when" id="when-required" value="required">
+                            <label for="when-required">Only if required</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>📈 Learning Impact</h3>
+                
+                <div class="question">
+                    <label>4. Have you noticed changes in your child's math attitude?</label>
+                    <div class="options">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="parent-change-1">
+                            <label for="parent-change-1">More confident</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="parent-change-2">
+                            <label for="parent-change-2">Less anxious</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="parent-change-3">
+                            <label for="parent-change-3">More interested in math</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="parent-change-4">
+                            <label for="parent-change-4">No change yet</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label>5. Do they talk about the characters? (Ninja, Wizard, Legend)</label>
+                    <div class="options">
+                        <div class="radio-option">
+                            <input type="radio" name="parent-characters" id="char-yes" value="yes">
+                            <label for="char-yes">Yes, they're motivated to unlock them</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="parent-characters" id="char-sometimes" value="sometimes">
+                            <label for="char-sometimes">Sometimes</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="parent-characters" id="char-no" value="no">
+                            <label for="char-no">Not really</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>📋 Communication</h3>
+                
+                <div class="question">
+                    <label>6. Would you like to receive progress updates?</label>
+                    <div class="options">
+                        <div class="radio-option">
+                            <input type="radio" name="parent-updates" id="updates-yes" value="yes">
+                            <label for="updates-yes">Yes - weekly email</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="parent-updates" id="updates-monthly" value="monthly">
+                            <label for="updates-monthly">Yes - monthly report</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="parent-updates" id="updates-portal" value="portal">
+                            <label for="updates-portal">Yes - parent portal access</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="parent-updates" id="updates-no" value="no">
+                            <label for="updates-no">Not necessary</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label>7. What would you want to know? (Select all that apply)</label>
+                    <div class="options">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="parent-know-1">
+                            <label for="parent-know-1">Time spent playing</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="parent-know-2">
+                            <label for="parent-know-2">Topics mastered</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="parent-know-3">
+                            <label for="parent-know-3">Areas needing practice</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="parent-know-4">
+                            <label for="parent-know-4">Comparison to grade level</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="parent-know-5">
+                            <label for="parent-know-5">Improvement over time</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>💭 Your Thoughts</h3>
+                
+                <div class="question">
+                    <label>8. What does your child say about SkibidiMath?</label>
+                    <textarea id="parent-say" placeholder="Share their comments..."></textarea>
+                </div>
+
+                <div class="question">
+                    <label>9. Any suggestions for improvement?</label>
+                    <textarea id="parent-suggest" placeholder="What would make it better?..."></textarea>
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="submitSurvey('parent')">📬 Submit Parent Feedback</button>
+        </div>
+
+        <!-- STUDENT SURVEY -->
+        <div id="student-survey" class="survey-card">
+            <h2>🧒 Student Feedback</h2>
+            <p class="subtitle">Tell us what you think about SkibidiMath!</p>
+
+            <div class="section">
+                <h3>🎮 Fun Factor</h3>
+                
+                <div class="question">
+                    <label>1. How much do you like SkibidiMath?</label>
+                    <div class="rating-scale">
+                        <div class="rating-item">
+                            <input type="radio" name="student-like" id="student-like-1" value="1">
+                            <label for="student-like-1">😫</label>
+                        </div>
+                        <div class="rating-item">
+                            <input type="radio" name="student-like" id="student-like-2" value="2">
+                            <label for="student-like-2">😕</label>
+                        </div>
+                        <div class="rating-item">
+                            <input type="radio" name="student-like" id="student-like-3" value="3">
+                            <label for="student-like-3">😐</label>
+                        </div>
+                        <div class="rating-item">
+                            <input type="radio" name="student-like" id="student-like-4" value="4">
+                            <label for="student-like-4">🙂</label>
+                        </div>
+                        <div class="rating-item">
+                            <input type="radio" name="student-like" id="student-like-5" value="5">
+                            <label for="student-like-5">😍</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label>2. What's your FAVORITE part? (Pick your top 3)</label>
+                    <div class="options">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="student-fav-1">
+                            <label for="student-fav-1">Unlocking characters (Ninja, Wizard, Legend)</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="student-fav-2">
+                            <label for="student-fav-2">Getting points</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="student-fav-3">
+                            <label for="student-fav-3">Beating the timer</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="student-fav-4">
+                            <label for="student-fav-4">Seeing my streak</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="student-fav-5">
+                            <label for="student-fav-5">Easy questions first, then harder</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="student-fav-6">
+                            <label for="student-fav-6">The colors and design</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="student-fav-7">
+                            <label for="student-fav-7">Playing with friends</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label>3. What's your LEAST favorite part?</label>
+                    <div class="options">
+                        <div class="radio-option">
+                            <input type="radio" name="student-least" id="least-timer" value="timer">
+                            <label for="least-timer">Timer runs out too fast</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="student-least" id="least-hard" value="hard">
+                            <label for="least-hard">Questions too hard</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="student-least" id="least-easy" value="easy">
+                            <label for="least-easy">Questions too easy</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="student-least" id="least-unlock" value="unlock">
+                            <label for="least-unlock">Can't unlock characters fast enough</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="student-least" id="least-nothing" value="nothing">
+                            <label for="least-nothing">Nothing - I like everything!</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>⭐ Characters & Motivation</h3>
+                
+                <div class="question">
+                    <label>4. Which character do you use?</label>
+                    <div class="options">
+                        <div class="radio-option">
+                            <input type="radio" name="student-character" id="char-normal" value="normal">
+                            <label for="char-normal">🧑 Math Learner (no bonus)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="student-character" id="char-ninja" value="ninja">
+                            <label for="char-ninja">🥷 Math Ninja (20% bonus)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="student-character" id="char-wizard" value="wizard">
+                            <label for="char-wizard">🧙 Math Wizard (50% bonus)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="student-character" id="char-legend" value="legend">
+                            <label for="char-legend">👑 Math Legend (100% bonus)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label>5. Are you trying to unlock a character?</label>
+                    <div class="options">
+                        <div class="radio-option">
+                            <input type="radio" name="student-unlock" id="unlock-ninja" value="ninja">
+                            <label for="unlock-ninja">Yes - trying to get Ninja (100 XP)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="student-unlock" id="unlock-wizard" value="wizard">
+                            <label for="unlock-wizard">Yes - trying to get Wizard (500 XP)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="student-unlock" id="unlock-legend" value="legend">
+                            <label for="unlock-legend">Yes - trying to get Legend (1000 XP)</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="student-unlock" id="unlock-no" value="no">
+                            <label for="unlock-no">No, I'm happy with my current one</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>📚 Learning</h3>
+                
+                <div class="question">
+                    <label>6. Do you feel like you're getting better at math?</label>
+                    <div class="options">
+                        <div class="radio-option">
+                            <input type="radio" name="student-better" id="better-yes" value="yes">
+                            <label for="better-yes">YES! Way better</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="student-better" id="better-little" value="little">
+                            <label for="better-little">A little better</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="student-better" id="better-same" value="same">
+                            <label for="better-same">Same as before</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="student-better" id="better-unsure" value="unsure">
+                            <label for="better-unsure">Not sure</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label>7. What math do you like practicing? (Select all that apply)</label>
+                    <div class="options">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="student-topic-1">
+                            <label for="student-topic-1">Addition</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="student-topic-2">
+                            <label for="student-topic-2">Subtraction</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="student-topic-3">
+                            <label for="student-topic-3">Multiplication</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="student-topic-4">
+                            <label for="student-topic-4">Division</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="student-topic-5">
+                            <label for="student-topic-5">Fractions</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="student-topic-6">
+                            <label for="student-topic-6">Decimals</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="student-topic-7">
+                            <label for="student-topic-7">Algebra</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="student-topic-8">
+                            <label for="student-topic-8">Negative numbers</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label>8. What math is too hard?</label>
+                    <textarea id="student-hard" placeholder="Tell us what's difficult..."></textarea>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>💭 Your Ideas!</h3>
+                
+                <div class="question">
+                    <label>9. If you could add ONE thing to the game, what would it be?</label>
+                    <textarea id="student-add" placeholder="Your idea here..."></textarea>
+                </div>
+
+                <div class="question">
+                    <label>10. What would make SkibidiMath MORE FUN?</label>
+                    <textarea id="student-morefun" placeholder="Tell us..."></textarea>
+                </div>
+            </div>
+
+            <button class="submit-btn" onclick="submitSurvey('student')">📬 Submit Your Feedback</button>
+        </div>
+
+        <!-- Success Message -->
+        <div id="success-message" class="success-message">
+            <h2>🎉 Thank You!</h2>
+            <p style="font-size: 1.2rem; margin: 20px 0;">Your feedback helps us make SkibidiMath better for everyone!</p>
+            <button class="submit-btn" onclick="resetSurvey()" style="width: auto; padding: 15px 40px;">📝 Take Another Survey</button>
+        </div>
+    </div>
+
+    <script>
+        function showSurvey(type) {
+            // Hide all surveys
+            document.getElementById('teacher-survey').classList.remove('active');
+            document.getElementById('parent-survey').classList.remove('active');
+            document.getElementById('student-survey').classList.remove('active');
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected survey
+            document.getElementById(type + '-survey').classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        function submitSurvey(type) {
+            // Here you would normally send data to a server
+            // For now, we'll just show success message
+            
+            // Hide all surveys
+            document.getElementById('teacher-survey').classList.remove('active');
+            document.getElementById('parent-survey').classList.remove('active');
+            document.getElementById('student-survey').classList.remove('active');
+            
+            // Show success message
+            document.getElementById('success-message').classList.add('show');
+        }
+
+        function resetSurvey() {
+            // Hide success message
+            document.getElementById('success-message').classList.remove('show');
+            
+            // Show teacher survey by default
+            document.getElementById('teacher-survey').classList.add('active');
+            
+            // Reset all radio buttons and checkboxes (optional)
+            document.querySelectorAll('input[type="radio"]').forEach(radio => radio.checked = false);
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => checkbox.checked = false);
+            document.querySelectorAll('textarea').forEach(textarea => textarea.value = '');
+        }
+    </script>
+</body>
+</html>
