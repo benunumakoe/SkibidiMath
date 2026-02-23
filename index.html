@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkibidiMath - Play & Learn!</title>
+    <title>SkibidiMath - AI Math Tutor</title>
     <style>
         * {
             margin: 0;
@@ -19,7 +19,7 @@
         }
 
         .game-wrapper {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 350px;
@@ -217,7 +217,7 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
-            height: 600px;
+            height: 800px;
         }
 
         .chat-header {
@@ -262,7 +262,7 @@
         .message {
             display: flex;
             gap: 10px;
-            max-width: 80%;
+            max-width: 100%;
         }
 
         .message.bot {
@@ -283,6 +283,7 @@
             align-items: center;
             justify-content: center;
             font-size: 1.2rem;
+            flex-shrink: 0;
         }
 
         .message-content {
@@ -290,6 +291,9 @@
             padding: 12px 18px;
             border-radius: 20px;
             color: #2d3748;
+            line-height: 1.5;
+            word-wrap: break-word;
+            max-width: 80%;
         }
 
         .message.user .message-content {
@@ -336,6 +340,12 @@
             box-shadow: 0 6px 0 #4c51bf;
         }
 
+        .chat-input button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         .typing-indicator {
             display: flex;
             gap: 5px;
@@ -361,13 +371,23 @@
             50% { transform: translateY(-10px); }
         }
 
+        .api-key-warning {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
         @media (max-width: 900px) {
             .game-wrapper {
                 grid-template-columns: 1fr;
             }
             
             .chat-container {
-                height: 400px;
+                height: 500px;
             }
             
             .options-grid {
@@ -437,7 +457,7 @@
 
             <div class="character-bar">
                 <div class="character-info">
-                    <span>Current Character:</span>
+                    <span>Current:</span>
                     <strong id="currentCharacterDisplay">🧑 Math Learner</strong>
                 </div>
                 <div class="character-info">
@@ -447,37 +467,73 @@
             </div>
         </div>
 
-        <!-- AI Chatbot -->
+        <!-- DeepSeek AI Chatbot -->
         <div class="chat-container">
             <div class="chat-header">
-                <div class="chat-avatar">🤖</div>
+                <div class="chat-avatar">🧠</div>
                 <div class="chat-title">
-                    <h3>Math Buddy AI</h3>
+                    <h3>DeepSeek AI Tutor</h3>
                     <p>Ask me anything about math!</p>
                 </div>
             </div>
 
+            <!-- API Key Warning (remove after adding your key) -->
+            <div class="api-key-warning" id="apiWarning">
+                ⚠️ Add your DeepSeek API key below to enable AI chat
+            </div>
+
+            <!-- API Key Input (remove after setting) -->
+            <div style="margin-bottom: 15px;">
+                <input type="password" id="apiKeyInput" placeholder="Enter DeepSeek API Key" 
+                       style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 10px;">
+                <button onclick="saveApiKey()" style="width: 100%; margin-top: 5px; padding: 8px; background: #667eea; color: white; border: none; border-radius: 5px;">Save Key</button>
+            </div>
+
             <div class="chat-messages" id="chatMessages">
                 <div class="message bot">
-                    <div class="message-avatar">🤖</div>
+                    <div class="message-avatar">🧠</div>
                     <div class="message-content">
-                        Hi! I'm your math buddy. Ask me:
-                        <br>• "Explain fractions"
-                        <br>• "Help me with algebra"
-                        <br>• "Give me a hint"
-                        <br>• "Make a practice question"
+                        👋 Hi! I'm your AI math tutor powered by DeepSeek!
+                        <br><br>
+                        <strong>Try asking me:</strong>
+                        <br>• "Explain fractions step by step"
+                        <br>• "Help me with this algebra problem"
+                        <br>• "Why is negative times negative positive?"
+                        <br>• "Create a practice problem for percentages"
+                        <br>• "Give me a hint on my current question"
+                        <br>• "What's my progress so far?"
                     </div>
                 </div>
             </div>
 
             <div class="chat-input">
-                <input type="text" id="chatInput" placeholder="Ask me anything..." onkeypress="if(event.key==='Enter') sendMessage()">
-                <button onclick="sendMessage()">➡️</button>
+                <input type="text" id="chatInput" placeholder="Ask your math question..." onkeypress="if(event.key==='Enter') sendMessage()">
+                <button onclick="sendMessage()" id="sendButton">➡️</button>
             </div>
         </div>
     </div>
 
     <script>
+        // ============================================
+        // CONFIGURATION
+        // ============================================
+        let DEEPSEEK_API_KEY = localStorage.getItem('deepseek_api_key') || '';
+        
+        function saveApiKey() {
+            const key = document.getElementById('apiKeyInput').value.trim();
+            if (key) {
+                DEEPSEEK_API_KEY = key;
+                localStorage.setItem('deepseek_api_key', key);
+                document.getElementById('apiWarning').style.display = 'none';
+                addBotMessage('✅ API key saved! You can now ask me anything about math.');
+            }
+        }
+
+        // Hide warning if key exists
+        if (DEEPSEEK_API_KEY) {
+            document.getElementById('apiWarning').style.display = 'none';
+        }
+
         // ============================================
         // GAME STATE
         // ============================================
@@ -843,25 +899,88 @@
         }
 
         // ============================================
-        // AI CHATBOT
+        // DEEPSEEK LIVE AI CHATBOT
         // ============================================
-        function sendMessage() {
+
+        let isSending = false;
+
+        async function sendMessage() {
+            if (isSending) return;
+            
             const input = document.getElementById('chatInput');
             const message = input.value.trim();
             
             if (!message) return;
             
+            if (!DEEPSEEK_API_KEY) {
+                addBotMessage('⚠️ Please enter your DeepSeek API key in the box above first.');
+                return;
+            }
+            
             addUserMessage(message);
             input.value = '';
-            
-            // Show typing indicator
             showTyping();
+            isSending = true;
+            document.getElementById('sendButton').disabled = true;
             
-            // Simulate AI thinking
-            setTimeout(() => {
+            try {
+                const response = await callDeepSeekAPI(message);
                 removeTyping();
-                generateAIResponse(message);
-            }, 1000);
+                addBotMessage(response);
+            } catch (error) {
+                removeTyping();
+                addBotMessage(`😕 Sorry, I encountered an error: ${error.message}`);
+            } finally {
+                isSending = false;
+                document.getElementById('sendButton').disabled = false;
+            }
+        }
+
+        async function callDeepSeekAPI(userMessage) {
+            const response = await fetch('https://api.deepseek.com/v1/chat/completions', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${DEEPSEEK_API_KEY}`
+                },
+                body: JSON.stringify({
+                    model: 'deepseek-chat',
+                    messages: [
+                        {
+                            role: 'system',
+                            content: `You are a friendly math tutor for students in grades 4-7. 
+                            Current student stats:
+                            - Grade: ${gameState.currentGrade}
+                            - Score: ${gameState.score}
+                            - Level: ${gameState.level}
+                            - Streak: ${gameState.streak}
+                            - Character: ${gameState.character}
+                            - XP: ${gameState.characterXP}
+                            
+                            Help with math concepts like fractions, decimals, percentages, 
+                            algebra, negative numbers, times tables, and word problems.
+                            Keep explanations simple, encouraging, and age-appropriate.
+                            If asked about the current question, it is: "${gameState.currentQuestion?.question || 'No current question'}"
+                            
+                            Be engaging and use emojis occasionally!`
+                        },
+                        {
+                            role: 'user',
+                            content: userMessage
+                        }
+                    ],
+                    temperature: 0.7,
+                    max_tokens: 500
+                })
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error?.message || 'API call failed');
+            }
+
+            const data = await response.json();
+            return data.choices[0].message.content;
         }
 
         function addUserMessage(text) {
@@ -869,7 +988,7 @@
             messages.innerHTML += `
                 <div class="message user">
                     <div class="message-avatar">👤</div>
-                    <div class="message-content">${text}</div>
+                    <div class="message-content">${escapeHtml(text)}</div>
                 </div>
             `;
             messages.scrollTop = messages.scrollHeight;
@@ -879,8 +998,8 @@
             const messages = document.getElementById('chatMessages');
             messages.innerHTML += `
                 <div class="message bot">
-                    <div class="message-avatar">🤖</div>
-                    <div class="message-content">${text}</div>
+                    <div class="message-avatar">🧠</div>
+                    <div class="message-content">${escapeHtml(text)}</div>
                 </div>
             `;
             messages.scrollTop = messages.scrollHeight;
@@ -903,144 +1022,10 @@
             if (typing) typing.remove();
         }
 
-        function generateAIResponse(message) {
-            message = message.toLowerCase();
-            let response = '';
-            
-            // Math help responses
-            if (message.includes('fraction') || message.includes('fractions')) {
-                response = `📚 Fractions are parts of a whole! 
-                <br><br>Examples:
-                <br>• 1/2 means 1 out of 2 parts
-                <br>• To add fractions with same denominator: 1/4 + 2/4 = 3/4
-                <br>• To find 1/2 of 8, divide 8 by 2 = 4
-                <br><br>Want to practice fractions? Keep playing Grade 4!`;
-            }
-            else if (message.includes('decimal') || message.includes('decimals')) {
-                response = `🔢 Decimals are numbers with a decimal point!
-                <br><br>Tips:
-                <br>• 0.5 is the same as 1/2
-                <br>• 0.25 + 0.25 = 0.50
-                <br>• Line up decimal points when adding
-                <br><br>Try Grade 5 for decimal practice!`;
-            }
-            else if (message.includes('percent') || message.includes('percentage')) {
-                response = `📊 Percent means "out of 100"!
-                <br><br>Examples:
-                <br>• 50% = 50/100 = 1/2
-                <br>• 25% of 40 = (25/100) × 40 = 10
-                <br>• 15% discount means pay 85%
-                <br><br>Play Grade 6 to master percentages!`;
-            }
-            else if (message.includes('algebra') || message.includes('equation')) {
-                response = `✖️ Algebra uses letters for unknown numbers!
-                <br><br>Tips:
-                <br>• x + 5 = 12 → x = 12 - 5 = 7
-                <br>• 2x = 14 → x = 14 ÷ 2 = 7
-                <br>• Whatever you do to one side, do to the other
-                <br><br>Try Grade 7 for algebra!`;
-            }
-            else if (message.includes('negative') || message.includes('negatives')) {
-                response = `➖ Negative numbers are less than zero!
-                <br><br>Rules:
-                <br>• -5 + 3 = -2 (move right on number line)
-                <br>• -4 - 3 = -7 (move left)
-                <br>• -3 × -4 = 12 (negative × negative = positive)
-                <br><br>Practice in Grade 7!`;
-            }
-            else if (message.includes('hint') || message.includes('help')) {
-                const question = gameState.currentQuestion;
-                if (question) {
-                    response = `💡 Hint for: "${question.question}"
-                    <br>• Think about what operation to use
-                    <br>• Eliminate obviously wrong answers
-                    <br>• You've got this! 💪`;
-                } else {
-                    response = `💡 Tips:
-                    <br>• Read the question carefully
-                    <br>• Eliminate wrong answers first
-                    <br>• Practice makes perfect!
-                    <br>• Keep playing to unlock characters!`;
-                }
-            }
-            else if (message.includes('character') || message.includes('unlock')) {
-                response = `🎮 Characters unlock with XP!
-                <br><br>🥷 Ninja: 100 XP (20% bonus)
-                <br>🧙 Wizard: 500 XP (50% bonus)
-                <br>👑 Legend: 1000 XP (100% bonus)
-                <br><br>You have ${gameState.characterXP} XP. Keep playing!`;
-            }
-            else if (message.includes('score') || message.includes('points')) {
-                response = `📈 Your Stats:
-                <br>• Score: ${gameState.score}
-                <br>• Level: ${gameState.level}
-                <br>• Streak: ${gameState.streak}
-                <br>• Questions: ${gameState.questionsDone}
-                <br>• XP: ${gameState.characterXP}
-                <br><br>You're doing great! 🌟`;
-            }
-            else if (message.includes('hello') || message.includes('hi')) {
-                response = `👋 Hello! I'm your math buddy!
-                <br><br>You can ask me:
-                <br>• About fractions, decimals, percentages
-                <br>• For algebra help
-                <br>• About negative numbers
-                <br>• For hints
-                <br>• About characters
-                <br>• Your current stats
-                <br><br>What would you like help with?`;
-            }
-            else if (message.includes('create') || message.includes('make') || message.includes('practice')) {
-                // Generate a practice question
-                const topics = ['fractions', 'decimals', 'percentages', 'algebra'];
-                const topic = topics[Math.floor(Math.random() * topics.length)];
-                response = `📝 Here's a practice problem:
-                <br><br>${generatePracticeQuestion(topic)}
-                <br><br>Try to solve it! You can also play the game for more practice.`;
-            }
-            else {
-                response = `🤔 I'm not sure about that. Try asking me:
-                <br>• "Explain fractions"
-                <br>• "Help with algebra"
-                <br>• "How to do percentages"
-                <br>• "Give me a hint"
-                <br>• "My stats"
-                <br>• "Unlock characters"`;
-            }
-            
-            addBotMessage(response);
-        }
-
-        function generatePracticeQuestion(topic) {
-            const questions = {
-                fractions: [
-                    "What is 1/2 of 16?",
-                    "What is 3/4 of 20?",
-                    "Add: 2/5 + 1/5",
-                    "Which is bigger: 2/3 or 3/5?"
-                ],
-                decimals: [
-                    "0.45 + 0.32 = ?",
-                    "1.5 - 0.75 = ?",
-                    "2.3 × 3 = ?",
-                    "4.8 ÷ 2 = ?"
-                ],
-                percentages: [
-                    "What is 25% of 80?",
-                    "15% of 60 = ?",
-                    "A $40 shirt, 20% off = ?",
-                    "What percent of 50 is 10?"
-                ],
-                algebra: [
-                    "Solve: x + 7 = 15",
-                    "2x - 3 = 9. Find x",
-                    "3(x + 2) = 21. x = ?",
-                    "x/4 + 1 = 6. x = ?"
-                ]
-            };
-            
-            const topicQuestions = questions[topic] || questions.fractions;
-            return topicQuestions[Math.floor(Math.random() * topicQuestions.length)];
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
 
         // Initialize game
