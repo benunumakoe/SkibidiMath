@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Masters - Grade 5 Decimals</title>
+    <title>SkibidiMath - Grade 4-7 Math Game</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="game-container">
         <div class="header">
-            <h1>🧮 DECIMAL DETECTIVES</h1>
-            <div class="grade-badge">Grade 5</div>
+            <h1>🧮 SKIBIDI MATH</h1>
+            <div class="grade-badge" id="headerGrade">Grade 4</div>
         </div>
 
         <div class="stats">
@@ -31,46 +31,34 @@
                 <span class="stat-value" id="streak">0</span>
             </div>
         </div>
-<!-- Top Bar with Grade and Character -->
-<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding: 0 10px; gap: 10px; flex-wrap: wrap;">
-    
-    <!-- Grade Selector -->
-    <div style="display: flex; gap: 10px;">
-        <button onclick="showGradeSelector()" style="background: #9f7aea; color: white; border: none; padding: 10px 20px; border-radius: 30px; font-size: 1rem; cursor: pointer; font-weight: bold;">
-            📚 Change Grade
-        </button>
-        <span id="currentGrade" style="background: #805ad5; color: white; padding: 8px 20px; border-radius: 30px; font-size: 1rem; font-weight: bold;">
-            Grade 4
-        </span>
-    </div>
-    
-    <!-- Top Bar with Grade and Character -->
-<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding: 0 10px; gap: 10px; flex-wrap: wrap;">
-    
-    <!-- Grade Selector -->
-    <div style="display: flex; gap: 10px;">
-        <button onclick="showGradeSelector()" style="background: #9f7aea; color: white; border: none; padding: 10px 20px; border-radius: 30px; font-size: 1rem; cursor: pointer; font-weight: bold;">
-            📚 Change Grade
-        </button>
-        <span id="currentGrade" style="background: #805ad5; color: white; padding: 8px 20px; border-radius: 30px; font-size: 1rem; font-weight: bold;">
-            Grade 4
-        </span>
-    </div>
-    
-    <!-- Character Selector -->
-    <div style="display: flex; gap: 10px;">
-        <button onclick="showCharacterSelect()" style="background: #667eea; color: white; border: none; padding: 10px 20px; border-radius: 30px; font-size: 1rem; cursor: pointer; font-weight: bold;">
-            🧑 Choose Character
-        </button>
-        <span id="currentCharacter" style="background: #48bb78; color: white; padding: 8px 20px; border-radius: 30px; font-size: 1rem; font-weight: bold;">
-            🧑 Math Learner (1x bonus)
-        </span>
-    </div>
-</div>
-</div>
+
+        <!-- Top Bar with Grade and Character -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 15px 0; padding: 0 10px; gap: 10px; flex-wrap: wrap;">
+            
+            <!-- Grade Selector -->
+            <div style="display: flex; gap: 10px;">
+                <button onclick="showGradeSelector()" style="background: #9f7aea; color: white; border: none; padding: 10px 20px; border-radius: 30px; font-size: 1rem; cursor: pointer; font-weight: bold; box-shadow: 0 4px 0 #6b46c1;">
+                    📚 Change Grade
+                </button>
+                <span id="currentGrade" style="background: #805ad5; color: white; padding: 8px 20px; border-radius: 30px; font-size: 1rem; font-weight: bold; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);">
+                    Grade 4
+                </span>
+            </div>
+            
+            <!-- Character Selector -->
+            <div style="display: flex; gap: 10px;">
+                <button onclick="showCharacterSelect()" style="background: #667eea; color: white; border: none; padding: 10px 20px; border-radius: 30px; font-size: 1rem; cursor: pointer; font-weight: bold; box-shadow: 0 4px 0 #4c51bf;">
+                    🧑 Choose Character
+                </button>
+                <span id="currentCharacter" style="background: #48bb78; color: white; padding: 8px 20px; border-radius: 30px; font-size: 1rem; font-weight: bold; box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);">
+                    🧑 Math Learner (1x bonus)
+                </span>
+            </div>
+        </div>
+
         <div class="game-area">
             <div class="question-box" id="question">
-                0.5 + 0.25 = ?
+                Loading question...
             </div>
 
             <div class="options-grid" id="options">
@@ -107,9 +95,9 @@
                     </div>
                 </div>
                 <div class="progress-item">
-                    <span>Comparison</span>
+                    <span>Division</span>
                     <div class="progress-bar">
-                        <div class="progress-fill" id="progressComp" style="width: 0%"></div>
+                        <div class="progress-fill" id="progressDiv" style="width: 0%"></div>
                     </div>
                 </div>
             </div>
@@ -118,7 +106,4 @@
 
     <script src="game.js"></script>
 </body>
-
 </html>
-
-
