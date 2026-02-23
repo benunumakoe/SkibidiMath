@@ -51,7 +51,7 @@ const progressAdd = document.getElementById('progressAdd');
 const progressSub = document.getElementById('progressSub');
 const progressMul = document.getElementById('progressMul');
 const progressComp = document.getElementById('progressComp');
-
+const progressDiv = document.getElementById('progressDiv');
 // ============================================
 // GRADE 4 CONTENT (Easier fractions, times tables)
 // ============================================
@@ -553,6 +553,7 @@ function updateProgressBars() {
     if (progressSub) progressSub.style.width = (gameState.progress.subtraction || 0) + '%';
     if (progressMul) progressMul.style.width = (gameState.progress.multiplication || 0) + '%';
     if (progressComp) progressComp.style.width = (gameState.progress.comparison || 0) + '%';
+    if (progressDiv) progressDiv.style.width = (gameState.progress.division || 0) + '%';
 }
 
 // End game
@@ -638,3 +639,4 @@ window.addEventListener('load', () => {
         // Restore progress if desired
     }
 });
+
