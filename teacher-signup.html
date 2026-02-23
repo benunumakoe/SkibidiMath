@@ -1,1 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkibidiMath - Teacher Sign Up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .signup-container {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .signup-container h1 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .signup-container p {
+            color: #718096;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #4a5568;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            border: 3px solid #e2e8f0;
+            border-radius: 10px;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #667eea;
+        }
+
+        .code-display {
+            background: #f0f4f8;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .code-label {
+            color: #4a5568;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .code-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            letter-spacing: 5px;
+            font-family: monospace;
+        }
+
+        .code-description {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-top: 5px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 15px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #4c51bf;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #4c51bf;
+        }
+
+        .btn-primary:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #4c51bf;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <h1>👨‍🏫 Teacher Sign Up</h1>
+        <p>Create your class and get your unique class codes</p>
+
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="teacherName" placeholder="e.g., Ms. Smith">
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="teacherEmail" placeholder="teacher@school.com">
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="teacherPassword" placeholder="Create a password">
+        </div>
+
+        <div class="form-group">
+            <label>School Name</label>
+            <input type="text" id="schoolName" placeholder="e.g., Lincoln Elementary">
+        </div>
+
+        <div class="form-group">
+            <label>Grade Level</label>
+            <select id="teacherGrade" style="width: 100%; padding: 15px; border: 3px solid #e2e8f0; border-radius: 10px;">
+                <option value="4">Grade 4</option>
+                <option value="5">Grade 5</option>
+                <option value="6">Grade 6</option>
+                <option value="7">Grade 7</option>
+                <option value="multiple">Multiple Grades</option>
+            </select>
+        </div>
+
+        <button class="btn-primary" onclick="signUpTeacher()">Create Account</button>
+
+        <div class="login-link">
+            <a href="teacher-login.html">Already have an account? Log in</a>
+        </div>
+    </div>
+
+    <script>
+        function generateClassCode() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < 6; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
+        }
+
+        function signUpTeacher() {
+            const name = document.getElementById('teacherName').value.trim();
+            const email = document.getElementById('teacherEmail').value.trim();
+            const password = document.getElementById('teacherPassword').value;
+            const school = document.getElementById('schoolName').value.trim();
+            const grade = document.getElementById('teacherGrade').value;
+
+            if (!name || !email || !password || !school) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Get existing teachers
+            const teachers = JSON.parse(localStorage.getItem('teachers') || '{}');
+
+            // Check if email already exists
+            if (teachers[email]) {
+                alert('An account with this email already exists');
+                return;
+            }
+
+            // Generate unique codes
+            let studentCode, parentCode;
+            do {
+                studentCode = generateClassCode();
+                parentCode = generateClassCode();
+            } while (
+                Object.values(teachers).some(t => t.studentCode === studentCode) ||
+                Object.values(teachers).some(t => t.parentCode === parentCode)
+            );
+
+            // Save teacher
+            teachers[email] = {
+                name: name,
+                school: school,
+                grade: grade,
+                studentCode: studentCode,
+                parentCode: parentCode,
+                password: password, // In real app, hash this!
+                createdAt: new Date().toISOString()
+            };
+
+            localStorage.setItem('teachers', JSON.stringify(teachers));
+            localStorage.setItem('currentTeacher', JSON.stringify(teachers[email]));
+
+            // Show codes
+            alert(`Account created!\n\nYour Class Code: ${studentCode}\nParent Code: ${parentCode}\n\nSave these codes!`);
+
+            // Redirect to dashboard
+            window.location.href = 'teacher-dashboard.html';
+        }
+    </script>
+</body>
+</html>
