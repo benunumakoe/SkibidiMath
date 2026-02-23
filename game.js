@@ -24,7 +24,7 @@ let gameState = {
     questionCount: 0,
     character: 'normal',
     characterXP: 0,
-    currentGrade: '4' // Track current grade
+    currentGrade: '4'
 };
 
 // Character System
@@ -51,10 +51,10 @@ const progressAdd = document.getElementById('progressAdd');
 const progressSub = document.getElementById('progressSub');
 const progressMul = document.getElementById('progressMul');
 const progressComp = document.getElementById('progressComp');
-const progressDiv = document.getElementById('progressDiv'); // ADDED
+const progressDiv = document.getElementById('progressDiv');
 
 // ============================================
-// GRADE 4 CONTENT (Easier fractions, times tables)
+// GRADE 4 CONTENT
 // ============================================
 const grade4Content = {
     fractions: {
@@ -89,7 +89,7 @@ const grade4Content = {
 };
 
 // ============================================
-// GRADE 6 CONTENT (Percentages, Ratios)
+// GRADE 6 CONTENT
 // ============================================
 const grade6Content = {
     percentages: {
@@ -125,7 +125,7 @@ const grade6Content = {
 };
 
 // ============================================
-// GRADE 7 CONTENT (Algebra basics, Negative numbers)
+// GRADE 7 CONTENT
 // ============================================
 const grade7Content = {
     algebra: {
@@ -319,9 +319,32 @@ const questionBank = {
     }
 };
 
+// Function to return to game
+function returnToGame() {
+    // Clear the game area and restore normal layout
+    const gameArea = document.querySelector('.game-area');
+    gameArea.innerHTML = `
+        <div class="question-box" id="question">
+            Loading question...
+        </div>
+        <div class="options-grid" id="options">
+            <!-- Options will be added by JavaScript -->
+        </div>
+        <div class="feedback" id="feedback"></div>
+    `;
+    
+    // Reassign DOM elements
+    questionEl = document.getElementById('question');
+    optionsEl = document.getElementById('options');
+    feedbackEl = document.getElementById('feedback');
+    
+    // Restart the game
+    newGame();
+}
+
 // Grade selector function
 function showGradeSelector() {
-    // Stop timer when showing selector
+    // Stop timer
     if (gameState.timerInterval) {
         clearInterval(gameState.timerInterval);
         gameState.timerInterval = null;
@@ -352,6 +375,9 @@ function showGradeSelector() {
                     <small>Algebra, Negative Numbers</small>
                 </div>
             </div>
+            <button onclick="returnToGame()" style="margin-top: 20px; background: #667eea; color: white; border: none; padding: 10px 30px; border-radius: 30px; font-size: 1rem; cursor: pointer; font-weight: bold;">
+                🔙 Back to Game
+            </button>
         </div>
     `;
     
@@ -363,17 +389,13 @@ function selectGrade(grade) {
     document.getElementById('currentGrade').innerHTML = `Grade ${grade}`;
     document.getElementById('headerGrade').innerHTML = `Grade ${grade}`;
     
-    // Reset and start new game
-    if (gameState.timerInterval) {
-        clearInterval(gameState.timerInterval);
-        gameState.timerInterval = null;
-    }
-    newGame();
+    // Return to game with new grade
+    returnToGame();
 }
 
 // Character selection function
 function showCharacterSelect() {
-    // Stop timer when showing selector
+    // Stop timer
     if (gameState.timerInterval) {
         clearInterval(gameState.timerInterval);
         gameState.timerInterval = null;
@@ -388,21 +410,21 @@ function showCharacterSelect() {
                     <div>Math Learner</div>
                     <small>No bonus</small>
                 </div>
-                <div class="char-card ${gameState.characterXP > 100 ? '' : 'locked'}" 
+                <div class="char-card ${gameState.characterXP >= 100 ? '' : 'locked'}" 
                      onclick="selectCharacter('ninja')">
                     <div class="char-emoji">🥷</div>
                     <div>Math Ninja</div>
                     <small>20% bonus (100 XP)</small>
                     ${gameState.characterXP < 100 ? '<div class="lock">🔒</div>' : ''}
                 </div>
-                <div class="char-card ${gameState.characterXP > 500 ? '' : 'locked'}" 
+                <div class="char-card ${gameState.characterXP >= 500 ? '' : 'locked'}" 
                      onclick="selectCharacter('wizard')">
                     <div class="char-emoji">🧙‍♂️</div>
                     <div>Math Wizard</div>
                     <small>50% bonus (500 XP)</small>
                     ${gameState.characterXP < 500 ? '<div class="lock">🔒</div>' : ''}
                 </div>
-                <div class="char-card ${gameState.characterXP > 1000 ? '' : 'locked'}" 
+                <div class="char-card ${gameState.characterXP >= 1000 ? '' : 'locked'}" 
                      onclick="selectCharacter('legend')">
                     <div class="char-emoji">👑</div>
                     <div>Math Legend</div>
@@ -410,6 +432,9 @@ function showCharacterSelect() {
                     ${gameState.characterXP < 1000 ? '<div class="lock">🔒</div>' : ''}
                 </div>
             </div>
+            <button onclick="returnToGame()" style="margin-top: 20px; background: #667eea; color: white; border: none; padding: 10px 30px; border-radius: 30px; font-size: 1rem; cursor: pointer; font-weight: bold;">
+                🔙 Back to Game
+            </button>
         </div>
     `;
     
@@ -420,16 +445,7 @@ function selectCharacter(char) {
     if (char === 'normal' || gameState.characterXP >= getRequiredXP(char)) {
         gameState.character = char;
         updateCharacterDisplay();
-        
-        // Reset timer and start new game
-        if (gameState.timerInterval) {
-            clearInterval(gameState.timerInterval);
-            gameState.timerInterval = null;
-        }
-        gameState.timer = 60;
-        timerEl.textContent = '60';
-        generateQuestion();
-        startTimer();
+        returnToGame();
     }
 }
 
@@ -485,7 +501,7 @@ function generateQuestion() {
     const bank = gradeQuestions[type]?.[difficulty];
     
     if (!bank || bank.length === 0) {
-        // Fallback to grade 5 addition
+        // Fallback to addition
         const fallbackBank = questionBank.addition.easy;
         const questionData = fallbackBank[Math.floor(Math.random() * fallbackBank.length)];
         gameState.currentQuestion = {
@@ -587,7 +603,7 @@ function updateProgressBars() {
     if (progressSub) progressSub.style.width = (gameState.progress.subtraction || 0) + '%';
     if (progressMul) progressMul.style.width = (gameState.progress.multiplication || 0) + '%';
     if (progressComp) progressComp.style.width = (gameState.progress.comparison || 0) + '%';
-    if (progressDiv) progressDiv.style.width = (gameState.progress.division || 0) + '%'; // ADDED
+    if (progressDiv) progressDiv.style.width = (gameState.progress.division || 0) + '%';
 }
 
 // End game
@@ -599,12 +615,51 @@ function endGame() {
 }
 
 // New game
+function returnToGame() {
+    // Recreate the game area HTML
+    const gameArea = document.querySelector('.game-area');
+    gameArea.innerHTML = `
+        <div class="question-box" id="question">
+            Loading question...
+        </div>
+        <div class="options-grid" id="options">
+            <!-- Options will be added by JavaScript -->
+        </div>
+        <div class="feedback" id="feedback"></div>
+    `;
+    
+    // Reassign DOM elements
+    questionEl = document.getElementById('question');
+    optionsEl = document.getElementById('options');
+    feedbackEl = document.getElementById('feedback');
+    
+    // Clear any existing timer
+    if (gameState.timerInterval) {
+        clearInterval(gameState.timerInterval);
+        gameState.timerInterval = null;
+    }
+    
+    // Reset timer to 60
+    gameState.timer = 60;
+    timerEl.textContent = '60';
+    
+    // Generate new question and start timer
+    generateQuestion();
+    startTimer();
+}
+
+// New game
 function newGame() {
     // Clear any existing timer
     if (gameState.timerInterval) {
         clearInterval(gameState.timerInterval);
         gameState.timerInterval = null;
     }
+    
+    // Save old values
+    const oldCharacter = gameState?.character || 'normal';
+    const oldXP = gameState?.characterXP || 0;
+    const oldGrade = gameState?.currentGrade || '4';
     
     gameState = {
         score: 0,
@@ -629,9 +684,9 @@ function newGame() {
             negativeNumbers: 0
         },
         questionCount: 0,
-        character: gameState?.character || 'normal',
-        characterXP: gameState?.characterXP || 0,
-        currentGrade: gameState?.currentGrade || '4'
+        character: oldCharacter,
+        characterXP: oldXP,
+        currentGrade: oldGrade
     };
     
     // Update displays
@@ -643,8 +698,7 @@ function newGame() {
     updateProgressBars();
     updateCharacterDisplay();
     
-    generateQuestion();
-    startTimer();
+    returnToGame();
 }
 
 // Event listeners
@@ -668,13 +722,4 @@ window.addEventListener('beforeunload', () => {
         character: gameState.character,
         currentGrade: gameState.currentGrade
     }));
-});
-
-// Load saved progress
-window.addEventListener('load', () => {
-    const saved = localStorage.getItem('mathGameProgress');
-    if (saved) {
-        const data = JSON.parse(saved);
-        // You could restore progress here
-    }
 });
