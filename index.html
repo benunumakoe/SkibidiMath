@@ -31,14 +31,28 @@
                 <span class="stat-value" id="streak">0</span>
             </div>
         </div>
-<!-- Character Button and Display -->
-<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding: 0 10px;">
-    <button onclick="showCharacterSelect()" style="background: #667eea; color: white; border: none; padding: 10px 20px; border-radius: 30px; font-size: 1rem; cursor: pointer; font-weight: bold;">
-        🧑 Choose Character
-    </button>
-    <span id="currentCharacter" style="background: #48bb78; color: white; padding: 8px 20px; border-radius: 30px; font-size: 1rem; font-weight: bold;">
-        🧑 Math Learner (1x bonus)
-    </span>
+<!-- Top Bar with Grade and Character -->
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; padding: 0 10px; gap: 10px; flex-wrap: wrap;">
+    
+    <!-- Grade Selector -->
+    <div style="display: flex; gap: 10px;">
+        <button onclick="showGradeSelector()" style="background: #9f7aea; color: white; border: none; padding: 10px 20px; border-radius: 30px; font-size: 1rem; cursor: pointer; font-weight: bold;">
+            📚 Change Grade
+        </button>
+        <span id="currentGrade" style="background: #805ad5; color: white; padding: 8px 20px; border-radius: 30px; font-size: 1rem; font-weight: bold;">
+            Grade 4
+        </span>
+    </div>
+    
+    <!-- Character Selector -->
+    <div style="display: flex; gap: 10px;">
+        <button onclick="showCharacterSelect()" style="background: #667eea; color: white; border: none; padding: 10px 20px; border-radius: 30px; font-size: 1rem; cursor: pointer; font-weight: bold;">
+            🧑 Choose Character
+        </button>
+        <span id="currentCharacter" style="background: #48bb78; color: white; padding: 8px 20px; border-radius: 30px; font-size: 1rem; font-weight: bold;">
+            🧑 Math Learner (1x bonus)
+        </span>
+    </div>
 </div>
         <div class="game-area">
             <div class="question-box" id="question">
@@ -92,3 +106,4 @@
 </body>
 
 </html>
+
