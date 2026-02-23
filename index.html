@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Masters - Grade 5 Decimals</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>🧮 DECIMAL DETECTIVES</h1>
+            <div class="grade-badge">Grade 5</div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-box">
+                <span class="stat-label">Score</span>
+                <span class="stat-value" id="score">0</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Time</span>
+                <span class="stat-value" id="timer">60</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Level</span>
+                <span class="stat-value" id="level">1</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-label">Streak</span>
+                <span class="stat-value" id="streak">0</span>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <div class="question-box" id="question">
+                0.5 + 0.25 = ?
+            </div>
+
+            <div class="options-grid" id="options">
+                <!-- Options will be added by JavaScript -->
+            </div>
+
+            <div class="feedback" id="feedback"></div>
+        </div>
+
+        <div class="controls">
+            <button class="btn-primary" id="nextBtn">Next Question</button>
+            <button class="btn-secondary" id="newGameBtn">New Game</button>
+        </div>
+
+        <div class="progress-section">
+            <h3>Your Progress</h3>
+            <div class="progress-bars">
+                <div class="progress-item">
+                    <span>Addition</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressAdd" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <span>Subtraction</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressSub" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <span>Multiplication</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressMul" style="width: 0%"></div>
+                    </div>
+                </div>
+                <div class="progress-item">
+                    <span>Comparison</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressComp" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
