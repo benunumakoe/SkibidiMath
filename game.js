@@ -21,7 +21,63 @@ let gameState = {
     character: 'normal',
     characterXP: 0
 };
+// Character System
+const characters = {
+    normal: { name: '🧑 Math Learner', emoji: '🧑', bonus: 1 },
+    ninja: { name: '🥷 Math Ninja', emoji: '🥷', bonus: 1.2, unlocked: false },
+    wizard: { name: '🧙‍♂️ Math Wizard', emoji: '🧙‍♂️', bonus: 1.5, unlocked: false },
+    legend: { name: '👑 Math Legend', emoji: '👑', bonus: 2, unlocked: false }
+};
 
+// Character selection HTML to add to your game
+function showCharacterSelect() {
+    const charHTML = `
+        <div class="character-select">
+            <h3>Choose Your Character!</h3>
+            <div class="char-grid">
+                <div class="char-card" onclick="selectCharacter('normal')">
+                    <div class="char-emoji">🧑</div>
+                    <div>Math Learner</div>
+                    <small>No bonus</small>
+                </div>
+                <div class="char-card ${gameState.characterXP > 100 ? '' : 'locked'}" 
+                     onclick="selectCharacter('ninja')">
+                    <div class="char-emoji">🥷</div>
+                    <div>Math Ninja</div>
+                    <small>20% bonus (100 XP)</small>
+                    ${gameState.characterXP < 100 ? '<div class="lock">🔒</div>' : ''}
+                </div>
+                <div class="char-card ${gameState.characterXP > 500 ? '' : 'locked'}" 
+                     onclick="selectCharacter('wizard')">
+                    <div class="char-emoji">🧙‍♂️</div>
+                    <div>Math Wizard</div>
+                    <small>50% bonus (500 XP)</small>
+                    ${gameState.characterXP < 500 ? '<div class="lock">🔒</div>' : ''}
+                </div>
+                <div class="char-card ${gameState.characterXP > 1000 ? '' : 'locked'}" 
+                     onclick="selectCharacter('legend')">
+                    <div class="char-emoji">👑</div>
+                    <div>Math Legend</div>
+                    <small>100% bonus (1000 XP)</small>
+                    ${gameState.characterXP < 1000 ? '<div class="lock">🔒</div>' : ''}
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.querySelector('.game-area').innerHTML = charHTML;
+}
+
+function selectCharacter(char) {
+    if (char === 'normal' || gameState.characterXP >= getRequiredXP(char)) {
+        gameState.character = char;
+        updateCharacterDisplay();
+    }
+}
+
+function getRequiredXP(char) {
+    return { ninja: 100, wizard: 500, legend: 1000 }[char] || 0;
+}
 // Question Bank with Grade 4 Content
 const questionBank = {
     // GRADE 4 CONTENT
@@ -86,3 +142,4 @@ const questionBank = {
 
 // Add this to your existing questionBank
 // Merge with your existing addition/subtraction/multiplication/comparison
+
