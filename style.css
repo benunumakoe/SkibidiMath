@@ -332,3 +332,78 @@ body {
     padding: 5px;
     border-radius: 50%;
 }
+/* Grade Selector Styles */
+.grade-selector {
+    text-align: center;
+    padding: 20px;
+}
+
+.grade-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.grade-card {
+    background: white;
+    border: 3px solid #cbd5e0;
+    border-radius: 15px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    text-align: center;
+}
+
+.grade-card:hover {
+    transform: translateY(-5px);
+    border-color: #9f7aea;
+    background: #faf5ff;
+}
+
+.grade-emoji {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .char-grid, .grade-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .char-card, .grade-card {
+        padding: 15px;
+    }
+    
+    .char-emoji, .grade-emoji {
+        font-size: 2.5rem;
+    }
+}
+
+/* Animation for correct answers */
+@keyframes correctPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.option-btn.correct {
+    animation: correctPulse 0.5s;
+}
+
+/* XP Bar */
+.xp-bar {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.xp-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #f6ad55, #ed8936);
+    transition: width 0.3s;
+}
