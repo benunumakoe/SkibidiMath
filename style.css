@@ -280,3 +280,55 @@ body {
     background: linear-gradient(90deg, #f6ad55, #ed8936);
     transition: width 0.3s;
 }
+/* Character System Styles */
+.character-select {
+    text-align: center;
+    padding: 20px;
+}
+
+.char-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.char-card {
+    background: white;
+    border: 3px solid #cbd5e0;
+    border-radius: 15px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.char-card:hover {
+    transform: translateY(-5px);
+    border-color: #667eea;
+}
+
+.char-card.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.char-card.locked:hover {
+    transform: none;
+    border-color: #cbd5e0;
+}
+
+.char-emoji {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.lock {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2rem;
+    background: rgba(0,0,0,0.1);
+    padding: 5px;
+    border-radius: 50%;
+}
