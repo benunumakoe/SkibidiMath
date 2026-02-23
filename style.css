@@ -27,12 +27,16 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .header h1 {
     color: #333;
-    font-size: 1.8rem;
+    font-size: 2rem;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .grade-badge {
@@ -42,13 +46,14 @@ body {
     border-radius: 30px;
     font-weight: bold;
     font-size: 1.2rem;
+    box-shadow: 0 4px 0 #c53030;
 }
 
 .stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .stat-box {
@@ -56,7 +61,7 @@ body {
     padding: 15px;
     border-radius: 10px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 0 #cbd5e0;
 }
 
 .stat-label {
@@ -78,6 +83,7 @@ body {
     padding: 30px;
     border-radius: 15px;
     margin-bottom: 20px;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .question-box {
@@ -86,6 +92,10 @@ body {
     margin-bottom: 30px;
     color: #2d3748;
     font-weight: bold;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .options-grid {
@@ -104,30 +114,40 @@ body {
     cursor: pointer;
     transition: all 0.3s;
     font-weight: bold;
+    box-shadow: 0 4px 0 #a0aec0;
 }
 
 .option-btn:hover {
     background: #e2e8f0;
     transform: translateY(-2px);
+    box-shadow: 0 6px 0 #a0aec0;
+}
+
+.option-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #a0aec0;
 }
 
 .option-btn.correct {
     background: #48bb78;
     color: white;
     border-color: #2f855a;
+    box-shadow: 0 4px 0 #276749;
 }
 
 .option-btn.wrong {
     background: #f56565;
     color: white;
     border-color: #c53030;
+    box-shadow: 0 4px 0 #9b2c2c;
 }
 
 .feedback {
     text-align: center;
-    font-size: 1.2rem;
-    min-height: 30px;
+    font-size: 1.3rem;
+    min-height: 40px;
     margin-top: 20px;
+    font-weight: bold;
 }
 
 .controls {
@@ -150,20 +170,35 @@ body {
 .btn-primary {
     background: #667eea;
     color: white;
+    box-shadow: 0 4px 0 #4c51bf;
 }
 
 .btn-primary:hover {
     background: #5a67d8;
     transform: translateY(-2px);
+    box-shadow: 0 6px 0 #4c51bf;
+}
+
+.btn-primary:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #4c51bf;
 }
 
 .btn-secondary {
     background: #e2e8f0;
     color: #4a5568;
+    box-shadow: 0 4px 0 #a0aec0;
 }
 
 .btn-secondary:hover {
     background: #cbd5e0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #a0aec0;
+}
+
+.btn-secondary:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #a0aec0;
 }
 
 .progress-section {
@@ -174,6 +209,7 @@ body {
 .progress-section h3 {
     color: #4a5568;
     margin-bottom: 15px;
+    font-size: 1.3rem;
 }
 
 .progress-item {
@@ -184,6 +220,7 @@ body {
     display: block;
     margin-bottom: 5px;
     color: #718096;
+    font-weight: 500;
 }
 
 .progress-bar {
@@ -191,6 +228,7 @@ body {
     background: #e2e8f0;
     border-radius: 10px;
     overflow: hidden;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
 }
 
 .progress-fill {
@@ -199,93 +237,18 @@ body {
     transition: width 0.3s;
 }
 
-@media (max-width: 600px) {
-    .stats {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .options-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .question-box {
-        font-size: 1.8rem;
-    }
-
-}
-/* Character System */
-.character-select {
-    text-align: center;
-    padding: 20px;
-}
-
-.char-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.char-card {
-    background: white;
-    border: 3px solid #cbd5e0;
-    border-radius: 15px;
-    padding: 20px;
-    cursor: pointer;
-    transition: all 0.3s;
-    position: relative;
-}
-
-.char-card:hover {
-    transform: translateY(-5px);
-    border-color: #667eea;
-}
-
-.char-card.locked {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.char-emoji {
-    font-size: 3rem;
-    margin-bottom: 10px;
-}
-
-.lock {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 1.2rem;
-}
-
-.character-badge {
-    background: #667eea;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    margin-left: 10px;
-}
-
-.xp-bar {
-    height: 10px;
-    background: #e2e8f0;
-    border-radius: 5px;
-    margin: 10px 0;
-    overflow: hidden;
-}
-
-.xp-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #f6ad55, #ed8936);
-    transition: width 0.3s;
-}
 /* Character System Styles */
 .character-select {
     text-align: center;
     padding: 20px;
 }
 
+.character-select h3 {
+    color: #4a5568;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
 .char-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -301,11 +264,13 @@ body {
     cursor: pointer;
     transition: all 0.3s;
     position: relative;
+    text-align: center;
 }
 
 .char-card:hover {
     transform: translateY(-5px);
     border-color: #667eea;
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
 }
 
 .char-card.locked {
@@ -316,11 +281,23 @@ body {
 .char-card.locked:hover {
     transform: none;
     border-color: #cbd5e0;
+    box-shadow: none;
 }
 
 .char-emoji {
     font-size: 3rem;
     margin-bottom: 10px;
+}
+
+.char-card div {
+    font-weight: bold;
+    color: #2d3748;
+    margin-bottom: 5px;
+}
+
+.char-card small {
+    color: #718096;
+    font-size: 0.9rem;
 }
 
 .lock {
@@ -331,11 +308,23 @@ body {
     background: rgba(0,0,0,0.1);
     padding: 5px;
     border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 /* Grade Selector Styles */
 .grade-selector {
     text-align: center;
     padding: 20px;
+}
+
+.grade-selector h3 {
+    color: #4a5568;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
 }
 
 .grade-grid {
@@ -360,6 +349,7 @@ body {
     transform: translateY(-5px);
     border-color: #9f7aea;
     background: #faf5ff;
+    box-shadow: 0 10px 20px rgba(159, 122, 234, 0.2);
 }
 
 .grade-emoji {
@@ -367,19 +357,16 @@ body {
     margin-bottom: 10px;
 }
 
-/* Responsive design */
-@media (max-width: 600px) {
-    .char-grid, .grade-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .char-card, .grade-card {
-        padding: 15px;
-    }
-    
-    .char-emoji, .grade-emoji {
-        font-size: 2.5rem;
-    }
+.grade-card div {
+    font-weight: bold;
+    color: #2d3748;
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+}
+
+.grade-card small {
+    color: #718096;
+    font-size: 0.9rem;
 }
 
 /* Animation for correct answers */
@@ -407,43 +394,46 @@ body {
     background: linear-gradient(90deg, #f6ad55, #ed8936);
     transition: width 0.3s;
 }
-/* Grade Selector Styles */
-.grade-selector {
-    text-align: center;
-    padding: 20px;
-}
 
-.grade-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.grade-card {
-    background: white;
-    border: 3px solid #cbd5e0;
-    border-radius: 15px;
-    padding: 20px;
-    cursor: pointer;
-    transition: all 0.3s;
-    position: relative;
-    text-align: center;
-}
-
-.grade-card:hover {
-    transform: translateY(-5px);
-    border-color: #9f7aea;
-    background: #faf5ff;
-}
-
-.grade-emoji {
-    font-size: 3rem;
-    margin-bottom: 10px;
+/* Character badge */
+.character-badge {
+    background: #667eea;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    margin-left: 10px;
 }
 
 /* Responsive design */
 @media (max-width: 600px) {
+    .game-container {
+        padding: 20px;
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .question-box {
+        font-size: 1.8rem;
+        min-height: 80px;
+    }
+
+    .option-btn {
+        padding: 15px;
+        font-size: 1.2rem;
+    }
+
     .char-grid, .grade-grid {
         grid-template-columns: 1fr;
     }
@@ -455,30 +445,39 @@ body {
     .char-emoji, .grade-emoji {
         font-size: 2.5rem;
     }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .btn-primary, .btn-secondary {
+        width: 100%;
+    }
 }
 
-/* Animation for correct answers */
-@keyframes correctPulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+/* Loading state */
+.loading {
+    opacity: 0.5;
+    pointer-events: none;
 }
 
-.option-btn.correct {
-    animation: correctPulse 0.5s;
+/* Tooltip styles */
+[data-tooltip] {
+    position: relative;
+    cursor: help;
 }
 
-/* XP Bar */
-.xp-bar {
-    height: 8px;
-    background: #e2e8f0;
-    border-radius: 4px;
-    margin: 10px 0;
-    overflow: hidden;
-}
-
-.xp-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #f6ad55, #ed8936);
-    transition: width 0.3s;
+[data-tooltip]:hover:after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2d3748;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    z-index: 10;
 }
