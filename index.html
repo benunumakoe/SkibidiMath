@@ -391,6 +391,14 @@
             text-align: center;
         }
 
+        .rate-limit-timer {
+            text-align: center;
+            color: #f56565;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
         @media (max-width: 900px) {
             .game-wrapper {
                 grid-template-columns: 1fr;
@@ -477,13 +485,13 @@
             </div>
         </div>
 
-        <!-- FREE Google Gemini AI Chatbot -->
+        <!-- FREE Google Gemini AI Chatbot with Multi-Model Support -->
         <div class="chat-container">
             <div class="chat-header">
                 <div class="chat-avatar">🧠</div>
                 <div class="chat-title">
                     <h3>Gemini AI Tutor</h3>
-                    <p>FREE - 60 requests per minute! ✅</p>
+                    <p>FREE - 3 models = 180 requests/min! 🚀</p>
                 </div>
             </div>
 
@@ -491,6 +499,9 @@
             <div id="apiStatus" class="api-key-warning">
                 ⚠️ Enter your FREE Gemini API key below
             </div>
+
+            <!-- Rate Limit Timer Display -->
+            <div id="rateLimitTimer" class="rate-limit-timer"></div>
 
             <!-- API Key Input -->
             <div style="margin-bottom: 15px;">
@@ -505,7 +516,7 @@
                     </button>
                 </div>
                 <p style="font-size: 0.8rem; color: #718096; margin-top: 8px; text-align: center;">
-                    Free tier: 60 requests/minute, 1,000+ per day ✅
+                    Free tier: 60 requests/min per model | 3 models = 180 requests/min! ✅
                 </p>
             </div>
 
@@ -515,13 +526,16 @@
                     <div class="message-content">
                         👋 Hi! I'm your FREE Gemini AI math tutor!
                         <br><br>
+                        <strong>✨ NEW: Multi-Model Support!</strong>
+                        <br>• 3 models = 3x more questions!
+                        <br>• Auto-switches when rate limited
+                        <br>• Queue system for classrooms
+                        <br><br>
                         <strong>Try asking me:</strong>
                         <br>• "Explain fractions step by step"
                         <br>• "Help me with algebra"
                         <br>• "Create a practice problem"
                         <br>• "Give me a hint on this question"
-                        <br><br>
-                        First, click "Get FREE Key" above, then paste it and save!
                     </div>
                 </div>
             </div>
@@ -530,17 +544,34 @@
                 <input type="text" id="chatInput" placeholder="Ask your math question..." onkeypress="if(event.key==='Enter') sendMessage()" disabled>
                 <button onclick="sendMessage()" id="sendButton" disabled>➡️</button>
             </div>
+            <div style="font-size: 0.7rem; color: #a0aec0; text-align: center; margin-top: 5px;">
+                Queue: <span id="queueCount">0</span> messages waiting
+            </div>
         </div>
     </div>
 
     <script>
         // ============================================
-        // CONFIGURATION - Google Gemini API (FIXED)
+        // CONFIGURATION - Google Gemini API with Multi-Model Support
         // ============================================
         let GEMINI_API_KEY = localStorage.getItem('gemini_api_key') || '';
         
-        // FIXED: Using gemini-pro model (works 100%)
-        const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent';
+        // Multiple models for 3x capacity
+        let currentModelIndex = 0;
+        const models = [
+            'gemini-pro',
+            'gemini-1.5-flash',
+            'gemini-1.0-pro'
+        ];
+        
+        // Queue system for classroom use
+        let messageQueue = [];
+        let isProcessingQueue = false;
+        let isSending = false;
+        
+        // Rate limit timer
+        let rateLimitTimer = null;
+        let timeLeft = 0;
         
         function saveApiKey() {
             const key = document.getElementById('apiKeyInput').value.trim();
@@ -550,13 +581,13 @@
                 
                 // Update UI
                 document.getElementById('apiStatus').className = 'api-success';
-                document.getElementById('apiStatus').innerHTML = '✅ API key saved! You can now chat with Gemini AI!';
+                document.getElementById('apiStatus').innerHTML = '✅ API key saved! 3 models active - 180 requests/min!';
                 
                 // Enable chat
                 document.getElementById('chatInput').disabled = false;
                 document.getElementById('sendButton').disabled = false;
                 
-                addBotMessage('✅ Great! Your Gemini API key is saved. You can now ask me anything about math!');
+                addBotMessage('✅ Great! Your Gemini API key is saved. I now have access to 3 different models for 3x more questions!');
             } else {
                 alert('Please enter your Gemini API key');
             }
@@ -565,7 +596,7 @@
         // Check if key exists on load
         if (GEMINI_API_KEY) {
             document.getElementById('apiStatus').className = 'api-success';
-            document.getElementById('apiStatus').innerHTML = '✅ Gemini API key is ready!';
+            document.getElementById('apiStatus').innerHTML = '✅ Gemini API key ready! 3 models active';
             document.getElementById('chatInput').disabled = false;
             document.getElementById('sendButton').disabled = false;
             document.getElementById('apiKeyInput').value = '••••••••••••••••';
@@ -936,10 +967,127 @@
         }
 
         // ============================================
-        // GOOGLE GEMINI AI CHATBOT - FIXED VERSION
+        // GOOGLE GEMINI AI CHATBOT - MULTI-MODEL + QUEUE SYSTEM
         // ============================================
 
-        let isSending = false;
+        function startRateLimitTimer(seconds = 60) {
+            timeLeft = seconds;
+            
+            if (rateLimitTimer) clearInterval(rateLimitTimer);
+            
+            rateLimitTimer = setInterval(() => {
+                timeLeft--;
+                
+                const timerDisplay = document.getElementById('rateLimitTimer');
+                if (timerDisplay) {
+                    if (timeLeft > 0) {
+                        timerDisplay.innerHTML = `⏳ Rate limit: try again in ${timeLeft}s`;
+                    } else {
+                        timerDisplay.innerHTML = '';
+                        clearInterval(rateLimitTimer);
+                    }
+                }
+            }, 1000);
+        }
+
+        async function processQueue() {
+            if (isProcessingQueue || messageQueue.length === 0) return;
+            
+            isProcessingQueue = true;
+            updateQueueDisplay();
+            
+            while (messageQueue.length > 0) {
+                const { message, resolve, reject } = messageQueue.shift();
+                updateQueueDisplay();
+                
+                try {
+                    const response = await callGeminiAPIWithRetry(message);
+                    resolve(response);
+                    // Wait 1 second between requests to be nice to the API
+                    await new Promise(r => setTimeout(r, 1000));
+                } catch (error) {
+                    reject(error);
+                }
+            }
+            
+            isProcessingQueue = false;
+        }
+
+        async function callGeminiAPIWithRetry(userMessage, retryCount = 0) {
+            const maxRetries = models.length * 2; // Try each model twice
+            
+            for (let i = 0; i < models.length; i++) {
+                const modelIndex = (currentModelIndex + i) % models.length;
+                const model = models[modelIndex];
+                
+                try {
+                    const prompt = `You are a friendly math tutor for students in grades 4-7. 
+Current student info:
+- Grade: ${gameState.currentGrade}
+- Score: ${gameState.score}
+- Level: ${gameState.level}
+- Streak: ${gameState.streak}
+- Current question: "${gameState.currentQuestion?.question || 'No active question'}"
+
+Student question: ${userMessage}
+
+Provide helpful, encouraging math help. Use simple language and examples. Be engaging and use emojis occasionally!`;
+
+                    const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/${model}:generateContent?key=${GEMINI_API_KEY}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{
+                                    text: prompt
+                                }]
+                            }],
+                            generationConfig: {
+                                temperature: 0.7,
+                                maxOutputTokens: 500,
+                            }
+                        })
+                    });
+
+                    if (response.ok) {
+                        // Update model index for next time
+                        currentModelIndex = (modelIndex + 1) % models.length;
+                        
+                        const data = await response.json();
+                        if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
+                            return data.candidates[0].content.parts[0].text;
+                        }
+                    } else {
+                        const errorData = await response.json();
+                        const errorMessage = errorData.error?.message || '';
+                        
+                        // If rate limited, try next model
+                        if (errorMessage.includes('rate') || errorMessage.includes('quota')) {
+                            console.log(`Model ${model} rate limited, trying next...`);
+                            continue;
+                        } else {
+                            throw new Error(errorMessage);
+                        }
+                    }
+                } catch (error) {
+                    console.log(`Model ${model} error:`, error.message);
+                    
+                    // If this was the last model and we haven't exceeded retries
+                    if (i === models.length - 1 && retryCount < maxRetries) {
+                        console.log(`All models failed, retry ${retryCount + 1}/${maxRetries}`);
+                        // Wait longer between retries (exponential backoff)
+                        await new Promise(r => setTimeout(r, 2000 * (retryCount + 1)));
+                        return callGeminiAPIWithRetry(userMessage, retryCount + 1);
+                    }
+                }
+            }
+            
+            // If all models and retries fail
+            startRateLimitTimer(30);
+            throw new Error('All models are busy. Please wait a moment and try again.');
+        }
 
         async function sendMessage() {
             if (isSending) return;
@@ -961,71 +1109,28 @@
             document.getElementById('sendButton').disabled = true;
             
             try {
-                const response = await callGeminiAPI(message);
+                // Add to queue and wait for response
+                const response = await new Promise((resolve, reject) => {
+                    messageQueue.push({ message, resolve, reject });
+                    updateQueueDisplay();
+                    processQueue();
+                });
+                
                 removeTyping();
                 addBotMessage(response);
             } catch (error) {
                 removeTyping();
-                console.error('Gemini API Error:', error);
-                
-                // Handle specific error messages
-                if (error.message.includes('API key')) {
-                    addBotMessage(`❌ Invalid API key. Please check your key or get a new one at Google AI Studio.`);
-                } else if (error.message.includes('quota') || error.message.includes('rate')) {
-                    addBotMessage(`⚠️ You've hit the rate limit. Free tier allows 60 requests per minute - just wait a moment!`);
-                } else {
-                    addBotMessage(`😕 Sorry, I encountered an error: ${error.message}`);
-                }
+                addBotMessage(`😕 ${error.message}`);
             } finally {
                 isSending = false;
                 document.getElementById('sendButton').disabled = false;
             }
         }
 
-        async function callGeminiAPI(userMessage) {
-            // Create a prompt that includes game context
-            const prompt = `You are a friendly math tutor for students in grades 4-7. 
-Current student info:
-- Grade: ${gameState.currentGrade}
-- Score: ${gameState.score}
-- Level: ${gameState.level}
-- Streak: ${gameState.streak}
-- Current question: "${gameState.currentQuestion?.question || 'No active question'}"
-
-Student question: ${userMessage}
-
-Provide helpful, encouraging math help. Use simple language and examples. Be engaging and use emojis occasionally!`;
-
-            const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    contents: [{
-                        parts: [{
-                            text: prompt
-                        }]
-                    }],
-                    generationConfig: {
-                        temperature: 0.7,
-                        maxOutputTokens: 500,
-                    }
-                })
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error?.message || `API error: ${response.status}`);
-            }
-
-            const data = await response.json();
-            
-            // Extract text from Gemini response format
-            if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
-                return data.candidates[0].content.parts[0].text;
-            } else {
-                throw new Error('Unexpected response format');
+        function updateQueueDisplay() {
+            const queueCount = document.getElementById('queueCount');
+            if (queueCount) {
+                queueCount.textContent = messageQueue.length;
             }
         }
 
