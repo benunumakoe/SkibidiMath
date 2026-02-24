@@ -80,7 +80,7 @@
         /* Game Mode Selector */
         .mode-selector {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(5, 1fr);
             gap: 10px;
             margin-bottom: 20px;
         }
@@ -142,7 +142,6 @@
             transform: translateY(-2px);
         }
 
-        /* Game Mode Specific Displays */
         .mode-display {
             background: #f0f4f8;
             padding: 20px;
@@ -170,72 +169,6 @@
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
-        }
-
-        .timer-bonus {
-            color: #48bb78;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-
-        .race-track {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .space-ship {
-            font-size: 2rem;
-            transition: margin-left 0.3s;
-        }
-
-        .finish-line {
-            font-size: 2rem;
-            margin-left: auto;
-        }
-
-        .board-game {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            padding: 20px;
-            background: #f0f4f8;
-            border-radius: 20px;
-        }
-
-        .board-cell {
-            aspect-ratio: 1;
-            background: white;
-            border: 2px solid #cbd5e0;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            font-weight: bold;
-            position: relative;
-        }
-
-        .board-cell.ladder {
-            background: #c6f6d5;
-            border-color: #38a169;
-        }
-
-        .board-cell.snake {
-            background: #fed7d7;
-            border-color: #e53e3e;
-        }
-
-        .player-position {
-            width: 20px;
-            height: 20px;
-            background: #667eea;
-            border-radius: 50%;
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
         }
 
         .game-area {
@@ -315,31 +248,6 @@
             margin-top: 20px;
         }
 
-        .character-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .character-emoji {
-            font-size: 2.5rem;
-        }
-
-        .xp-bar {
-            width: 200px;
-            height: 12px;
-            background: rgba(255,255,255,0.3);
-            border-radius: 6px;
-            overflow: hidden;
-        }
-
-        .xp-fill {
-            height: 100%;
-            background: #f6ad55;
-            transition: width 0.3s;
-        }
-
-        /* Chatbot Area */
         .chat-container {
             background: white;
             border-radius: 30px;
@@ -370,16 +278,6 @@
             font-size: 1.8rem;
         }
 
-        .chat-title h3 {
-            color: #2d3748;
-            margin-bottom: 5px;
-        }
-
-        .chat-title p {
-            color: #718096;
-            font-size: 0.9rem;
-        }
-
         .chat-messages {
             flex: 1;
             overflow-y: auto;
@@ -387,6 +285,42 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+        }
+
+        .message {
+            display: flex;
+            gap: 10px;
+            max-width: 80%;
+        }
+
+        .message.bot {
+            align-self: flex-start;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 35px;
+            height: 35px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .message-content {
+            background: #f0f4f8;
+            padding: 12px 18px;
+            border-radius: 20px;
+        }
+
+        .message.user .message-content {
+            background: #667eea;
+            color: white;
         }
 
         .chat-input {
@@ -434,11 +368,11 @@
             <div class="header">
                 <h1>🧮 SKIBIDI MATH</h1>
                 <div class="character-info">
-                    <span class="character-emoji" id="characterEmoji">🧑</span>
+                    <span class="character-emoji">🧑</span>
                     <div>
-                        <div id="characterName">Math Learner</div>
+                        <div>Math Learner</div>
                         <div class="xp-bar">
-                            <div class="xp-fill" id="xpBar" style="width: 0%"></div>
+                            <div class="xp-fill" style="width: 0%"></div>
                         </div>
                     </div>
                 </div>
@@ -569,14 +503,10 @@
             character: 'normal',
             characterXP: 0,
             gameMode: 'classic',
-            // Sudden Death mode
             lives: 3,
-            // Time Attack mode
             timeBonus: 0,
-            // Space Race mode
             racePosition: 0,
             raceTotal: 10,
-            // Snakes & Ladders
             boardPosition: 1,
             boardSize: 25,
             snakes: {16: 6, 24: 12, 19: 8},
@@ -591,19 +521,42 @@
         };
 
         // ============================================
+        // QUESTION BANK (simplified for demo)
+        // ============================================
+        const questionBank = {
+            grade4: [
+                { question: '3 × 4 = ?', options: ['12', '7', '8', '9'], answer: '12' },
+                { question: 'What is 1/2 of 8?', options: ['4', '3', '5', '6'], answer: '4' },
+                { question: '12 ÷ 3 = ?', options: ['4', '3', '6', '9'], answer: '4' },
+                { question: '5 + 7 = ?', options: ['12', '13', '11', '10'], answer: '12' },
+                { question: '9 - 4 = ?', options: ['5', '4', '6', '3'], answer: '5' }
+            ],
+            grade5: [
+                { question: '0.5 + 0.3 = ?', options: ['0.8', '0.5', '0.6', '0.7'], answer: '0.8' },
+                { question: '1.2 × 3 = ?', options: ['3.6', '3.5', '3.7', '3.4'], answer: '3.6' },
+                { question: '4.8 ÷ 2 = ?', options: ['2.4', '2.2', '2.6', '2.8'], answer: '2.4' }
+            ],
+            grade6: [
+                { question: 'What is 25% of 80?', options: ['20', '25', '30', '15'], answer: '20' },
+                { question: '3:1 ratio. 12 total. How many each?', options: ['9 and 3', '8 and 4', '6 and 6', '10 and 2'], answer: '9 and 3' }
+            ],
+            grade7: [
+                { question: 'x + 5 = 12, x = ?', options: ['7', '6', '8', '5'], answer: '7' },
+                { question: '2x = 14, x = ?', options: ['7', '6', '8', '5'], answer: '7' },
+                { question: '-5 + 3 = ?', options: ['-2', '-8', '2', '8'], answer: '-2' }
+            ]
+        };
+
+        // ============================================
         // GAME MODES
         // ============================================
         function setGameMode(mode) {
             gameState.gameMode = mode;
             
-            // Update button states
             document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             
-            // Reset mode-specific variables
             resetGameMode();
-            
-            // Update display
             updateModeDisplay();
             nextQuestion();
         }
@@ -646,19 +599,13 @@
                     
                 case 'timeattack':
                     modeStatus.innerHTML = '⏱️ Time Attack - Correct answers add 5 seconds!';
-                    modeDetails.innerHTML = `<span class="timer-bonus">⏱️ Bonus: ${gameState.timeBonus}s</span>`;
+                    modeDetails.innerHTML = `<span>⏱️ Bonus: ${gameState.timeBonus}s</span>`;
                     break;
                     
                 case 'spacerace':
                     const progress = (gameState.racePosition / gameState.raceTotal) * 100;
                     modeStatus.innerHTML = '🚀 Space Race - Answer 10 correctly to win!';
-                    modeDetails.innerHTML = `
-                        <div class="race-track">
-                            <span class="space-ship" style="margin-left: ${progress}%">🚀</span>
-                            <span class="finish-line">🏁</span>
-                        </div>
-                        <div>${gameState.racePosition}/${gameState.raceTotal}</div>
-                    `;
+                    modeDetails.innerHTML = `<div>${gameState.racePosition}/${gameState.raceTotal}</div>`;
                     break;
                     
                 case 'snakes':
@@ -669,15 +616,46 @@
         }
 
         // ============================================
-        // MODIFIED CHECK ANSWER FOR DIFFERENT MODES
+        // GAME FUNCTIONS
         // ============================================
+        function changeGrade(grade) {
+            gameState.currentGrade = grade;
+            document.querySelectorAll('.grade-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            gameState.canAnswer = true;
+            
+            const gradeQuestions = questionBank[`grade${gameState.currentGrade}`];
+            const randomIndex = Math.floor(Math.random() * gradeQuestions.length);
+            gameState.currentQuestion = gradeQuestions[randomIndex];
+            
+            document.getElementById('question').textContent = gameState.currentQuestion.question;
+            
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            const shuffled = [...gameState.currentQuestion.options].sort(() => Math.random() - 0.5);
+            
+            shuffled.forEach(option => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = option;
+                btn.onclick = () => checkAnswer(option);
+                optionsContainer.appendChild(btn);
+            });
+            
+            document.getElementById('feedback').textContent = '';
+        }
+
         function checkAnswer(selected) {
             if (!gameState.canAnswer) return;
             
             gameState.canAnswer = false;
             const isCorrect = selected === gameState.currentQuestion.answer;
             
-            // Visual feedback
             document.querySelectorAll('.option-btn').forEach(btn => {
                 btn.style.pointerEvents = 'none';
                 if (btn.textContent === gameState.currentQuestion.answer) {
@@ -687,7 +665,6 @@
                 }
             });
             
-            // Handle different game modes
             handleGameMode(isCorrect);
             
             setTimeout(() => {
@@ -718,14 +695,14 @@
                         gameState.score += points;
                         gameState.streak++;
                         gameState.characterXP += 5;
-                        document.getElementById('feedback').textContent = `✅ Correct! +${points} points! Lives: ${gameState.lives}`;
+                        document.getElementById('feedback').textContent = `✅ Correct! Lives: ${gameState.lives}`;
                     } else {
                         gameState.lives--;
                         gameState.streak = 0;
-                        document.getElementById('feedback').textContent = `❌ Lost a life! ${gameState.lives} lives remaining`;
+                        document.getElementById('feedback').textContent = `❌ Lost a life! ${gameState.lives} left`;
                         
                         if (gameState.lives <= 0) {
-                            endGame('💀 GAME OVER - No lives left!');
+                            document.getElementById('feedback').textContent = '💀 GAME OVER!';
                             return;
                         }
                     }
@@ -738,11 +715,11 @@
                         gameState.streak++;
                         gameState.characterXP += 5;
                         gameState.timeBonus += 5;
-                        document.getElementById('feedback').textContent = `✅ Correct! +5 seconds bonus!`;
+                        document.getElementById('feedback').textContent = `✅ Correct! +5 seconds!`;
                     } else {
                         gameState.streak = 0;
                         gameState.timeBonus = Math.max(0, gameState.timeBonus - 2);
-                        document.getElementById('feedback').textContent = '❌ Lost 2 seconds!';
+                        document.getElementById('feedback').textContent = '❌ -2 seconds!';
                     }
                     break;
                     
@@ -750,13 +727,12 @@
                     if (isCorrect) {
                         gameState.racePosition++;
                         gameState.characterXP += 5;
-                        document.getElementById('feedback').textContent = `🚀 Moving forward! ${gameState.racePosition}/${gameState.raceTotal}`;
+                        document.getElementById('feedback').textContent = `🚀 ${gameState.racePosition}/${gameState.raceTotal}`;
                         
                         if (gameState.racePosition >= gameState.raceTotal) {
-                            const points = 100 * gameState.level;
-                            gameState.score += points;
-                            endGame('🎉 YOU WIN THE SPACE RACE! +100 points!');
-                            return;
+                            gameState.score += 100 * gameState.level;
+                            document.getElementById('feedback').textContent = '🎉 YOU WIN! +100 points!';
+                            resetGameMode();
                         }
                     } else {
                         document.getElementById('feedback').textContent = '❌ No movement!';
@@ -766,8 +742,8 @@
                 case 'snakes':
                     if (isCorrect) {
                         gameState.boardPosition++;
+                        gameState.characterXP += 5;
                         
-                        // Check for snakes or ladders
                         if (gameState.ladders[gameState.boardPosition]) {
                             gameState.boardPosition = gameState.ladders[gameState.boardPosition];
                             document.getElementById('feedback').textContent = '🪜 LADDER! Climb up!';
@@ -778,13 +754,10 @@
                             document.getElementById('feedback').textContent = '✅ Moving forward!';
                         }
                         
-                        gameState.characterXP += 5;
-                        
                         if (gameState.boardPosition >= gameState.boardSize) {
-                            const points = 100 * gameState.level;
-                            gameState.score += points;
-                            endGame('🏆 YOU WIN! +100 points!');
-                            return;
+                            gameState.score += 100 * gameState.level;
+                            document.getElementById('feedback').textContent = '🏆 YOU WIN! +100 points!';
+                            resetGameMode();
                         }
                     } else {
                         document.getElementById('feedback').textContent = '❌ Stay where you are!';
@@ -801,54 +774,6 @@
             updateModeDisplay();
         }
 
-        function endGame(message) {
-            document.getElementById('feedback').textContent = message;
-            document.querySelectorAll('.option-btn').forEach(btn => {
-                btn.style.pointerEvents = 'none';
-            });
-            setTimeout(() => {
-                resetGameMode();
-                updateModeDisplay();
-                nextQuestion();
-            }, 3000);
-        }
-
-        // ============================================
-        // GAME FUNCTIONS (keep your existing ones)
-        // ============================================
-        function changeGrade(grade) {
-            gameState.currentGrade = grade;
-            document.querySelectorAll('.grade-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            nextQuestion();
-        }
-
-        function nextQuestion() {
-            gameState.canAnswer = true;
-            
-            // Use your existing question bank
-            const gradeQuestions = questionBank[`grade${gameState.currentGrade}`];
-            const randomIndex = Math.floor(Math.random() * gradeQuestions.length);
-            gameState.currentQuestion = gradeQuestions[randomIndex];
-            
-            document.getElementById('question').textContent = gameState.currentQuestion.question;
-            
-            const optionsContainer = document.getElementById('options');
-            optionsContainer.innerHTML = '';
-            
-            const shuffled = [...gameState.currentQuestion.options].sort(() => Math.random() - 0.5);
-            
-            shuffled.forEach(option => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.textContent = option;
-                btn.onclick = () => checkAnswer(option);
-                optionsContainer.appendChild(btn);
-            });
-            
-            document.getElementById('feedback').textContent = '';
-        }
-
         function updateDisplay() {
             document.getElementById('score').textContent = gameState.score;
             document.getElementById('level').textContent = gameState.level;
@@ -856,12 +781,10 @@
             document.getElementById('questionsDone').textContent = gameState.questionsDone;
             
             const character = characters[gameState.character];
-            document.getElementById('characterEmoji').textContent = character.emoji;
-            document.getElementById('characterName').textContent = character.name;
             document.getElementById('currentCharacterDisplay').textContent = `${character.emoji} ${character.name}`;
             
             const xpPercent = (gameState.characterXP / 1000) * 100;
-            document.getElementById('xpBar').style.width = Math.min(xpPercent, 100) + '%';
+            document.querySelector('.xp-fill').style.width = Math.min(xpPercent, 100) + '%';
             
             if (gameState.characterXP < 100) {
                 document.getElementById('nextCharacter').textContent = `🥷 Ninja (${100 - gameState.characterXP} XP needed)`;
@@ -875,7 +798,7 @@
         }
 
         // ============================================
-        // CHATBOT (simplified)
+        // CHATBOT
         // ============================================
         function sendMessage() {
             const input = document.getElementById('chatInput');
@@ -915,7 +838,7 @@
             messages.scrollTop = messages.scrollHeight;
         }
 
-        // Initialize game
+        // Initialize
         nextQuestion();
     </script>
 </body>
