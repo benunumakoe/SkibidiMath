@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkibidiMath UAE - ADEK Aligned Math Game</title>
+    <title>SkibidiMath UAE - Math Game</title>
     <style>
         * {
             margin: 0;
@@ -350,12 +350,116 @@
             border: 3px solid #000000;
         }
 
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #009688, #FF0000, #000000);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            display: flex;
+            gap: 10px;
+            max-width: 80%;
+        }
+
+        .message.bot {
+            align-self: flex-start;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 35px;
+            height: 35px;
+            background: #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .message-content {
+            background: #f0f4f8;
+            padding: 12px 18px;
+            border-radius: 20px;
+        }
+
+        .message.user .message-content {
+            background: #009688;
+            color: white;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 30px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .chat-input button {
+            width: 50px;
+            height: 50px;
+            background: #009688;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #00695c;
+            transition: all 0.3s;
+        }
+
+        .chat-input button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #00695c;
+        }
+
         @media (max-width: 900px) {
             .game-wrapper {
                 grid-template-columns: 1fr;
             }
             .dashboard-grid {
                 grid-template-columns: 1fr;
+            }
+            .mode-selector {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -367,7 +471,7 @@
             <div class="header">
                 <div style="display: flex; align-items: center; gap: 15px;">
                     <h1>🧮 SKIBIDI MATH UAE</h1>
-                    <span class="uae-badge">🇦🇪 ADEK ALIGNED</span>
+                    <span class="uae-badge">🇦🇪 UAE HERITAGE</span>
                 </div>
                 <div class="language-toggle">
                     <button class="lang-btn active" onclick="setLanguage('en')">🇬🇧 English</button>
@@ -395,18 +499,17 @@
                 </div>
             </div>
 
-            <!-- AI Teacher Dashboard (HIGHEST IMPACT) -->
+            <!-- AI Teacher Dashboard -->
             <div class="ai-dashboard">
                 <div class="dashboard-header">
-                    <h3 data-en="🤖 AI Teacher Assistant" data-ar="🤖 مساعد المعلم AI">🤖 AI Teacher Assistant</h3>
-                    <span class="ai-badge" data-en="ADEK Approved" data-ar="معتمد من أديك">ADEK Approved</span>
+                    <h3 data-en="🤖 AI Teacher Assistant" data-ar="🤖 مساعد المعلم">🤖 AI Teacher Assistant</h3>
                 </div>
                 
                 <div class="dashboard-grid">
                     <div class="dashboard-card">
                         <h4 data-en="Class Progress" data-ar="تقدم الفصل">Class Progress</h4>
                         <div class="dashboard-value" id="classProgress">78%</div>
-                        <small data-en="Above ADEK average (65%)" data-ar="فوق متوسط ​​أديك">Above ADEK average (65%)</small>
+                        <small data-en="Above national average" data-ar="فوق المتوسط الوطني">Above national average</small>
                     </div>
                     <div class="dashboard-card">
                         <h4 data-en="Students at Risk" data-ar="الطلاب المعرضون للخطر">Students at Risk</h4>
@@ -414,9 +517,9 @@
                         <small data-en="Need fractions practice" data-ar="بحاجة إلى ممارسة الكسور">Need fractions practice</small>
                     </div>
                     <div class="dashboard-card">
-                        <h4 data-en="ADEK Score Prediction" data-ar="توقع درجة أديك">ADEK Score Prediction</h4>
+                        <h4 data-en="Mastery Level" data-ar="مستوى الإتقان">Mastery Level</h4>
                         <div class="dashboard-value" id="adekPrediction">82%</div>
-                        <small data-en="On track for 'Above Proficient'" data-ar="على الطريق الصحيح">On track for 'Above Proficient'</small>
+                        <small data-en="Progress tracking" data-ar="تتبع التقدم">Progress tracking</small>
                     </div>
                 </div>
 
@@ -425,7 +528,7 @@
                 </div>
             </div>
 
-            <!-- Game Modes (with UAE Heritage Mode) -->
+            <!-- Game Modes -->
             <div class="mode-selector">
                 <button class="mode-btn active" onclick="setGameMode('classic')">
                     <span class="mode-emoji">🎮</span>
@@ -481,7 +584,7 @@
             <div class="chat-header">
                 <div class="chat-avatar">🧠</div>
                 <div>
-                    <h3 data-en="AI Math Tutor" data-ar="مدرس الرياضيات AI">AI Math Tutor</h3>
+                    <h3 data-en="AI Math Tutor" data-ar="مدرس الرياضيات">AI Math Tutor</h3>
                     <p data-en="Ask me about UAE math!" data-ar="اسألني عن رياضيات الإمارات!">Ask me about UAE math!</p>
                 </div>
             </div>
@@ -525,7 +628,7 @@
         }
 
         // ============================================
-        // UAE HERITAGE & ADEK QUESTION BANK
+        // UAE HERITAGE QUESTION BANK
         // ============================================
         const uaeQuestionBank = {
             grade4: [
@@ -534,8 +637,7 @@
                     options: ["3/4", "1/4", "2/4", "4/4"],
                     answer: "3/4",
                     type: "fractions",
-                    uaeTheme: true,
-                    adekAligned: true
+                    uaeTheme: true
                 },
                 {
                     question: "🇦🇪 Burj Khalifa has 163 floors. If you visit 50 floors, how many floors are left?",
@@ -557,8 +659,7 @@
                     question: "🇦🇪 60% of UAE population lives in Abu Dhabi and Dubai. If total is 10 million, how many live there?",
                     options: ["6 million", "5 million", "7 million", "6.5 million"],
                     answer: "6 million",
-                    type: "percentages",
-                    adekAligned: true
+                    type: "percentages"
                 },
                 {
                     question: "🇦🇪 Sheikh Zayed Grand Mosque has 82 domes. If 1/2 are white marble, how many white domes?",
@@ -582,8 +683,7 @@
                     question: "🇦🇪 Dubai population: 3.5 million grows 2% yearly. Next year's population?",
                     options: ["3.57 million", "3.6 million", "3.55 million", "3.58 million"],
                     answer: "3.57 million",
-                    type: "percentages",
-                    adekAligned: true
+                    type: "percentages"
                 }
             ]
         };
@@ -619,15 +719,15 @@
             const atRisk = Math.max(0, 5 - Math.floor(gameState.streak / 2));
             document.getElementById('studentsAtRisk').textContent = atRisk;
             
-            const adekPrediction = Math.min(100, Math.round(70 + (gameState.level * 2)));
-            document.getElementById('adekPrediction').textContent = adekPrediction + '%';
+            const masteryLevel = Math.min(100, Math.round(70 + (gameState.level * 2)));
+            document.getElementById('adekPrediction').textContent = masteryLevel + '%';
             
             const tips = [
                 "Try 'UAE Heritage Mode' for culturally relevant math practice!",
-                "Students who practice 15 mins daily score 20% higher on ADEK tests",
+                "Students who practice 15 mins daily score 20% higher on tests",
                 "Fractions and decimals are the top areas for improvement in Grade 5",
                 "UAE heritage questions boost engagement by 40%",
-                "Next ADEK assessment window: May-June 2026"
+                "Regular practice builds math confidence!"
             ];
             document.getElementById('aiTip').innerHTML = '💡 ' + tips[Math.floor(Math.random() * tips.length)];
         }
@@ -671,7 +771,7 @@
         }
 
         // ============================================
-        // QUESTION SYSTEM (with UAE Heritage support)
+        // QUESTION SYSTEM
         // ============================================
         function changeGrade(grade) {
             gameState.currentGrade = grade;
@@ -827,7 +927,7 @@
         // Initialize
         nextQuestion();
         updateAIDashboard();
-        setInterval(updateAIDashboard, 10000); // Update every 10 seconds
+        setInterval(updateAIDashboard, 10000);
     </script>
 </body>
 </html>
