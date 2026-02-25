@@ -3,26 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkibidiMath UAE - Math Game</title>
+    <title>SkibidiMath UAE - 200+ Math Questions</title>
     <style>
+        /* Keep all your existing CSS exactly the same */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        /* UAE Flag Theme */
-        .uae-theme {
-            background: linear-gradient(135deg, #009688 0%, #FF0000 50%, #000000 100%);
-            animation: flagWave 10s ease infinite;
-            background-size: 400% 400%;
-        }
-
-        @keyframes flagWave {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
 
         body {
@@ -32,7 +20,6 @@
             transition: all 0.3s;
         }
 
-        /* Arabic RTL Support */
         body.rtl {
             direction: rtl;
             text-align: right;
@@ -71,7 +58,6 @@
             font-weight: bold;
         }
 
-        /* Language Toggle */
         .language-toggle {
             display: flex;
             gap: 10px;
@@ -108,11 +94,19 @@
             box-shadow: 0 4px 0 #cbd5e0;
         }
 
-        .stat-label, .stat-value {
-            transition: all 0.3s;
+        .stat-label {
+            display: block;
+            color: #666;
+            font-size: 0.9rem;
         }
 
-        /* AI Teacher Dashboard */
+        .stat-value {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4a5568;
+        }
+
         .ai-dashboard {
             background: linear-gradient(135deg, #00968810, #FF000010, #00000010);
             border: 2px solid #009688;
@@ -131,14 +125,6 @@
         .dashboard-header h3 {
             color: #009688;
             font-size: 1.5rem;
-        }
-
-        .ai-badge {
-            background: #009688;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 30px;
-            font-size: 0.9rem;
         }
 
         .dashboard-grid {
@@ -467,11 +453,11 @@
 <body>
     <div class="game-wrapper">
         <div class="game-container">
-            <!-- Header with UAE Theme and Language Toggle -->
+            <!-- Header -->
             <div class="header">
                 <div style="display: flex; align-items: center; gap: 15px;">
                     <h1>🧮 SKIBIDI MATH UAE</h1>
-                    <span class="uae-badge">🇦🇪 UAE HERITAGE</span>
+                    <span class="uae-badge">🇦🇪 200+ QUESTIONS</span>
                 </div>
                 <div class="language-toggle">
                     <button class="lang-btn active" onclick="setLanguage('en')">🇬🇧 English</button>
@@ -524,7 +510,7 @@
                 </div>
 
                 <div class="dashboard-tip" id="aiTip">
-                    💡 <span data-en="Try 'UAE Heritage Mode' for culturally relevant math practice!" data-ar="جرّب 'وضع التراث الإماراتي' لممارسة الرياضيات ذات الصلة ثقافياً!">Try 'UAE Heritage Mode' for culturally relevant math practice!</span>
+                    💡 <span data-en="Over 200 questions across 4 grade levels!" data-ar="أكثر من 200 سؤال عبر 4 مستويات صفية!">Over 200 questions across 4 grade levels!</span>
                 </div>
             </div>
 
@@ -585,16 +571,16 @@
                 <div class="chat-avatar">🧠</div>
                 <div>
                     <h3 data-en="AI Math Tutor" data-ar="مدرس الرياضيات">AI Math Tutor</h3>
-                    <p data-en="Ask me about UAE math!" data-ar="اسألني عن رياضيات الإمارات!">Ask me about UAE math!</p>
+                    <p data-en="Ask me about math!" data-ar="اسألني عن الرياضيات!">Ask me about math!</p>
                 </div>
             </div>
             <div class="chat-messages" id="chatMessages">
                 <div class="message bot">
                     <div class="message-avatar">🧠</div>
                     <div class="message-content">
-                        <span data-en="Welcome to UAE Heritage Math! Try questions about Burj Khalifa, Falcon speeds, and more!" 
-                              data-ar="مرحباً بك في رياضيات التراث الإماراتي! جرب أسئلة عن برج خليفة، سرعة الصقور، والمزيد!">
-                            Welcome to UAE Heritage Math! Try questions about Burj Khalifa, Falcon speeds, and more!
+                        <span data-en="Welcome! We now have over 200 questions across all grades!" 
+                              data-ar="مرحباً! لدينا الآن أكثر من 200 سؤال لجميع الصفوف!">
+                            Welcome! We now have over 200 questions across all grades!
                         </span>
                     </div>
                 </div>
@@ -608,7 +594,7 @@
 
     <script>
         // ============================================
-        // LANGUAGE SYSTEM (Arabic/English)
+        // LANGUAGE SYSTEM
         // ============================================
         let currentLanguage = 'en';
 
@@ -617,75 +603,285 @@
             document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
             document.body.classList.toggle('rtl', lang === 'ar');
             
-            // Update all language-aware elements
             document.querySelectorAll('[data-en][data-ar]').forEach(el => {
                 el.textContent = el.getAttribute(`data-${lang}`);
             });
             
-            // Update buttons
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
         }
 
         // ============================================
-        // UAE HERITAGE QUESTION BANK
+        // EXPANDED QUESTION BANK - 200+ QUESTIONS!
         // ============================================
+        
+        // GRADE 4 QUESTIONS (50+ questions)
+        const grade4Questions = [
+            // Multiplication (15 questions)
+            { question: '3 × 4 = ?', options: ['12', '7', '8', '9'], answer: '12', topic: 'multiplication' },
+            { question: '4 × 5 = ?', options: ['20', '15', '25', '30'], answer: '20', topic: 'multiplication' },
+            { question: '6 × 3 = ?', options: ['18', '15', '21', '24'], answer: '18', topic: 'multiplication' },
+            { question: '7 × 2 = ?', options: ['14', '12', '16', '18'], answer: '14', topic: 'multiplication' },
+            { question: '8 × 4 = ?', options: ['32', '28', '36', '40'], answer: '32', topic: 'multiplication' },
+            { question: '9 × 3 = ?', options: ['27', '24', '30', '33'], answer: '27', topic: 'multiplication' },
+            { question: '5 × 6 = ?', options: ['30', '25', '35', '40'], answer: '30', topic: 'multiplication' },
+            { question: '4 × 7 = ?', options: ['28', '24', '32', '35'], answer: '28', topic: 'multiplication' },
+            { question: '3 × 8 = ?', options: ['24', '21', '27', '30'], answer: '24', topic: 'multiplication' },
+            { question: '6 × 4 = ?', options: ['24', '20', '28', '30'], answer: '24', topic: 'multiplication' },
+            { question: '7 × 3 = ?', options: ['21', '18', '24', '27'], answer: '21', topic: 'multiplication' },
+            { question: '8 × 5 = ?', options: ['40', '35', '45', '50'], answer: '40', topic: 'multiplication' },
+            { question: '9 × 2 = ?', options: ['18', '16', '20', '22'], answer: '18', topic: 'multiplication' },
+            { question: '4 × 8 = ?', options: ['32', '28', '36', '40'], answer: '32', topic: 'multiplication' },
+            { question: '5 × 7 = ?', options: ['35', '30', '40', '45'], answer: '35', topic: 'multiplication' },
+            
+            // Division (15 questions)
+            { question: '12 ÷ 3 = ?', options: ['4', '3', '6', '9'], answer: '4', topic: 'division' },
+            { question: '20 ÷ 4 = ?', options: ['5', '4', '6', '3'], answer: '5', topic: 'division' },
+            { question: '15 ÷ 5 = ?', options: ['3', '4', '5', '2'], answer: '3', topic: 'division' },
+            { question: '18 ÷ 6 = ?', options: ['3', '2', '4', '5'], answer: '3', topic: 'division' },
+            { question: '24 ÷ 4 = ?', options: ['6', '5', '7', '4'], answer: '6', topic: 'division' },
+            { question: '30 ÷ 5 = ?', options: ['6', '5', '7', '4'], answer: '6', topic: 'division' },
+            { question: '28 ÷ 7 = ?', options: ['4', '3', '5', '6'], answer: '4', topic: 'division' },
+            { question: '32 ÷ 8 = ?', options: ['4', '3', '5', '6'], answer: '4', topic: 'division' },
+            { question: '36 ÷ 6 = ?', options: ['6', '5', '7', '4'], answer: '6', topic: 'division' },
+            { question: '42 ÷ 7 = ?', options: ['6', '5', '7', '4'], answer: '6', topic: 'division' },
+            { question: '48 ÷ 6 = ?', options: ['8', '7', '9', '6'], answer: '8', topic: 'division' },
+            { question: '54 ÷ 9 = ?', options: ['6', '5', '7', '4'], answer: '6', topic: 'division' },
+            { question: '56 ÷ 7 = ?', options: ['8', '7', '9', '6'], answer: '8', topic: 'division' },
+            { question: '63 ÷ 9 = ?', options: ['7', '6', '8', '5'], answer: '7', topic: 'division' },
+            { question: '64 ÷ 8 = ?', options: ['8', '7', '9', '6'], answer: '8', topic: 'division' },
+            
+            // Fractions (20 questions)
+            { question: 'What is 1/2 of 8?', options: ['4', '3', '5', '6'], answer: '4', topic: 'fractions' },
+            { question: 'What is 1/4 of 16?', options: ['4', '3', '5', '6'], answer: '4', topic: 'fractions' },
+            { question: 'What is 1/3 of 9?', options: ['3', '2', '4', '5'], answer: '3', topic: 'fractions' },
+            { question: 'What is 1/5 of 10?', options: ['2', '3', '4', '5'], answer: '2', topic: 'fractions' },
+            { question: 'What is 1/6 of 12?', options: ['2', '3', '4', '5'], answer: '2', topic: 'fractions' },
+            { question: 'What is 3/4 of 12?', options: ['9', '8', '10', '6'], answer: '9', topic: 'fractions' },
+            { question: 'What is 2/3 of 18?', options: ['12', '10', '14', '16'], answer: '12', topic: 'fractions' },
+            { question: 'What is 3/5 of 20?', options: ['12', '10', '14', '16'], answer: '12', topic: 'fractions' },
+            { question: '1/3 + 1/3 = ?', options: ['2/3', '1/3', '3/3', '2/6'], answer: '2/3', topic: 'fractions' },
+            { question: '1/4 + 1/4 = ?', options: ['1/2', '1/4', '3/4', '2/4'], answer: '1/2', topic: 'fractions' },
+            { question: '1/5 + 2/5 = ?', options: ['3/5', '2/5', '4/5', '1/5'], answer: '3/5', topic: 'fractions' },
+            { question: '2/5 + 1/5 = ?', options: ['3/5', '2/5', '4/5', '1/5'], answer: '3/5', topic: 'fractions' },
+            { question: '3/8 + 2/8 = ?', options: ['5/8', '6/8', '4/8', '7/8'], answer: '5/8', topic: 'fractions' },
+            { question: '5/8 - 2/8 = ?', options: ['3/8', '4/8', '2/8', '1/8'], answer: '3/8', topic: 'fractions' },
+            { question: '7/10 - 3/10 = ?', options: ['4/10', '5/10', '6/10', '3/10'], answer: '4/10', topic: 'fractions' },
+            { question: 'Which is bigger: 1/2 or 1/3?', options: ['1/2', '1/3', 'equal', 'none'], answer: '1/2', topic: 'fractions' },
+            { question: 'Which is bigger: 1/4 or 1/5?', options: ['1/4', '1/5', 'equal', 'none'], answer: '1/4', topic: 'fractions' },
+            { question: 'Which is smaller: 1/3 or 1/4?', options: ['1/4', '1/3', 'equal', 'none'], answer: '1/4', topic: 'fractions' },
+            { question: '2/4 is the same as?', options: ['1/2', '1/4', '3/4', '2/2'], answer: '1/2', topic: 'fractions' },
+            { question: '3/6 is the same as?', options: ['1/2', '1/3', '2/3', '1/6'], answer: '1/2', topic: 'fractions' }
+        ];
+
+        // GRADE 5 QUESTIONS (50+ questions)
+        const grade5Questions = [
+            // Decimals (25 questions)
+            { question: '0.2 + 0.3 = ?', options: ['0.5', '0.6', '0.4', '0.7'], answer: '0.5', topic: 'decimals' },
+            { question: '0.3 + 0.4 = ?', options: ['0.7', '0.6', '0.8', '0.5'], answer: '0.7', topic: 'decimals' },
+            { question: '0.5 + 0.2 = ?', options: ['0.7', '0.6', '0.8', '0.5'], answer: '0.7', topic: 'decimals' },
+            { question: '0.25 + 0.25 = ?', options: ['0.5', '0.4', '0.75', '0.6'], answer: '0.5', topic: 'decimals' },
+            { question: '0.4 + 0.35 = ?', options: ['0.75', '0.7', '0.8', '0.85'], answer: '0.75', topic: 'decimals' },
+            { question: '0.45 + 0.32 = ?', options: ['0.77', '0.78', '0.76', '0.75'], answer: '0.77', topic: 'decimals' },
+            { question: '0.55 + 0.33 = ?', options: ['0.88', '0.78', '0.98', '0.68'], answer: '0.88', topic: 'decimals' },
+            { question: '0.6 + 0.25 = ?', options: ['0.85', '0.8', '0.9', '0.75'], answer: '0.85', topic: 'decimals' },
+            { question: '0.75 + 0.15 = ?', options: ['0.9', '0.8', '1.0', '0.85'], answer: '0.9', topic: 'decimals' },
+            { question: '0.8 - 0.3 = ?', options: ['0.5', '0.4', '0.6', '0.3'], answer: '0.5', topic: 'decimals' },
+            { question: '0.9 - 0.4 = ?', options: ['0.5', '0.4', '0.6', '0.3'], answer: '0.5', topic: 'decimals' },
+            { question: '0.75 - 0.25 = ?', options: ['0.5', '0.4', '0.6', '0.3'], answer: '0.5', topic: 'decimals' },
+            { question: '0.8 - 0.35 = ?', options: ['0.45', '0.4', '0.5', '0.55'], answer: '0.45', topic: 'decimals' },
+            { question: '0.9 - 0.45 = ?', options: ['0.45', '0.4', '0.5', '0.55'], answer: '0.45', topic: 'decimals' },
+            { question: '1.2 - 0.5 = ?', options: ['0.7', '0.6', '0.8', '0.5'], answer: '0.7', topic: 'decimals' },
+            { question: '1.5 - 0.75 = ?', options: ['0.75', '0.8', '0.7', '0.85'], answer: '0.75', topic: 'decimals' },
+            { question: '2.3 - 1.2 = ?', options: ['1.1', '1.2', '1.3', '1.0'], answer: '1.1', topic: 'decimals' },
+            { question: '2.5 - 1.3 = ?', options: ['1.2', '1.3', '1.1', '1.4'], answer: '1.2', topic: 'decimals' },
+            { question: '3.6 - 2.4 = ?', options: ['1.2', '1.3', '1.1', '1.4'], answer: '1.2', topic: 'decimals' },
+            { question: '4.2 - 1.8 = ?', options: ['2.4', '2.3', '2.5', '2.6'], answer: '2.4', topic: 'decimals' },
+            { question: '0.5 × 2 = ?', options: ['1.0', '1.5', '2.0', '0.5'], answer: '1.0', topic: 'decimals' },
+            { question: '0.5 × 3 = ?', options: ['1.5', '1.0', '2.0', '2.5'], answer: '1.5', topic: 'decimals' },
+            { question: '0.5 × 4 = ?', options: ['2.0', '1.5', '2.5', '3.0'], answer: '2.0', topic: 'decimals' },
+            { question: '0.25 × 2 = ?', options: ['0.5', '0.4', '0.6', '0.3'], answer: '0.5', topic: 'decimals' },
+            { question: '0.25 × 4 = ?', options: ['1.0', '0.5', '1.5', '2.0'], answer: '1.0', topic: 'decimals' },
+            
+            // Word Problems (25 questions)
+            { question: 'Sarah has 12 apples. She gives 3 to Tom. How many left?', options: ['9', '15', '8', '10'], answer: '9', topic: 'wordproblems' },
+            { question: 'John has 15 marbles. He loses 5. How many left?', options: ['10', '20', '5', '15'], answer: '10', topic: 'wordproblems' },
+            { question: 'Maria has 24 stickers. She gives half to her friend. How many left?', options: ['12', '10', '14', '8'], answer: '12', topic: 'wordproblems' },
+            { question: '5 cookies per pack. 3 packs = ? cookies', options: ['15', '10', '20', '8'], answer: '15', topic: 'wordproblems' },
+            { question: '6 pencils in a box. 4 boxes = ? pencils', options: ['24', '20', '18', '22'], answer: '24', topic: 'wordproblems' },
+            { question: '8 toys in each bag. 5 bags = ? toys', options: ['40', '35', '45', '30'], answer: '40', topic: 'wordproblems' },
+            { question: '24 students, 4 teams. Each team has ? students', options: ['6', '5', '7', '4'], answer: '6', topic: 'wordproblems' },
+            { question: '30 students, 5 groups. Each group has ? students', options: ['6', '5', '7', '4'], answer: '6', topic: 'wordproblems' },
+            { question: '36 chairs, 6 rows. Each row has ? chairs', options: ['6', '5', '7', '4'], answer: '6', topic: 'wordproblems' },
+            { question: 'Save $5 per week for 6 weeks = $?', options: ['$30', '$25', '$35', '$11'], answer: '$30', topic: 'wordproblems' },
+            { question: 'Save $8 per week for 4 weeks = $?', options: ['$32', '$30', '$34', '$28'], answer: '$32', topic: 'wordproblems' },
+            { question: 'A pizza has 8 slices. Eat 3. Left = ? slices', options: ['5', '3', '4', '6'], answer: '5', topic: 'wordproblems' },
+            { question: 'A pizza has 12 slices. Eat 4. Left = ? slices', options: ['8', '7', '9', '6'], answer: '8', topic: 'wordproblems' },
+            { question: '10 packs, 6 stickers each. Total stickers?', options: ['60', '50', '70', '40'], answer: '60', topic: 'wordproblems' },
+            { question: '8 packs, 7 stickers each. Total stickers?', options: ['56', '54', '58', '52'], answer: '56', topic: 'wordproblems' },
+            { question: 'Share $20 among 4 friends. Each gets $?', options: ['$5', '$4', '$6', '$3'], answer: '$5', topic: 'wordproblems' },
+            { question: 'Share $30 among 5 friends. Each gets $?', options: ['$6', '$5', '$7', '$4'], answer: '$6', topic: 'wordproblems' },
+            { question: 'Share $48 among 6 friends. Each gets $?', options: ['$8', '$7', '$9', '$6'], answer: '$8', topic: 'wordproblems' },
+            { question: 'Read 15 pages per day for 5 days = ? pages', options: ['75', '70', '80', '65'], answer: '75', topic: 'wordproblems' },
+            { question: 'Read 20 pages per day for 6 days = ? pages', options: ['120', '115', '125', '110'], answer: '120', topic: 'wordproblems' },
+            { question: 'A bag has 24 candies. 6 candies per bag. How many bags?', options: ['4', '3', '5', '6'], answer: '4', topic: 'wordproblems' },
+            { question: 'A box has 36 chocolates. 6 chocolates per box. How many boxes?', options: ['6', '5', '7', '4'], answer: '6', topic: 'wordproblems' },
+            { question: 'Walk 2 km per day for 2 weeks = ? km', options: ['28', '14', '30', '24'], answer: '28', topic: 'wordproblems' },
+            { question: 'Walk 3 km per day for 5 days = ? km', options: ['15', '12', '18', '20'], answer: '15', topic: 'wordproblems' },
+            { question: 'Run 4 km per day for 6 days = ? km', options: ['24', '20', '28', '22'], answer: '24', topic: 'wordproblems' }
+        ];
+
+        // GRADE 6 QUESTIONS (50+ questions)
+        const grade6Questions = [
+            // Percentages (25 questions)
+            { question: 'What is 50% of 20?', options: ['10', '5', '15', '20'], answer: '10', topic: 'percentages' },
+            { question: 'What is 50% of 30?', options: ['15', '10', '20', '25'], answer: '15', topic: 'percentages' },
+            { question: 'What is 50% of 50?', options: ['25', '20', '30', '35'], answer: '25', topic: 'percentages' },
+            { question: '25% of 40 = ?', options: ['10', '8', '12', '15'], answer: '10', topic: 'percentages' },
+            { question: '25% of 60 = ?', options: ['15', '12', '18', '20'], answer: '15', topic: 'percentages' },
+            { question: '25% of 80 = ?', options: ['20', '15', '25', '30'], answer: '20', topic: 'percentages' },
+            { question: '75% of 100 = ?', options: ['75', '50', '25', '100'], answer: '75', topic: 'percentages' },
+            { question: '75% of 40 = ?', options: ['30', '25', '35', '20'], answer: '30', topic: 'percentages' },
+            { question: '75% of 80 = ?', options: ['60', '50', '70', '40'], answer: '60', topic: 'percentages' },
+            { question: '10% of 80 = ?', options: ['8', '10', '6', '12'], answer: '8', topic: 'percentages' },
+            { question: '10% of 90 = ?', options: ['9', '8', '10', '11'], answer: '9', topic: 'percentages' },
+            { question: '10% of 120 = ?', options: ['12', '10', '14', '8'], answer: '12', topic: 'percentages' },
+            { question: '20% of 50 = ?', options: ['10', '15', '20', '5'], answer: '10', topic: 'percentages' },
+            { question: '20% of 60 = ?', options: ['12', '10', '14', '8'], answer: '12', topic: 'percentages' },
+            { question: '20% of 80 = ?', options: ['16', '20', '18', '14'], answer: '16', topic: 'percentages' },
+            { question: '30% of 90 = ?', options: ['27', '30', '24', '21'], answer: '27', topic: 'percentages' },
+            { question: '30% of 60 = ?', options: ['18', '15', '21', '12'], answer: '18', topic: 'percentages' },
+            { question: '40% of 60 = ?', options: ['24', '20', '30', '25'], answer: '24', topic: 'percentages' },
+            { question: '40% of 50 = ?', options: ['20', '15', '25', '10'], answer: '20', topic: 'percentages' },
+            { question: '15% of 80 = ?', options: ['12', '10', '15', '8'], answer: '12', topic: 'percentages' },
+            { question: '15% of 60 = ?', options: ['9', '8', '10', '12'], answer: '9', topic: 'percentages' },
+            { question: '12% of 200 = ?', options: ['24', '20', '30', '18'], answer: '24', topic: 'percentages' },
+            { question: '5% of 200 = ?', options: ['10', '5', '15', '20'], answer: '10', topic: 'percentages' },
+            { question: 'What percent of 50 is 10?', options: ['20%', '25%', '15%', '30%'], answer: '20%', topic: 'percentages' },
+            { question: 'What percent of 80 is 20?', options: ['25%', '20%', '30%', '15%'], answer: '25%', topic: 'percentages' },
+            
+            // Ratios (25 questions)
+            { question: 'Ratio 2:3, total 25. How many?', options: ['10 and 15', '8 and 17', '12 and 13', '5 and 20'], answer: '10 and 15', topic: 'ratios' },
+            { question: 'Ratio 1:2, total 15. How many?', options: ['5 and 10', '4 and 11', '6 and 9', '3 and 12'], answer: '5 and 10', topic: 'ratios' },
+            { question: 'Ratio 2:1, total 12. How many?', options: ['8 and 4', '7 and 5', '9 and 3', '6 and 6'], answer: '8 and 4', topic: 'ratios' },
+            { question: 'Ratio 3:1, total 12. How many?', options: ['9 and 3', '8 and 4', '6 and 6', '10 and 2'], answer: '9 and 3', topic: 'ratios' },
+            { question: 'Ratio 3:2, total 20. How many?', options: ['12 and 8', '10 and 10', '15 and 5', '14 and 6'], answer: '12 and 8', topic: 'ratios' },
+            { question: 'Ratio 4:1, total 15. How many?', options: ['12 and 3', '10 and 5', '11 and 4', '13 and 2'], answer: '12 and 3', topic: 'ratios' },
+            { question: 'Ratio 5:1, total 18. How many?', options: ['15 and 3', '14 and 4', '16 and 2', '13 and 5'], answer: '15 and 3', topic: 'ratios' },
+            { question: 'Ratio 2:5, total 28. How many?', options: ['8 and 20', '10 and 18', '12 and 16', '14 and 14'], answer: '8 and 20', topic: 'ratios' },
+            { question: 'Ratio 3:4, total 28. How many?', options: ['12 and 16', '10 and 18', '14 and 14', '8 and 20'], answer: '12 and 16', topic: 'ratios' },
+            { question: 'Ratio 1:4, total 20. Larger share?', options: ['16', '4', '5', '15'], answer: '16', topic: 'ratios' },
+            { question: 'Ratio 1:3, total 20. Smaller share?', options: ['5', '4', '6', '3'], answer: '5', topic: 'ratios' },
+            { question: 'Ratio 2:3, total 30. Larger share?', options: ['18', '12', '15', '20'], answer: '18', topic: 'ratios' },
+            { question: 'Ratio 2:5, total 35. Smaller share?', options: ['10', '15', '5', '20'], answer: '10', topic: 'ratios' },
+            { question: '5:2 ratio. 35 total. Larger share?', options: ['25', '20', '15', '30'], answer: '25', topic: 'ratios' },
+            { question: '4:3 ratio. 28 total. Smaller share?', options: ['12', '16', '14', '10'], answer: '12', topic: 'ratios' },
+            { question: '7:3 ratio. 30 total. Larger share?', options: ['21', '9', '18', '12'], answer: '21', topic: 'ratios' },
+            { question: '8:2 ratio. 30 total. Larger share?', options: ['24', '6', '20', '10'], answer: '24', topic: 'ratios' },
+            { question: '3:5 ratio. Difference is 12. Total?', options: ['48', '36', '24', '60'], answer: '48', topic: 'ratios' },
+            { question: '2:3 ratio. Difference is 10. Total?', options: ['50', '40', '30', '20'], answer: '50', topic: 'ratios' },
+            { question: '4:5 ratio. Difference is 8. Total?', options: ['72', '64', '56', '48'], answer: '72', topic: 'ratios' },
+            { question: '7:5 ratio. Difference is 10. Total?', options: ['60', '50', '40', '30'], answer: '60', topic: 'ratios' },
+            { question: '3:2 ratio. Sum is 30. Larger share?', options: ['18', '12', '15', '20'], answer: '18', topic: 'ratios' },
+            { question: '4:1 ratio. Sum is 25. Larger share?', options: ['20', '5', '15', '10'], answer: '20', topic: 'ratios' },
+            { question: '5:3 ratio. Sum is 40. Larger share?', options: ['25', '15', '20', '24'], answer: '25', topic: 'ratios' },
+            { question: '7:2 ratio. Sum is 36. Larger share?', options: ['28', '8', '24', '12'], answer: '28', topic: 'ratios' }
+        ];
+
+        // GRADE 7 QUESTIONS (50+ questions)
+        const grade7Questions = [
+            // Algebra (25 questions)
+            { question: 'x + 5 = 12. Find x', options: ['7', '6', '8', '5'], answer: '7', topic: 'algebra' },
+            { question: 'x + 3 = 10. Find x', options: ['7', '6', '8', '5'], answer: '7', topic: 'algebra' },
+            { question: 'x + 7 = 15. Find x', options: ['8', '7', '9', '6'], answer: '8', topic: 'algebra' },
+            { question: 'x + 8 = 20. Find x', options: ['12', '11', '13', '10'], answer: '12', topic: 'algebra' },
+            { question: 'x - 3 = 9. Find x', options: ['12', '11', '10', '13'], answer: '12', topic: 'algebra' },
+            { question: 'x - 5 = 7. Find x', options: ['12', '11', '13', '10'], answer: '12', topic: 'algebra' },
+            { question: 'x - 8 = 10. Find x', options: ['18', '17', '19', '16'], answer: '18', topic: 'algebra' },
+            { question: '2x = 14. Find x', options: ['7', '6', '8', '5'], answer: '7', topic: 'algebra' },
+            { question: '2x = 18. Find x', options: ['9', '8', '10', '7'], answer: '9', topic: 'algebra' },
+            { question: '3x = 21. Find x', options: ['7', '6', '8', '5'], answer: '7', topic: 'algebra' },
+            { question: '3x = 27. Find x', options: ['9', '8', '10', '7'], answer: '9', topic: 'algebra' },
+            { question: '4x = 32. Find x', options: ['8', '7', '9', '6'], answer: '8', topic: 'algebra' },
+            { question: '5x = 35. Find x', options: ['7', '6', '8', '5'], answer: '7', topic: 'algebra' },
+            { question: 'x/2 = 5. Find x', options: ['10', '8', '12', '6'], answer: '10', topic: 'algebra' },
+            { question: 'x/3 = 4. Find x', options: ['12', '10', '15', '9'], answer: '12', topic: 'algebra' },
+            { question: 'x/4 = 6. Find x', options: ['24', '20', '18', '22'], answer: '24', topic: 'algebra' },
+            { question: 'x/5 = 7. Find x', options: ['35', '30', '40', '25'], answer: '35', topic: 'algebra' },
+            { question: '2x + 3 = 11. Find x', options: ['4', '3', '5', '6'], answer: '4', topic: 'algebra' },
+            { question: '2x + 5 = 15. Find x', options: ['5', '4', '6', '7'], answer: '5', topic: 'algebra' },
+            { question: '3x + 2 = 14. Find x', options: ['4', '5', '3', '6'], answer: '4', topic: 'algebra' },
+            { question: '3x + 4 = 19. Find x', options: ['5', '4', '6', '7'], answer: '5', topic: 'algebra' },
+            { question: '4x - 3 = 13. Find x', options: ['4', '3', '5', '6'], answer: '4', topic: 'algebra' },
+            { question: '4x - 5 = 15. Find x', options: ['5', '4', '6', '7'], answer: '5', topic: 'algebra' },
+            { question: '5x - 2 = 23. Find x', options: ['5', '4', '6', '7'], answer: '5', topic: 'algebra' },
+            { question: '5x - 7 = 18. Find x', options: ['5', '4', '6', '7'], answer: '5', topic: 'algebra' },
+            
+            // Negative Numbers (25 questions)
+            { question: '-5 + 3 = ?', options: ['-2', '-8', '2', '8'], answer: '-2', topic: 'negatives' },
+            { question: '-6 + 4 = ?', options: ['-2', '-10', '2', '10'], answer: '-2', topic: 'negatives' },
+            { question: '-7 + 5 = ?', options: ['-2', '-12', '2', '12'], answer: '-2', topic: 'negatives' },
+            { question: '-8 + 6 = ?', options: ['-2', '-14', '2', '14'], answer: '-2', topic: 'negatives' },
+            { question: '-4 + 7 = ?', options: ['3', '-3', '11', '-11'], answer: '3', topic: 'negatives' },
+            { question: '-3 + 8 = ?', options: ['5', '-5', '11', '-11'], answer: '5', topic: 'negatives' },
+            { question: '-2 + 9 = ?', options: ['7', '-7', '11', '-11'], answer: '7', topic: 'negatives' },
+            { question: '7 - 10 = ?', options: ['-3', '3', '-17', '17'], answer: '-3', topic: 'negatives' },
+            { question: '8 - 12 = ?', options: ['-4', '4', '-20', '20'], answer: '-4', topic: 'negatives' },
+            { question: '9 - 14 = ?', options: ['-5', '5', '-23', '23'], answer: '-5', topic: 'negatives' },
+            { question: '10 - 15 = ?', options: ['-5', '5', '-25', '25'], answer: '-5', topic: 'negatives' },
+            { question: '-4 - 3 = ?', options: ['-7', '-1', '7', '1'], answer: '-7', topic: 'negatives' },
+            { question: '-5 - 4 = ?', options: ['-9', '-1', '9', '1'], answer: '-9', topic: 'negatives' },
+            { question: '-6 - 5 = ?', options: ['-11', '-1', '11', '1'], answer: '-11', topic: 'negatives' },
+            { question: '-7 - 6 = ?', options: ['-13', '-1', '13', '1'], answer: '-13', topic: 'negatives' },
+            { question: '-8 + (-2) = ?', options: ['-10', '-6', '10', '6'], answer: '-10', topic: 'negatives' },
+            { question: '-9 + (-3) = ?', options: ['-12', '-6', '12', '6'], answer: '-12', topic: 'negatives' },
+            { question: '-10 + (-4) = ?', options: ['-14', '-6', '14', '6'], answer: '-14', topic: 'negatives' },
+            { question: '-12 + 7 = ?', options: ['-5', '5', '-19', '19'], answer: '-5', topic: 'negatives' },
+            { question: '-15 + 8 = ?', options: ['-7', '7', '-23', '23'], answer: '-7', topic: 'negatives' },
+            { question: '-3 × -4 = ?', options: ['12', '-12', '7', '-7'], answer: '12', topic: 'negatives' },
+            { question: '-2 × -5 = ?', options: ['10', '-10', '7', '-7'], answer: '10', topic: 'negatives' },
+            { question: '-4 × -3 = ?', options: ['12', '-12', '7', '-7'], answer: '12', topic: 'negatives' },
+            { question: '-20 ÷ 5 = ?', options: ['-4', '4', '-15', '15'], answer: '-4', topic: 'negatives' },
+            { question: '-30 ÷ 6 = ?', options: ['-5', '5', '-24', '24'], answer: '-5', topic: 'negatives' }
+        ];
+
+        // UAE HERITAGE QUESTIONS (20+ questions)
+        const uaeQuestions = [
+            { question: "🇦🇪 The UAE flag has 4 colors. What fraction is green?", options: ["1/4", "1/2", "3/4", "1/3"], answer: "1/4", topic: "fractions" },
+            { question: "🇦🇪 Burj Khalifa has 163 floors. You visit 50. How many left?", options: ["113", "100", "120", "110"], answer: "113", topic: "subtraction" },
+            { question: "🇦🇪 A Falcon flies 120 km in 2 hours. Speed per hour?", options: ["60 km/h", "50 km/h", "70 km/h", "65 km/h"], answer: "60 km/h", topic: "division" },
+            { question: "🇦🇪 60% of UAE lives in Abu Dhabi & Dubai. If total 10 million, how many?", options: ["6 million", "5 million", "7 million", "6.5 million"], answer: "6 million", topic: "percentages" },
+            { question: "🇦🇪 Sheikh Zayed Grand Mosque has 82 domes. If 1/2 white, how many white?", options: ["41", "42", "40", "39"], answer: "41", topic: "fractions" },
+            { question: "🇦🇪 Date harvest: 3:2 ratio of Khalas to Medjool. Total 500 kg. How many kg Khalas?", options: ["300 kg", "200 kg", "250 kg", "350 kg"], answer: "300 kg", topic: "ratios" },
+            { question: "🇦🇪 Dubai population: 3.5 million grows 2% yearly. Next year?", options: ["3.57 million", "3.6 million", "3.55 million", "3.58 million"], answer: "3.57 million", topic: "percentages" },
+            { question: "🇦🇪 Abu Dhabi has 200 schools. 75% are private. How many private?", options: ["150", "50", "100", "175"], answer: "150", topic: "percentages" },
+            { question: "🇦🇪 A camel walks 40 km in 5 hours. Speed?", options: ["8 km/h", "6 km/h", "10 km/h", "5 km/h"], answer: "8 km/h", topic: "division" },
+            { question: "🇦🇪 Ferrari World has 35 rides. You try 1/5 of them. How many?", options: ["7", "5", "10", "8"], answer: "7", topic: "fractions" },
+            { question: "🇦🇪 Dubai Mall has 1,200 shops. 1/4 are fashion. How many fashion shops?", options: ["300", "400", "200", "500"], answer: "300", topic: "fractions" },
+            { question: "🇦🇪 Emirates airline has 250 planes. 40% are Airbus. How many Airbus?", options: ["100", "150", "120", "80"], answer: "100", topic: "percentages" },
+            { question: "🇦🇪 7 emirates. What fraction is Dubai? (1 emirate)", options: ["1/7", "1/6", "1/5", "1/8"], answer: "1/7", topic: "fractions" },
+            { question: "🇦🇪 UAE has 365 days of sun. If 1/5 are cloudy, how many cloudy days?", options: ["73", "70", "80", "65"], answer: "73", topic: "fractions" },
+            { question: "🇦🇪 Gold souk has 50 shops. Ratio of gold to silver shops is 3:2. How many gold shops?", options: ["30", "20", "25", "35"], answer: "30", topic: "ratios" },
+            { question: "🇦🇪 Dubai Metro has 53 stations. You visit 25. What percent visited?", options: ["47%", "50%", "45%", "40%"], answer: "47%", topic: "percentages" },
+            { question: "🇦🇪 Palm Jumeirah has 17 fronds. Half have houses. How many fronds with houses?", options: ["8.5", "9", "8", "10"], answer: "8.5", topic: "decimals" },
+            { question: "🇦🇪 Museum of the Future has 7 floors. You explore 2/7. What fraction left?", options: ["5/7", "3/7", "4/7", "6/7"], answer: "5/7", topic: "fractions" },
+            { question: "🇦🇪 Liwa Desert has 200 km of dunes. You cross 75 km. Percent left?", options: ["62.5%", "60%", "65%", "70%"], answer: "62.5%", topic: "percentages" },
+            { question: "🇦🇪 UAE National Day is Dec 2. Days left from Nov 1?", options: ["31", "30", "32", "29"], answer: "31", topic: "subtraction" }
+        ];
+
+        // Combine all questions
+        const regularQuestionBank = {
+            grade4: grade4Questions,
+            grade5: grade5Questions,
+            grade6: grade6Questions,
+            grade7: grade7Questions
+        };
+
         const uaeQuestionBank = {
-            grade4: [
-                {
-                    question: "🇦🇪 The UAE flag has 4 colors. If 1/4 of the flag is green, what fraction is NOT green?",
-                    options: ["3/4", "1/4", "2/4", "4/4"],
-                    answer: "3/4",
-                    type: "fractions",
-                    uaeTheme: true
-                },
-                {
-                    question: "🇦🇪 Burj Khalifa has 163 floors. If you visit 50 floors, how many floors are left?",
-                    options: ["113", "100", "120", "110"],
-                    answer: "113",
-                    type: "subtraction",
-                    uaeTheme: true
-                },
-                {
-                    question: "🇦🇪 A Falcon flies 120 km in 2 hours. What is its speed per hour?",
-                    options: ["60 km/h", "50 km/h", "70 km/h", "65 km/h"],
-                    answer: "60 km/h",
-                    type: "division",
-                    uaeTheme: true
-                }
-            ],
-            grade5: [
-                {
-                    question: "🇦🇪 60% of UAE population lives in Abu Dhabi and Dubai. If total is 10 million, how many live there?",
-                    options: ["6 million", "5 million", "7 million", "6.5 million"],
-                    answer: "6 million",
-                    type: "percentages"
-                },
-                {
-                    question: "🇦🇪 Sheikh Zayed Grand Mosque has 82 domes. If 1/2 are white marble, how many white domes?",
-                    options: ["41", "42", "40", "39"],
-                    answer: "41",
-                    type: "fractions",
-                    uaeTheme: true
-                }
-            ],
-            grade6: [
-                {
-                    question: "🇦🇪 Date harvest: 3:2 ratio of Khalas to Medjool. Total 500 kg. How many kg Khalas?",
-                    options: ["300 kg", "200 kg", "250 kg", "350 kg"],
-                    answer: "300 kg",
-                    type: "ratios",
-                    uaeTheme: true
-                }
-            ],
-            grade7: [
-                {
-                    question: "🇦🇪 Dubai population: 3.5 million grows 2% yearly. Next year's population?",
-                    options: ["3.57 million", "3.6 million", "3.55 million", "3.58 million"],
-                    answer: "3.57 million",
-                    type: "percentages"
-                }
-            ]
+            grade4: uaeQuestions.filter(q => q.topic === 'fractions' || q.topic === 'division' || q.topic === 'subtraction'),
+            grade5: uaeQuestions.filter(q => q.topic === 'percentages' || q.topic === 'decimals'),
+            grade6: uaeQuestions.filter(q => q.topic === 'ratios' || q.topic === 'percentages'),
+            grade7: uaeQuestions.filter(q => q.topic === 'percentages' || q.topic === 'decimals')
         };
 
         // ============================================
@@ -710,7 +906,7 @@
         };
 
         // ============================================
-        // AI TEACHER DASHBOARD
+        // AI DASHBOARD
         // ============================================
         function updateAIDashboard() {
             const classProgress = Math.min(100, Math.round(65 + (gameState.score / 100)));
@@ -723,11 +919,11 @@
             document.getElementById('adekPrediction').textContent = masteryLevel + '%';
             
             const tips = [
-                "Try 'UAE Heritage Mode' for culturally relevant math practice!",
+                "Over 200 questions across all grades!",
+                "Try UAE Heritage Mode for local culture questions!",
                 "Students who practice 15 mins daily score 20% higher on tests",
-                "Fractions and decimals are the top areas for improvement in Grade 5",
-                "UAE heritage questions boost engagement by 40%",
-                "Regular practice builds math confidence!"
+                "Fractions and decimals are top areas for improvement in Grade 5",
+                "Now with 50+ questions per grade level!"
             ];
             document.getElementById('aiTip').innerHTML = '💡 ' + tips[Math.floor(Math.random() * tips.length)];
         }
@@ -761,7 +957,7 @@
             const modeDetails = document.getElementById('modeDetails');
             
             if (gameState.gameMode === 'uaeheritage') {
-                modeStatus.innerHTML = '🇦🇪 UAE Heritage Mode - Questions about Emirati culture!';
+                modeStatus.innerHTML = '🇦🇪 UAE Heritage Mode - 20+ UAE culture questions!';
             } else if (gameState.gameMode === 'suddendeath') {
                 modeStatus.innerHTML = '💀 Sudden Death Mode';
                 modeDetails.innerHTML = `❤️ ${gameState.lives} lives left`;
@@ -785,9 +981,12 @@
             
             let questionPool;
             if (gameState.uaeMode) {
-                questionPool = uaeQuestionBank[`grade${gameState.currentGrade}`] || uaeQuestionBank.grade5;
+                questionPool = uaeQuestionBank[`grade${gameState.currentGrade}`];
+                if (!questionPool || questionPool.length === 0) {
+                    questionPool = uaeQuestions; // fallback to all UAE questions
+                }
             } else {
-                questionPool = regularQuestionBank[`grade${gameState.currentGrade}`] || regularQuestionBank.grade5;
+                questionPool = regularQuestionBank[`grade${gameState.currentGrade}`] || grade5Questions;
             }
             
             const randomIndex = Math.floor(Math.random() * questionPool.length);
@@ -841,9 +1040,7 @@
                 gameState.questionsDone++;
                 document.getElementById('feedback').textContent = '✅ Correct!';
                 
-                if (gameState.gameMode === 'suddendeath') {
-                    // All good, lives remain
-                } else if (gameState.gameMode === 'spacerace') {
+                if (gameState.gameMode === 'spacerace') {
                     gameState.racePosition++;
                     if (gameState.racePosition >= gameState.raceTotal) {
                         gameState.score += 100;
@@ -875,27 +1072,6 @@
         }
 
         // ============================================
-        // REGULAR QUESTION BANK
-        // ============================================
-        const regularQuestionBank = {
-            grade4: [
-                { question: '3 × 4 = ?', options: ['12', '7', '8', '9'], answer: '12' },
-                { question: 'What is 1/2 of 8?', options: ['4', '3', '5', '6'], answer: '4' },
-                { question: '12 ÷ 3 = ?', options: ['4', '3', '6', '9'], answer: '4' }
-            ],
-            grade5: [
-                { question: '0.5 + 0.3 = ?', options: ['0.8', '0.5', '0.6', '0.7'], answer: '0.8' },
-                { question: '1.2 × 3 = ?', options: ['3.6', '3.5', '3.7', '3.4'], answer: '3.6' }
-            ],
-            grade6: [
-                { question: 'What is 25% of 80?', options: ['20', '25', '30', '15'], answer: '20' }
-            ],
-            grade7: [
-                { question: 'x + 5 = 12, x = ?', options: ['7', '6', '8', '5'], answer: '7' }
-            ]
-        };
-
-        // ============================================
         // CHATBOT
         // ============================================
         function sendMessage() {
@@ -907,7 +1083,7 @@
             input.value = '';
             
             setTimeout(() => {
-                let response = "🇦🇪 Try UAE Heritage Mode for questions about Burj Khalifa, Falcons, and Emirati culture!";
+                let response = "We now have over 200 questions across all grades! Try UAE Heritage Mode for local culture questions!";
                 addBotMessage(response);
             }, 1000);
         }
