@@ -116,6 +116,11 @@
             margin-left: 10px;
         }
 
+        .visitor-badge {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
         .mode-selector {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -401,21 +406,16 @@
             }
         }
     </style>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXX');
-</script>
 </head>
 <body>
     <div class="game-wrapper">
         <div class="game-container">
             <div class="header">
-                <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
                     <h1>🧮 SKIBIDI MATH UAE</h1>
                     <span class="uae-badge">🇦🇪 500+ QUESTIONS</span>
+                    <!-- VISITOR BADGE ADDED HERE - CUSTOMIZED UAE GREEN COLOR -->
+                    <img src="https://visitor-badge.laobi.icu/badge?page_id=benunumakoe.SkibidiMath&color=009688" alt="Visitor counter" class="visitor-badge">
                 </div>
                 <div class="language-toggle">
                     <button class="lang-btn active" onclick="setLanguage('en')">🇬🇧 English</button>
@@ -882,4 +882,3 @@
     </script>
 </body>
 </html>
-
