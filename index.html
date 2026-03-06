@@ -673,34 +673,88 @@
 
 const questionBank = {
     grade4: [
-    // Multiplication (5 questions)
+    // === EXISTING 20 QUESTIONS (KEEP THESE) ===
     { question: "23 × 4 = ?", options: ["92", "82", "72", "102"], answer: "92", topic: "multiplication" },
     { question: "45 × 6 = ?", options: ["270", "250", "260", "280"], answer: "270", topic: "multiplication" },
     { question: "32 × 3 = ?", options: ["96", "86", "106", "92"], answer: "96", topic: "multiplication" },
     { question: "54 × 5 = ?", options: ["270", "260", "250", "280"], answer: "270", topic: "multiplication" },
     { question: "27 × 8 = ?", options: ["216", "206", "226", "196"], answer: "216", topic: "multiplication" },
-    
-    // Division (5 questions)
     { question: "84 ÷ 4 = ?", options: ["21", "22", "20", "19"], answer: "21", topic: "division" },
     { question: "96 ÷ 3 = ?", options: ["32", "31", "33", "30"], answer: "32", topic: "division" },
     { question: "75 ÷ 5 = ?", options: ["15", "14", "16", "13"], answer: "15", topic: "division" },
     { question: "124 ÷ 4 = ?", options: ["31", "30", "32", "29"], answer: "31", topic: "division" },
     { question: "135 ÷ 5 = ?", options: ["27", "26", "28", "25"], answer: "27", topic: "division" },
-    
-    // Fractions (5 questions)
     { question: "1/4 + 2/4 = ?", options: ["3/4", "2/4", "1/2", "3/8"], answer: "3/4", topic: "fractions" },
     { question: "3/8 + 2/8 = ?", options: ["5/8", "1/2", "6/8", "3/4"], answer: "5/8", topic: "fractions" },
     { question: "Which fraction is equivalent to 1/2?", options: ["2/4", "2/3", "3/4", "1/3"], answer: "2/4", topic: "fractions" },
     { question: "3/4 = ?/8", options: ["6", "5", "7", "4"], answer: "6", topic: "fractions" },
     { question: "2/3 = ?/9", options: ["6", "5", "7", "4"], answer: "6", topic: "fractions" },
-    
-    // Decimals (5 questions)
     { question: "Which is larger: 0.5 or 0.3?", options: ["0.5", "0.3", "same", "can't tell"], answer: "0.5", topic: "decimals" },
     { question: "Write 7/10 as a decimal.", options: ["0.7", "0.07", "7.0", "0.007"], answer: "0.7", topic: "decimals" },
     { question: "Write 0.3 as a fraction.", options: ["3/10", "1/3", "3/100", "30/100"], answer: "3/10", topic: "decimals" },
     { question: "Compare: 0.33 ___ 0.3", options: [">", "<", "=", "can't tell"], answer: ">", topic: "decimals" },
-    { question: "0.25 + 0.25 = ?", options: ["0.5", "0.4", "0.75", "0.6"], answer: "0.5", topic: "decimals" }
-]
+    { question: "0.25 + 0.25 = ?", options: ["0.5", "0.4", "0.75", "0.6"], answer: "0.5", topic: "decimals" },
+    
+    // === NEW 50 QUESTIONS - MULTIPLICATION (10 more) ===
+    { question: "38 × 7 = ?", options: ["266", "256", "276", "246"], answer: "266", topic: "multiplication" },
+    { question: "41 × 9 = ?", options: ["369", "359", "379", "349"], answer: "369", topic: "multiplication" },
+    { question: "19 × 6 = ?", options: ["114", "104", "124", "110"], answer: "114", topic: "multiplication" },
+    { question: "63 × 4 = ?", options: ["252", "242", "262", "248"], answer: "252", topic: "multiplication" },
+    { question: "72 × 8 = ?", options: ["576", "566", "586", "560"], answer: "576", topic: "multiplication" },
+    { question: "23 × 12 = ?", options: ["276", "286", "266", "256"], answer: "276", topic: "multiplication" },
+    { question: "32 × 15 = ?", options: ["480", "470", "490", "460"], answer: "480", topic: "multiplication" },
+    { question: "24 × 31 = ?", options: ["744", "734", "754", "724"], answer: "744", topic: "multiplication" },
+    { question: "18 × 15 = ?", options: ["270", "260", "280", "250"], answer: "270", topic: "multiplication" },
+    { question: "25 × 24 = ?", options: ["600", "590", "610", "580"], answer: "600", topic: "multiplication" },
+    
+    // === DIVISION (10 more) ===
+    { question: "168 ÷ 7 = ?", options: ["24", "23", "25", "22"], answer: "24", topic: "division" },
+    { question: "144 ÷ 12 = ?", options: ["12", "13", "11", "10"], answer: "12", topic: "division" },
+    { question: "189 ÷ 9 = ?", options: ["21", "20", "22", "19"], answer: "21", topic: "division" },
+    { question: "225 ÷ 15 = ?", options: ["15", "16", "14", "13"], answer: "15", topic: "division" },
+    { question: "72 ÷ 6 = ?", options: ["12", "13", "11", "14"], answer: "12", topic: "division" },
+    { question: "81 ÷ 9 = ?", options: ["9", "8", "10", "7"], answer: "9", topic: "division" },
+    { question: "108 ÷ 12 = ?", options: ["9", "8", "10", "11"], answer: "9", topic: "division" },
+    { question: "132 ÷ 11 = ?", options: ["12", "13", "11", "10"], answer: "12", topic: "division" },
+    { question: "152 ÷ 8 = ?", options: ["19", "18", "20", "17"], answer: "19", topic: "division" },
+    { question: "184 ÷ 8 = ?", options: ["23", "22", "24", "21"], answer: "23", topic: "division" },
+    
+    // === FRACTIONS (10 more) ===
+    { question: "5/6 - 2/6 = ?", options: ["3/6", "4/6", "2/6", "1/2"], answer: "3/6", topic: "fractions" },
+    { question: "7/10 - 3/10 = ?", options: ["4/10", "5/10", "3/10", "2/5"], answer: "4/10", topic: "fractions" },
+    { question: "2/5 + 1/5 = ?", options: ["3/5", "2/5", "4/5", "1/5"], answer: "3/5", topic: "fractions" },
+    { question: "4/9 + 3/9 = ?", options: ["7/9", "6/9", "8/9", "5/9"], answer: "7/9", topic: "fractions" },
+    { question: "6/7 - 2/7 = ?", options: ["4/7", "3/7", "5/7", "2/7"], answer: "4/7", topic: "fractions" },
+    { question: "A pizza has 8 slices. You eat 3. What fraction is left?", options: ["5/8", "3/8", "4/8", "6/8"], answer: "5/8", topic: "fractions" },
+    { question: "5/6 = ?/12", options: ["10", "9", "11", "8"], answer: "10", topic: "fractions" },
+    { question: "2/7 = ?/14", options: ["4", "3", "5", "6"], answer: "4", topic: "fractions" },
+    { question: "4/5 = ?/15", options: ["12", "11", "13", "10"], answer: "12", topic: "fractions" },
+    { question: "3/8 = ?/16", options: ["6", "5", "7", "4"], answer: "6", topic: "fractions" },
+    
+    // === DECIMALS (10 more) ===
+    { question: "Write 25/100 as a decimal.", options: ["0.25", "0.025", "2.5", "0.205"], answer: "0.25", topic: "decimals" },
+    { question: "Write 0.45 as a fraction.", options: ["45/100", "45/10", "4.5/10", "9/20"], answer: "45/100", topic: "decimals" },
+    { question: "Write 3/100 as a decimal.", options: ["0.03", "0.3", "0.003", "3.0"], answer: "0.03", topic: "decimals" },
+    { question: "Write 0.09 as a fraction.", options: ["9/100", "9/10", "90/100", "1/9"], answer: "9/100", topic: "decimals" },
+    { question: "Which is larger: 0.25 or 0.4?", options: ["0.4", "0.25", "same", "can't tell"], answer: "0.4", topic: "decimals" },
+    { question: "Put in order: 0.7, 0.2, 0.5", options: ["0.2, 0.5, 0.7", "0.7, 0.5, 0.2", "0.5, 0.2, 0.7", "0.2, 0.7, 0.5"], answer: "0.2, 0.5, 0.7", topic: "decimals" },
+    { question: "0.8 - 0.3 = ?", options: ["0.5", "0.4", "0.6", "0.3"], answer: "0.5", topic: "decimals" },
+    { question: "0.9 - 0.4 = ?", options: ["0.5", "0.4", "0.6", "0.3"], answer: "0.5", topic: "decimals" },
+    { question: "0.75 - 0.25 = ?", options: ["0.5", "0.4", "0.6", "0.3"], answer: "0.5", topic: "decimals" },
+    { question: "1.5 - 0.75 = ?", options: ["0.75", "0.8", "0.7", "0.85"], answer: "0.75", topic: "decimals" },
+    
+    // === WORD PROBLEMS (10 new) ===
+    { question: "A classroom has 24 rows of desks. Each row has 6 desks. How many desks?", options: ["144", "140", "148", "138"], answer: "144", topic: "wordproblems" },
+    { question: "There are 15 boxes. Each box has 12 pencils. Total pencils?", options: ["180", "170", "190", "175"], answer: "180", topic: "wordproblems" },
+    { question: "A school has 23 classes. Each class has 28 students. Total students?", options: ["644", "634", "654", "624"], answer: "644", topic: "wordproblems" },
+    { question: "A teacher has 96 stickers for 8 students. How many each?", options: ["12", "13", "11", "14"], answer: "12", topic: "wordproblems" },
+    { question: "144 pencils packed in boxes of 12. How many boxes?", options: ["12", "13", "11", "10"], answer: "12", topic: "wordproblems" },
+    { question: "180 students in 12 teams. How many per team?", options: ["15", "14", "16", "13"], answer: "15", topic: "wordproblems" },
+    { question: "AED 248 shared among 8 friends. How much each?", options: ["31", "30", "32", "29"], answer: "31", topic: "wordproblems" },
+    { question: "A bakery made 156 cookies in boxes of 6. How many boxes?", options: ["26", "25", "27", "24"], answer: "26", topic: "wordproblems" },
+    { question: "336 eggs in cartons of 12. How many cartons?", options: ["28", "27", "29", "26"], answer: "28", topic: "wordproblems" },
+    { question: "A bus carries 45 students. How many buses for 315 students?", options: ["7", "8", "6", "9"], answer: "7", topic: "wordproblems" }
+],
 };
 
         function setGameMode(mode) {
@@ -904,6 +958,7 @@ const questionBank = {
     </script>
 </body>
 </html>
+
 
 
 
