@@ -3081,7 +3081,7 @@ const questionBank = {
                 }
             } else {
                 gameState.streak = 0;
-                document.getElementById('feedback').textContent = '❌ Try again!';
+                document.getElementById('feedback').textContent = '❌ Try again!';    wrongSound.play();
                 
                 if (gameState.gameMode === 'suddendeath') {
                     gameState.lives--;
@@ -3168,6 +3168,7 @@ const questionBank = {
     </script>
 </body>
 </html>
+
 
 
 
