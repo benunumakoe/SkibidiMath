@@ -28,7 +28,7 @@
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 350px;
+            grid-template-columns: 1fr;
             gap: 20px;
         }
 
@@ -142,7 +142,7 @@
 
         .mode-selector {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 8px;
             margin-bottom: 15px;
         }
@@ -315,125 +315,54 @@
             flex-wrap: wrap;
         }
 
-        .chat-container {
-            background: white;
-            border-radius: 30px;
-            padding: 15px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            height: 500px;
-            border: 3px solid #000000;
-            margin-top: 20px;
-        }
-
-        .chat-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #e2e8f0;
-        }
-
-        .chat-avatar {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #009688, #FF0000, #000000);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            font-size: 0.9rem;
-        }
-
-        .message {
-            display: flex;
-            gap: 8px;
-            max-width: 90%;
-        }
-
-        .message.bot {
-            align-self: flex-start;
-        }
-
-        .message.user {
-            align-self: flex-end;
-            flex-direction: row-reverse;
-        }
-
-        .message-avatar {
-            width: 30px;
-            height: 30px;
-            background: #e2e8f0;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-        }
-
-        .message-content {
-            background: #f0f4f8;
-            padding: 8px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-        }
-
-        .message.user .message-content {
-            background: #009688;
-            color: white;
-        }
-
-        .chat-input {
-            display: flex;
-            gap: 8px;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px solid #e2e8f0;
-        }
-
-        .chat-input input {
-            flex: 1;
-            padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            outline: none;
-        }
-
-        .chat-input button {
-            width: 45px;
-            height: 45px;
-            background: #009688;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.1rem;
-            cursor: pointer;
-            box-shadow: 0 4px 0 #00695c;
-            transition: all 0.3s;
-        }
-
         .kofi-button {
             text-align: center;
-            margin: 20px 0 10px;
+            margin: 10px 0 20px;
         }
 
         .kofi-button img {
             max-width: 200px;
             height: auto;
+        }
+
+        .footer-section {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+
+        .footer-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 10px 0;
+        }
+
+        .music-toggle-btn {
+            padding: 8px 16px;
+            border: 2px solid #009688;
+            border-radius: 30px;
+            background: white;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            margin: 5px auto;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .music-toggle-btn:hover {
+            background: #009688;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .music-toggle-btn:active {
+            transform: translateY(0);
         }
 
         /* Desktop styles */
@@ -443,7 +372,7 @@
             }
             
             .game-wrapper {
-                grid-template-columns: 1fr 350px;
+                grid-template-columns: 1fr;
             }
             
             .header {
@@ -456,7 +385,7 @@
             }
             
             .mode-selector {
-                grid-template-columns: repeat(5, 1fr);
+                grid-template-columns: repeat(4, 1fr);
             }
             
             .options-grid {
@@ -493,40 +422,25 @@
                 font-size: 0.75rem;
             }
         }
-                .music-toggle-btn {
-            padding: 8px 16px;
-            border: 2px solid #009688;
-            border-radius: 30px;
-            background: white;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            margin: 5px auto;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .music-toggle-btn:hover {
-            background: #009688;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-
-        .music-toggle-btn:active {
-            transform: translateY(0);
-        }
     </style>
 </head>
 <body>
     <div class="game-wrapper">
         <div class="game-container">
+            <!-- Ko-fi Button at TOP (moved from bottom) -->
+            <div class="kofi-button">
+                <a href='https://ko-fi.com/skibidimath' target='_blank'>
+                    <img height='50' style='border:0px; height:50px;' 
+                         src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' 
+                         border='0' alt='Support Me on Ko-fi' />
+                </a>
+            </div>
+
             <div class="header">
                 <h1>🧮 SKIBIDI MATH UAE</h1>
                 <div class="header-top-row">
                     <div class="badge-container">
                         <span class="uae-badge">🇦🇪 500+ QUESTIONS</span>
-                        <img src="https://visitor-badge.laobi.icu/badge?page_id=benunumakoe.SkibidiMath&color=009688" alt="Visitor counter" class="visitor-badge">
                     </div>
                     <div class="language-toggle">
                         <button class="lang-btn active" onclick="setLanguage('en')">🇬🇧 EN</button>
@@ -562,10 +476,6 @@
                 <button class="mode-btn" onclick="setGameMode('suddendeath')">
                     <span>💀</span>
                     <span data-en="Sudden Death" data-ar="الموت">Sudden</span>
-                </button>
-                <button class="mode-btn" onclick="setGameMode('timeattack')">
-                    <span>⏱️</span>
-                    <span data-en="Time Attack" data-ar="هجوم">Time</span>
                 </button>
                 <button class="mode-btn" onclick="setGameMode('spacerace')">
                     <span>🚀</span>
@@ -611,42 +521,12 @@
                 </div>
             </div>
 
-            <!-- Ko-fi Button Added Here -->
-            <div class="kofi-button">
-                <a href='https://ko-fi.com/skibidimath' target='_blank'>
-                    <img height='50' style='border:0px; height:50px;' 
-                         src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' 
-                         border='0' alt='Support Me on Ko-fi' />
-                </a>
-            </div>
-        </div>
-                    <!-- Music Toggle Button -->
-            <div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
-                <button onclick="toggleMusic()" class="music-toggle-btn">🔊 Music On</button>
-            </div>
-
-        <div class="chat-container">
-            <div class="chat-header">
-                <div class="chat-avatar">🧠</div>
-                <div>
-                    <h3 data-en="AI Math Tutor" data-ar="مدرس الرياضيات">AI Math Tutor</h3>
-                    <p data-en="Ask me!" data-ar="اسألني!">Ask me!</p>
+            <!-- Footer Section with Visitor Counter and Music Button -->
+            <div class="footer-section">
+                <div class="footer-badges">
+                    <img src="https://visitor-badge.laobi.icu/badge?page_id=benunumakoe.SkibidiMath&color=009688" alt="Visitor counter" class="visitor-badge">
+                    <button onclick="toggleMusic()" class="music-toggle-btn">🔊 Music On</button>
                 </div>
-            </div>
-            <div class="chat-messages" id="chatMessages">
-                <div class="message bot">
-                    <div class="message-avatar">🧠</div>
-                    <div class="message-content">
-                        <span data-en="Welcome! 500+ questions!" 
-                              data-ar="مرحباً! 500+ سؤال!">
-                            Welcome! 500+ questions!
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="chat-input">
-                <input type="text" id="chatInput" placeholder="Ask...">
-                <button onclick="sendMessage()">➡️</button>
             </div>
         </div>
     </div>
@@ -681,8 +561,9 @@
             wizard: { name: '🧙 Math Wizard', emoji: '🧙', bonus: 1.5, xpRequired: 500 },
             legend: { name: '👑 Math Legend', emoji: '👑', bonus: 2, xpRequired: 1000 }
         };
-                // ============================================
-        // SOUND EFFECTS - ADD THIS EXACT CODE HERE
+        
+        // ============================================
+        // SOUND EFFECTS
         // ============================================
         const correctSound = new Audio('sounds/correct.mp3');
         const wrongSound = new Audio('sounds/wrong.mp3');
@@ -698,9 +579,11 @@
             if (musicOn) {
                 backgroundMusic.pause();
                 musicOn = false;
+                document.querySelector('.music-toggle-btn').textContent = '🔇 Music Off';
             } else {
                 backgroundMusic.play();
                 musicOn = true;
+                document.querySelector('.music-toggle-btn').textContent = '🔊 Music On';
             }
         }
 
@@ -3009,7 +2892,6 @@ const questionBank = {
         function resetGameMode() {
             switch(gameState.gameMode) {
                 case 'suddendeath': gameState.lives = 3; break;
-                case 'timeattack': gameState.timeBonus = 0; break;
                 case 'spacerace': gameState.racePosition = 0; break;
             }
         }
@@ -3167,83 +3049,7 @@ const questionBank = {
             }
         }
 
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const message = input.value.trim();
-            if (!message) return;
-            
-            addUserMessage(message);
-            input.value = '';
-            
-            setTimeout(() => {
-                let response = "Try UAE Heritage Mode for questions about Burj Khalifa, Falcons, and Emirati culture!";
-                addBotMessage(response);
-            }, 1000);
-        }
-
-        function addUserMessage(text) {
-            const messages = document.getElementById('chatMessages');
-            messages.innerHTML += `<div class="message user"><div class="message-avatar">👤</div><div class="message-content">${text}</div></div>`;
-            messages.scrollTop = messages.scrollHeight;
-        }
-
-        function addBotMessage(text) {
-            const messages = document.getElementById('chatMessages');
-            messages.innerHTML += `<div class="message bot"><div class="message-avatar">🧠</div><div class="message-content">${text}</div></div>`;
-            messages.scrollTop = messages.scrollHeight;
-        }
-
         nextQuestion();
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
