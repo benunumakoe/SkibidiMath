@@ -573,31 +573,24 @@
         backgroundMusic.loop = true;
         backgroundMusic.volume = 0.3; // 30% volume so it's not overpowering
         
-                // Function to toggle music on/off
-        let musicOn = false;  // Start with music OFF
-        let audioAllowed = false;
+                  // Function to toggle music on/off
+        let musicOn = false;
         
         function toggleMusic() {
-            if (!audioAllowed) {
-                // First click: try to play
+            if (!musicOn) {
+                // Try to play - silently fail if not allowed yet
                 backgroundMusic.play().then(() => {
-                    audioAllowed = true;
                     musicOn = true;
                     document.querySelector('.music-toggle-btn').textContent = '🔊 Music On';
                 }).catch(() => {
-                    alert('Please click anywhere on the page first, then try again');
+                    // Silently fail - user just needs to click the page first
+                    console.log("Audio blocked - click the page first");
                 });
             } else {
-                // Normal toggle after audio is allowed
-                if (musicOn) {
-                    backgroundMusic.pause();
-                    musicOn = false;
-                    document.querySelector('.music-toggle-btn').textContent = '🔇 Music Off';
-                } else {
-                    backgroundMusic.play();
-                    musicOn = true;
-                    document.querySelector('.music-toggle-btn').textContent = '🔊 Music On';
-                }
+                // Pause
+                backgroundMusic.pause();
+                musicOn = false;
+                document.querySelector('.music-toggle-btn').textContent = '🔇 Music Off';
             }
         }
 
@@ -3067,4 +3060,5 @@ const questionBank = {
     </script>
 </body>
 </html>
+
 
