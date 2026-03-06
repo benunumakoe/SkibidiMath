@@ -3070,7 +3070,7 @@ const questionBank = {
                 gameState.streak++;
                 gameState.characterXP += 5;
                 gameState.questionsDone++;
-                document.getElementById('feedback').textContent = `✅ Correct! +${points} points!`;
+                document.getElementById('feedback').textContent = `✅ Correct! +${points} points!`;    correctSound.play();
                 
                 if (gameState.gameMode === 'spacerace') {
                     gameState.racePosition++;
