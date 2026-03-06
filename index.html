@@ -654,6 +654,28 @@
             wizard: { name: '🧙 Math Wizard', emoji: '🧙', bonus: 1.5, xpRequired: 500 },
             legend: { name: '👑 Math Legend', emoji: '👑', bonus: 2, xpRequired: 1000 }
         };
+                // ============================================
+        // SOUND EFFECTS - ADD THIS EXACT CODE HERE
+        // ============================================
+        const correctSound = new Audio('sounds/correct.mp3');
+        const wrongSound = new Audio('sounds/wrong.mp3');
+        const backgroundMusic = new Audio('sounds/background-music.mp3');
+        
+        // Set background music to loop and lower volume
+        backgroundMusic.loop = true;
+        backgroundMusic.volume = 0.3; // 30% volume so it's not overpowering
+        
+        // Function to toggle music on/off
+        let musicOn = true;
+        function toggleMusic() {
+            if (musicOn) {
+                backgroundMusic.pause();
+                musicOn = false;
+            } else {
+                backgroundMusic.play();
+                musicOn = true;
+            }
+        }
 
         function setLanguage(lang) {
             currentLanguage = lang;
@@ -3146,6 +3168,7 @@ const questionBank = {
     </script>
 </body>
 </html>
+
 
 
 
