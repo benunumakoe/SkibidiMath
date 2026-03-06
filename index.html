@@ -671,13 +671,25 @@
       // GRADE 4 COMPLETE QUESTION BANK
 // 500 Questions - All Topics
 
-grade4: [
-    { question: "23 × 4 = ?", options: ["92", "82", "72", "102"], answer: "92", topic: "multiplication" },
-    { question: "45 × 6 = ?", options: ["270", "250", "260", "280"], answer: "270", topic: "multiplication" },
-    { question: "84 ÷ 4 = ?", options: ["21", "22", "20", "19"], answer: "21", topic: "division" },
-    { question: "1/4 + 2/4 = ?", options: ["3/4", "2/4", "1/2", "3/8"], answer: "3/4", topic: "fractions" },
-    { question: "Which is larger: 0.5 or 0.3?", options: ["0.5", "0.3", "same", "can't tell"], answer: "0.5", topic: "decimals" }
-],
+const questionBank = {
+    grade4: [
+        { question: "23 × 4 = ?", options: ["92", "82", "72", "102"], answer: "92", topic: "multiplication" },
+        { question: "45 × 6 = ?", options: ["270", "250", "260", "280"], answer: "270", topic: "multiplication" },
+        { question: "84 ÷ 4 = ?", options: ["21", "22", "20", "19"], answer: "21", topic: "division" },
+        { question: "1/4 + 2/4 = ?", options: ["3/4", "2/4", "1/2", "3/8"], answer: "3/4", topic: "fractions" },
+        { question: "Which is larger: 0.5 or 0.3?", options: ["0.5", "0.3", "same", "can't tell"], answer: "0.5", topic: "decimals" }
+    ],
+    grade5: [
+        { question: '0.2 + 0.3 = ?', options: ['0.5', '0.6', '0.4', '0.7'], answer: '0.5', topic: 'decimals' },
+        // ... rest of your grade 5 questions
+    ],
+    grade6: [
+        // ... your grade 6 questions
+    ],
+    grade7: [
+        // ... your grade 7 questions
+    ]
+};
 // Total count: 500+ questions
 console.log(`Grade 4 questions loaded: ${grade4Questions.length}`);
 
@@ -887,6 +899,7 @@ if (typeof module !== 'undefined' && module.exports) {
     </script>
 </body>
 </html>
+
 
 
 
