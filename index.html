@@ -436,19 +436,221 @@
                 </a>
             </div>
 
-            <div class="header">
-                <h1>🧮 SKIBIDI MATH UAE</h1>
-                <div class="header-top-row">
-                    <div class="badge-container">
-                        <span class="uae-badge">🇦🇪 500+ QUESTIONS</span>
-                    </div>
-                    <div class="language-toggle">
-                        <button class="lang-btn active" onclick="setLanguage('en')">🇬🇧 EN</button>
-                        <button class="lang-btn" onclick="setLanguage('ar')">🇦🇪 عربي</button>
-                    </div>
+           <!-- New SkibidiMath Logo with Kandoora Boy -->
+<div class="logo-section" style="margin-bottom: 20px;">
+    <style>
+        /* Add all the logo styles here */
+        .logo-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            background: white;
+            padding: 20px;
+            border-radius: 40px;
+            border: 3px solid #000;
+            box-shadow: 0 10px 0 #cbd5e0;
+        }
+        
+        .kandoora-boy {
+            position: relative;
+            width: 120px;
+            height: 160px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .head {
+            width: 60px;
+            height: 60px;
+            background: #F5DEB3;
+            border-radius: 50%;
+            margin: 0 auto;
+            border: 3px solid #000;
+            z-index: 3;
+            position: relative;
+        }
+        
+        .eyes {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding-top: 20px;
+        }
+        
+        .eye {
+            width: 10px;
+            height: 10px;
+            background: #000;
+            border-radius: 50%;
+        }
+        
+        .smile {
+            width: 20px;
+            height: 6px;
+            border-bottom: 3px solid #000;
+            border-radius: 0 0 15px 15px;
+            margin: 5px auto 0;
+        }
+        
+        .ghutra {
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            width: 85px;
+            height: 70px;
+            background: #fff;
+            border-radius: 35px 35px 15px 15px;
+            transform: rotate(-5deg);
+            border: 3px solid #000;
+            z-index: 2;
+        }
+        
+        .agal {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 70px;
+            height: 10px;
+            background: #333;
+            border-radius: 15px;
+            border: 2px solid #000;
+            z-index: 3;
+        }
+        
+        .kandoora {
+            width: 85px;
+            height: 100px;
+            background: #fff;
+            border: 3px solid #000;
+            border-radius: 30px 30px 15px 15px;
+            margin: -20px auto 0;
+            z-index: 1;
+            position: relative;
+            box-shadow: 0 6px 0 #e0e0e0;
+        }
+        
+        .math-symbols-mini {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 5px;
+            justify-content: center;
+        }
+        
+        .math-symbol-mini {
+            font-size: 1.5rem;
+            font-weight: bold;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+            border-radius: 10px;
+            border: 2px solid #000;
+        }
+        
+        .brand-text {
+            text-align: center;
+        }
+        
+        .skibidi-text {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #009688, #FF0000, #000000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+        
+        .math-text {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #000;
+            margin-top: -5px;
+        }
+        
+        .math-text small {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .language-toggle {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+        }
+        
+        .lang-btn {
+            padding: 6px 12px;
+            border: 2px solid #009688;
+            border-radius: 30px;
+            background: white;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        
+        .lang-btn.active {
+            background: #009688;
+            color: white;
+        }
+        
+        @media (max-width: 600px) {
+            .logo-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .skibidi-text {
+                font-size: 1.8rem;
+            }
+            
+            .math-text {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+    
+    <div class="logo-content">
+        <!-- Kandoora Boy -->
+        <div class="kandoora-boy">
+            <div class="ghutra"></div>
+            <div class="agal"></div>
+            <div class="head">
+                <div class="eyes">
+                    <div class="eye"></div>
+                    <div class="eye"></div>
                 </div>
+                <div class="smile"></div>
             </div>
-
+            <div class="kandoora"></div>
+        </div>
+        
+        <!-- Logo Text -->
+        <div class="brand-text">
+            <div class="math-symbols-mini">
+                <div class="math-symbol-mini">+</div>
+                <div class="math-symbol-mini">×</div>
+                <div class="math-symbol-mini">÷</div>
+            </div>
+            <div class="skibidi-text">SKIBIDI</div>
+            <div class="math-text">MATH <small>.com</small></div>
+        </div>
+        
+        <!-- Language Toggle (keep this from your original) -->
+        <div class="language-toggle">
+            <button class="lang-btn active" onclick="setLanguage('en')">🇬🇧 EN</button>
+            <button class="lang-btn" onclick="setLanguage('ar')">🇦🇪 عربي</button>
+        </div>
+    </div>
+</div>
             <div class="stats">
                 <div class="stat-box">
                     <span class="stat-label" data-en="Score" data-ar="النتيجة">Score</span>
@@ -3067,6 +3269,7 @@ const questionBank = {
     </script>
 </body>
 </html>
+
 
 
 
