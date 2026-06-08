@@ -3099,7 +3099,54 @@ const questionBank = {
                 document.getElementById('nextCharacter').textContent = `👑 Max Level!`;
             }
         }
-
+        // ============================================
+        // HINT BUTTON FUNCTIONALITY
+        // ============================================
+        const hintButton = document.getElementById('hint-btn');
+        const hintMessage = document.getElementById('hint-message');
+        
+        function getLocalHint(questionText) {
+            const q = questionText.toLowerCase();
+            if (q.includes('×') || q.includes('*')) {
+                return "🔢 Multiply first: " + q.replace(/[?]/g, '');
+            }
+            if (q.includes('÷')) {
+                return "➗ Divide first: " + q.replace(/[?]/g, '');
+            }
+            if (q.includes('(')) {
+                return "( ) Parentheses first! Always solve inside the parentheses before anything else.";
+            }
+            if (q.includes('+') && q.includes('-')) {
+                return "➕ Go left to right for addition and subtraction.";
+            }
+            if (q.includes('+')) {
+                return "➕ Add these numbers carefully.";
+            }
+            if (q.includes('-')) {
+                return "➖ Subtract carefully. Check your work!";
+            }
+            return "📝 Break it down one step at a time. Follow the order of operations!";
+        }
+        
+        if (hintButton) {
+            hintButton.addEventListener('click', function() {
+                const questionElement = document.getElementById('question');
+                const questionText = questionElement ? questionElement.innerText : "";
+                
+                const hint = getLocalHint(questionText);
+                hintMessage.innerHTML = hint;
+                hintMessage.style.display = 'block';
+                
+                // Optional: Hide hint after 5 seconds
+                setTimeout(() => {
+                    hintMessage.style.opacity = '0';
+                    setTimeout(() => {
+                        hintMessage.style.display = 'none';
+                        hintMessage.style.opacity = '1';
+                    }, 500);
+                }, 5000);
+            });
+        }
         nextQuestion();
     </script>
 </body>
