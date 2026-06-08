@@ -3211,24 +3211,25 @@ const questionBank = {
                 }, 8000);
             });
         }                // ============================================
-        // HINT BUTTON FUNCTIONALITY
+        // ============================================
+        // HINT BUTTON (Simple version - WORKS!)
         // ============================================
         const hintButton = document.getElementById('hint-btn');
         const hintMessage = document.getElementById('hint-message');
         
-        function getLocalHint(questionText) {
+        function getSimpleHint(questionText) {
             const q = questionText.toLowerCase();
             if (q.includes('×') || q.includes('*')) {
-                return "🔢 Multiply first: " + q.replace(/[?]/g, '');
+                return "🔢 Multiply first: " + questionText;
             }
             if (q.includes('÷')) {
-                return "➗ Divide first: " + q.replace(/[?]/g, '');
+                return "➗ Divide first: " + questionText;
             }
             if (q.includes('(')) {
-                return "( ) Parentheses first! Always solve inside the parentheses before anything else.";
+                return "( ) Parentheses first! Solve inside the parentheses before anything else.";
             }
             if (q.includes('+') && q.includes('-')) {
-                return "➕ Go left to right for addition and subtraction.";
+                return "➕➖ Go left to right for addition and subtraction.";
             }
             if (q.includes('+')) {
                 return "➕ Add these numbers carefully.";
@@ -3236,37 +3237,25 @@ const questionBank = {
             if (q.includes('-')) {
                 return "➖ Subtract carefully. Check your work!";
             }
-            return "📝 Break it down one step at a time. Follow the order of operations!";
+            return "📝 Break it down one step at a time. Follow order of operations!";
         }
         
         if (hintButton) {
             hintButton.addEventListener('click', function() {
                 const questionElement = document.getElementById('question');
-                const questionText = questionElement ? questionElement.innerText : "the problem";
+                const questionText = questionElement ? questionElement.innerText : "";
                 
-                const hint = getLocalHint(questionText);
+                const hint = getSimpleHint(questionText);
                 hintMessage.innerHTML = hint;
                 hintMessage.style.display = 'block';
                 
-                // Hide hint after 5 seconds
                 setTimeout(() => {
                     hintMessage.style.display = 'none';
                 }, 5000);
             });
         }
+        
         nextQuestion();
     </script>
-        </script>
-
-    <!-- Hint Button HTML (added at the bottom) -->
-    <div style="text-align: center; margin: 20px 0; padding: 10px;">
-        <button id="hint-btn" style="background: #009688; color: white; border: none; padding: 12px 24px; border-radius: 30px; font-size: 1.1rem; cursor: pointer; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-            💡 Get Hint
-        </button>
-    </div>
-    <div id="hint-message" style="text-align: center; margin-top: 10px; padding: 12px; background: #fff3cd; border-radius: 10px; color: #856404; font-style: italic; display: none; max-width: 80%; margin-left: auto; margin-right: auto;"></div>
-
-</body>
-</html>
 </body>
 </html>
