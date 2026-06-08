@@ -3107,55 +3107,110 @@ const questionBank = {
                 document.getElementById('nextCharacter').textContent = `👑 Max Level!`;
             }
         }
-        // ============================================
-        // HINT BUTTON FUNCTIONALITY
+                // ============================================
+        // AI HINT BUTTON FUNCTIONALITY (with Hugging Face)
         // ============================================
         const hintButton = document.getElementById('hint-btn');
         const hintMessage = document.getElementById('hint-message');
         
+        // 🔐 PASTE YOUR NEW HUGGING FACE TOKEN HERE
+        const HF_TOKEN = "hf_YOUR_NEW_TOKEN_HERE";  // <--- REPLACE THIS!
+        
+        // API URL for a free math-friendly model
+        const HF_API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.3";
+        
+        // Local hints as backup (if API fails)
         function getLocalHint(questionText) {
             const q = questionText.toLowerCase();
             if (q.includes('×') || q.includes('*')) {
-                return "🔢 Multiply first: " + q.replace(/[?]/g, '');
+                return "🔢 Multiply first: " + questionText;
             }
             if (q.includes('÷')) {
-                return "➗ Divide first: " + q.replace(/[?]/g, '');
+                return "➗ Divide first: " + questionText;
             }
             if (q.includes('(')) {
-                return "( ) Parentheses first! Always solve inside the parentheses before anything else.";
+                return "( ) Parentheses first! Solve inside the parentheses before anything else.";
             }
             if (q.includes('+') && q.includes('-')) {
-                return "➕ Go left to right for addition and subtraction.";
+                return "➕➖ Go left to right for addition and subtraction.";
             }
-            if (q.includes('+')) {
-                return "➕ Add these numbers carefully.";
-            }
-            if (q.includes('-')) {
-                return "➖ Subtract carefully. Check your work!";
-            }
-            return "📝 Break it down one step at a time. Follow the order of operations!";
+            return "📝 Break it down one step at a time. Follow order of operations!";
         }
         
+        // AI hint function
+        async function getAIHint(questionText) {
+            // If no token or token is placeholder, use local hints
+            if (!HF_TOKEN || HF_TOKEN === "hf_YOUR_NEW_TOKEN_HERE") {
+                console.log("No API token, using local hint");
+                return getLocalHint(questionText);
+            }
+            
+            try {
+                const prompt = `You are a math tutor. Give a VERY short, encouraging hint for this math problem: "${questionText}". The hint should help the student solve it themselves without giving away the answer directly. Keep it under 20 words.`;
+                
+                const response = await fetch(HF_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${HF_TOKEN}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        inputs: prompt,
+                        parameters: {
+                            max_new_tokens: 50,
+                            temperature: 0.7,
+                            return_full_text: false
+                        }
+                    })
+                });
+                
+                if (!response.ok) {
+                    console.log("API error:", response.status);
+                    return getLocalHint(questionText);
+                }
+                
+                const data = await response.json();
+                const aiHint = data[0]?.generated_text?.trim();
+                
+                if (aiHint && aiHint.length > 0) {
+                    return "🤖 " + aiHint;
+                } else {
+                    return getLocalHint(questionText);
+                }
+                
+            } catch (error) {
+                console.log("Network error, using local hint:", error);
+                return getLocalHint(questionText);
+            }
+        }
+        
+        // Handle hint button click
         if (hintButton) {
-            hintButton.addEventListener('click', function() {
+            hintButton.addEventListener('click', async function() {
+                // Show loading message
+                hintMessage.innerHTML = "🤔 Thinking of a hint...";
+                hintMessage.style.display = 'block';
+                hintButton.disabled = true;
+                hintButton.style.opacity = '0.7';
+                
+                // Get current question
                 const questionElement = document.getElementById('question');
                 const questionText = questionElement ? questionElement.innerText : "";
                 
-                const hint = getLocalHint(questionText);
-                hintMessage.innerHTML = hint;
-                hintMessage.style.display = 'block';
+                // Get AI hint
+                const hint = await getAIHint(questionText);
                 
-                // Optional: Hide hint after 5 seconds
+                // Display hint
+                hintMessage.innerHTML = hint;
+                hintButton.disabled = false;
+                hintButton.style.opacity = '1';
+                
+                // Hide hint after 8 seconds
                 setTimeout(() => {
-                    hintMessage.style.opacity = '0';
-                    setTimeout(() => {
-                        hintMessage.style.display = 'none';
-                        hintMessage.style.opacity = '1';
-                    }, 500);
-                }, 5000);
+                    hintMessage.style.display = 'none';
+                }, 8000);
             });
-        }
-                // ============================================
+        }                // ============================================
         // HINT BUTTON FUNCTIONALITY
         // ============================================
         const hintButton = document.getElementById('hint-btn');
