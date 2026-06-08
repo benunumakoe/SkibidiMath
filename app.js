@@ -1,3 +1,24 @@
+// Add this at the VERY TOP of your app.js file
+import { AIHelper } from './ai-helper.js';
+
+// Add this after your other variable declarations
+const aiHelper = new AIHelper();
+
+// Find or create your hint button functionality
+// If you have a hint button with id="hint-btn", add this:
+document.getElementById('hint-btn')?.addEventListener('click', async () => {
+  // Get the current question text from wherever you store it
+  const questionElement = document.getElementById('question-display') || document.querySelector('.question');
+  const questionText = questionElement?.innerText || "What is 35 ÷ 7?";
+  
+  // Show "loading" hint
+  const hintElement = document.getElementById('hint-message');
+  if (hintElement) {
+    hintElement.innerHTML = "🤔 Thinking...";
+    const hint = await aiHelper.getHint(questionText);
+    hintElement.innerHTML = hint;
+  }
+});
 import { AIHelper } from './ai-helper.js';
 
 // Initialize AI helper at the top of your file
