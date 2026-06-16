@@ -1830,6 +1830,33 @@
         { question: "A price decreased from R120 to R90. What is the percentage decrease?", options: ["25%", "20%", "30%", "15%"], answer: "25%", topic: "percentages" },
     ],
 };
+        // At the bottom of your questionBank, add this AFTER your existing questionBank:
+// ============================================
+// FILL EMPTY BANKS WITH GRADE 4 QUESTIONS (TEMPORARY FIX)
+// ============================================
+const grade4Questions = questionBank.uae_grade4; // Get the existing grade 4 questions
+
+// UAE Grades
+questionBank.uae_grade5 = [...grade4Questions];
+questionBank.uae_grade6 = [...grade4Questions];
+questionBank.uae_grade7 = [...grade4Questions];
+
+// US Grades
+questionBank.us_grade5 = [...grade4Questions];
+questionBank.us_grade6 = [...grade4Questions];
+questionBank.us_grade7 = [...grade4Questions];
+
+// UK Years
+questionBank.uk_year5 = [...grade4Questions];
+questionBank.uk_year6 = [...grade4Questions];
+questionBank.uk_year7 = [...grade4Questions];
+questionBank.uk_year8 = [...grade4Questions];
+
+// SA Grades
+questionBank.sa_grade4 = [...grade4Questions];
+questionBank.sa_grade5 = [...grade4Questions];
+questionBank.sa_grade6 = [...grade4Questions];
+questionBank.sa_grade7 = [...grade4Questions];
 
         // ============================================
         // GAME FUNCTIONS
