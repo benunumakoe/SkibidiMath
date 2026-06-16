@@ -43,17 +43,5 @@
             "type": "image/png"
         }
     ],
-    "screenshots": [
-        {
-            "src": "/screenshots/screenshot1.png",
-            "sizes": "1753x812",
-            "type": "image/png"
-        },
-        {
-            "src": "/screenshots/screenshot2.png",
-            "sizes": "277x156",
-            "type": "image/png"
-        }
-    ],
     "prefer_related_applications": false
 }
