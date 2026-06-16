@@ -75,18 +75,90 @@
         .music-toggle-btn:hover { background: #009688; color: white; transform: translateY(-2px); }
         .ad-container { text-align: center; margin: 20px 0; padding: 10px; background: #f8f9fa; border-radius: 10px; min-height: 100px; }
         .ad-label { font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        /* ===== DROPDOWN MENU ===== */
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropbtn {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 18px;
+    border-radius: 30px;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+    display: inline-block;
+}
+
+.dropbtn:hover {
+    background: #00695c;
+    transform: translateY(-2px);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: white;
+    min-width: 180px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    z-index: 1000;
+    padding: 8px 0;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown-content a {
+    color: #333 !important;
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+    font-weight: normal;
+    border-radius: 0;
+    font-size: 0.9rem;
+}
+
+.dropdown-content a:hover {
+    background: #f0f4f8;
+    color: #009688 !important;
+    transform: none;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Mobile-friendly: touch support */
+.dropdown.active .dropdown-content {
+    display: block;
+}
         @media (min-width: 900px) { body { padding: 20px; } .game-wrapper { grid-template-columns: 1fr; } .header { flex-direction: row; justify-content: space-between; } .stats { grid-template-columns: repeat(4, 1fr); } .mode-selector { grid-template-columns: repeat(4, 1fr); } .options-grid { grid-template-columns: repeat(2, 1fr); } .character-bar { flex-direction: row; justify-content: space-between; } .header h1 { font-size: 2rem; } }
         @media (max-width: 400px) { .question-box { font-size: 1.5rem; } .option-btn { font-size: 1.2rem; padding: 12px; } .grade-btn { font-size: 0.8rem; padding: 6px 3px; } .mode-btn { font-size: 0.75rem; } .curriculum-btn { font-size: 0.7rem; padding: 5px 10px; } }
     </style>
 </head>
 <body>
     <nav class="main-nav">
-        <a href="/">🏠 Home</a>
-        <a href="/about.html">📖 About</a>
-        <a href="/privacy.html">🔒 Privacy</a>
-        <a href="/contact.html">📧 Contact</a>
-        <a href="/terms.html">⚖️ Terms</a>
-    </nav>
+    <a href="/">🏠 Home</a>
+    <a href="/about.html">📖 About</a>
+    
+    <!-- Worksheets Dropdown -->
+    <div class="dropdown">
+        <a href="#" class="dropbtn">📄 Worksheets ▼</a>
+        <div class="dropdown-content">
+            <a href="/worksheets/algebra-linear-equations.pdf">Algebra</a>
+            <a href="/worksheets/geometry-worksheet.pdf">Geometry</a>
+            <a href="/worksheets/fractions-worksheet.pdf">Fractions</a>
+            <a href="/worksheets/grade5-multiplication.pdf">Multiplication</a>
+            <a href="/worksheets/grade6-decimals.pdf">Decimals</a>
+        </div>
+    </div>
+    
+    <a href="/privacy.html">🔒 Privacy</a>
+    <a href="/contact.html">📧 Contact</a>
+    <a href="/terms.html">⚖️ Terms</a>
+</nav>
 
     <div class="game-wrapper">
         <div class="game-container">
@@ -1428,5 +1500,22 @@
         // ============================================
         nextQuestion();
     </script>
+// ============================================
+// DROPDOWN TOGGLE FOR MOBILE
+// ============================================
+document.querySelectorAll('.dropbtn').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const parent = this.parentElement;
+        parent.classList.toggle('active');
+    });
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+    }
+});
 </body>
 </html>
