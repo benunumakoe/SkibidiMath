@@ -3,6 +3,7 @@
     "name": "SkibidiMath",
     "short_name": "SkibidiMath",
     "description": "Free math practice game for grades 4-7",
+    "lang": "en-US",
     "start_url": "https://skibidimath.com",
     "scope": "https://skibidimath.com",
     "display": "standalone",
