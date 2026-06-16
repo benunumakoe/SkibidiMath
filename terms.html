@@ -8,4 +8,259 @@
         * {
             margin: 0;
             padding: 0;
-            box-sizing:
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #00968820 0%, #FF000020 50%, #00000020 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        nav {
+            background: #009688;
+            padding: 15px 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 25px;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background: #00695c;
+        }
+        .content-card {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #009688;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            border-left: 5px solid #009688;
+            padding-left: 20px;
+        }
+        h2 {
+            color: #009688;
+            margin: 25px 0 15px 0;
+            font-size: 1.5rem;
+        }
+        h3 {
+            color: #FF0000;
+            margin: 20px 0 10px 0;
+            font-size: 1.2rem;
+        }
+        p {
+            line-height: 1.7;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        ul, ol {
+            margin: 15px 0 15px 30px;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .effective-date {
+            background: #f0f4f8;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        @media (max-width: 768px) {
+            .content-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="/">🏠 Home</a>
+            <a href="/about.html">📖 About</a>
+            <a href="/privacy.html">🔒 Privacy</a>
+            <a href="/contact.html">📧 Contact</a>
+            <a href="/terms.html">⚖️ Terms</a>
+        </nav>
+
+        <div class="content-card">
+            <h1>⚖️ Terms of Service</h1>
+            
+            <div class="effective-date">
+                <strong>Effective Date:</strong> January 15, 2026 | <strong>Last Updated:</strong> January 15, 2026
+            </div>
+
+            <p>Welcome to SkibidiMath.com ("we," "our," or "us"). By accessing or using our website, including all content, features, and games (collectively, the "Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, please do not use our Service.</p>
+
+            <p>These Terms apply to all users of the Service, including students, parents, teachers, school administrators, and any other visitors. SkibidiMath.com is owned and operated by an independent educator and is provided as a free educational resource.</p>
+
+            <h2>1. Eligibility</h2>
+            <p>By using SkibidiMath, you represent that:</p>
+            <ul>
+                <li>You are at least 13 years of age, OR</li>
+                <li>You are using the Service with the supervision of a parent or guardian who agrees to these Terms, OR</li>
+                <li>You are a parent or guardian supervising a child under 13.</li>
+            </ul>
+            <p>SkibidiMath is designed for students in grades 4-7 (typically ages 9-13). We encourage parents and teachers to supervise children's use of the Service.</p>
+
+            <h2>2. Description of Service</h2>
+            <p>SkibidiMath provides an online math practice platform featuring:</p>
+            <ul>
+                <li>Over 500 math questions covering grades 4 through 7</li>
+                <li>Multiple game modes: Classic, Sudden Death, Space Race, and Adventure</li>
+                <li>Character progression system (Math Learner → Math Ninja → Math Wizard → Math Legend)</li>
+                <li>Topics including multiplication, division, fractions, decimals, percentages, geometry, algebra, and word problems</li>
+                <li>Arabic and English language support</li>
+            </ul>
+            <p>The Service is provided free of charge and is supported by advertisements (Google AdSense) and optional donations via Ko-fi.</p>
+
+            <h2>3. User Conduct</h2>
+            <p>You agree to use SkibidiMath only for lawful purposes and in accordance with these Terms. You agree NOT to:</p>
+            <ul>
+                <li>Use the Service in any way that violates applicable laws or regulations</li>
+                <li>Attempt to gain unauthorized access to any part of the Service</li>
+                <li>Interfere with or disrupt the Service or servers</li>
+                <li>Click on your own advertisements or encourage others to do so</li>
+                <li>Use automated scripts, bots, or other software to manipulate game scores</li>
+                <li>Copy, reproduce, distribute, or create derivative works of the Service without permission</li>
+                <li>Use the Service for any commercial purpose without express written consent</li>
+                <li>Harass, abuse, or harm other users (including through contact forms or email)</li>
+            </ul>
+
+            <h2>4. Intellectual Property Rights</h2>
+            <p>All content on SkibidiMath.com, including but not limited to:</p>
+            <ul>
+                <li>Game code, HTML, CSS, JavaScript</li>
+                <li>Question banks and answer keys</li>
+                <li>Graphics, design elements, and user interface</li>
+                <li>Text content, including these Terms and Privacy Policy</li>
+                <li>The "SkibidiMath" name and logo</li>
+            </ul>
+            <p>are the exclusive property of SkibidiMath.com unless otherwise noted. You may not reproduce, distribute, modify, or create derivative works without prior written permission.</p>
+            
+            <p><strong>Educational Use Exception:</strong> Teachers and parents may print or display questions from SkibidiMath for non-commercial educational purposes in their classrooms or homes, provided that attribution to SkibidiMath.com is maintained.</p>
+
+            <h2>5. Third-Party Services</h2>
+            <p>SkibidiMath integrates the following third-party services, each governed by its own terms and policies:</p>
+            <ul>
+                <li><strong>Google AdSense:</strong> Serves advertisements. Google's <a href="https://policies.google.com/terms" target="_blank">Terms of Service</a> apply.</li>
+                <li><strong>Ko-fi:</strong> Processes donations. Ko-fi's <a href="https://more.ko-fi.com/terms" target="_blank">Terms of Service</a> apply.</li>
+                <li><strong>Visitor Badge (laobi.icu):</strong> Provides anonymous visitor counting.</li>
+            </ul>
+            <p>We are not responsible for the practices or content of any third-party services.</p>
+
+            <h2>6. Disclaimer of Warranties</h2>
+            <p>THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT ANY WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED. TO THE FULLEST EXTENT PERMITTED BY LAW, WE DISCLAIM ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO:</p>
+            <ul>
+                <li>MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE</li>
+                <li>ACCURACY, RELIABILITY, OR COMPLETENESS OF CONTENT</li>
+                <li>UNINTERRUPTED OR ERROR-FREE OPERATION</li>
+                <li>CORRECTION OF DEFECTS OR BUGS</li>
+                <li>SECURITY OR PROTECTION AGAINST VIRUSES OR HARMFUL CODE</li>
+            </ul>
+            <p>While we strive for accuracy, errors may occur. If you believe any question or answer is incorrect, please contact us at benunumakoe@gmail.com.</p>
+
+            <h2>7. Limitation of Liability</h2>
+            <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, SKIBIDIMATH.COM AND ITS OWNER SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION:</p>
+            <ul>
+                <li>LOSS OF PROFITS, DATA, OR GOODWILL</li>
+                <li>PERSONAL INJURY OR PROPERTY DAMAGE</li>
+                <li>ANY MATTER BEYOND OUR REASONABLE CONTROL</li>
+            </ul>
+            <p>IN NO EVENT SHALL OUR TOTAL LIABILITY TO YOU EXCEED THE AMOUNT YOU HAVE PAID TO USE THE SERVICE (WHICH, FOR AVOIDANCE OF DOUBT, IS $0, AS THE SERVICE IS FREE).</p>
+
+            <h2>8. Indemnification</h2>
+            <p>You agree to indemnify, defend, and hold harmless SkibidiMath.com and its owner from and against any claims, liabilities, damages, losses, and expenses (including reasonable attorney's fees) arising out of or relating to:</p>
+            <ul>
+                <li>Your violation of these Terms</li>
+                <li>Your use of the Service</li>
+                <li>Your violation of any third-party rights</li>
+                <li>Your violation of applicable laws</li>
+            </ul>
+
+            <h2>9. Disclaimer of Educational Guarantees</h2>
+            <p>SkibidiMath is an educational supplement, not a replacement for formal instruction. We do not guarantee:</p>
+            <ul>
+                <li>Improvement in test scores or grades</li>
+                <li>Mastery of any particular math concept</li>
+                <li>Success in any standardized assessment (including TIMSS, PISA, or other exams)</li>
+            </ul>
+            <p>Individual results vary based on many factors, including prior knowledge, practice frequency, and quality of instruction. SkibidiMath should be used as one component of a comprehensive math education plan.</p>
+
+            <h2>10. Modifications to the Service</h2>
+            <p>We reserve the right to modify, suspend, or discontinue any part of the Service at any time, with or without notice. We shall not be liable to you or any third party for any modification, suspension, or discontinuation of the Service.</p>
+
+            <h2>11. Modifications to Terms</h2>
+            <p>We may revise these Terms from time to time. The most current version will always be posted at https://www.skibidimath.com/terms.html. By continuing to use the Service after changes become effective, you agree to be bound by the revised Terms. If you do not agree to the new Terms, please stop using the Service.</p>
+
+            <h2>12. Termination</h2>
+            <p>We may terminate or suspend your access to the Service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach these Terms. Upon termination, your right to use the Service will cease immediately.</p>
+
+            <h2>13. Governing Law</h2>
+            <p>These Terms shall be governed and construed in accordance with the laws of the United Arab Emirates, without regard to its conflict of law provisions. Any legal action arising out of or relating to these Terms or your use of the Service shall be filed exclusively in the courts located in the United Arab Emirates.</p>
+
+            <h2>14. Children's Online Safety</h2>
+            <p>SkibidiMath is committed to protecting children online. We comply with:</p>
+            <ul>
+                <li>The Children's Online Privacy Protection Act (COPPA)</li>
+                <li>UAE Federal Law No. 3 of 2016 (Child Rights Law), also known as Wadeema's Law</li>
+                <li>General Data Protection Regulation (GDPR) for EU users</li>
+            </ul>
+            <p>We do not collect personal information from children under 13. Parents or guardians who believe their child has provided personal information should contact us immediately at benunumakoe@gmail.com.</p>
+
+            <h2>15. Acceptable Use Policy for Schools</h2>
+            <p>Schools and teachers may use SkibidiMath in their classrooms provided that:</p>
+            <ul>
+                <li>No fees are charged to students for access</li>
+                <li>SkibidiMath is not embedded or framed within a paid service</li>
+                <li>Attribution to SkibidiMath.com is clearly displayed</li>
+                <li>The Service is not modified or altered</li>
+            </ul>
+            <p>For questions about school-wide use, please contact us at benunumakoe@gmail.com.</p>
+
+            <h2>16. Accessibility</h2>
+            <p>SkibidiMath strives to be accessible to all users, including those with disabilities. We are committed to improving accessibility over time. If you experience accessibility issues, please contact us so we can address them.</p>
+
+            <h2>17. Severability</h2>
+            <p>If any provision of these Terms is found to be unenforceable or invalid, that provision shall be limited or eliminated to the minimum extent necessary, and the remaining provisions shall remain in full force and effect.</p>
+
+            <h2>18. Entire Agreement</h2>
+            <p>These Terms, together with our Privacy Policy, constitute the entire agreement between you and SkibidiMath.com regarding your use of the Service, superseding any prior agreements.</p>
+
+            <h2>19. Contact Information</h2>
+            <p>If you have any questions about these Terms, please contact us at:</p>
+            <ul>
+                <li><strong>Email:</strong> benunumakoe@gmail.com</li>
+                <li><strong>Website:</strong> https://www.skibidimath.com</li>
+            </ul>
+
+            <p style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; font-size: 0.9rem; color: #666;">By using SkibidiMath.com, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.</p>
+        </div>
+
+        <div class="footer">
+            <p>© 2026 SkibidiMath.com | Making Math Fun, One Game at a Time</p>
+        </div>
+    </div>
+</body>
+</html>
