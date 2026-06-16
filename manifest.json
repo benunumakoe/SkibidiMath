@@ -10,6 +10,7 @@
     "orientation": "portrait",
     "background_color": "#009688",
     "theme_color": "#009688",
+    "categories": ["education", "games"],
     "icons": [
         {
             "src": "/icons/72.png",
@@ -39,18 +40,6 @@
         {
             "src": "/icons/512.png",
             "sizes": "512x512",
-            "type": "image/png"
-        }
-    ],
-    "screenshots": [
-        {
-            "src": "/screenshots/screenshot1.png",
-            "sizes": "1080x1920",
-            "type": "image/png"
-        },
-        {
-            "src": "/screenshots/screenshot2.png",
-            "sizes": "1080x1920",
             "type": "image/png"
         }
     ]
