@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SkibidiMath - Free math practice game supporting UAE, US, UK, and SA CAPS curricula. Created by an international educator with 15 years of experience.">
     <title>About SkibidiMath - Math Practice Platform</title>
     <style>
         * {
@@ -78,6 +79,40 @@
         li {
             margin-bottom: 8px;
         }
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        .curriculum-card {
+            background: #f0f4f8;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 3px solid transparent;
+            transition: transform 0.3s;
+        }
+        .curriculum-card:hover {
+            transform: translateY(-5px);
+        }
+        .curriculum-card.uae { border-color: #009688; }
+        .curriculum-card.us { border-color: #3C3B6E; }
+        .curriculum-card.uk { border-color: #012169; }
+        .curriculum-card.sa { border-color: #DE3831; }
+        .curriculum-card .flag {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .curriculum-card .name {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        .curriculum-card .detail {
+            font-size: 0.85rem;
+            color: #666;
+        }
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -100,6 +135,13 @@
             padding: 20px;
             color: #666;
         }
+        .highlight-box {
+            background: #e8f5e9;
+            padding: 20px 25px;
+            border-radius: 15px;
+            border-left: 5px solid #009688;
+            margin: 20px 0;
+        }
         @media (max-width: 768px) {
             .content-card { padding: 20px; }
             h1 { font-size: 1.8rem; }
@@ -119,20 +161,54 @@
         <div class="content-card">
             <h1>📖 About SkibidiMath</h1>
             
-            <p><strong>SkibidiMath.com</strong> was founded in 2025 and officially established in 2026 by an experienced international Math and Science educator with nearly 15 years of classroom teaching experience. What started as a passion project for students in the UAE has since grown into a global platform serving teachers, students, and parents worldwide.</p>
+            <p><strong>SkibidiMath.com</strong> was founded in 2025 and officially established in 2026 by an experienced international Math and Science educator with nearly 15 years of classroom teaching experience across multiple curricula and continents. What started as a passion project for students in the UAE has since grown into a global platform serving teachers, students, and parents worldwide.</p>
+
+            <div class="highlight-box">
+                <strong>🌍 Four Curricula, One Platform:</strong> SkibidiMath now supports the <strong>UAE National Curriculum, US Common Core, UK Oxford Curriculum, and South African CAPS</strong>—making it a truly global math practice tool!
+            </div>
 
             <h2>🎯 Our Mission</h2>
             <p>Mathematics is the universal language of logic, critical thinking, and problem-solving. Yet, for millions of middle school students around the world, math becomes a source of anxiety and frustration. SkibidiMath was created to change that narrative.</p>
-            <p>Our mission is simple: <strong>to make math practice engaging, accessible, and effective for every student</strong>, regardless of where they are in their learning journey. We believe that when students enjoy practicing math, they build confidence, and confidence leads to mastery.</p>
+            <p>Our mission is simple: <strong>to make math practice engaging, accessible, and effective for every student</strong>, regardless of where they are in their learning journey or which curriculum they follow. We believe that when students enjoy practicing math, they build confidence, and confidence leads to mastery.</p>
 
             <h2>👨‍🏫 The Creator's Story</h2>
-            <p>As an international Math and Science teacher with almost 15 years of experience in middle school classrooms, I have witnessed firsthand the challenges that students, teachers, and parents face daily. Middle school is a critical period—it is where the foundation of core mathematics is strengthened or weakened. Students who struggle with fractions, decimals, percentages, and basic algebra in grades 4-7 often find high school math overwhelming.</p>
-            <p>I have taught in diverse classrooms across different countries, worked with students of varying abilities, and collaborated with hundreds of parents who desperately wanted to help their children succeed but didn't know where to start. This experience revealed a clear gap: there was no engaging, curriculum-aligned platform that made math practice feel like a game rather than a chore.</p>
-            <p>That realization led to the birth of SkibidiMath. What began as a small project for my UAE students quickly gained traction, and I realized that the need was universal—not limited to any one country or curriculum.</p>
+            <p>As an international Math and Science educator with almost 15 years of experience in middle school classrooms across four different curricula—<strong>UAE National Curriculum, US Common Core, UK Oxford Curriculum, and South African CAPS</strong>—I have witnessed firsthand the challenges that students, teachers, and parents face daily, regardless of where they are in the world.</p>
+            
+            <p>My teaching journey has taken me across borders, from the United Arab Emirates to the United States, the United Kingdom, and South Africa. Each curriculum has its unique strengths and challenges, but one thing remains constant: <strong>middle school is the critical period where mathematical foundations are built or broken.</strong></p>
+            
+            <p>Students who struggle with fractions, decimals, percentages, and basic algebra in grades 4-7 often find high school math overwhelming. This is true whether they are sitting in a classroom in Dubai, Texas, London, or Johannesburg. The challenges are universal—but so is the solution.</p>
+            
+            <p>Having taught in diverse classrooms, worked with students of varying abilities, and collaborated with hundreds of parents who desperately wanted to help their children succeed, I realized there was a clear gap: <strong>there was no engaging, curriculum-aligned platform that made math practice feel like a game rather than a chore.</strong> And more importantly, there was no platform that served multiple curricula simultaneously.</p>
+            
+            <p>That realization led to the birth of SkibidiMath. What began as a small project for my UAE students quickly gained traction, and I realized that the need was universal—not limited to any one country or curriculum. Today, SkibidiMath serves students, teachers, and parents from over 30 countries worldwide.</p>
 
-            <h2>🌍 From UAE to Global</h2>
-            <p>SkibidiMath first focused on supporting UAE students, aligning with the UAE national curriculum and preparing students for TIMSS assessments. However, math is a universal language, and the challenges middle school students face are remarkably similar across borders. Today, SkibidiMath serves students, teachers, and parents from over 30 countries worldwide.</p>
-            <p>Whether you are a student in Dubai, a teacher in Texas, or a parent in London, SkibidiMath is designed to help you succeed.</p>
+            <h2>🌍 Four Curricula, One Platform</h2>
+            <p>SkibidiMath now proudly supports four major curricula:</p>
+            
+            <div class="curriculum-grid">
+                <div class="curriculum-card uae">
+                    <span class="flag">🇦🇪</span>
+                    <div class="name">UAE National Curriculum</div>
+                    <div class="detail">Grades 4-7 • AED currency • UAE context</div>
+                </div>
+                <div class="curriculum-card us">
+                    <span class="flag">🇺🇸</span>
+                    <div class="name">US Common Core</div>
+                    <div class="detail">Grades 4-7 • USD currency • US context</div>
+                </div>
+                <div class="curriculum-card uk">
+                    <span class="flag">🇬🇧</span>
+                    <div class="name">UK Oxford Curriculum</div>
+                    <div class="detail">Years 5-9 • GBP currency • UK context</div>
+                </div>
+                <div class="curriculum-card sa">
+                    <span class="flag">🇿🇦</span>
+                    <div class="name">SA CAPS Curriculum</div>
+                    <div class="detail">Grades 4-7 • ZAR currency • SA context</div>
+                </div>
+            </div>
+
+            <p>Whether you are a student in Dubai, a teacher in Texas, a parent in London, or a school in Johannesburg—<strong>SkibidiMath is designed to help you succeed.</strong></p>
 
             <div class="stats-grid">
                 <div class="stat-card">
@@ -140,12 +216,12 @@
                     <div>Math Questions</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">4-7</div>
-                    <div>Grade Levels</div>
+                    <div class="stat-number">4</div>
+                    <div>Curricula Supported</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">15+</div>
-                    <div>Math Topics</div>
+                    <div class="stat-number">4-7</div>
+                    <div>Grade Levels</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-number">30+</div>
@@ -154,26 +230,35 @@
             </div>
 
             <h2>🎮 What We Offer</h2>
-            <p>SkibidiMath features over 500 carefully crafted math questions spanning grades 4 through 7. Our platform includes:</p>
+            <p>SkibidiMath features over 500 carefully crafted math questions spanning grades 4 through 7 across four curricula. Our platform includes:</p>
             <ul>
                 <li><strong>Multiple Game Modes:</strong> Classic, Sudden Death, Space Race, and Adventure modes keep students engaged.</li>
                 <li><strong>Character Progression:</strong> Students unlock Math Ninja, Math Wizard, and Math Legend as they earn XP.</li>
                 <li><strong>Comprehensive Topics:</strong> Multiplication, division, fractions, decimals, percentages, geometry, algebra, word problems, and more.</li>
                 <li><strong>Instant Feedback:</strong> Students learn immediately whether their answer is correct.</li>
                 <li><strong>Progress Tracking:</strong> Score, level, streak, and questions completed are all tracked.</li>
+                <li><strong>Curriculum Flexibility:</strong> Switch between UAE, US, UK, and SA curricula with one click.</li>
             </ul>
 
             <h2>📚 Why Middle School Math Matters</h2>
-            <p>Research consistently shows that middle school math proficiency is the single strongest predictor of high school graduation and college readiness. Students who master core concepts in grades 4-7 are significantly more likely to succeed in algebra, geometry, and calculus later on.</p>
+            <p>Research consistently shows that middle school math proficiency is the single strongest predictor of high school graduation and college readiness—across all curricula and countries. Students who master core concepts in grades 4-7 are significantly more likely to succeed in algebra, geometry, and calculus later on.</p>
             <p>Unfortunately, many students fall through the cracks during these critical years. Classrooms are overcrowded, teachers are overworked, and parents often feel helpless to provide the additional practice their children need. SkibidiMath bridges that gap by providing unlimited, engaging practice that students actually want to do.</p>
 
             <h2>👪 For Teachers and Parents</h2>
-            <p>SkibidiMath is not just for students—it is a tool for teachers and parents as well. Teachers can recommend SkibidiMath for homework or extra practice, knowing that the content aligns with standard middle school curricula. Parents can use SkibidiMath to support their children at home without needing to be math experts themselves.</p>
+            <p>SkibidiMath is not just for students—it is a tool for teachers and parents as well. Teachers can recommend SkibidiMath for homework or extra practice, knowing that the content aligns with their specific curriculum. Parents can use SkibidiMath to support their children at home without needing to be math experts themselves.</p>
             <p>The platform is completely free to use (supported by unobtrusive advertisements), ensuring that financial barriers never stand between a student and their education.</p>
 
             <h2>🔮 Looking Ahead</h2>
-            <p>SkibidiMath is constantly evolving. Future plans include adding more grade levels, introducing adaptive difficulty based on student performance, expanding the question bank to over 2,000 questions, and developing teacher dashboards to track class progress.</p>
-            <p>Thank you for being part of this journey. Together, we can strengthen the mathematical foundation of the next generation.</p>
+            <p>SkibidiMath is constantly evolving. Future plans include:</p>
+            <ul>
+                <li><strong>More Grade Levels:</strong> Expanding to Grade 8 and 9 across all curricula</li>
+                <li><strong>Adaptive Difficulty:</strong> AI-powered questions that adjust to student performance</li>
+                <li><strong>Expanded Question Bank:</strong> Targeting over 2,000 questions per curriculum</li>
+                <li><strong>Teacher Dashboards:</strong> Track class progress and identify learning gaps</li>
+                <li><strong>Printable Worksheets:</strong> Generate practice sheets for offline learning</li>
+                <li><strong>More Curricula:</strong> Australian, Canadian, and IB curricula in development</li>
+            </ul>
+            <p>Thank you for being part of this journey. Together, we can strengthen the mathematical foundation of the next generation—no matter where they are in the world.</p>
 
             <p style="margin-top: 30px; font-style: italic; color: #666;">— The SkibidiMath Team<br>Established 2026</p>
         </div>
