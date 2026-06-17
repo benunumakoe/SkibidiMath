@@ -91,7 +91,56 @@ body.rtl { direction: rtl; text-align: right; }
 .curriculum-btn.active-sa { background: #DE3831; color: white; border-color: #DE3831; }
 .mode-selector { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 15px; }
 .mode-btn { padding: 10px 5px; border: none; border-radius: 15px; font-size: 0.85rem; font-weight: bold; cursor: pointer; transition: all 0.3s; background: #e2e8f0; color: #4a5568; display: flex; flex-direction: column; align-items: center; gap: 3px; }
-.mode-btn.active { background: #009688; color: white; box-shadow: 0 4px 0 #00695c; transform: translateY(-2px); }
+.mode-btn.active {
+    background: var(--army-green);
+    color: white;
+    box-shadow: 0 4px 0 var(--forest-green);
+    transform: translateY(-2px);
+}
+
+.curriculum-btn.active-uae {
+    background: var(--army-green);
+    color: white;
+    border-color: var(--army-green);
+}
+
+.curriculum-btn.active-us {
+    background: #3C3B6E;
+    color: white;
+    border-color: #3C3B6E;
+}
+
+.curriculum-btn.active-uk {
+    background: #012169;
+    color: white;
+    border-color: #012169;
+}
+
+.curriculum-btn.active-sa {
+    background: #DE3831;
+    color: white;
+    border-color: #DE3831;
+}
+
+/* Get Hint button */
+#hint-btn {
+    background: var(--rustic-orange);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(196, 120, 58, 0.3);
+    transition: all 0.3s;
+}
+
+#hint-btn:hover {
+    background: #A8652E;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(196, 120, 58, 0.4);
+}
 .grade-selector { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 15px; }
 .grade-btn { padding: 8px 5px; border: none; border-radius: 20px; font-size: 0.9rem; font-weight: bold; cursor: pointer; transition: all 0.3s; background: #e2e8f0; color: #4a5568; }
 .grade-btn.active { background: #009688; color: white; box-shadow: 0 4px 0 #00695c; transform: translateY(-2px); }
