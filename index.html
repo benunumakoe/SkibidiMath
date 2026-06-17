@@ -4,7 +4,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5784217125471238"
      crossorigin="anonymous"></script>
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/style.css?v=2">
     <meta charset="UTF-8">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
@@ -19,7 +19,7 @@
 <nav class="main-nav">
     <a href="/">🏠 Home</a>
     <a href="/about.html">📖 About</a>
-    <a href="/blog">📝 Blog</a>
+    <a href="/blog?ver=2">📝 Blog</a>
     <div class="dropdown">
         <a href="#" class="dropbtn">📄 Worksheets ▼</a>
         <div class="dropdown-content">
@@ -613,6 +613,15 @@ if ('serviceWorker' in navigator) {
         .then(function() { console.log('Service Worker registered'); })
         .catch(function(err) { console.log('Service Worker registration failed:', err); });
 }
+</script>
+    <script>
+    // Force reload if the page was loaded from cache
+    if (performance.navigation.type === 1) {
+        // Page was reloaded, don't do anything
+    } else if (performance.navigation.type === 2) {
+        // Page was loaded from cache
+        window.location.reload(true);
+    }
 </script>
 </body>
 </html>
