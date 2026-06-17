@@ -13,9 +13,34 @@
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
 body { background: linear-gradient(135deg, #00968820 0%, #FF000020 50%, #00000020 100%); min-height: 100vh; padding: 20px; transition: all 0.3s; }
 body.rtl { direction: rtl; text-align: right; }
-.main-nav { background: #009688; padding: 12px 25px; border-radius: 50px; margin-bottom: 25px; display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-.main-nav a { color: white; text-decoration: none; font-weight: bold; padding: 8px 18px; border-radius: 30px; transition: all 0.3s; font-size: 0.95rem; }
-.main-nav a:hover { background: #00695c; transform: translateY(-2px); }
+.main-nav {
+    background: var(--army-green);
+    padding: 12px 25px;
+    border-radius: 50px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(74, 93, 35, 0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.main-nav a {
+    color: var(--cream);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 18px;
+    border-radius: 30px;
+    transition: all 0.3s;
+    font-size: 0.95rem;
+}
+
+.main-nav a:hover {
+    background: var(--forest-green);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
 .game-wrapper { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 20px; }
 .game-container { background: white; border-radius: 30px; padding: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); border: 3px solid #000000; }
 .header { display: flex; flex-direction: column; align-items: center; margin-bottom: 15px; gap: 10px; }
