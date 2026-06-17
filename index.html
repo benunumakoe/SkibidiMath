@@ -1747,5 +1747,39 @@ document.addEventListener('click', function(e) {
             .catch(err => console.log('Service Worker registration failed:', err));
     }
 </script>
+    <script>
+    // ============================================
+    // NESTED DROPDOWN TOGGLE FOR MOBILE/TOUCH
+    // ============================================
+    document.querySelectorAll('.dropbtn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            var parent = this.parentElement;
+            parent.classList.toggle('active');
+        });
+    });
+
+    document.querySelectorAll('.sub-dropdown > a').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            var parent = this.parentElement;
+            parent.classList.toggle('active');
+        });
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown')) {
+            document.querySelectorAll('.dropdown').forEach(function(d) {
+                d.classList.remove('active');
+            });
+        }
+        if (!e.target.closest('.sub-dropdown')) {
+            document.querySelectorAll('.sub-dropdown').forEach(function(d) {
+                d.classList.remove('active');
+            });
+        }
+    });
+</script>
 </body>
 </html>
