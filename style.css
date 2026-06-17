@@ -1,4 +1,16 @@
-  * {
+/* ===== EARTHY COLOR SCHEME ===== */
+:root {
+    --army-green: #4A5D23;
+    --sage-green: #7A8C5E;
+    --muddy-brown: #5C4033;
+    --warm-sand: #D4C5A0;
+    --cream: #F5F0E1;
+    --rustic-orange: #C4783A;
+    --forest-green: #2D4A1E;
+    --gold: #C9A84C;
+    --wood: #8B7355;
+}
+* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -415,3 +427,116 @@
                 font-size: 0.75rem;
             }
         }
+/* ===== SUPPORT US SECTION ===== */
+.support-section {
+    background: linear-gradient(145deg, var(--army-green), var(--forest-green));
+    border-radius: 30px;
+    padding: 40px 30px;
+    margin: 30px 0;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 20px 60px rgba(74, 93, 35, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.support-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 200%;
+    background: radial-gradient(ellipse, rgba(255,255,255,0.05) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.support-content {
+    position: relative;
+    z-index: 1;
+}
+
+.support-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.support-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.support-description {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.9);
+    max-width: 600px;
+    margin: 0 auto 20px;
+    line-height: 1.6;
+}
+
+.support-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.support-btn {
+    background: white;
+    color: var(--army-green);
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    display: inline-block;
+}
+
+.support-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+.support-note {
+    color: rgba(255,255,255,0.8);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.support-message {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    margin-top: 10px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+    .support-section {
+        padding: 30px 20px;
+        margin: 20px 0;
+    }
+    .support-title {
+        font-size: 1.5rem;
+    }
+    .support-description {
+        font-size: 1rem;
+    }
+    .support-btn {
+        font-size: 1rem;
+        padding: 12px 24px;
+    }
+    .support-buttons {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .support-note {
+        font-size: 0.9rem;
+    }
+}
