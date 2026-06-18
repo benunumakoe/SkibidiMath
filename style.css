@@ -840,3 +840,11 @@ body.rtl { direction: rtl; text-align: right; }
         content: " ▲";
     }
 }
+/* ===== FIX: Ensure dropdown shows on active ===== */
+.dropdown.active .dropdown-content {
+    display: block !important;
+}
+
+.sub-dropdown.active .sub-dropdown-content {
+    display: block !important;
+}
