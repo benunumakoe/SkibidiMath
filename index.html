@@ -213,7 +213,7 @@
         </div>
 
         <div class="game-area">
-            <div class="question-box" id="question"><span class="uae-flag-icon"></span>Loading...<span class="uae-flag-icon"></span></div>
+            <div class="question-box" id="question"><span class="uae-flag-icon"></span>Loading<span class="uae-flag-icon"></span></div>
             <div class="options-grid" id="options"></div>
             <div class="feedback" id="feedback"></div>
             <div style="text-align: center; margin: 15px 0;">
@@ -365,33 +365,33 @@ const questionBank = {};
 // ============================================
 // GRADE 5 - 100 QUESTION BANK
 // ============================================
-const grade5Core = [ ... ];
-function generateGrade5Questions() { ... }
-const grade5FullBank = [...grade5Core, ...generateGrade5Questions()];
+const grade5Core = [  ];
+function generateGrade5Questions() {  }
+const grade5FullBank = [grade5Core, generateGrade5Questions()];
 
 // ============================================
 // GRADE 4 - 100 QUESTION BANK
 // ============================================
-const grade4Core = [ ... ];
-function generateGrade4Questions() { ... }
-const grade4FullBank = [...grade4Core, ...generateGrade4Questions()];
+const grade4Core = [  ];
+function generateGrade4Questions() {  }
+const grade4FullBank = [grade4Core, generateGrade4Questions()];
 
 // ============================================
 // GRADE 6 - 100 QUESTION BANK
 // ============================================
-const grade6Core = [ ... ];
-function generateGrade6Questions() { ... }
-const grade6FullBank = [...grade6Core, ...generateGrade6Questions()];
+const grade6Core = [  ];
+function generateGrade6Questions() {  }
+const grade6FullBank = [grade6Core, generateGrade6Questions()];
 
 // ============================================
 // GRADE 7 - 100 QUESTION BANK
 // ============================================
-const grade7Core = [ ... ];
-function generateGrade7Questions() { ... }
-const grade7FullBank = [...grade7Core, ...generateGrade7Questions()];
+const grade7Core = [  ];
+function generateGrade7Questions() {  }
+const grade7FullBank = [grade7Core, generateGrade7Questions()];
 
 // GCD helper function
-function gcd(a, b) { ... }
+function gcd(a, b) {  }
 
 // ============================================
 // APPLY 500 QUESTIONS TO ALL GRADES
@@ -403,13 +403,13 @@ allCurricula.forEach(cur => {
     allGrades.forEach(grade => {
         const key = `${cur}_${grade}`;
         if (grade === 'grade4') {
-            questionBank[key] = grade4FullBank.map(q => ({...q}));
+            questionBank[key] = grade4FullBank.map(q => ({q}));
         } else if (grade === 'grade5') {
-            questionBank[key] = grade5FullBank.map(q => ({...q}));
+            questionBank[key] = grade5FullBank.map(q => ({q}));
         } else if (grade === 'grade6') {
-            questionBank[key] = grade6FullBank.map(q => ({...q}));
+            questionBank[key] = grade6FullBank.map(q => ({q}));
         } else if (grade === 'grade7') {
-            questionBank[key] = grade7FullBank.map(q => ({...q}));
+            questionBank[key] = grade7FullBank.map(q => ({q}));
         }
     });
 });
@@ -512,7 +512,7 @@ function generateGrade5Questions() {
                     let w = answer + (Math.floor(Math.random() * 20) - 10);
                     if (w !== answer && w > 0 && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [answer.toString(), ...Array.from(wrongs).map(String)];
+                const options = [answer.toString(), Array.from(wrongs).map(String)];
                 q = {
                     question: `${a} × ${b} = ?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -531,7 +531,7 @@ function generateGrade5Questions() {
                     let w = c + (Math.floor(Math.random() * 10) - 5);
                     if (w !== c && w > 0 && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [answer.toString(), ...Array.from(wrongs).map(String)];
+                const options = [answer.toString(), Array.from(wrongs).map(String)];
                 q = {
                     question: `${a} ÷ ${b} = ?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -550,7 +550,7 @@ function generateGrade5Questions() {
                     let w = `${num1 + num2 + (Math.floor(Math.random() * 4) - 2)}/${denom}`;
                     if (w !== answer && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `${num1}/${denom} + ${num2}/${denom} = ?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -568,7 +568,7 @@ function generateGrade5Questions() {
                     let w = ((a * b + (Math.floor(Math.random() * 10) - 5)) / 100).toFixed(2);
                     if (w !== answer && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `0.${a} × 0.${b} = ?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -586,7 +586,7 @@ function generateGrade5Questions() {
                     let w = (pct * total / 100 + (Math.floor(Math.random() * 20) - 10)).toString();
                     if (w !== answer && !wrongs.has(w) && parseInt(w) > 0) wrongs.add(w);
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `What is ${pct}% of ${total}?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -604,7 +604,7 @@ function generateGrade5Questions() {
                     let err = l * w + (Math.floor(Math.random() * 20) - 10);
                     if (err !== l * w && err > 0 && !wrongs.has(err.toString())) wrongs.add(err.toString());
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `A rectangle has length ${l} cm and width ${w} cm. What is its area?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -622,7 +622,7 @@ function generateGrade5Questions() {
                     let err = 2 * (l + w) + (Math.floor(Math.random() * 20) - 10);
                     if (err !== 2 * (l + w) && err > 0 && !wrongs.has(err.toString())) wrongs.add(err.toString());
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `A rectangle has length ${l} cm and width ${w} cm. What is its perimeter?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -638,7 +638,7 @@ function generateGrade5Questions() {
 }
 
 // Combine static + generated = 500 questions
-const grade5FullBank = [...grade5Core, ...generateGrade5Questions()];
+const grade5FullBank = [grade5Core, generateGrade5Questions()];
     // ============================================
 // GRADE 4 - 500 QUESTION BANK
 // ============================================
@@ -723,7 +723,7 @@ function generateGrade4Questions() {
                     let w = answer + (Math.floor(Math.random() * 10) - 5);
                     if (w !== answer && w > 0 && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [answer.toString(), ...Array.from(wrongs).map(String)];
+                const options = [answer.toString(), Array.from(wrongs).map(String)];
                 q = {
                     question: `${a} × ${b} = ?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -742,7 +742,7 @@ function generateGrade4Questions() {
                     let w = c + (Math.floor(Math.random() * 6) - 3);
                     if (w !== c && w > 0 && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [answer.toString(), ...Array.from(wrongs).map(String)];
+                const options = [answer.toString(), Array.from(wrongs).map(String)];
                 q = {
                     question: `${a} ÷ ${b} = ?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -761,7 +761,7 @@ function generateGrade4Questions() {
                     let w = `${num1 + num2 + (Math.floor(Math.random() * 4) - 2)}/${denom}`;
                     if (w !== answer && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `${num1}/${denom} + ${num2}/${denom} = ?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -780,7 +780,7 @@ function generateGrade4Questions() {
                     let w = ((a + b + (Math.floor(Math.random() * 6) - 3)) / 10).toFixed(1);
                     if (w !== answer && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `0.${a} + 0.${b} = ?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -798,7 +798,7 @@ function generateGrade4Questions() {
                     let err = l * w + (Math.floor(Math.random() * 10) - 5);
                     if (err !== l * w && err > 0 && !wrongs.has(err.toString())) wrongs.add(err.toString());
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `A rectangle has length ${l} cm and width ${w} cm. What is its area?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -816,7 +816,7 @@ function generateGrade4Questions() {
                     let err = 2 * (l + w) + (Math.floor(Math.random() * 10) - 5);
                     if (err !== 2 * (l + w) && err > 0 && !wrongs.has(err.toString())) wrongs.add(err.toString());
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `A rectangle has length ${l} cm and width ${w} cm. What is its perimeter?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -831,7 +831,7 @@ function generateGrade4Questions() {
     return generated;
 }
 
-const grade4FullBank = [...grade4Core, ...generateGrade4Questions()];
+const grade4FullBank = [grade4Core, generateGrade4Questions()];
     // ============================================
 // GRADE 6 - 500 QUESTION BANK
 // ============================================
@@ -928,7 +928,7 @@ function generateGrade6Questions() {
                     let w = answer + (Math.floor(Math.random() * 30) - 15);
                     if (w !== answer && w > 0 && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [answer.toString(), ...Array.from(wrongs).map(String)];
+                const options = [answer.toString(), Array.from(wrongs).map(String)];
                 q = {
                     question: `${a} × ${b} = ?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -947,7 +947,7 @@ function generateGrade6Questions() {
                     let w = c + (Math.floor(Math.random() * 10) - 5);
                     if (w !== c && w > 0 && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [answer.toString(), ...Array.from(wrongs).map(String)];
+                const options = [answer.toString(), Array.from(wrongs).map(String)];
                 q = {
                     question: `${a} ÷ ${b} = ?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -965,7 +965,7 @@ function generateGrade6Questions() {
                     let w = answer + (Math.floor(Math.random() * 6) - 3);
                     if (w !== answer && w > 0 && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [`x=${answer}`, ...Array.from(wrongs).map(w => `x=${w}`)];
+                const options = [`x=${answer}`, Array.from(wrongs).map(w => `x=${w}`)];
                 q = {
                     question: `Solve: ${a}x = ${b}`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -991,7 +991,7 @@ function generateGrade6Questions() {
                     let w = `${num1 + num2 + (Math.floor(Math.random() * 6) - 3)}/${denom}`;
                     if (w !== answer && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `${num1}/${denom} + ${num2}/${denom} = ?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -1012,7 +1012,7 @@ function generateGrade6Questions() {
                     let w = (sum + (Math.floor(Math.random() * 20) - 10) / 100).toFixed(2);
                     if (w !== answer && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `${a}.${b} + ${c}.${d} = ?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -1029,7 +1029,7 @@ function generateGrade6Questions() {
                     let err = side * side * side + (Math.floor(Math.random() * 20) - 10);
                     if (err !== side * side * side && err > 0 && !wrongs.has(err.toString())) wrongs.add(err.toString());
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `What is the volume of a cube with side ${side} cm?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -1046,7 +1046,7 @@ function generateGrade6Questions() {
                     let err = (3.14 * radius * radius + (Math.floor(Math.random() * 20) - 10)).toFixed(2);
                     if (err !== answer && !wrongs.has(err)) wrongs.add(err);
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `What is the area of a circle with radius ${radius} cm? (π=3.14)`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -1061,7 +1061,7 @@ function generateGrade6Questions() {
     return generated;
 }
 
-const grade6FullBank = [...grade6Core, ...generateGrade6Questions()];
+const grade6FullBank = [grade6Core, generateGrade6Questions()];
     // ============================================
 // GRADE 7 - 500 QUESTION BANK
 // ============================================
@@ -1158,7 +1158,7 @@ function generateGrade7Questions() {
                     let w = answer + (Math.floor(Math.random() * 6) - 3);
                     if (w !== answer && w > 0 && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [`x=${answer}`, ...Array.from(wrongs).map(w => `x=${w}`)];
+                const options = [`x=${answer}`, Array.from(wrongs).map(w => `x=${w}`)];
                 q = {
                     question: `Solve: ${a}x + ${b} = ${c}`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -1176,7 +1176,7 @@ function generateGrade7Questions() {
                     let w = answer + (Math.floor(Math.random() * 20) - 10);
                     if (w !== answer && w > 0 && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [answer.toString(), ...Array.from(wrongs).map(String)];
+                const options = [answer.toString(), Array.from(wrongs).map(String)];
                 q = {
                     question: `What is ${pct}% of ${total}?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -1205,7 +1205,7 @@ function generateGrade7Questions() {
                     let w = `${num1 + num2 + (Math.floor(Math.random() * 6) - 3)}/${denom}`;
                     if (w !== answer && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `${num1}/${denom} + ${num2}/${denom2} = ?`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -1226,7 +1226,7 @@ function generateGrade7Questions() {
                     let w = `${simplifiedA + (Math.floor(Math.random() * 4) - 2)}:${simplifiedB + (Math.floor(Math.random() * 4) - 2)}`;
                     if (w !== answer && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `Simplify ${a}:${b}`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -1247,7 +1247,7 @@ function generateGrade7Questions() {
                     let w = (mean + (Math.floor(Math.random() * 6) - 3)).toFixed(1);
                     if (w !== answer && !wrongs.has(w)) wrongs.add(w);
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `Find the mean: ${values.join(', ')}`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -1266,7 +1266,7 @@ function generateGrade7Questions() {
                     let err = l * w * h + (Math.floor(Math.random() * 30) - 15);
                     if (err !== l * w * h && err > 0 && !wrongs.has(err.toString())) wrongs.add(err.toString());
                 }
-                const options = [answer, ...Array.from(wrongs)];
+                const options = [answer, Array.from(wrongs)];
                 q = {
                     question: `Find the volume of a rectangular prism with length ${l} cm, width ${w} cm, height ${h} cm.`,
                     options: options.sort(() => Math.random() - 0.5),
@@ -1291,7 +1291,7 @@ function gcd(a, b) {
     return a;
 }
 
-const grade7FullBank = [...grade7Core, ...generateGrade7Questions()];
+const grade7FullBank = [grade7Core, generateGrade7Questions()];
    // ============================================
 // APPLY 500 QUESTIONS TO ALL GRADES
 // ============================================
@@ -1302,13 +1302,13 @@ allCurricula.forEach(cur => {
     allGrades.forEach(grade => {
         const key = `${cur}_${grade}`;
         if (grade === 'grade4') {
-            questionBank[key] = grade4FullBank.map(q => ({...q}));
+            questionBank[key] = grade4FullBank.map(q => ({q}));
         } else if (grade === 'grade5') {
-            questionBank[key] = grade5FullBank.map(q => ({...q}));
+            questionBank[key] = grade5FullBank.map(q => ({q}));
         } else if (grade === 'grade6') {
-            questionBank[key] = grade6FullBank.map(q => ({...q}));
+            questionBank[key] = grade6FullBank.map(q => ({q}));
         } else if (grade === 'grade7') {
-            questionBank[key] = grade7FullBank.map(q => ({...q}));
+            questionBank[key] = grade7FullBank.map(q => ({q}));
         }
     });
 });
