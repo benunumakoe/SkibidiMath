@@ -496,152 +496,240 @@ const questionBank = {
 };
 
 // ============================================
-// GAME FUNCTIONS
+// GRADE 5 - 500 QUESTION BANK (Generated + Static)
 // ============================================
-function setGameMode(mode) {
-    gameState.gameMode = mode;
-    document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-    if (event && event.target) event.target.classList.add('active');
-    if (mode === 'suddendeath') gameState.lives = 3;
-    if (mode === 'spacerace') gameState.racePosition = 0;
-    updateModeDisplay();
-    nextQuestion();
-}
 
-function updateModeDisplay() {
-    const modeStatus = document.getElementById('modeStatus');
-    const modeDetails = document.getElementById('modeDetails');
-    if (gameState.gameMode === 'suddendeath') {
-        modeStatus.innerHTML = '💀 Sudden Death Mode';
-        modeDetails.innerHTML = `❤️ ${gameState.lives} lives left`;
-    } else {
-        modeStatus.innerHTML = gameState.gameMode.charAt(0).toUpperCase() + gameState.gameMode.slice(1) + ' Mode';
-        modeDetails.innerHTML = '';
-    }
-}
+// ----- 50 Hand-Crafted Questions -----
+const grade5Core = [
+    // Multiplication
+    { question: "23 × 4 = ?", options: ["92", "82", "72", "102"], answer: "92", topic: "multiplication" },
+    { question: "45 × 6 = ?", options: ["270", "250", "260", "280"], answer: "270", topic: "multiplication" },
+    { question: "56 × 7 = ?", options: ["392", "382", "402", "412"], answer: "392", topic: "multiplication" },
+    { question: "67 × 8 = ?", options: ["536", "526", "546", "556"], answer: "536", topic: "multiplication" },
+    { question: "74 × 5 = ?", options: ["370", "360", "380", "390"], answer: "370", topic: "multiplication" },
+    { question: "38 × 6 = ?", options: ["228", "218", "238", "248"], answer: "228", topic: "multiplication" },
+    { question: "47 × 9 = ?", options: ["423", "413", "433", "443"], answer: "423", topic: "multiplication" },
+    { question: "52 × 8 = ?", options: ["416", "406", "426", "436"], answer: "416", topic: "multiplication" },
+    { question: "63 × 7 = ?", options: ["441", "431", "451", "461"], answer: "441", topic: "multiplication" },
+    { question: "29 × 6 = ?", options: ["174", "164", "184", "194"], answer: "174", topic: "multiplication" },
+    
+    // Division
+    { question: "144 ÷ 12 = ?", options: ["12", "14", "10", "16"], answer: "12", topic: "division" },
+    { question: "168 ÷ 14 = ?", options: ["12", "14", "10", "16"], answer: "12", topic: "division" },
+    { question: "192 ÷ 16 = ?", options: ["12", "14", "10", "16"], answer: "12", topic: "division" },
+    { question: "108 ÷ 9 = ?", options: ["12", "10", "14", "16"], answer: "12", topic: "division" },
+    { question: "84 ÷ 7 = ?", options: ["12", "10", "14", "16"], answer: "12", topic: "division" },
+    { question: "216 ÷ 18 = ?", options: ["12", "14", "10", "16"], answer: "12", topic: "division" },
+    { question: "256 ÷ 16 = ?", options: ["16", "14", "18", "20"], answer: "16", topic: "division" },
+    { question: "324 ÷ 18 = ?", options: ["18", "16", "20", "22"], answer: "18", topic: "division" },
+    { question: "175 ÷ 25 = ?", options: ["7", "5", "8", "6"], answer: "7", topic: "division" },
+    { question: "225 ÷ 15 = ?", options: ["15", "12", "18", "20"], answer: "15", topic: "division" },
+    
+    // Fractions
+    { question: "2/5 + 1/5 = ?", options: ["3/5", "2/5", "1/5", "4/5"], answer: "3/5", topic: "fractions" },
+    { question: "3/5 + 1/5 = ?", options: ["4/5", "3/5", "2/5", "1/5"], answer: "4/5", topic: "fractions" },
+    { question: "2/5 + 3/10 = ?", options: ["7/10", "5/10", "1/2", "3/5"], answer: "7/10", topic: "fractions" },
+    { question: "1/4 + 1/8 = ?", options: ["3/8", "2/8", "1/2", "3/4"], answer: "3/8", topic: "fractions" },
+    { question: "2/3 + 1/6 = ?", options: ["5/6", "1/2", "2/6", "3/4"], answer: "5/6", topic: "fractions" },
+    { question: "3/4 - 1/4 = ?", options: ["1/2", "1/4", "3/4", "1"], answer: "1/2", topic: "fractions" },
+    { question: "5/6 - 1/6 = ?", options: ["2/3", "1/2", "4/6", "5/6"], answer: "2/3", topic: "fractions" },
+    { question: "2/3 - 1/3 = ?", options: ["1/3", "2/3", "1", "1/2"], answer: "1/3", topic: "fractions" },
+    { question: "3/8 + 2/8 = ?", options: ["5/8", "3/8", "1/4", "5/16"], answer: "5/8", topic: "fractions" },
+    { question: "1/2 + 1/4 = ?", options: ["3/4", "1/4", "2/3", "1/2"], answer: "3/4", topic: "fractions" },
+    
+    // Decimals
+    { question: "0.75 + 0.25 = ?", options: ["1.0", "0.9", "1.1", "0.8"], answer: "1.0", topic: "decimals" },
+    { question: "0.6 + 0.3 = ?", options: ["0.9", "0.8", "1.0", "0.7"], answer: "0.9", topic: "decimals" },
+    { question: "0.7 × 0.4 = ?", options: ["0.28", "0.24", "0.32", "0.20"], answer: "0.28", topic: "decimals" },
+    { question: "0.6 × 0.5 = ?", options: ["0.30", "0.35", "0.25", "0.40"], answer: "0.30", topic: "decimals" },
+    { question: "0.8 × 0.6 = ?", options: ["0.48", "0.42", "0.56", "0.64"], answer: "0.48", topic: "decimals" },
+    { question: "0.4 + 0.5 = ?", options: ["0.9", "0.8", "1.0", "0.7"], answer: "0.9", topic: "decimals" },
+    { question: "0.3 + 0.7 = ?", options: ["1.0", "0.9", "1.1", "0.8"], answer: "1.0", topic: "decimals" },
+    { question: "0.25 + 0.25 = ?", options: ["0.5", "0.4", "0.6", "0.75"], answer: "0.5", topic: "decimals" },
+    { question: "0.5 × 0.5 = ?", options: ["0.25", "0.5", "0.75", "1.0"], answer: "0.25", topic: "decimals" },
+    { question: "0.2 × 0.8 = ?", options: ["0.16", "0.18", "0.14", "0.20"], answer: "0.16", topic: "decimals" },
+    
+    // Percent
+    { question: "What is 25% of 80?", options: ["20", "25", "30", "40"], answer: "20", topic: "percent" },
+    { question: "What is 20% of 60?", options: ["12", "15", "10", "18"], answer: "12", topic: "percent" },
+    { question: "What is 10% of 70?", options: ["7", "10", "5", "15"], answer: "7", topic: "percent" },
+    { question: "What is 30% of 150?", options: ["45", "50", "40", "55"], answer: "45", topic: "percent" },
+    { question: "What is 15% of 200?", options: ["30", "25", "35", "40"], answer: "30", topic: "percent" },
+    { question: "What is 50% of 120?", options: ["60", "50", "70", "40"], answer: "60", topic: "percent" },
+    { question: "What is 5% of 200?", options: ["10", "5", "15", "20"], answer: "10", topic: "percent" },
+    { question: "What is 75% of 80?", options: ["60", "70", "50", "65"], answer: "60", topic: "percent" },
+    { question: "What is 40% of 150?", options: ["60", "50", "70", "40"], answer: "60", topic: "percent" },
+    { question: "What is 60% of 200?", options: ["120", "100", "140", "160"], answer: "120", topic: "percent" },
+    
+    // Geometry
+    { question: "A rectangle has length 8 cm and width 3 cm. What is its area?", options: ["24", "22", "26", "20"], answer: "24", topic: "area" },
+    { question: "A triangle has base 6 cm and height 4 cm. What is its area?", options: ["12", "24", "10", "14"], answer: "12", topic: "area" },
+    { question: "A parallelogram has base 10 cm and height 4 cm. What is its area?", options: ["40", "30", "50", "20"], answer: "40", topic: "area" },
+    { question: "A square has side 6 cm. What is its perimeter?", options: ["24", "20", "28", "32"], answer: "24", topic: "perimeter" },
+    { question: "A rectangle has length 7 cm and width 2 cm. What is its perimeter?", options: ["18", "14", "16", "20"], answer: "18", topic: "perimeter" },
+    { question: "A triangle has sides 3 cm, 4 cm, and 5 cm. What is its perimeter?", options: ["12", "10", "14", "16"], answer: "12", topic: "perimeter" },
+    { question: "A circle has radius 3 cm. What is its circumference? (π=3.14)", options: ["18.84", "12.56", "9.42", "15.70"], answer: "18.84", topic: "circumference" },
+    { question: "A circle has radius 4 cm. What is its area? (π=3.14)", options: ["50.24", "25.12", "12.56", "37.68"], answer: "50.24", topic: "area" },
+    { question: "A rectangle has length 12 cm and width 5 cm. What is its area?", options: ["60", "50", "70", "40"], answer: "60", topic: "area" },
+    { question: "A square has side 9 cm. What is its area?", options: ["81", "72", "90", "64"], answer: "81", topic: "area" },
+];
 
-function changeGrade(grade) {
-    gameState.currentGrade = grade;
-    document.querySelectorAll('.grade-btn').forEach(btn => btn.classList.remove('active'));
-    if (event && event.target) event.target.classList.add('active');
-    nextQuestion();
-}
-
-function getQuestionPool() {
-    const grade = gameState.currentGrade;
-    const curriculum = currentCurriculum;
-    let gradeKey;
-    if (curriculum === 'uk') {
-        const ukYearMap = {4:'year5', 5:'year6', 6:'year7', 7:'year8'};
-        gradeKey = `uk_${ukYearMap[grade]}`;
-    } else {
-        gradeKey = `${curriculum}_grade${grade}`;
-    }
-    let pool = questionBank[gradeKey];
-    if (!pool || pool.length === 0) {
-        pool = questionBank.uae_grade4;
-    }
-    return pool;
-}
-
-function nextQuestion() {
-    gameState.canAnswer = true;
-    let questionPool = getQuestionPool();
-    const randomIndex = Math.floor(Math.random() * questionPool.length);
-    gameState.currentQuestion = questionPool[randomIndex];
-    document.getElementById('question').innerHTML = gameState.currentQuestion.question;
-    const optionsContainer = document.getElementById('options');
-    optionsContainer.innerHTML = '';
-    const shuffled = [...gameState.currentQuestion.options].sort(() => Math.random() - 0.5);
-    shuffled.forEach(option => {
-        const btn = document.createElement('button');
-        btn.className = 'option-btn';
-        btn.textContent = option;
-        btn.onclick = () => checkAnswer(option);
-        optionsContainer.appendChild(btn);
-    });
-    document.getElementById('feedback').textContent = '';
-}
-
-function checkAnswer(selected) {
-    if (!gameState.canAnswer) return;
-    gameState.canAnswer = false;
-    const isCorrect = selected === gameState.currentQuestion.answer;
-    document.querySelectorAll('.option-btn').forEach(btn => {
-        btn.style.pointerEvents = 'none';
-        if (btn.textContent === gameState.currentQuestion.answer) btn.classList.add('correct');
-        else if (btn.textContent === selected && !isCorrect) btn.classList.add('wrong');
-    });
-    handleGameMode(isCorrect);
-    setTimeout(() => { nextQuestion(); }, 1500);
-}
-
-function handleGameMode(isCorrect) {
-    const bonus = characters[gameState.character]?.bonus || 1;
-    if (isCorrect) {
-        const points = Math.floor(10 * gameState.level * bonus);
-        gameState.score += points;
-        gameState.streak++;
-        gameState.characterXP += 5;
-        gameState.questionsDone++;
-        document.getElementById('feedback').textContent = `✅ Correct! +${points} points!`;
-        if (gameState.gameMode === 'spacerace') {
-            gameState.racePosition++;
-            if (gameState.racePosition >= gameState.raceTotal) {
-                gameState.score += 100;
-                document.getElementById('feedback').textContent = '🎉 Race Won! +100!';
+// ----- GENERATOR for 450 more questions -----
+function generateGrade5Questions() {
+    const generated = [];
+    const topics = ['multiplication', 'division', 'fractions', 'decimals', 'percent', 'area', 'perimeter'];
+    
+    for (let i = 0; i < 450; i++) {
+        const topic = topics[i % topics.length];
+        let q = {};
+        
+        switch (topic) {
+            case 'multiplication': {
+                const a = Math.floor(Math.random() * 50) + 10;
+                const b = Math.floor(Math.random() * 9) + 2;
+                const answer = a * b;
+                const wrongs = new Set();
+                while (wrongs.size < 3) {
+                    let w = answer + (Math.floor(Math.random() * 20) - 10);
+                    if (w !== answer && w > 0 && !wrongs.has(w)) wrongs.add(w);
+                }
+                const options = [answer.toString(), ...Array.from(wrongs).map(String)];
+                q = {
+                    question: `${a} × ${b} = ?`,
+                    options: options.sort(() => Math.random() - 0.5),
+                    answer: answer.toString(),
+                    topic: 'multiplication'
+                };
+                break;
+            }
+            case 'division': {
+                const b = Math.floor(Math.random() * 12) + 2;
+                const c = Math.floor(Math.random() * 12) + 1;
+                const a = b * c;
+                const answer = c;
+                const wrongs = new Set();
+                while (wrongs.size < 3) {
+                    let w = c + (Math.floor(Math.random() * 10) - 5);
+                    if (w !== c && w > 0 && !wrongs.has(w)) wrongs.add(w);
+                }
+                const options = [answer.toString(), ...Array.from(wrongs).map(String)];
+                q = {
+                    question: `${a} ÷ ${b} = ?`,
+                    options: options.sort(() => Math.random() - 0.5),
+                    answer: answer.toString(),
+                    topic: 'division'
+                };
+                break;
+            }
+            case 'fractions': {
+                const denom = [4, 6, 8, 10, 12][Math.floor(Math.random() * 5)];
+                const num1 = Math.floor(Math.random() * (denom - 1)) + 1;
+                const num2 = Math.floor(Math.random() * (denom - num1)) + 1;
+                const answer = `${num1 + num2}/${denom}`;
+                const wrongs = new Set();
+                while (wrongs.size < 3) {
+                    let w = `${num1 + num2 + (Math.floor(Math.random() * 4) - 2)}/${denom}`;
+                    if (w !== answer && !wrongs.has(w)) wrongs.add(w);
+                }
+                const options = [answer, ...Array.from(wrongs)];
+                q = {
+                    question: `${num1}/${denom} + ${num2}/${denom} = ?`,
+                    options: options.sort(() => Math.random() - 0.5),
+                    answer: answer,
+                    topic: 'fractions'
+                };
+                break;
+            }
+            case 'decimals': {
+                const a = Math.floor(Math.random() * 9) + 1;
+                const b = Math.floor(Math.random() * 9) + 1;
+                const answer = (a * b / 100).toFixed(2);
+                const wrongs = new Set();
+                while (wrongs.size < 3) {
+                    let w = ((a * b + (Math.floor(Math.random() * 10) - 5)) / 100).toFixed(2);
+                    if (w !== answer && !wrongs.has(w)) wrongs.add(w);
+                }
+                const options = [answer, ...Array.from(wrongs)];
+                q = {
+                    question: `0.${a} × 0.${b} = ?`,
+                    options: options.sort(() => Math.random() - 0.5),
+                    answer: answer,
+                    topic: 'decimals'
+                };
+                break;
+            }
+            case 'percent': {
+                const total = [50, 80, 100, 120, 150, 200, 250][Math.floor(Math.random() * 7)];
+                const pct = [10, 15, 20, 25, 30, 40, 50, 60, 75][Math.floor(Math.random() * 9)];
+                const answer = (pct * total / 100).toString();
+                const wrongs = new Set();
+                while (wrongs.size < 3) {
+                    let w = (pct * total / 100 + (Math.floor(Math.random() * 20) - 10)).toString();
+                    if (w !== answer && !wrongs.has(w) && parseInt(w) > 0) wrongs.add(w);
+                }
+                const options = [answer, ...Array.from(wrongs)];
+                q = {
+                    question: `What is ${pct}% of ${total}?`,
+                    options: options.sort(() => Math.random() - 0.5),
+                    answer: answer,
+                    topic: 'percent'
+                };
+                break;
+            }
+            case 'area': {
+                const l = Math.floor(Math.random() * 15) + 5;
+                const w = Math.floor(Math.random() * 8) + 2;
+                const answer = (l * w).toString();
+                const wrongs = new Set();
+                while (wrongs.size < 3) {
+                    let err = l * w + (Math.floor(Math.random() * 20) - 10);
+                    if (err !== l * w && err > 0 && !wrongs.has(err.toString())) wrongs.add(err.toString());
+                }
+                const options = [answer, ...Array.from(wrongs)];
+                q = {
+                    question: `A rectangle has length ${l} cm and width ${w} cm. What is its area?`,
+                    options: options.sort(() => Math.random() - 0.5),
+                    answer: answer,
+                    topic: 'area'
+                };
+                break;
+            }
+            case 'perimeter': {
+                const l = Math.floor(Math.random() * 15) + 5;
+                const w = Math.floor(Math.random() * 8) + 2;
+                const answer = (2 * (l + w)).toString();
+                const wrongs = new Set();
+                while (wrongs.size < 3) {
+                    let err = 2 * (l + w) + (Math.floor(Math.random() * 20) - 10);
+                    if (err !== 2 * (l + w) && err > 0 && !wrongs.has(err.toString())) wrongs.add(err.toString());
+                }
+                const options = [answer, ...Array.from(wrongs)];
+                q = {
+                    question: `A rectangle has length ${l} cm and width ${w} cm. What is its perimeter?`,
+                    options: options.sort(() => Math.random() - 0.5),
+                    answer: answer,
+                    topic: 'perimeter'
+                };
+                break;
             }
         }
-    } else {
-        gameState.streak = 0;
-        document.getElementById('feedback').textContent = '❌ Try again!';
-        if (gameState.gameMode === 'suddendeath') {
-            gameState.lives--;
-            if (gameState.lives <= 0) {
-                document.getElementById('feedback').textContent = '💀 Game Over!';
-                if (gameState.gameMode === 'suddendeath') gameState.lives = 3;
-            }
-        }
+        generated.push(q);
     }
-    if (gameState.streak % 5 === 0 && gameState.streak > 0) gameState.level++;
-    checkCharacterUnlocks();
-    updateDisplay();
-    updateModeDisplay();
+    return generated;
 }
 
-function checkCharacterUnlocks() {
-    if (gameState.characterXP >= 100 && !gameState.characterUnlocked.ninja) {
-        gameState.characterUnlocked.ninja = true;
-        gameState.character = 'ninja';
-    }
-    if (gameState.characterXP >= 500 && !gameState.characterUnlocked.wizard) {
-        gameState.characterUnlocked.wizard = true;
-        gameState.character = 'wizard';
-    }
-    if (gameState.characterXP >= 1000 && !gameState.characterUnlocked.legend) {
-        gameState.characterUnlocked.legend = true;
-        gameState.character = 'legend';
-    }
-}
+// Combine static + generated = 500 questions
+const grade5FullBank = [...grade5Core, ...generateGrade5Questions()];
+    // Apply 500 questions to ALL grades
+const allGrades = ['grade4', 'grade5', 'grade6', 'grade7'];
+const allCurricula = ['uae', 'us', 'uk', 'sa'];
 
-function updateDisplay() {
-    document.getElementById('score').textContent = gameState.score;
-    document.getElementById('level').textContent = gameState.level;
-    document.getElementById('streak').textContent = gameState.streak;
-    document.getElementById('questionsDone').textContent = gameState.questionsDone;
-    const character = characters[gameState.character];
-    document.getElementById('currentCharacterDisplay').textContent = `${character.emoji} ${character.name}`;
-    if (gameState.characterXP < 100) {
-        document.getElementById('nextCharacter').textContent = `🥷 Ninja (${100 - gameState.characterXP} XP needed)`;
-    } else if (gameState.characterXP < 500) {
-        document.getElementById('nextCharacter').textContent = `🧙 Wizard (${500 - gameState.characterXP} XP needed)`;
-    } else if (gameState.characterXP < 1000) {
-        document.getElementById('nextCharacter').textContent = `👑 Legend (${1000 - gameState.characterXP} XP needed)`;
-    } else {
-        document.getElementById('nextCharacter').textContent = `👑 Max Level!`;
-    }
-}
-
+allCurricula.forEach(cur => {
+    allGrades.forEach(grade => {
+        const key = `${cur}_${grade}`;
+        questionBank[key] = grade5FullBank.map(q => ({...q}));
+    });
+});
 // ============================================
 // HINT FUNCTION
 // ============================================
