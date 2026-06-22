@@ -361,7 +361,27 @@ function setCurriculum(curriculum) {
 // QUESTION BANK - EMPTY (will be filled later)
 // ============================================
 const questionBank = {};
-
+// Generate questions after page loads
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        // Generate all questions in background
+        allCurricula.forEach(cur => {
+            allGrades.forEach(grade => {
+                const key = `${cur}_${grade}`;
+                if (grade === 'grade4') {
+                    questionBank[key] = grade4FullBank.map(q => ({...q}));
+                } else if (grade === 'grade5') {
+                    questionBank[key] = grade5FullBank.map(q => ({...q}));
+                } else if (grade === 'grade6') {
+                    questionBank[key] = grade6FullBank.map(q => ({...q}));
+                } else if (grade === 'grade7') {
+                    questionBank[key] = grade7FullBank.map(q => ({...q}));
+                }
+            });
+        });
+        console.log('All questions loaded!');
+    }, 100);
+});
 // ----- 50 Hand-Crafted Questions -----
 const grade5Core = [
     // Multiplication
