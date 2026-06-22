@@ -361,7 +361,62 @@ function setCurriculum(curriculum) {
 // QUESTION BANK - EMPTY (will be filled later)
 // ============================================
 const questionBank = {};
-// Generate questions after page loads
+
+// ============================================
+// GRADE 5 - 100 QUESTION BANK
+// ============================================
+const grade5Core = [ ... ];
+function generateGrade5Questions() { ... }
+const grade5FullBank = [...grade5Core, ...generateGrade5Questions()];
+
+// ============================================
+// GRADE 4 - 100 QUESTION BANK
+// ============================================
+const grade4Core = [ ... ];
+function generateGrade4Questions() { ... }
+const grade4FullBank = [...grade4Core, ...generateGrade4Questions()];
+
+// ============================================
+// GRADE 6 - 100 QUESTION BANK
+// ============================================
+const grade6Core = [ ... ];
+function generateGrade6Questions() { ... }
+const grade6FullBank = [...grade6Core, ...generateGrade6Questions()];
+
+// ============================================
+// GRADE 7 - 100 QUESTION BANK
+// ============================================
+const grade7Core = [ ... ];
+function generateGrade7Questions() { ... }
+const grade7FullBank = [...grade7Core, ...generateGrade7Questions()];
+
+// GCD helper function
+function gcd(a, b) { ... }
+
+// ============================================
+// APPLY 500 QUESTIONS TO ALL GRADES
+// ============================================
+const allGrades = ['grade4', 'grade5', 'grade6', 'grade7'];
+const allCurricula = ['uae', 'us', 'uk', 'sa'];
+
+allCurricula.forEach(cur => {
+    allGrades.forEach(grade => {
+        const key = `${cur}_${grade}`;
+        if (grade === 'grade4') {
+            questionBank[key] = grade4FullBank.map(q => ({...q}));
+        } else if (grade === 'grade5') {
+            questionBank[key] = grade5FullBank.map(q => ({...q}));
+        } else if (grade === 'grade6') {
+            questionBank[key] = grade6FullBank.map(q => ({...q}));
+        } else if (grade === 'grade7') {
+            questionBank[key] = grade7FullBank.map(q => ({...q}));
+        }
+    });
+});
+
+// ============================================
+// GAME FUNCTIONS
+// ============================================
 
 // ----- 50 Hand-Crafted Questions -----
 const grade5Core = [
