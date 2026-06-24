@@ -361,7 +361,26 @@ function setCurriculum(curriculum) {
 // QUESTION BANK - EMPTY (will be filled later)
 // ============================================
 const questionBank = {};
+// ============================================
+// APPLY 500 QUESTIONS TO ALL GRADES
+// ============================================
+const allGrades = ['grade4', 'grade5', 'grade6', 'grade7'];
+const allCurricula = ['uae', 'us', 'uk', 'sa'];
 
+allCurricula.forEach(cur => {
+    allGrades.forEach(grade => {
+        const key = `${cur}_${grade}`;
+        if (grade === 'grade4') {
+            questionBank[key] = grade4FullBank.map(q => ({...q}));
+        } else if (grade === 'grade5') {
+            questionBank[key] = grade5FullBank.map(q => ({...q}));
+        } else if (grade === 'grade6') {
+            questionBank[key] = grade6FullBank.map(q => ({...q}));
+        } else if (grade === 'grade7') {
+            questionBank[key] = grade7FullBank.map(q => ({...q}));
+        }
+    });
+});
 // ============================================
 // GAME FUNCTIONS
 // ============================================
@@ -1240,26 +1259,6 @@ function gcd(a, b) {
 }
 
 const grade7FullBank = [grade7Core, generateGrade7Questions()];
-   // ============================================
-// APPLY 500 QUESTIONS TO ALL GRADES
-// ============================================
-const allGrades = ['grade4', 'grade5', 'grade6', 'grade7'];
-const allCurricula = ['uae', 'us', 'uk', 'sa'];
-
-allCurricula.forEach(cur => {
-    allGrades.forEach(grade => {
-        const key = `${cur}_${grade}`;
-        if (grade === 'grade4') {
-            questionBank[key] = grade4FullBank.map(q => ({...q}));
-        } else if (grade === 'grade5') {
-            questionBank[key] = grade5FullBank.map(q => ({...q}));
-        } else if (grade === 'grade6') {
-            questionBank[key] = grade6FullBank.map(q => ({...q}));
-        } else if (grade === 'grade7') {
-            questionBank[key] = grade7FullBank.map(q => ({...q}));
-        }
-    });
-});
 // ============================================
 // HINT FUNCTION
 // ============================================
