@@ -1261,6 +1261,32 @@ allCurricula.forEach(cur => {
     });
 });   
 // ============================================
+// GET QUESTION POOL
+// ============================================
+function getQuestionPool() {
+    const grade = gameState.currentGrade;
+    const curriculum = currentCurriculum;
+    let gradeKey;
+    if (curriculum === 'uk') {
+        const ukYearMap = {4:'year5', 5:'year6', 6:'year7', 7:'year8'};
+        gradeKey = `uk_${ukYearMap[grade]}`;
+    } else {
+        gradeKey = `${curriculum}_grade${grade}`;
+    }
+    let pool = questionBank[gradeKey];
+    if (!pool || pool.length === 0) {
+        // Fallback question if bank is empty
+        return [{ 
+            question: "2 + 2 = ?", 
+            options: ["4", "3", "5", "6"], 
+            answer: "4", 
+            topic: "addition" 
+        }];
+    }
+    return pool;
+}
+    
+// ============================================
 // HINT FUNCTION
 // ============================================
 const hintButton = document.getElementById('hint-btn');
