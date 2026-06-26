@@ -1,31 +1,106 @@
----
-layout: default
-title: SkibidiMath Blog
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SkibidiMath Blog - Tips, strategies, and insights for helping students master math in grades 4-7.">
+    <title>SkibidiMath Blog - Math Tips & Strategies</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <a href="/">🏠 Home</a>
+            <a href="/about.html">📖 About</a>
+            <a href="/blog.html">📝 Blog</a>
+            <a href="/privacy.html">🔒 Privacy</a>
+            <a href="/contact.html">📧 Contact</a>
+            <a href="/terms.html">⚖️ Terms</a>
+        </nav>
 
-<style>
-    .blog-container { max-width: 800px; margin: 0 auto; padding: 20px; }
-    .blog-title { color: #4A5D23; font-size: 2.5rem; margin-bottom: 10px; }
-    .blog-subtitle { color: #5C4033; font-size: 1.1rem; margin-bottom: 30px; }
-    .blog-post { background: white; padding: 20px 25px; margin-bottom: 20px; border-radius: 16px; border: 1px solid #D4C5A0; box-shadow: 0 4px 15px rgba(0,0,0,0.04); transition: all 0.3s ease; }
-    .blog-post:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
-    .blog-post-title { font-size: 1.3rem; font-weight: 700; color: #4A5D23; text-decoration: none; }
-    .blog-post-title:hover { color: #C4783A; }
-    .blog-post-date { font-size: 0.85rem; color: #5C4033; margin-top: 4px; }
-    .blog-post-excerpt { font-size: 0.95rem; color: #555; margin-top: 8px; }
-</style>
+        <div class="content-card">
+            <h1>📝 SkibidiMath Blog</h1>
+            <p>Tips, strategies, and insights for helping students master math in grades 4-7.</p>
 
-<div class="blog-container">
-    <h1 class="blog-title">📝 SkibidiMath Blog</h1>
-    <p class="blog-subtitle">Tips, guides, and resources for teachers, parents, and students.</p>
+            <hr>
 
-    <div class="blog-posts">
-        {% for post in site.posts %}
-        <div class="blog-post">
-            <a href="{{ post.url }}" class="blog-post-title">{{ post.title }}</a>
-            <div class="blog-post-date">📅 {{ post.date | date: "%B %d, %Y" }}</div>
-            <div class="blog-post-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</div>
+            <!-- ===== BLOG POST 1 ===== -->
+            <article>
+                <h2>🎮 Why Gamified Math Works: The Science Behind Learning Through Play</h2>
+                <p><small>📅 Published: June 2026 | 📖 5 min read</small></p>
+                <p>Research shows that gamified learning increases student engagement and retention by up to 60% compared to traditional worksheets. But why does it work so well?</p>
+                <p>When students play games, their brains release dopamine—the "feel-good" chemical associated with reward and motivation. This dopamine release makes learning more enjoyable and helps students retain information longer.</p>
+                <p>At SkibidiMath, we've designed our game to combine the best of both worlds: rigorous, curriculum-aligned math practice with the engaging mechanics of a video game. The result? Students who actually <strong>want</strong> to practice math.</p>
+                <p><strong>Key Takeaway:</strong> Gamification turns math practice from a chore into a challenge, and when students enjoy learning, they learn more effectively.</p>
+            </article>
+
+            <hr>
+
+            <!-- ===== BLOG POST 2 ===== -->
+            <article>
+                <h2>📚 5 Tips for Parents: Supporting Your Child's Math Journey</h2>
+                <p><small>📅 Published: June 2026 | 📖 4 min read</small></p>
+                <p>Parents often ask us: "How can I help my child with math when I'm not a math expert?" Here are 5 simple ways you can make a big difference:</p>
+                <ol>
+                    <li><strong>Practice for just 10 minutes a day.</strong> Consistency matters more than quantity. Short, daily practice sessions build habits and confidence.</li>
+                    <li><strong>Celebrate correct answers.</strong> Positive reinforcement encourages students to keep trying, even when math gets challenging.</li>
+                    <li><strong>Let your child choose their grade level.</strong> Students learn best when they're neither bored nor overwhelmed. SkibidiMath lets students switch between grades freely.</li>
+                    <li><strong>Use different game modes to keep it fresh.</strong> Classic, Sudden Death, Space Race, and Adventure modes offer variety and prevent boredom.</li>
+                    <li><strong>Track progress together.</strong> Celebrate improvements in score, level, and streak. This shows your child that effort leads to growth.</li>
+                </ol>
+                <p><strong>Key Takeaway:</strong> You don't need to be a math expert to support your child. Your encouragement and consistency are what matters most.</p>
+            </article>
+
+            <hr>
+
+            <!-- ===== BLOG POST 3 ===== -->
+            <article>
+                <h2>🚀 What's Coming Next: New Features at SkibidiMath</h2>
+                <p><small>📅 Published: June 2026 | 📖 3 min read</small></p>
+                <p>We're constantly working to make SkibidiMath better for students, teachers, and parents. Here's what we're working on:</p>
+                <ul>
+                    <li><strong>🏆 Leaderboards:</strong> Students will be able to compete in a friendly way with classmates and students from around the world.</li>
+                    <li><strong>🧠 More Game Modes:</strong> We're developing new ways to practice, including timed challenges and partner modes.</li>
+                    <li><strong>📝 Printable Worksheets:</strong> Perfect for offline practice, homework, and classroom use.</li>
+                    <li><strong>📊 Teacher Dashboards:</strong> Track class progress and identify learning gaps at a glance.</li>
+                    <li><strong>🌍 More Curricula:</strong> Australian, Canadian, and IB curricula are in development.</li>
+                </ul>
+                <p><strong>Key Takeaway:</strong> SkibidiMath is growing quickly. We're committed to making math practice better for everyone.</p>
+            </article>
+
+            <hr>
+
+            <!-- ===== BLOG POST 4 ===== -->
+            <article>
+                <h2>📊 Why 4 Curricula? The Power of Global Math Education</h2>
+                <p><small>📅 Published: May 2026 | 📖 4 min read</small></p>
+                <p>SkibidiMath is one of the only platforms that supports four major curricula: UAE National Curriculum, US Common Core, UK Oxford Curriculum, and South African CAPS.</p>
+                <p>Why is this important? Because students move between countries and curricula. International schools, expatriate families, and globally-minded educators need consistency in math education, even when the curriculum changes.</p>
+                <p>By supporting four curricula, SkibidiMath ensures that students can continue practicing math, no matter where they are in the world. Whether you're in Dubai, London, Texas, or Johannesburg, SkibidiMath has you covered.</p>
+                <p><strong>Key Takeaway:</strong> Global education requires global tools. SkibidiMath is designed to serve students wherever they are.</p>
+            </article>
+
+            <hr>
+
+            <!-- ===== BLOG POST 5 ===== -->
+            <article>
+                <h2>💯 Math Anxiety: How Gamification Helps Students Overcome Fear</h2>
+                <p><small>📅 Published: May 2026 | 📖 5 min read</small></p>
+                <p>Math anxiety is real—and it affects students across all curricula and countries. When students fear math, they avoid it. When they avoid it, they fall behind. The cycle continues.</p>
+                <p>Gamification breaks this cycle by shifting the focus from "getting the right answer" to "enjoying the challenge." In a game, mistakes aren't failures—they're opportunities to learn and try again.</p>
+                <p>At SkibidiMath, we've seen students who were previously afraid of math transform into confident learners. The secret? Making practice feel like play.</p>
+                <p><strong>Key Takeaway:</strong> When students stop fearing math, they start learning math. Gamification makes that shift possible.</p>
+            </article>
+
+            <hr>
+
+            <p style="margin-top: 20px; font-style: italic; color: #666;">📢 Want to contribute to our blog? <a href="/contact.html">Contact us</a> with your ideas!</p>
+
         </div>
-        {% endfor %}
+
+        <div class="footer">
+            <p>© 2026 SkibidiMath.com | Making Math Fun, One Game at a Time</p>
+        </div>
     </div>
-</div>
+</body>
+</html>
