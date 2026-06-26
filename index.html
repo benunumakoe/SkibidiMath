@@ -1309,7 +1309,13 @@ if (hintButton) {
 // ============================================
 // INITIALIZE
 // ============================================
-nextQuestion();
+// Wait for page to fully load before starting
+document.addEventListener('DOMContentLoaded', function() {
+    // Small delay to ensure everything is ready
+    setTimeout(function() {
+        nextQuestion();
+    }, 100);
+});
 
 // ============================================
 // DROPDOWN TOGGLE FOR MOBILE
