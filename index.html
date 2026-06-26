@@ -1285,7 +1285,134 @@ function getQuestionPool() {
     }
     return pool;
 }
-    
+// ============================================
+// NEXT QUESTION
+// ============================================
+function nextQuestion() {
+    gameState.canAnswer = true;
+    let questionPool = getQuestionPool();
+    if (!questionPool || questionPool.length === 0) {
+        document.getElementById('question').innerHTML = "No questions available. Please refresh.";
+        return;
+    }
+    const randomIndex = Math.floor(Math.random() * questionPool.length);
+    gameState.currentQuestion = questionPool[randomIndex];
+    document.getElementById('question').innerHTML = gameState.currentQuestion.question;
+    const optionsContainer = document.getElementById('options');
+    optionsContainer.innerHTML = '';
+    const shuffled = [...gameState.currentQuestion.options].sort(() => Math.random() - 0.5);
+    shuffled.forEach(option => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(option);
+        optionsContainer.appendChild(btn);
+    });
+    document.getElementById('feedback').textContent = '';
+}
+    // ============================================
+// CHECK ANSWER
+// ============================================
+function checkAnswer(selected) {
+    if (!gameState.canAnswer) return;
+    gameState.canAnswer = false;
+    const isCorrect = selected === gameState.currentQuestion.answer;
+    document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.style.pointerEvents = 'none';
+        if (btn.textContent === gameState.currentQuestion.answer) btn.classList.add('correct');
+        else if (btn.textContent === selected && !isCorrect) btn.classList.add('wrong');
+    });
+    handleGameMode(isCorrect);
+    setTimeout(() => { nextQuestion(); }, 1500);
+}
+    // ============================================
+// HANDLE GAME MODE
+// ============================================
+function handleGameMode(isCorrect) {
+    const bonus = characters[gameState.character]?.bonus || 1;
+    if (isCorrect) {
+        const points = Math.floor(10 * gameState.level * bonus);
+        gameState.score += points;
+        gameState.streak++;
+        gameState.characterXP += 5;
+        gameState.questionsDone++;
+        document.getElementById('feedback').textContent = `✅ Correct! +${points} points!`;
+        if (gameState.gameMode === 'spacerace') {
+            gameState.racePosition++;
+            if (gameState.racePosition >= gameState.raceTotal) {
+                gameState.score += 100;
+                document.getElementById('feedback').textContent = '🎉 Race Won! +100!';
+            }
+        }
+    } else {
+        gameState.streak = 0;
+        document.getElementById('feedback').textContent = '❌ Try again!';
+        if (gameState.gameMode === 'suddendeath') {
+            gameState.lives--;
+            if (gameState.lives <= 0) {
+                document.getElementById('feedback').textContent = '💀 Game Over!';
+                gameState.lives = 3;
+            }
+        }
+    }
+    if (gameState.streak % 5 === 0 && gameState.streak > 0) gameState.level++;
+    checkCharacterUnlocks();
+    updateDisplay();
+    updateModeDisplay();
+}
+    // ============================================
+// CHECK CHARACTER UNLOCKS
+// ============================================
+function checkCharacterUnlocks() {
+    if (gameState.characterXP >= 100 && !gameState.characterUnlocked.ninja) {
+        gameState.characterUnlocked.ninja = true;
+        gameState.character = 'ninja';
+    }
+    if (gameState.characterXP >= 500 && !gameState.characterUnlocked.wizard) {
+        gameState.characterUnlocked.wizard = true;
+        gameState.character = 'wizard';
+    }
+    if (gameState.characterXP >= 1000 && !gameState.characterUnlocked.legend) {
+        gameState.characterUnlocked.legend = true;
+        gameState.character = 'legend';
+    }
+}
+
+// ============================================
+// UPDATE DISPLAY
+// ============================================
+function updateDisplay() {
+    document.getElementById('score').textContent = gameState.score;
+    document.getElementById('level').textContent = gameState.level;
+    document.getElementById('streak').textContent = gameState.streak;
+    document.getElementById('questionsDone').textContent = gameState.questionsDone;
+    const character = characters[gameState.character];
+    document.getElementById('currentCharacterDisplay').textContent = `${character.emoji} ${character.name}`;
+    if (gameState.characterXP < 100) {
+        document.getElementById('nextCharacter').textContent = `🥷 Ninja (${100 - gameState.characterXP} XP needed)`;
+    } else if (gameState.characterXP < 500) {
+        document.getElementById('nextCharacter').textContent = `🧙 Wizard (${500 - gameState.characterXP} XP needed)`;
+    } else if (gameState.characterXP < 1000) {
+        document.getElementById('nextCharacter').textContent = `👑 Legend (${1000 - gameState.characterXP} XP needed)`;
+    } else {
+        document.getElementById('nextCharacter').textContent = `👑 Max Level!`;
+    }
+}
+
+// ============================================
+// UPDATE MODE DISPLAY
+// ============================================
+function updateModeDisplay() {
+    const modeStatus = document.getElementById('modeStatus');
+    const modeDetails = document.getElementById('modeDetails');
+    if (gameState.gameMode === 'suddendeath') {
+        modeStatus.innerHTML = '💀 Sudden Death Mode';
+        modeDetails.innerHTML = `❤️ ${gameState.lives} lives left`;
+    } else {
+        modeStatus.innerHTML = gameState.gameMode.charAt(0).toUpperCase() + gameState.gameMode.slice(1) + ' Mode';
+        modeDetails.innerHTML = '';
+    }
+}
 // ============================================
 // HINT FUNCTION
 // ============================================
