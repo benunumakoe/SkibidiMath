@@ -1480,11 +1480,13 @@ allCurricula.forEach(cur => {
     });
 });
 // ============================================
-// GET QUESTION POOL
+// GET QUESTION POOL - FIXED
 // ============================================
 function getQuestionPool() {
     const grade = gameState.currentGrade;
     const curriculum = currentCurriculum;
+    
+    // Build the correct key
     let gradeKey;
     if (curriculum === 'uk') {
         const ukYearMap = {4:'year5', 5:'year6', 6:'year7', 7:'year8'};
@@ -1492,221 +1494,144 @@ function getQuestionPool() {
     } else {
         gradeKey = `${curriculum}_grade${grade}`;
     }
+    
+    // Try to get the pool
     let pool = questionBank[gradeKey];
+    
+    // Debug: log what we found
+    console.log('Looking for:', gradeKey);
+    console.log('Pool size:', pool ? pool.length : 0);
+    
+    // If pool is empty or undefined, try to generate it on the fly
     if (!pool || pool.length === 0) {
-        // Fallback question if bank is empty
-        return [{ 
-            question: "2 + 2 = ?", 
-            options: ["4", "3", "5", "6"], 
-            answer: "4", 
-            topic: "addition" 
-        }];
+        console.warn('Pool not found for:', gradeKey, 'Using fallback');
+        // Generate a simple fallback question
+        return generateFallbackQuestion(grade);
     }
+    
     return pool;
 }
+
 // ============================================
-// NEXT QUESTION
+// FALLBACK QUESTION GENERATOR
+// ============================================
+function generateFallbackQuestion(grade) {
+    const questions = [];
+    const num1 = Math.floor(Math.random() * 20) + 1;
+    const num2 = Math.floor(Math.random() * 20) + 1;
+    const answer = num1 + num2;
+    const wrongs = new Set();
+    while (wrongs.size < 3) {
+        let w = answer + (Math.floor(Math.random() * 10) - 5);
+        if (w !== answer && w > 0 && !wrongs.has(w)) wrongs.add(w);
+    }
+    return [{
+        question: `${num1} + ${num2} = ?`,
+        options: [answer.toString(), ...Array.from(wrongs).map(String)].sort(() => Math.random() - 0.5),
+        answer: answer.toString(),
+        topic: 'addition'
+    }];
+}
+
+// ============================================
+// NEXT QUESTION - FIXED
 // ============================================
 function nextQuestion() {
     gameState.canAnswer = true;
     let questionPool = getQuestionPool();
+    
+    // Ensure we have a valid pool
     if (!questionPool || questionPool.length === 0) {
-        document.getElementById('question').innerHTML = "No questions available. Please refresh.";
-        return;
+        questionPool = generateFallbackQuestion(gameState.currentGrade);
     }
+    
     const randomIndex = Math.floor(Math.random() * questionPool.length);
     gameState.currentQuestion = questionPool[randomIndex];
-    document.getElementById('question').innerHTML = gameState.currentQuestion.question;
+    
+    // Update the UI
+    const questionEl = document.getElementById('question');
+    if (questionEl) {
+        questionEl.innerHTML = gameState.currentQuestion.question;
+    }
+    
     const optionsContainer = document.getElementById('options');
-    optionsContainer.innerHTML = '';
-    const shuffled = [...gameState.currentQuestion.options].sort(() => Math.random() - 0.5);
-    shuffled.forEach(option => {
-        const btn = document.createElement('button');
-        btn.className = 'option-btn';
-        btn.textContent = option;
-        btn.onclick = () => checkAnswer(option);
-        optionsContainer.appendChild(btn);
-    });
-    document.getElementById('feedback').textContent = '';
-}
-    // ============================================
-// CHECK ANSWER
-// ============================================
-function checkAnswer(selected) {
-    if (!gameState.canAnswer) return;
-    gameState.canAnswer = false;
-    const isCorrect = selected === gameState.currentQuestion.answer;
-    document.querySelectorAll('.option-btn').forEach(btn => {
-        btn.style.pointerEvents = 'none';
-        if (btn.textContent === gameState.currentQuestion.answer) btn.classList.add('correct');
-        else if (btn.textContent === selected && !isCorrect) btn.classList.add('wrong');
-    });
-    handleGameMode(isCorrect);
-    setTimeout(() => { nextQuestion(); }, 1500);
-}
-    // ============================================
-// HANDLE GAME MODE
-// ============================================
-function handleGameMode(isCorrect) {
-    const bonus = characters[gameState.character]?.bonus || 1;
-    if (isCorrect) {
-        const points = Math.floor(10 * gameState.level * bonus);
-        gameState.score += points;
-        gameState.streak++;
-        gameState.characterXP += 5;
-        gameState.questionsDone++;
-        document.getElementById('feedback').textContent = `✅ Correct! +${points} points!`;
-        if (gameState.gameMode === 'spacerace') {
-            gameState.racePosition++;
-            if (gameState.racePosition >= gameState.raceTotal) {
-                gameState.score += 100;
-                document.getElementById('feedback').textContent = '🎉 Race Won! +100!';
-            }
-        }
-    } else {
-        gameState.streak = 0;
-        document.getElementById('feedback').textContent = '❌ Try again!';
-        if (gameState.gameMode === 'suddendeath') {
-            gameState.lives--;
-            if (gameState.lives <= 0) {
-                document.getElementById('feedback').textContent = '💀 Game Over!';
-                gameState.lives = 3;
-            }
-        }
-    }
-    if (gameState.streak % 5 === 0 && gameState.streak > 0) gameState.level++;
-    checkCharacterUnlocks();
-    updateDisplay();
-    updateModeDisplay();
-}
-    // ============================================
-// CHECK CHARACTER UNLOCKS
-// ============================================
-function checkCharacterUnlocks() {
-    if (gameState.characterXP >= 100 && !gameState.characterUnlocked.ninja) {
-        gameState.characterUnlocked.ninja = true;
-        gameState.character = 'ninja';
-    }
-    if (gameState.characterXP >= 500 && !gameState.characterUnlocked.wizard) {
-        gameState.characterUnlocked.wizard = true;
-        gameState.character = 'wizard';
-    }
-    if (gameState.characterXP >= 1000 && !gameState.characterUnlocked.legend) {
-        gameState.characterUnlocked.legend = true;
-        gameState.character = 'legend';
-    }
-}
-
-// ============================================
-// UPDATE DISPLAY
-// ============================================
-function updateDisplay() {
-    document.getElementById('score').textContent = gameState.score;
-    document.getElementById('level').textContent = gameState.level;
-    document.getElementById('streak').textContent = gameState.streak;
-    document.getElementById('questionsDone').textContent = gameState.questionsDone;
-    const character = characters[gameState.character];
-    document.getElementById('currentCharacterDisplay').textContent = `${character.emoji} ${character.name}`;
-    if (gameState.characterXP < 100) {
-        document.getElementById('nextCharacter').textContent = `🥷 Ninja (${100 - gameState.characterXP} XP needed)`;
-    } else if (gameState.characterXP < 500) {
-        document.getElementById('nextCharacter').textContent = `🧙 Wizard (${500 - gameState.characterXP} XP needed)`;
-    } else if (gameState.characterXP < 1000) {
-        document.getElementById('nextCharacter').textContent = `👑 Legend (${1000 - gameState.characterXP} XP needed)`;
-    } else {
-        document.getElementById('nextCharacter').textContent = `👑 Max Level!`;
-    }
-}
-
-// ============================================
-// UPDATE MODE DISPLAY
-// ============================================
-function updateModeDisplay() {
-    const modeStatus = document.getElementById('modeStatus');
-    const modeDetails = document.getElementById('modeDetails');
-    if (gameState.gameMode === 'suddendeath') {
-        modeStatus.innerHTML = '💀 Sudden Death Mode';
-        modeDetails.innerHTML = `❤️ ${gameState.lives} lives left`;
-    } else {
-        modeStatus.innerHTML = gameState.gameMode.charAt(0).toUpperCase() + gameState.gameMode.slice(1) + ' Mode';
-        modeDetails.innerHTML = '';
-    }
-}
-// ============================================
-// HINT FUNCTION
-// ============================================
-const hintButton = document.getElementById('hint-btn');
-const hintMessage = document.getElementById('hint-message');
-function getSimpleHint(questionText) {
-    const q = questionText.toLowerCase();
-    if (q.includes('×') || q.includes('*')) return "🔢 Multiply first: " + questionText;
-    if (q.includes('÷')) return "➗ Divide first: " + questionText;
-    if (q.includes('(')) return "( ) Parentheses first!";
-    return "📝 Break it down one step at a time.";
-}
-if (hintButton) {
-    hintButton.addEventListener('click', function() {
-        const questionText = document.getElementById('question')?.innerText || "";
-        hintMessage.innerHTML = getSimpleHint(questionText);
-        hintMessage.style.display = 'block';
-        setTimeout(() => { hintMessage.style.display = 'none'; }, 5000);
-    });
-}
-
-// ============================================
-// INITIALIZE
-// ============================================
-// Start the game
-setTimeout(function() {
-    nextQuestion();
-}, 100);
-
-// ============================================
-// DROPDOWN TOGGLE FOR MOBILE
-// ============================================
-document.querySelectorAll('.dropbtn').forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var parent = this.parentElement;
-        parent.classList.toggle('active');
-    });
-});
-
-document.querySelectorAll('.sub-dropdown > a').forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        var parent = this.parentElement;
-        parent.classList.toggle('active');
-    });
-});
-
-document.addEventListener('click', function(e) {
-    if (!e.target.closest('.dropdown')) {
-        document.querySelectorAll('.dropdown').forEach(function(d) {
-            d.classList.remove('active');
+    if (optionsContainer) {
+        optionsContainer.innerHTML = '';
+        const shuffled = [...gameState.currentQuestion.options].sort(() => Math.random() - 0.5);
+        shuffled.forEach(option => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.textContent = option;
+            btn.onclick = () => checkAnswer(option);
+            optionsContainer.appendChild(btn);
         });
     }
+    
+    const feedback = document.getElementById('feedback');
+    if (feedback) {
+        feedback.textContent = '';
+    }
+}
+
+// ============================================
+// INITIALIZE - FIXED
+// ============================================
+function initGame() {
+    console.log('Initializing game...');
+    console.log('Question bank keys:', Object.keys(questionBank));
+    
+    // Set default values
+    gameState.currentGrade = 5;
+    gameState.gameMode = 'classic';
+    gameState.lives = 3;
+    gameState.character = 'normal';
+    gameState.characterXP = 0;
+    
+    // Update UI
+    updateDisplay();
+    updateModeDisplay();
+    
+    // Start the game
+    nextQuestion();
+}
+
+// Start the game when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Make sure all grade banks are populated
+    populateAllQuestionBanks();
+    initGame();
 });
 
 // ============================================
-// SERVICE WORKER
+// POPULATE ALL QUESTION BANKS - FIXED
 // ============================================
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
-        .then(function() { console.log('Service Worker registered'); })
-        .catch(function(err) { console.log('Service Worker registration failed:', err); });
+function populateAllQuestionBanks() {
+    const allGrades = ['grade4', 'grade5', 'grade6', 'grade7'];
+    const allCurricula = ['uae', 'us', 'uk', 'sa'];
+    
+    allCurricula.forEach(cur => {
+        allGrades.forEach(grade => {
+            const key = `${cur}_${grade}`;
+            
+            // Get the appropriate question bank
+            let bank = [];
+            if (grade === 'grade4') {
+                bank = grade4FullBank;
+            } else if (grade === 'grade5') {
+                bank = grade5FullBank;
+            } else if (grade === 'grade6') {
+                bank = grade6FullBank;
+            } else if (grade === 'grade7') {
+                bank = grade7FullBank;
+            }
+            
+            // Store in questionBank
+            questionBank[key] = bank.map(q => ({...q}));
+        });
+    });
+    
+    console.log('Question banks populated:', Object.keys(questionBank).length);
 }
-</script>
-    <script>
-    // Force reload if the page was loaded from cache
-    if (performance.navigation.type === 1) {
-        // Page was reloaded, don't do anything
-    } else if (performance.navigation.type === 2) {
-        // Page was loaded from cache
-        window.location.reload(true);
-    }
 </script>
 </body>
 </html>
