@@ -329,34 +329,59 @@ function setLanguage(lang) {
 }
 
 // ============================================
-// CURRICULUM
+// CURRICULUM - KEEP ONLY THIS VERSION
 // ============================================
 function setCurriculum(curriculum) {
     currentCurriculum = curriculum;
     document.querySelectorAll('.curriculum-btn').forEach(btn => {
         btn.className = 'curriculum-btn';
     });
-    if (event && event.target) {
-        event.target.classList.add(`active-${curriculum}`);
+    // Find the clicked button and add active class
+    const buttons = document.querySelectorAll('.curriculum-btn');
+    const curriculumMap = {'uae': 0, 'us': 1, 'uk': 2, 'sa': 3};
+    if (curriculumMap[curriculum] !== undefined && buttons[curriculumMap[curriculum]]) {
+        buttons[curriculumMap[curriculum]].classList.add(`active-${curriculum}`);
     }
+    
     const badge = document.getElementById('curriculumBadge');
     const info = curriculumInfo[curriculum];
     badge.textContent = `📚 ${info.flag}`;
     badge.className = `curriculum-badge ${info.badgeClass}`;
+    
     const display = document.getElementById('curriculumDisplay');
     display.textContent = `${info.flag} ${info.name}`;
+    
+    // Update grade button labels
     document.querySelectorAll('.grade-btn').forEach(btn => {
-        const grade = parseInt(btn.textContent.replace(/[^0-9]/g, ''));
+        const grade = parseInt(btn.getAttribute('data-grade') || btn.textContent.replace(/[^0-9]/g, ''));
         if (curriculum === 'uk') {
             const ukYearMap = {4:5, 5:6, 6:7, 7:8};
             btn.textContent = `Y${ukYearMap[grade] || grade + 1}`;
         } else {
             btn.textContent = `G${grade}`;
         }
+        btn.setAttribute('data-grade', grade);
     });
+    
     changeGrade(gameState.currentGrade);
 }
 
+// ============================================
+// LANGUAGE - Fix event reference
+// ============================================
+function setLanguage(lang) {
+    currentLanguage = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.body.classList.toggle('rtl', lang === 'ar');
+    document.querySelectorAll('[data-en][data-ar]').forEach(el => {
+        el.textContent = el.getAttribute(`data-${lang}`);
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    // Find the clicked button
+    const buttons = document.querySelectorAll('.lang-btn');
+    if (lang === 'en' && buttons[0]) buttons[0].classList.add('active');
+    else if (lang === 'ar' && buttons[1]) buttons[1].classList.add('active');
+}
     // ============================================
 // QUESTION BANK - EMPTY (will be filled later)
 // ============================================
