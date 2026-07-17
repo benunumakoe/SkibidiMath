@@ -315,20 +315,6 @@ let musicOn = false;
 function toggleMusic() { musicOn = !musicOn; document.querySelector('.music-toggle-btn').textContent = musicOn ? '🔊 Music On' : '🔇 Music Off'; }
 
 // ============================================
-// LANGUAGE
-// ============================================
-function setLanguage(lang) {
-    currentLanguage = lang;
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    document.body.classList.toggle('rtl', lang === 'ar');
-    document.querySelectorAll('[data-en][data-ar]').forEach(el => {
-        el.textContent = el.getAttribute(`data-${lang}`);
-    });
-    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-    if (event && event.target) event.target.classList.add('active');
-}
-
-// ============================================
 // CURRICULUM - KEEP ONLY THIS VERSION
 // ============================================
 function setCurriculum(curriculum) {
@@ -389,80 +375,6 @@ const questionBank = {};
     // ============================================
 // GRADE 5 - 500 QUESTION BANK
 // ============================================
-
-const grade5Core = [
-    // Multiplication
-    { question: "23 × 4 = ?", options: ["92", "82", "72", "102"], answer: "92", topic: "multiplication" },
-    { question: "45 × 6 = ?", options: ["270", "250", "260", "280"], answer: "270", topic: "multiplication" },
-    { question: "56 × 7 = ?", options: ["392", "382", "402", "412"], answer: "392", topic: "multiplication" },
-    { question: "67 × 8 = ?", options: ["536", "526", "546", "556"], answer: "536", topic: "multiplication" },
-    { question: "74 × 5 = ?", options: ["370", "360", "380", "390"], answer: "370", topic: "multiplication" },
-    { question: "38 × 6 = ?", options: ["228", "218", "238", "248"], answer: "228", topic: "multiplication" },
-    { question: "47 × 9 = ?", options: ["423", "413", "433", "443"], answer: "423", topic: "multiplication" },
-    { question: "52 × 8 = ?", options: ["416", "406", "426", "436"], answer: "416", topic: "multiplication" },
-    { question: "63 × 7 = ?", options: ["441", "431", "451", "461"], answer: "441", topic: "multiplication" },
-    { question: "29 × 6 = ?", options: ["174", "164", "184", "194"], answer: "174", topic: "multiplication" },
-    
-    // Division
-    { question: "144 ÷ 12 = ?", options: ["12", "14", "10", "16"], answer: "12", topic: "division" },
-    { question: "168 ÷ 14 = ?", options: ["12", "14", "10", "16"], answer: "12", topic: "division" },
-    { question: "192 ÷ 16 = ?", options: ["12", "14", "10", "16"], answer: "12", topic: "division" },
-    { question: "108 ÷ 9 = ?", options: ["12", "10", "14", "16"], answer: "12", topic: "division" },
-    { question: "84 ÷ 7 = ?", options: ["12", "10", "14", "16"], answer: "12", topic: "division" },
-    { question: "216 ÷ 18 = ?", options: ["12", "14", "10", "16"], answer: "12", topic: "division" },
-    { question: "256 ÷ 16 = ?", options: ["16", "14", "18", "20"], answer: "16", topic: "division" },
-    { question: "324 ÷ 18 = ?", options: ["18", "16", "20", "22"], answer: "18", topic: "division" },
-    { question: "175 ÷ 25 = ?", options: ["7", "5", "8", "6"], answer: "7", topic: "division" },
-    { question: "225 ÷ 15 = ?", options: ["15", "12", "18", "20"], answer: "15", topic: "division" },
-    
-    // Fractions
-    { question: "2/5 + 1/5 = ?", options: ["3/5", "2/5", "1/5", "4/5"], answer: "3/5", topic: "fractions" },
-    { question: "3/5 + 1/5 = ?", options: ["4/5", "3/5", "2/5", "1/5"], answer: "4/5", topic: "fractions" },
-    { question: "2/5 + 3/10 = ?", options: ["7/10", "5/10", "1/2", "3/5"], answer: "7/10", topic: "fractions" },
-    { question: "1/4 + 1/8 = ?", options: ["3/8", "2/8", "1/2", "3/4"], answer: "3/8", topic: "fractions" },
-    { question: "2/3 + 1/6 = ?", options: ["5/6", "1/2", "2/6", "3/4"], answer: "5/6", topic: "fractions" },
-    { question: "3/4 - 1/4 = ?", options: ["1/2", "1/4", "3/4", "1"], answer: "1/2", topic: "fractions" },
-    { question: "5/6 - 1/6 = ?", options: ["2/3", "1/2", "4/6", "5/6"], answer: "2/3", topic: "fractions" },
-    { question: "2/3 - 1/3 = ?", options: ["1/3", "2/3", "1", "1/2"], answer: "1/3", topic: "fractions" },
-    { question: "3/8 + 2/8 = ?", options: ["5/8", "3/8", "1/4", "5/16"], answer: "5/8", topic: "fractions" },
-    { question: "1/2 + 1/4 = ?", options: ["3/4", "1/4", "2/3", "1/2"], answer: "3/4", topic: "fractions" },
-    
-    // Decimals
-    { question: "0.75 + 0.25 = ?", options: ["1.0", "0.9", "1.1", "0.8"], answer: "1.0", topic: "decimals" },
-    { question: "0.6 + 0.3 = ?", options: ["0.9", "0.8", "1.0", "0.7"], answer: "0.9", topic: "decimals" },
-    { question: "0.7 × 0.4 = ?", options: ["0.28", "0.24", "0.32", "0.20"], answer: "0.28", topic: "decimals" },
-    { question: "0.6 × 0.5 = ?", options: ["0.30", "0.35", "0.25", "0.40"], answer: "0.30", topic: "decimals" },
-    { question: "0.8 × 0.6 = ?", options: ["0.48", "0.42", "0.56", "0.64"], answer: "0.48", topic: "decimals" },
-    { question: "0.4 + 0.5 = ?", options: ["0.9", "0.8", "1.0", "0.7"], answer: "0.9", topic: "decimals" },
-    { question: "0.3 + 0.7 = ?", options: ["1.0", "0.9", "1.1", "0.8"], answer: "1.0", topic: "decimals" },
-    { question: "0.25 + 0.25 = ?", options: ["0.5", "0.4", "0.6", "0.75"], answer: "0.5", topic: "decimals" },
-    { question: "0.5 × 0.5 = ?", options: ["0.25", "0.5", "0.75", "1.0"], answer: "0.25", topic: "decimals" },
-    { question: "0.2 × 0.8 = ?", options: ["0.16", "0.18", "0.14", "0.20"], answer: "0.16", topic: "decimals" },
-    
-    // Percent
-    { question: "What is 25% of 80?", options: ["20", "25", "30", "40"], answer: "20", topic: "percent" },
-    { question: "What is 20% of 60?", options: ["12", "15", "10", "18"], answer: "12", topic: "percent" },
-    { question: "What is 10% of 70?", options: ["7", "10", "5", "15"], answer: "7", topic: "percent" },
-    { question: "What is 30% of 150?", options: ["45", "50", "40", "55"], answer: "45", topic: "percent" },
-    { question: "What is 15% of 200?", options: ["30", "25", "35", "40"], answer: "30", topic: "percent" },
-    { question: "What is 50% of 120?", options: ["60", "50", "70", "40"], answer: "60", topic: "percent" },
-    { question: "What is 5% of 200?", options: ["10", "5", "15", "20"], answer: "10", topic: "percent" },
-    { question: "What is 75% of 80?", options: ["60", "70", "50", "65"], answer: "60", topic: "percent" },
-    { question: "What is 40% of 150?", options: ["60", "50", "70", "40"], answer: "60", topic: "percent" },
-    { question: "What is 60% of 200?", options: ["120", "100", "140", "160"], answer: "120", topic: "percent" },
-    
-    // Geometry
-    { question: "A rectangle has length 8 cm and width 3 cm. What is its area?", options: ["24", "22", "26", "20"], answer: "24", topic: "area" },
-    { question: "A triangle has base 6 cm and height 4 cm. What is its area?", options: ["12", "24", "10", "14"], answer: "12", topic: "area" },
-    { question: "A parallelogram has base 10 cm and height 4 cm. What is its area?", options: ["40", "30", "50", "20"], answer: "40", topic: "area" },
-    { question: "A square has side 6 cm. What is its perimeter?", options: ["24", "20", "28", "32"], answer: "24", topic: "perimeter" },
-    { question: "A rectangle has length 7 cm and width 2 cm. What is its perimeter?", options: ["18", "14", "16", "20"], answer: "18", topic: "perimeter" },
-    { question: "A triangle has sides 3 cm, 4 cm, and 5 cm. What is its perimeter?", options: ["12", "10", "14", "16"], answer: "12", topic: "perimeter" },
-    { question: "A circle has radius 3 cm. What is its circumference? (π=3.14)", options: ["18.84", "12.56", "9.42", "15.70"], answer: "18.84", topic: "circumference" },
-    { question: "A circle has radius 4 cm. What is its area? (π=3.14)", options: ["50.24", "25.12", "12.56", "37.68"], answer: "50.24", topic: "area" },
-    { question: "A rectangle has length 12 cm and width 5 cm. What is its area?", options: ["60", "50", "70", "40"], answer: "60", topic: "area" },
-    { question: "A square has side 9 cm. What is its area?", options: ["81", "72", "90", "64"], answer: "81", topic: "area" },
-];
 
 function generateGrade5Questions() {
     const generated = [];
