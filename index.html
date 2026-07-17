@@ -1632,6 +1632,178 @@ function populateAllQuestionBanks() {
     
     console.log('Question banks populated:', Object.keys(questionBank).length);
 }
+    // ============================================
+// UPDATE DISPLAY - ADD THIS
+// ============================================
+function updateDisplay() {
+    document.getElementById('score').textContent = gameState.score;
+    document.getElementById('level').textContent = gameState.level;
+    document.getElementById('streak').textContent = gameState.streak;
+    document.getElementById('questionsDone').textContent = gameState.questionsDone;
+    
+    const character = characters[gameState.character] || characters.normal;
+    document.getElementById('currentCharacterDisplay').textContent = `${character.emoji} ${character.name}`;
+    
+    const nextChar = document.getElementById('nextCharacter');
+    if (!nextChar) return;
+    if (gameState.characterXP < 100) {
+        nextChar.textContent = `🥷 Ninja (${100 - gameState.characterXP} XP needed)`;
+    } else if (gameState.characterXP < 500) {
+        nextChar.textContent = `🧙 Wizard (${500 - gameState.characterXP} XP needed)`;
+    } else if (gameState.characterXP < 1000) {
+        nextChar.textContent = `👑 Legend (${1000 - gameState.characterXP} XP needed)`;
+    } else {
+        nextChar.textContent = `👑 Max Level!`;
+    }
+}
+
+// ============================================
+// UPDATE MODE DISPLAY - ADD THIS
+// ============================================
+function updateModeDisplay() {
+    const modeStatus = document.getElementById('modeStatus');
+    const modeDetails = document.getElementById('modeDetails');
+    
+    if (!modeStatus) return;
+    
+    const modeNames = {
+        'classic': '🎮 Classic Mode',
+        'suddendeath': '💀 Sudden Death Mode',
+        'spacerace': '🚀 Space Race Mode',
+        'adventure': '🗺️ Adventure Mode'
+    };
+    
+    modeStatus.textContent = modeNames[gameState.gameMode] || 'Classic Mode';
+    
+    if (gameState.gameMode === 'suddendeath') {
+        if (modeDetails) modeDetails.innerHTML = `❤️ ${gameState.lives} lives left`;
+    } else if (gameState.gameMode === 'spacerace') {
+        if (modeDetails) modeDetails.innerHTML = `🚀 Position: ${gameState.racePosition}/${gameState.raceTotal}`;
+    } else {
+        if (modeDetails) modeDetails.innerHTML = '';
+    }
+}
+
+// ============================================
+// CHECK ANSWER - ADD THIS
+// ============================================
+function checkAnswer(selected) {
+    if (!gameState.canAnswer) return;
+    if (!gameState.currentQuestion) return;
+    
+    gameState.canAnswer = false;
+    const isCorrect = selected === gameState.currentQuestion.answer;
+    
+    document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.style.pointerEvents = 'none';
+        if (btn.textContent === gameState.currentQuestion.answer) {
+            btn.classList.add('correct');
+        } else if (btn.textContent === selected && !isCorrect) {
+            btn.classList.add('wrong');
+        }
+    });
+    
+    handleGameMode(isCorrect);
+    setTimeout(() => { nextQuestion(); }, 1500);
+}
+
+// ============================================
+// HANDLE GAME MODE - ADD THIS
+// ============================================
+function handleGameMode(isCorrect) {
+    const bonus = characters[gameState.character]?.bonus || 1;
+    const feedback = document.getElementById('feedback');
+    
+    if (isCorrect) {
+        const points = Math.floor(10 * gameState.level * bonus);
+        gameState.score += points;
+        gameState.streak++;
+        gameState.characterXP += 5;
+        gameState.questionsDone++;
+        if (feedback) feedback.textContent = `✅ Correct! +${points} points!`;
+        
+        if (gameState.gameMode === 'spacerace') {
+            gameState.racePosition++;
+            if (gameState.racePosition >= gameState.raceTotal) {
+                gameState.score += 100;
+                if (feedback) feedback.textContent = '🎉 Race Won! +100!';
+            }
+        }
+    } else {
+        gameState.streak = 0;
+        if (feedback) feedback.textContent = '❌ Try again!';
+        
+        if (gameState.gameMode === 'suddendeath') {
+            gameState.lives--;
+            if (gameState.lives <= 0) {
+                if (feedback) feedback.textContent = '💀 Game Over!';
+                gameState.lives = 3;
+            }
+        }
+    }
+    
+    if (gameState.streak % 5 === 0 && gameState.streak > 0) {
+        gameState.level++;
+    }
+    
+    checkCharacterUnlocks();
+    updateDisplay();
+    updateModeDisplay();
+}
+
+// ============================================
+// CHECK CHARACTER UNLOCKS - ADD THIS
+// ============================================
+function checkCharacterUnlocks() {
+    if (gameState.characterXP >= 100 && !gameState.characterUnlocked.ninja) {
+        gameState.characterUnlocked.ninja = true;
+        gameState.character = 'ninja';
+    }
+    if (gameState.characterXP >= 500 && !gameState.characterUnlocked.wizard) {
+        gameState.characterUnlocked.wizard = true;
+        gameState.character = 'wizard';
+    }
+    if (gameState.characterXP >= 1000 && !gameState.characterUnlocked.legend) {
+        gameState.characterUnlocked.legend = true;
+        gameState.character = 'legend';
+    }
+}
+
+// ============================================
+// CHANGE GRADE - ADD THIS
+// ============================================
+function changeGrade(grade) {
+    gameState.currentGrade = grade;
+    
+    document.querySelectorAll('.grade-btn').forEach(btn => {
+        btn.classList.remove('active');
+        const btnGrade = parseInt(btn.textContent.replace(/[^0-9]/g, ''));
+        if (btnGrade === grade) {
+            btn.classList.add('active');
+        }
+    });
+    
+    nextQuestion();
+}
+
+// ============================================
+// SET GAME MODE - ADD THIS
+// ============================================
+function setGameMode(mode) {
+    gameState.gameMode = mode;
+    gameState.lives = 3;
+    gameState.racePosition = 0;
+    
+    document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+    const modeMap = {'classic': 0, 'suddendeath': 1, 'spacerace': 2, 'adventure': 3};
+    const buttons = document.querySelectorAll('.mode-btn');
+    if (modeMap[mode] !== undefined && buttons[modeMap[mode]]) {
+        buttons[modeMap[mode]].classList.add('active');
+    }
+    
+    updateModeDisplay();
+    nextQuestion();
+}
 </script>
 </body>
 </html>
