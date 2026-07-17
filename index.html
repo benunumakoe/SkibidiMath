@@ -202,11 +202,11 @@
         </div>
 
         <div class="grade-selector">
-            <button class="grade-btn" onclick="changeGrade(4)">G4</button>
-            <button class="grade-btn active" onclick="changeGrade(5)">G5</button>
-            <button class="grade-btn" onclick="changeGrade(6)">G6</button>
-            <button class="grade-btn" onclick="changeGrade(7)">G7</button>
-        </div>
+    <button class="grade-btn" data-grade="4" onclick="changeGrade(4)">G4</button>
+    <button class="grade-btn active" data-grade="5" onclick="changeGrade(5)">G5</button>
+    <button class="grade-btn" data-grade="6" onclick="changeGrade(6)">G6</button>
+    <button class="grade-btn" data-grade="7" onclick="changeGrade(7)">G7</button>
+</div>
 
         <div class="mode-display" id="modeDisplay">
             <div id="modeStatus">Classic Mode</div>
@@ -357,9 +357,6 @@ function setCurriculum(curriculum) {
     changeGrade(gameState.currentGrade);
 }
 
-function setCurriculum(curriculum) {
-    // ... all the code ...
-}
     // ============================================
 // QUESTION BANK - EMPTY (will be filled later)
 // ============================================
