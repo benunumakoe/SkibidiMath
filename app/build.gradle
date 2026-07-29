@@ -1,0 +1,32 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    // Add if using Firebase
+    id 'com.google.gms.google-services'
+}
+
+android {
+    compileSdk 34
+    
+    defaultConfig {
+        applicationId "com.yourcompany.skibidimath"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+    }
+}
+
+dependencies {
+    // Core Billing Library
+    def billing_version = "6.1.0" // Use latest stable
+    
+    // Java/Kotlin
+    implementation "com.android.billingclient:billing:$billing_version"
+    
+    // Kotlin extensions (if using Kotlin)
+    implementation "com.android.billingclient:billing-ktx:$billing_version"
+    
+    // For testing
+    testImplementation 'junit:junit:4.13.2'
+}
