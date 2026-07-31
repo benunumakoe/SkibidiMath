@@ -1,32 +1,50 @@
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
-    // Add if using Firebase
-    id 'com.google.gms.google-services'
 }
 
 android {
+    namespace 'com.yourcompany.skibidimath'  // ⚠️ CHANGE THIS to your package name
     compileSdk 34
-    
+
     defaultConfig {
-        applicationId "com.yourcompany.skibidimath"
+        applicationId "com.yourcompany.skibidimath"  // ⚠️ CHANGE THIS
         minSdk 21
         targetSdk 34
         versionCode 1
         versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+    
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
-    // Core Billing Library
-    def billing_version = "6.1.0" // Use latest stable
+    // AndroidX Core
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.webkit:webkit:1.8.0'
     
-    // Java/Kotlin
+    // ⭐ GOOGLE PLAY BILLING ⭐
+    def billing_version = "6.1.0"
     implementation "com.android.billingclient:billing:$billing_version"
     
-    // Kotlin extensions (if using Kotlin)
-    implementation "com.android.billingclient:billing-ktx:$billing_version"
-    
-    // For testing
+    // Testing
     testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
