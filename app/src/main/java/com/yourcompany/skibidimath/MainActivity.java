@@ -97,3 +97,28 @@ public class MainActivity extends AppCompatActivity {
         billingManager.endConnection();
     }
 }
+// Add this class inside MainActivity.java
+public class JavaScriptInterface {
+    @android.webkit.JavascriptInterface
+    public void purchaseRemoveAds() {
+        MainActivity.this.purchaseRemoveAds();
+    }
+    
+    @android.webkit.JavascriptInterface
+    public void purchaseProPack() {
+        MainActivity.this.purchaseProPack();
+    }
+    
+    @android.webkit.JavascriptInterface
+    public boolean hasRemoveAds() {
+        return MainActivity.this.hasRemoveAds();
+    }
+    
+    @android.webkit.JavascriptInterface
+    public boolean hasProPack() {
+        return MainActivity.this.hasProPack();
+    }
+}
+
+// In setupWebView() add:
+webView.addJavascriptInterface(new JavaScriptInterface(), "AndroidInterface");
