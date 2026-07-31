@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">SkibidiMath</string>
+    
+    <!-- Purchase button texts -->
+    <string name="remove_ads">Remove Ads</string>
+    <string name="pro_pack">Pro Pack</string>
+    <string name="subscribe">Subscribe</string>
+    
+    <!-- Toast messages -->
+    <string name="purchase_success">Purchase successful! Thank you! 🎉</string>
+    <string name="purchase_cancelled">Purchase cancelled</string>
+    <string name="purchase_failed">Purchase failed</string>
+    <string name="already_purchased">Already purchased! ✅</string>
+</resources>
