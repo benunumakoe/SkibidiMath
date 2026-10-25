@@ -1,5 +1,5 @@
 /* ============================================
-   SKIBIDIMATH — APP UI STYLESHEET (v7)
+   SKIBIDIMATH — APP UI STYLESHEET (v8)
    ============================================ */
 
 :root {
@@ -224,7 +224,7 @@ body {
 .hero-character { position: absolute; right: -10px; bottom: -20px; width: 160px; height: 180px; display: flex; align-items: center; justify-content: center; z-index: 1; }
 .character-emoji { font-size: 8rem; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3)); }
 
-/* ============ SUPPORT BAR ============ */
+/* ============ SUPPORT BAR (Now clickable) ============ */
 .support-bar {
   background: white;
   border-radius: var(--radius-lg);
@@ -235,6 +235,12 @@ body {
   box-shadow: var(--shadow-sm);
   margin-bottom: 16px;
   border: 2px solid #eef2f7;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.support-bar:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: #cce0ff;
 }
 .support-left { display: flex; align-items: center; gap: 12px; }
 .coffee-icon { font-size: 2rem; }
