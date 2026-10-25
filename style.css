@@ -1,5 +1,5 @@
 /* ============================================
-   SKIBIDIMATH — APP UI STYLESHEET (v8)
+   SKIBIDIMATH — APP UI STYLESHEET (v9)
    ============================================ */
 
 :root {
@@ -224,7 +224,7 @@ body {
 .hero-character { position: absolute; right: -10px; bottom: -20px; width: 160px; height: 180px; display: flex; align-items: center; justify-content: center; z-index: 1; }
 .character-emoji { font-size: 8rem; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3)); }
 
-/* ============ SUPPORT BAR (Now clickable) ============ */
+/* ============ SUPPORT BAR ============ */
 .support-bar {
   background: white;
   border-radius: var(--radius-lg);
