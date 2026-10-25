@@ -4,7 +4,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5784217125471238"
      crossorigin="anonymous"></script>
     <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/style.css?v=3">
+    <link rel="stylesheet" href="/style.css?v=4">
     <meta charset="UTF-8">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
@@ -14,7 +14,16 @@
     <meta name="keywords" content="math game, math practice, grade 4 math, grade 5 math, grade 6 math, grade 7 math, UAE math, US math, UK math, SA math, free math game">
     <title>SkibidiMath - Free Math Game for Grades 4-7</title>
     <meta name="google-adsense-account" content="ca-pub-5784217125471238">
+    <meta name="theme-color" content="#4a7c2a">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+
+    <!-- Confetti library (for correct-answer celebration) -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 <!-- ===== NAVIGATION ===== -->
@@ -151,7 +160,7 @@
             </div>
         </div>
     </div>
-    
+
     <a href="/privacy.html">🔒 Privacy</a>
     <a href="/contact.html">📧 Contact</a>
     <a href="/terms.html">⚖️ Terms</a>
@@ -185,6 +194,11 @@
             <div class="stat-box"><span class="stat-label" data-en="Level" data-ar="المستوى">Level</span><span class="stat-value" id="level">1</span></div>
             <div class="stat-box"><span class="stat-label" data-en="Streak" data-ar="التتابع">Streak</span><span class="stat-value" id="streak">0</span></div>
             <div class="stat-box"><span class="stat-label" data-en="Questions" data-ar="الأسئلة">Questions</span><span class="stat-value" id="questionsDone">0</span></div>
+        </div>
+
+        <!-- NEW: XP progress bar -->
+        <div class="progress-wrap">
+            <div class="progress-fill" id="xpProgress"></div>
         </div>
 
         <div class="curriculum-selector">
@@ -243,7 +257,7 @@
             <div class="support-icon">💚</div>
             <h2 class="support-title">Keep SkibidiMath Free Forever</h2>
             <p class="support-description">
-                SkibidiMath will always be free. No ads. No paywalls. No subscriptions. 
+                SkibidiMath will always be free. No ads. No paywalls. No subscriptions.
                 If you believe every child deserves free math education, please consider supporting us.
             </p>
             <div class="support-buttons">
@@ -281,7 +295,39 @@
     </div>
 </div>
 
+<!-- Dark mode toggle (new) -->
+<button class="dark-toggle" id="darkToggle" title="Toggle dark mode">🌙</button>
+
 <script>
+// ============================================
+// AUDIO — synthesized tones (no files needed)
+// ============================================
+let audioCtx = null;
+function playTone(freq, duration, type) {
+    try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type || 'sine';
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain).connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+    } catch (e) { /* audio not available */ }
+}
+function playCorrectSound() { playTone(880, 0.15, 'sine'); setTimeout(() => playTone(1320, 0.2, 'sine'), 120); }
+function playWrongSound() { playTone(200, 0.3, 'sawtooth'); }
+
+// ============================================
+// CONFETTI
+// ============================================
+function fireConfetti() {
+    if (typeof confetti !== 'function') return;
+    confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+}
+
 // ============================================
 // GAME STATE
 // ============================================
@@ -297,20 +343,24 @@ let gameState = {
 
 const characters = {
     normal: { name: '🧑 Math Learner', emoji: '🧑', bonus: 1, xpRequired: 0 },
-    ninja: { name: '🥷 Math Ninja', emoji: '🥷', bonus: 1.2, xpRequired: 100 },
-    wizard: { name: '🧙 Math Wizard', emoji: '🧙', bonus: 1.5, xpRequired: 500 },
-    legend: { name: '👑 Math Legend', emoji: '👑', bonus: 2, xpRequired: 1000 }
+    ninja:  { name: '🥷 Math Ninja',   emoji: '🥷', bonus: 1.2, xpRequired: 100 },
+    wizard: { name: '🧙 Math Wizard',  emoji: '🧙', bonus: 1.5, xpRequired: 500 },
+    legend: { name: '👑 Math Legend',  emoji: '👑', bonus: 2,   xpRequired: 1000 }
 };
 
 const curriculumInfo = {
-    uae: { name: 'UAE Curriculum', flag: '🇦🇪', badgeClass: 'uae', gradePrefix: 'Grade' },
-    us: { name: 'US Common Core', flag: '🇺🇸', badgeClass: 'us', gradePrefix: 'Grade' },
-    uk: { name: 'UK Oxford Curriculum', flag: '🇬🇧', badgeClass: 'uk', gradePrefix: 'Year' },
-    sa: { name: 'SA CAPS', flag: '🇿🇦', badgeClass: 'sa', gradePrefix: 'Grade' }
+    uae: { name: 'UAE Curriculum',       flag: '🇦🇪', badgeClass: 'uae', gradePrefix: 'Grade' },
+    us:  { name: 'US Common Core',       flag: '🇺🇸', badgeClass: 'us',  gradePrefix: 'Grade' },
+    uk:  { name: 'UK Oxford Curriculum', flag: '🇬🇧', badgeClass: 'uk',  gradePrefix: 'Year'  },
+    sa:  { name: 'SA CAPS',              flag: '🇿🇦', badgeClass: 'sa',  gradePrefix: 'Grade' }
 };
 
 let musicOn = false;
-function toggleMusic() { musicOn = !musicOn; document.querySelector('.music-toggle-btn').textContent = musicOn ? '🔊 Music On' : '🔇 Music Off'; }
+function toggleMusic() {
+    musicOn = !musicOn;
+    document.querySelector('.music-toggle-btn').textContent = musicOn ? '🔊 Music On' : '🔇 Music Off';
+    if (musicOn) playTone(660, 0.1, 'sine');
+}
 
 // ============================================
 // LANGUAGE
@@ -337,92 +387,80 @@ function setCurriculum(curriculum) {
         btn.className = 'curriculum-btn';
     });
     const buttons = document.querySelectorAll('.curriculum-btn');
-    const curriculumMap = {'uae': 0, 'us': 1, 'uk': 2, 'sa': 3};
+    const curriculumMap = { uae: 0, us: 1, uk: 2, sa: 3 };
     if (curriculumMap[curriculum] !== undefined && buttons[curriculumMap[curriculum]]) {
         buttons[curriculumMap[curriculum]].classList.add(`active-${curriculum}`);
     }
-    
+
     const badge = document.getElementById('curriculumBadge');
     const info = curriculumInfo[curriculum];
     badge.textContent = `📚 ${info.flag}`;
     badge.className = `curriculum-badge ${info.badgeClass}`;
-    
+
     const display = document.getElementById('curriculumDisplay');
     display.textContent = `${info.flag} ${info.name}`;
-    
+
     document.querySelectorAll('.grade-btn').forEach(btn => {
         const grade = parseInt(btn.getAttribute('data-grade') || btn.textContent.replace(/[^0-9]/g, ''));
         if (curriculum === 'uk') {
-            const ukYearMap = {4:5, 5:6, 6:7, 7:8};
+            const ukYearMap = { 4: 5, 5: 6, 6: 7, 7: 8 };
             btn.textContent = `Y${ukYearMap[grade] || grade + 1}`;
         } else {
             btn.textContent = `G${grade}`;
         }
         btn.setAttribute('data-grade', grade);
     });
-    
+
     changeGrade(gameState.currentGrade);
 }
 
 // ============================================
-// QUESTION GENERATORS - SIMPLE & RELIABLE
+// QUESTION GENERATORS
 // ============================================
 function generateQuestionsForGrade(grade) {
     const questions = [];
     const topics = ['addition', 'subtraction', 'multiplication', 'division', 'fractions', 'decimals'];
     const count = 80;
-    
+
     for (let i = 0; i < count; i++) {
         const topic = topics[i % topics.length];
         let q = {};
         let a, b, answer, symbol, options;
         let maxNum = grade <= 4 ? 12 : (grade <= 5 ? 20 : (grade <= 6 ? 30 : 50));
-        
-        switch(topic) {
+
+        switch (topic) {
             case 'addition':
                 a = Math.floor(Math.random() * maxNum) + 1;
                 b = Math.floor(Math.random() * maxNum) + 1;
-                answer = a + b;
-                symbol = '+';
-                break;
+                answer = a + b; symbol = '+'; break;
             case 'subtraction':
                 a = Math.floor(Math.random() * maxNum) + maxNum;
                 b = Math.floor(Math.random() * a);
-                answer = a - b;
-                symbol = '−';
-                break;
+                answer = a - b; symbol = '−'; break;
             case 'multiplication':
                 a = Math.floor(Math.random() * (grade <= 4 ? 9 : 12)) + 1;
                 b = Math.floor(Math.random() * (grade <= 4 ? 9 : 12)) + 1;
-                answer = a * b;
-                symbol = '×';
-                break;
+                answer = a * b; symbol = '×'; break;
             case 'division':
                 b = Math.floor(Math.random() * (grade <= 4 ? 9 : 12)) + 1;
                 let c = Math.floor(Math.random() * (grade <= 4 ? 9 : 12)) + 1;
-                a = b * c;
-                answer = c;
-                symbol = '÷';
-                break;
+                a = b * c; answer = c; symbol = '÷'; break;
             case 'fractions':
                 if (grade >= 5) {
                     const denom = [2, 3, 4, 5, 6, 8, 10][Math.floor(Math.random() * 7)];
                     a = Math.floor(Math.random() * (denom - 1)) + 1;
                     b = Math.floor(Math.random() * (denom - a)) + 1;
-                    answer = `${a+b}/${denom}`;
+                    answer = `${a + b}/${denom}`;
                     q = {
                         question: `${a}/${denom} + ${b}/${denom} = ?`,
-                        options: [answer, `${a+b+1}/${denom}`, `${a+b-1}/${denom}`, `${a+b+2}/${denom}`].sort(() => Math.random() - 0.5),
-                        answer: answer,
-                        topic: 'fractions'
+                        options: [answer, `${a + b + 1}/${denom}`, `${a + b - 1}/${denom}`, `${a + b + 2}/${denom}`].sort(() => Math.random() - 0.5),
+                        answer: answer, topic: 'fractions'
                     };
-                    questions.push(q);
-                    continue;
+                    questions.push(q); continue;
                 } else {
                     a = Math.floor(Math.random() * 9) + 1;
                     b = Math.floor(Math.random() * 9) + 1;
-                    answer = a + b;
-                    symbol = '+';
+                    answer = a + b; symbol = '+';
                 }
                 break;
             case 'decimals':
@@ -433,21 +471,17 @@ function generateQuestionsForGrade(grade) {
                     q = {
                         question: `0.${a} + 0.${b} = ?`,
                         options: [decAnswer, ((a + b + 1) / 10).toFixed(1), ((a + b - 1) / 10).toFixed(1), ((a + b + 2) / 10).toFixed(1)].sort(() => Math.random() - 0.5),
-                        answer: decAnswer,
-                        topic: 'decimals'
+                        answer: decAnswer, topic: 'decimals'
                     };
-                    questions.push(q);
-                    continue;
+                    questions.push(q); continue;
                 } else {
                     a = Math.floor(Math.random() * 9) + 1;
                     b = Math.floor(Math.random() * 9) + 1;
-                    answer = a + b;
-                    symbol = '+';
+                    answer = a + b; symbol = '+';
                 }
                 break;
         }
-        
-        // For addition/subtraction/multiplication/division
+
         if (topic !== 'fractions' && topic !== 'decimals') {
             const wrongs = new Set();
             while (wrongs.size < 3) {
@@ -457,28 +491,25 @@ function generateQuestionsForGrade(grade) {
             q = {
                 question: `${a} ${symbol} ${b} = ?`,
                 options: [answer.toString(), ...Array.from(wrongs).map(String)].sort(() => Math.random() - 0.5),
-                answer: answer.toString(),
-                topic: topic
+                answer: answer.toString(), topic: topic
             };
             questions.push(q);
         }
     }
-    
-    // Add some word problems for higher grades
+
     if (grade >= 6) {
         for (let i = 0; i < 20; i++) {
             const num1 = Math.floor(Math.random() * 50) + 10;
             const num2 = Math.floor(Math.random() * 10) + 2;
-            const ans = num1 * num2;
             questions.push({
                 question: `If a school has ${num1} students and each classroom holds ${num2} students, how many classrooms are needed? (Round up)`,
-                options: [Math.ceil(num1/num2).toString(), (Math.ceil(num1/num2)+1).toString(), (Math.ceil(num1/num2)-1).toString(), (Math.ceil(num1/num2)+2).toString()].sort(() => Math.random() - 0.5),
-                answer: Math.ceil(num1/num2).toString(),
+                options: [Math.ceil(num1 / num2).toString(), (Math.ceil(num1 / num2) + 1).toString(), (Math.ceil(num1 / num2) - 1).toString(), (Math.ceil(num1 / num2) + 2).toString()].sort(() => Math.random() - 0.5),
+                answer: Math.ceil(num1 / num2).toString(),
                 topic: 'word problems'
             });
         }
     }
-    
+
     return questions;
 }
 
@@ -486,8 +517,6 @@ function generateQuestionsForGrade(grade) {
 // QUESTION BANK
 // ============================================
 const questionBank = {};
-
-// Generate banks for all grades and curricula
 const gradeLevels = ['grade4', 'grade5', 'grade6', 'grade7'];
 const curricula = ['uae', 'us', 'uk', 'sa'];
 
@@ -495,7 +524,7 @@ gradeLevels.forEach(grade => {
     const gradeNum = parseInt(grade.replace('grade', ''));
     const questions = generateQuestionsForGrade(gradeNum);
     curricula.forEach(cur => {
-        questionBank[`${cur}_${grade}`] = questions.map(q => ({...q}));
+        questionBank[`${cur}_${grade}`] = questions.map(q => ({ ...q }));
     });
 });
 
@@ -506,10 +535,8 @@ function getQuestionPool() {
     const grade = gameState.currentGrade;
     const curriculum = currentCurriculum;
     let gradeKey = `${curriculum}_grade${grade}`;
-    
     let pool = questionBank[gradeKey];
     if (!pool || pool.length === 0) {
-        // Fallback - generate simple questions on the fly
         const fallback = [];
         for (let i = 0; i < 20; i++) {
             const a = Math.floor(Math.random() * 20) + 1;
@@ -523,8 +550,7 @@ function getQuestionPool() {
             fallback.push({
                 question: `${a} + ${b} = ?`,
                 options: [answer.toString(), ...Array.from(wrongs).map(String)].sort(() => Math.random() - 0.5),
-                answer: answer.toString(),
-                topic: 'addition'
+                answer: answer.toString(), topic: 'addition'
             });
         }
         return fallback;
@@ -542,11 +568,10 @@ function nextQuestion() {
         document.getElementById('question').textContent = 'No questions available. Please refresh.';
         return;
     }
-    
     const randomIndex = Math.floor(Math.random() * pool.length);
     gameState.currentQuestion = pool[randomIndex];
     document.getElementById('question').textContent = gameState.currentQuestion.question;
-    
+
     const optionsContainer = document.getElementById('options');
     optionsContainer.innerHTML = '';
     const shuffled = [...gameState.currentQuestion.options].sort(() => Math.random() - 0.5);
@@ -557,7 +582,6 @@ function nextQuestion() {
         btn.onclick = () => checkAnswer(option);
         optionsContainer.appendChild(btn);
     });
-    
     document.getElementById('feedback').textContent = '';
 }
 
@@ -567,14 +591,14 @@ function nextQuestion() {
 function checkAnswer(selected) {
     if (!gameState.canAnswer || !gameState.currentQuestion) return;
     gameState.canAnswer = false;
-    
+
     const isCorrect = selected === gameState.currentQuestion.answer;
     document.querySelectorAll('.option-btn').forEach(btn => {
         btn.style.pointerEvents = 'none';
         if (btn.textContent === gameState.currentQuestion.answer) btn.classList.add('correct');
         else if (btn.textContent === selected && !isCorrect) btn.classList.add('wrong');
     });
-    
+
     if (isCorrect) {
         const points = 10 * gameState.level;
         gameState.score += points;
@@ -583,9 +607,12 @@ function checkAnswer(selected) {
         gameState.characterXP += 5;
         document.getElementById('feedback').textContent = `✅ Correct! +${points} points!`;
         if (gameState.streak % 5 === 0) gameState.level++;
+        playCorrectSound();
+        fireConfetti();
     } else {
         gameState.streak = 0;
         document.getElementById('feedback').textContent = '❌ Try again!';
+        playWrongSound();
         if (gameState.gameMode === 'suddendeath') {
             gameState.lives--;
             if (gameState.lives <= 0) {
@@ -594,7 +621,7 @@ function checkAnswer(selected) {
             }
         }
     }
-    
+
     checkCharacterUnlocks();
     updateDisplay();
     setTimeout(() => nextQuestion(), 1500);
@@ -608,10 +635,17 @@ function updateDisplay() {
     document.getElementById('level').textContent = gameState.level;
     document.getElementById('streak').textContent = gameState.streak;
     document.getElementById('questionsDone').textContent = gameState.questionsDone;
-    
+
     const character = characters[gameState.character] || characters.normal;
     document.getElementById('currentCharacterDisplay').textContent = `${character.emoji} ${character.name}`;
-    
+
+    // XP progress bar (fills 0 → 1000)
+    const xpBar = document.getElementById('xpProgress');
+    if (xpBar) {
+        const pct = Math.min(100, (gameState.characterXP / 1000) * 100);
+        xpBar.style.width = pct + '%';
+    }
+
     const nextChar = document.getElementById('nextCharacter');
     if (!nextChar) return;
     if (gameState.characterXP < 100) {
@@ -626,13 +660,12 @@ function updateDisplay() {
 }
 
 // ============================================
-// UPDATE MODE DISPLAY
+// MODE DISPLAY
 // ============================================
 function updateModeDisplay() {
     const modeStatus = document.getElementById('modeStatus');
     const modeDetails = document.getElementById('modeDetails');
     if (!modeStatus) return;
-    
     const modeNames = {
         'classic': '🎮 Classic Mode',
         'suddendeath': '💀 Sudden Death Mode',
@@ -640,7 +673,6 @@ function updateModeDisplay() {
         'adventure': '🗺️ Adventure Mode'
     };
     modeStatus.textContent = modeNames[gameState.gameMode] || 'Classic Mode';
-    
     if (gameState.gameMode === 'suddendeath') {
         modeDetails.innerHTML = `❤️ ${gameState.lives} lives left`;
     } else if (gameState.gameMode === 'spacerace') {
@@ -688,7 +720,7 @@ function setGameMode(mode) {
     gameState.lives = 3;
     gameState.racePosition = 0;
     document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-    const modeMap = {'classic': 0, 'suddendeath': 1, 'spacerace': 2, 'adventure': 3};
+    const modeMap = { 'classic': 0, 'suddendeath': 1, 'spacerace': 2, 'adventure': 3 };
     const buttons = document.querySelectorAll('.mode-btn');
     if (modeMap[mode] !== undefined && buttons[modeMap[mode]]) {
         buttons[modeMap[mode]].classList.add('active');
@@ -698,20 +730,37 @@ function setGameMode(mode) {
 }
 
 // ============================================
-// HINT FUNCTION
+// HINT
 // ============================================
-document.getElementById('hint-btn')?.addEventListener('click', function() {
+document.getElementById('hint-btn')?.addEventListener('click', function () {
     const hintMessage = document.getElementById('hint-message');
-    const question = document.getElementById('question')?.textContent || '';
     hintMessage.innerHTML = '💡 Break it down one step at a time!';
     hintMessage.style.display = 'block';
     setTimeout(() => { hintMessage.style.display = 'none'; }, 4000);
 });
 
 // ============================================
-// INITIALIZE
+// DARK MODE (persisted in localStorage)
 // ============================================
-document.addEventListener('DOMContentLoaded', function() {
+(function initDarkMode() {
+    const saved = localStorage.getItem('skibidi-dark');
+    if (saved === '1') document.body.classList.add('dark');
+    const btn = document.getElementById('darkToggle');
+    if (btn) {
+        btn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+        btn.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            btn.textContent = isDark ? '☀️' : '🌙';
+            localStorage.setItem('skibidi-dark', isDark ? '1' : '0');
+        });
+    }
+})();
+
+// ============================================
+// INIT
+// ============================================
+document.addEventListener('DOMContentLoaded', function () {
     console.log('🚀 SkibidiMath Initializing...');
     updateDisplay();
     updateModeDisplay();
@@ -720,27 +769,25 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================
-// DROPDOWN TOGGLE FOR MOBILE
+// DROPDOWN TOGGLE (MOBILE)
 // ============================================
-document.querySelectorAll('.dropbtn').forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
+document.querySelectorAll('.dropbtn').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
         this.parentElement.classList.toggle('active');
     });
 });
-
-document.querySelectorAll('.sub-dropdown > a').forEach(function(btn) {
-    btn.addEventListener('click', function(e) {
+document.querySelectorAll('.sub-dropdown > a').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
         e.preventDefault();
         e.stopPropagation();
         this.parentElement.classList.toggle('active');
     });
 });
-
-document.addEventListener('click', function(e) {
+document.addEventListener('click', function (e) {
     if (!e.target.closest('.dropdown')) {
-        document.querySelectorAll('.dropdown').forEach(function(d) {
+        document.querySelectorAll('.dropdown').forEach(function (d) {
             d.classList.remove('active');
         });
     }
@@ -751,8 +798,8 @@ document.addEventListener('click', function(e) {
 // ============================================
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js')
-        .then(function() { console.log('Service Worker registered'); })
-        .catch(function(err) { console.log('Service Worker registration failed:', err); });
+        .then(function () { console.log('Service Worker registered'); })
+        .catch(function (err) { console.log('Service Worker registration failed:', err); });
 }
 </script>
 </body>
