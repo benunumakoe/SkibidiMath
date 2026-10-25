@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5784217125471238"
+     crossorigin="anonymous"></script>
+    <link rel="manifest" href="/manifest.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SkibidiMath - Play, Learn, Excel</title>
-    <meta name="description" content="SkibidiMath - Free math practice game for grades 4-7.">
+    <meta name="description" content="SkibidiMath - Free math practice game for grades 4-7. Master multiplication, division, fractions, decimals, and more with fun game modes!">
+    <title>SkibidiMath - Free Math Game for Grades 4-7</title>
+    <meta name="google-adsense-account" content="ca-pub-5784217125471238">
     <meta name="theme-color" content="#0056b3">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
     
@@ -16,17 +20,19 @@
     <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     
-    <link rel="stylesheet" href="/style.css?v=6">
+    <link rel="stylesheet" href="/style.css?v=7">
 </head>
 <body>
 
-    <!-- ===== NAVIGATION BAR ===== -->
+    <!-- ===== NAVIGATION BAR (Fully Restored) ===== -->
     <nav class="top-nav">
         <a href="/">🏠 Home</a>
         <a href="/about.html">📖 About</a>
         <a href="/blog?ver=2">📝 Blog</a>
+        
+        <!-- Mega Dropdown -->
         <div class="dropdown">
-            <a href="#" class="dropbtn">📄 Worksheets ▼</a>
+            <a href="#" class="dropbtn" onclick="event.preventDefault(); this.parentElement.classList.toggle('active');">📄 Worksheets ▼</a>
             <div class="dropdown-content">
                 <div class="topic-header">📐 Order of Operations</div>
                 <div class="sub-dropdown">
@@ -37,6 +43,7 @@
                         <a href="/worksheets/order-of-operations/pemdas-advanced.pdf" target="_blank">Advanced</a>
                     </div>
                 </div>
+                
                 <div class="topic-header">🔢 Integers</div>
                 <div class="sub-dropdown">
                     <a href="#">Integer Operations ▸</a>
@@ -47,6 +54,7 @@
                         <a href="/worksheets/integers/integer-division.pdf" target="_blank">Division</a>
                     </div>
                 </div>
+                
                 <div class="topic-header">⚡ Exponents</div>
                 <div class="sub-dropdown">
                     <a href="#">Exponent Rules ▸</a>
@@ -56,7 +64,8 @@
                         <a href="/worksheets/exponents/scientific-notation.pdf" target="_blank">Scientific Notation</a>
                     </div>
                 </div>
-                <div class="topic-header">💯 Fractions</div>
+                
+                <div class="topic-header">💯 Fractions, Decimals &amp; Percents</div>
                 <div class="sub-dropdown">
                     <a href="#">Fractions ▸</a>
                     <div class="sub-dropdown-content">
@@ -78,6 +87,7 @@
                         <a href="/worksheets/fractions-decimals-percents/percents-word-problems.pdf" target="_blank">Word Problems</a>
                     </div>
                 </div>
+
                 <div class="topic-header">📐 Angles</div>
                 <div class="sub-dropdown">
                     <a href="#">Angle Worksheets ▸</a>
@@ -87,6 +97,7 @@
                         <a href="/worksheets/angles/complementary-supplementary.pdf" target="_blank">Complementary &amp; Supplementary</a>
                     </div>
                 </div>
+                
                 <div class="topic-header">📏 Area &amp; Perimeter</div>
                 <div class="sub-dropdown">
                     <a href="#">Area Worksheets ▸</a>
@@ -104,8 +115,60 @@
                         <a href="/worksheets/area-and-perimeter/perimeter-composite.pdf" target="_blank">Composite Perimeter</a>
                     </div>
                 </div>
+
+                <div class="topic-header">📦 Volume &amp; Surface Area</div>
+                <div class="sub-dropdown">
+                    <a href="#">Volume Worksheets ▸</a>
+                    <div class="sub-dropdown-content">
+                        <a href="/worksheets/volume-surface-area/volume-prisms.pdf" target="_blank">Volume of Prisms</a>
+                        <a href="/worksheets/volume-surface-area/volume-cylinders.pdf" target="_blank">Volume of Cylinders</a>
+                        <a href="/worksheets/volume-surface-area/volume-pyramids.pdf" target="_blank">Volume of Pyramids</a>
+                    </div>
+                </div>
+                <div class="sub-dropdown">
+                    <a href="#">Surface Area ▸</a>
+                    <div class="sub-dropdown-content">
+                        <a href="/worksheets/volume-surface-area/surface-area-prisms.pdf" target="_blank">Surface Area of Prisms</a>
+                        <a href="/worksheets/volume-surface-area/surface-area-cylinders.pdf" target="_blank">Surface Area of Cylinders</a>
+                    </div>
+                </div>
+
+                <div class="topic-header">📊 Rates, Ratios &amp; Proportions</div>
+                <div class="sub-dropdown">
+                    <a href="#">Ratios ▸</a>
+                    <div class="sub-dropdown-content">
+                        <a href="/worksheets/rates-ratios-proportions/ratios-basic.pdf" target="_blank">Basic Ratios</a>
+                        <a href="/worksheets/rates-ratios-proportions/ratios-word-problems.pdf" target="_blank">Word Problems</a>
+                    </div>
+                </div>
+                <div class="sub-dropdown">
+                    <a href="#">Proportions ▸</a>
+                    <div class="sub-dropdown-content">
+                        <a href="/worksheets/rates-ratios-proportions/proportions-basic.pdf" target="_blank">Basic Proportions</a>
+                        <a href="/worksheets/rates-ratios-proportions/proportions-word-problems.pdf" target="_blank">Word Problems</a>
+                    </div>
+                </div>
+
+                <div class="topic-header">✏️ Solving Equations</div>
+                <div class="sub-dropdown">
+                    <a href="#">One-Step Equations ▸</a>
+                    <div class="sub-dropdown-content">
+                        <a href="/worksheets/solving-equations/one-step-addition.pdf" target="_blank">Addition</a>
+                        <a href="/worksheets/solving-equations/one-step-subtraction.pdf" target="_blank">Subtraction</a>
+                        <a href="/worksheets/solving-equations/one-step-multiplication.pdf" target="_blank">Multiplication</a>
+                        <a href="/worksheets/solving-equations/one-step-division.pdf" target="_blank">Division</a>
+                    </div>
+                </div>
+                <div class="sub-dropdown">
+                    <a href="#">Two-Step Equations ▸</a>
+                    <div class="sub-dropdown-content">
+                        <a href="/worksheets/solving-equations/two-step-basic.pdf" target="_blank">Basic</a>
+                        <a href="/worksheets/solving-equations/two-step-word-problems.pdf" target="_blank">Word Problems</a>
+                    </div>
+                </div>
             </div>
         </div>
+        
         <a href="/privacy.html">🔒 Privacy</a>
         <a href="/contact.html">📧 Contact</a>
         <a href="/terms.html">⚖️ Terms</a>
@@ -230,25 +293,18 @@
 
     </main>
 
-    <!-- ===== ACTIVE GAME SCREEN (Hidden by default) ===== -->
+    <!-- ===== ACTIVE GAME SCREEN ===== -->
     <main class="app-container" id="game-screen" style="display: none;">
-        
         <button class="back-btn" onclick="exitGame()">‹ Back to Menu</button>
-
         <div class="game-header">
             <div class="mode-display" id="modeStatus">Classic Mode</div>
             <div class="xp-bar-wrap"><div class="xp-bar-fill" id="xpProgress"></div></div>
         </div>
-
         <div class="question-card" id="question">Loading...</div>
-        
         <div class="options-grid" id="options"></div>
-        
         <div class="feedback" id="feedback"></div>
-
         <button id="hint-btn" class="hint-btn">💡 Get Hint</button>
         <div id="hint-message" class="hint-box"></div>
-        
         <div class="character-bar">
             <div class="char-info"><span>Current:</span><strong id="currentCharacterDisplay">🧑 Learner</strong></div>
             <div class="char-info"><span>Next:</span><span id="nextCharacter">🥷 Ninja (100 XP)</span></div>
@@ -422,6 +478,22 @@ document.getElementById('hint-btn').addEventListener('click', () => {
     hint.textContent = '💡 Try counting on your fingers or drawing it out!';
     hint.style.display = 'block';
     setTimeout(() => { hint.style.display = 'none'; }, 4000);
+});
+
+// Mobile Dropdown fix
+document.querySelectorAll('.dropbtn, .sub-dropdown > a').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        if (window.innerWidth < 900) {
+            e.preventDefault();
+            e.stopPropagation();
+            this.parentElement.classList.toggle('active');
+        }
+    });
+});
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown, .sub-dropdown').forEach(d => d.classList.remove('active'));
+    }
 });
 </script>
 </body>
