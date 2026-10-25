@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5784217125471238"
-     crossorigin="anonymous"></script>
-    <link rel="manifest" href="/manifest.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="SkibidiMath - Free math practice game for grades 4-7. Master multiplication, division, fractions, decimals, and more with fun game modes!">
-    <title>SkibidiMath - Free Math Game for Grades 4-7</title>
-    <meta name="google-adsense-account" content="ca-pub-5784217125471238">
-    <meta name="theme-color" content="#0056b3">
+    <title>SkibidiMath - Play, Learn, Excel</title>
+    <meta name="theme-color" content="#1e73ff">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
     
     <!-- Fonts & Scripts -->
@@ -18,149 +13,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     
-    <link rel="stylesheet" href="/style.css?v=9">
+    <link rel="stylesheet" href="/style.css?v=10">
 </head>
 <body>
-
-    <!-- ===== TOP NAVIGATION & DROPDOWNS ===== -->
-    <nav class="top-nav">
-        <a href="/">🏠 Home</a>
-        <a href="/about.html">📖 About</a>
-        <a href="/blog?ver=2">📝 Blog</a>
-        
-        <div class="dropdown">
-            <a href="#" class="dropbtn" onclick="event.preventDefault(); this.parentElement.classList.toggle('active');">📄 Worksheets ▼</a>
-            <div class="dropdown-content">
-                <div class="topic-header">📐 Order of Operations</div>
-                <div class="sub-dropdown">
-                    <a href="#">PEMDAS ▸</a>
-                    <div class="sub-dropdown-content">
-                        <a href="/worksheets/order-of-operations/pemdas-basic.pdf" target="_blank">Basic</a>
-                        <a href="/worksheets/order-of-operations/pemdas-intermediate.pdf" target="_blank">Intermediate</a>
-                        <a href="/worksheets/order-of-operations/pemdas-advanced.pdf" target="_blank">Advanced</a>
-                    </div>
-                </div>
-                <div class="topic-header">🔢 Integers</div>
-                <div class="sub-dropdown">
-                    <a href="#">Integer Operations ▸</a>
-                    <div class="sub-dropdown-content">
-                        <a href="/worksheets/integers/integer-addition.pdf" target="_blank">Addition</a>
-                        <a href="/worksheets/integers/integer-subtraction.pdf" target="_blank">Subtraction</a>
-                        <a href="/worksheets/integers/integer-multiplication.pdf" target="_blank">Multiplication</a>
-                        <a href="/worksheets/integers/integer-division.pdf" target="_blank">Division</a>
-                    </div>
-                </div>
-                <div class="topic-header">⚡ Exponents</div>
-                <div class="sub-dropdown">
-                    <a href="#">Exponent Rules ▸</a>
-                    <div class="sub-dropdown-content">
-                        <a href="/worksheets/exponents/exponent-rules-basic.pdf" target="_blank">Basic Rules</a>
-                        <a href="/worksheets/exponents/exponent-rules-practice.pdf" target="_blank">Practice</a>
-                        <a href="/worksheets/exponents/scientific-notation.pdf" target="_blank">Scientific Notation</a>
-                    </div>
-                </div>
-                <div class="topic-header">💯 Fractions</div>
-                <div class="sub-dropdown">
-                    <a href="#">Fractions ▸</a>
-                    <div class="sub-dropdown-content">
-                        <a href="/worksheets/fractions-decimals-percents/fractions-basic.pdf" target="_blank">Basic Fractions</a>
-                        <a href="/worksheets/fractions-decimals-percents/fractions-operations.pdf" target="_blank">Operations</a>
-                    </div>
-                </div>
-                <div class="sub-dropdown">
-                    <a href="#">Decimals ▸</a>
-                    <div class="sub-dropdown-content">
-                        <a href="/worksheets/fractions-decimals-percents/decimals-basic.pdf" target="_blank">Basic Decimals</a>
-                        <a href="/worksheets/fractions-decimals-percents/decimals-operations.pdf" target="_blank">Operations</a>
-                    </div>
-                </div>
-                <div class="sub-dropdown">
-                    <a href="#">Percents ▸</a>
-                    <div class="sub-dropdown-content">
-                        <a href="/worksheets/fractions-decimals-percents/percents-basic.pdf" target="_blank">Basic Percents</a>
-                        <a href="/worksheets/fractions-decimals-percents/percents-word-problems.pdf" target="_blank">Word Problems</a>
-                    </div>
-                </div>
-                <div class="topic-header">📐 Angles</div>
-                <div class="sub-dropdown">
-                    <a href="#">Angle Worksheets ▸</a>
-                    <div class="sub-dropdown-content">
-                        <a href="/worksheets/angles/angle-types.pdf" target="_blank">Angle Types</a>
-                        <a href="/worksheets/angles/angle-measurement.pdf" target="_blank">Angle Measurement</a>
-                        <a href="/worksheets/angles/complementary-supplementary.pdf" target="_blank">Complementary &amp; Supplementary</a>
-                    </div>
-                </div>
-                <div class="topic-header">📏 Area &amp; Perimeter</div>
-                <div class="sub-dropdown">
-                    <a href="#">Area Worksheets ▸</a>
-                    <div class="sub-dropdown-content">
-                        <a href="/worksheets/area-and-perimeter/area-of-triangles.pdf" target="_blank">Area of Triangles</a>
-                        <a href="/worksheets/area-and-perimeter/area-of-rectangles.pdf" target="_blank">Area of Rectangles</a>
-                        <a href="/worksheets/area-and-perimeter/area-of-circles.pdf" target="_blank">Area of Circles</a>
-                        <a href="/worksheets/area-and-perimeter/area-of-composite.pdf" target="_blank">Composite Shapes</a>
-                    </div>
-                </div>
-                <div class="sub-dropdown">
-                    <a href="#">Perimeter Worksheets ▸</a>
-                    <div class="sub-dropdown-content">
-                        <a href="/worksheets/area-and-perimeter/perimeter-basic.pdf" target="_blank">Basic Perimeter</a>
-                        <a href="/worksheets/area-and-perimeter/perimeter-composite.pdf" target="_blank">Composite Perimeter</a>
-                    </div>
-                </div>
-                <div class="topic-header">📦 Volume &amp; Surface Area</div>
-                <div class="sub-dropdown">
-                    <a href="#">Volume Worksheets ▸</a>
-                    <div class="sub-dropdown-content">
-                        <a href="/worksheets/volume-surface-area/volume-prisms.pdf" target="_blank">Volume of Prisms</a>
-                        <a href="/worksheets/volume-surface-area/volume-cylinders.pdf" target="_blank">Volume of Cylinders</a>
-                        <a href="/worksheets/volume-surface-area/volume-pyramids.pdf" target="_blank">Volume of Pyramids</a>
-                    </div>
-                </div>
-                <div class="sub-dropdown">
-                    <a href="#">Surface Area ▸</a>
-                    <div class="sub-dropdown-content">
-                        <a href="/worksheets/volume-surface-area/surface-area-prisms.pdf" target="_blank">Surface Area of Prisms</a>
-                        <a href="/worksheets/volume-surface-area/surface-area-cylinders.pdf" target="_blank">Surface Area of Cylinders</a>
-                    </div>
-                </div>
-                <div class="topic-header">📊 Rates, Ratios &amp; Proportions</div>
-                <div class="sub-dropdown">
-                    <a href="#">Ratios ▸</a>
-                    <div class="sub-dropdown-content">
-                        <a href="/worksheets/rates-ratios-proportions/ratios-basic.pdf" target="_blank">Basic Ratios</a>
-                        <a href="/worksheets/rates-ratios-proportions/ratios-word-problems.pdf" target="_blank">Word Problems</a>
-                    </div>
-                </div>
-                <div class="sub-dropdown">
-                    <a href="#">Proportions ▸</a>
-                    <div class="sub-dropdown-content">
-                        <a href="/worksheets/rates-ratios-proportions/proportions-basic.pdf" target="_blank">Basic Proportions</a>
-                        <a href="/worksheets/rates-ratios-proportions/proportions-word-problems.pdf" target="_blank">Word Problems</a>
-                    </div>
-                </div>
-                <div class="topic-header">✏️ Solving Equations</div>
-                <div class="sub-dropdown">
-                    <a href="#">One-Step Equations ▸</a>
-                    <div class="sub-dropdown-content">
-                        <a href="/worksheets/solving-equations/one-step-addition.pdf" target="_blank">Addition</a>
-                        <a href="/worksheets/solving-equations/one-step-subtraction.pdf" target="_blank">Subtraction</a>
-                        <a href="/worksheets/solving-equations/one-step-multiplication.pdf" target="_blank">Multiplication</a>
-                        <a href="/worksheets/solving-equations/one-step-division.pdf" target="_blank">Division</a>
-                    </div>
-                </div>
-                <div class="sub-dropdown">
-                    <a href="#">Two-Step Equations ▸</a>
-                    <div class="sub-dropdown-content">
-                        <a href="/worksheets/solving-equations/two-step-basic.pdf" target="_blank">Basic</a>
-                        <a href="/worksheets/solving-equations/two-step-word-problems.pdf" target="_blank">Word Problems</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a href="/privacy.html">🔒 Privacy</a>
-        <a href="/contact.html">📧 Contact</a>
-        <a href="/terms.html">⚖️ Terms</a>
-    </nav>
 
     <!-- ===== TOP HEADER ===== -->
     <header class="top-header">
@@ -169,7 +24,7 @@
             <p>Play • Learn • Excel</p>
         </div>
         <div class="header-controls">
-            <!-- Removed UAE Button -->
+            <button class="control-pill">🇦🇪 UAE ▾</button>
             <button class="control-pill">🌐 EN ▾</button>
         </div>
     </header>
@@ -185,13 +40,15 @@
                 <button class="btn-play" onclick="scrollToModes()">▶ Start Playing ›</button>
             </div>
             <div class="hero-character">
+                <!-- REPLACE WITH 3D BOY IMAGE -->
                 <div class="character-emoji">👦🏽</div> 
             </div>
         </section>
 
         <!-- Ko-fi / Support Bar -->
-        <a href="https://ko-fi.com/skibidimath" target="_blank" class="support-bar" style="text-decoration: none; display: flex;">
+        <a href="https://ko-fi.com/skibidimath" target="_blank" class="support-bar">
             <div class="support-left">
+                <!-- REPLACE WITH 3D COFFEE CUP IMAGE -->
                 <span class="coffee-icon">☕</span>
                 <div>
                     <h4>Buy me a coffee</h4>
@@ -199,7 +56,7 @@
                 </div>
             </div>
             <div class="support-right">
-                <span class="logo-mini">Skibidi<br>MATH</span>
+                <span class="logo-mini">SKIBIDI<br>MATH</span>
             </div>
         </a>
 
@@ -227,10 +84,13 @@
             </div>
         </section>
 
-        <!-- Selectors (Now just one full-width button) -->
-        <section class="selector-row" style="grid-template-columns: 1fr;">
+        <!-- Selectors -->
+        <section class="selector-row">
             <button class="selector-btn">
                 <span class="icon-box">💬</span> English / العربية <span class="arrow">›</span>
+            </button>
+            <button class="selector-btn">
+                <span class="flag-icon">🇦🇪</span> UAE Curriculum <span class="arrow">›</span>
             </button>
         </section>
 
@@ -290,10 +150,6 @@
         <div class="feedback" id="feedback"></div>
         <button id="hint-btn" class="hint-btn">💡 Get Hint</button>
         <div id="hint-message" class="hint-box"></div>
-        <div class="character-bar">
-            <div class="char-info"><span>Current:</span><strong id="currentCharacterDisplay">🧑 Learner</strong></div>
-            <div class="char-info"><span>Next:</span><span id="nextCharacter">🥷 Ninja (100 XP)</span></div>
-        </div>
     </main>
 
     <!-- ===== BOTTOM NAVIGATION ===== -->
@@ -463,22 +319,6 @@ document.getElementById('hint-btn').addEventListener('click', () => {
     hint.textContent = '💡 Try counting on your fingers or drawing it out!';
     hint.style.display = 'block';
     setTimeout(() => { hint.style.display = 'none'; }, 4000);
-});
-
-// Mobile Dropdown fix
-document.querySelectorAll('.dropbtn, .sub-dropdown > a').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-        if (window.innerWidth < 900) {
-            e.preventDefault();
-            e.stopPropagation();
-            this.parentElement.classList.toggle('active');
-        }
-    });
-});
-document.addEventListener('click', function(e) {
-    if (!e.target.closest('.dropdown')) {
-        document.querySelectorAll('.dropdown, .sub-dropdown').forEach(d => d.classList.remove('active'));
-    }
 });
 </script>
 </body>
