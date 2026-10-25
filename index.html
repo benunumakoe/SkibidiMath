@@ -1,307 +1,207 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5784217125471238"
-     crossorigin="anonymous"></script>
-    <link rel="manifest" href="/manifest.json">
-    <link rel="stylesheet" href="/style.css?v=4">
     <meta charset="UTF-8">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <meta name="description" content="SkibidiMath - Free math practice game for grades 4-7. Master multiplication, division, fractions, decimals, and more with fun game modes!">
-    <meta name="keywords" content="math game, math practice, grade 4 math, grade 5 math, grade 6 math, grade 7 math, UAE math, US math, UK math, SA math, free math game">
-    <title>SkibidiMath - Free Math Game for Grades 4-7</title>
-    <meta name="google-adsense-account" content="ca-pub-5784217125471238">
-    <meta name="theme-color" content="#4a7c2a">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SkibidiMath - Play, Learn, Excel</title>
+    <meta name="description" content="SkibidiMath - Free math practice game for grades 4-7.">
+    <meta name="theme-color" content="#0056b3">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
-
-    <!-- Google Fonts -->
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
-
-    <!-- Confetti library (for correct-answer celebration) -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    
+    <link rel="stylesheet" href="/style.css?v=5">
 </head>
 <body>
-<!-- ===== NAVIGATION ===== -->
-<nav class="main-nav">
-    <a href="/">🏠 Home</a>
-    <a href="/about.html">📖 About</a>
-    <a href="/blog?ver=2">📝 Blog</a>
-    <div class="dropdown">
-        <a href="#" class="dropbtn">📄 Worksheets ▼</a>
-        <div class="dropdown-content">
-            <div class="topic-header">📐 Order of Operations</div>
-            <div class="sub-dropdown">
-                <a href="#">PEMDAS ▸</a>
-                <div class="sub-dropdown-content">
-                    <a href="/worksheets/order-of-operations/pemdas-basic.pdf" target="_blank">Basic</a>
-                    <a href="/worksheets/order-of-operations/pemdas-intermediate.pdf" target="_blank">Intermediate</a>
-                    <a href="/worksheets/order-of-operations/pemdas-advanced.pdf" target="_blank">Advanced</a>
-                </div>
-            </div>
-            <div class="topic-header">🔢 Integers</div>
-            <div class="sub-dropdown">
-                <a href="#">Integer Operations ▸</a>
-                <div class="sub-dropdown-content">
-                    <a href="/worksheets/integers/integer-addition.pdf" target="_blank">Addition</a>
-                    <a href="/worksheets/integers/integer-subtraction.pdf" target="_blank">Subtraction</a>
-                    <a href="/worksheets/integers/integer-multiplication.pdf" target="_blank">Multiplication</a>
-                    <a href="/worksheets/integers/integer-division.pdf" target="_blank">Division</a>
-                </div>
-            </div>
-            <div class="topic-header">⚡ Exponents</div>
-            <div class="sub-dropdown">
-                <a href="#">Exponent Rules ▸</a>
-                <div class="sub-dropdown-content">
-                    <a href="/worksheets/exponents/exponent-rules-basic.pdf" target="_blank">Basic Rules</a>
-                    <a href="/worksheets/exponents/exponent-rules-practice.pdf" target="_blank">Practice</a>
-                    <a href="/worksheets/exponents/scientific-notation.pdf" target="_blank">Scientific Notation</a>
-                </div>
-            </div>
-            <div class="topic-header">💯 Fractions, Decimals &amp; Percents</div>
-            <div class="sub-dropdown">
-                <a href="#">Fractions ▸</a>
-                <div class="sub-dropdown-content">
-                    <a href="/worksheets/fractions-decimals-percents/fractions-basic.pdf" target="_blank">Basic Fractions</a>
-                    <a href="/worksheets/fractions-decimals-percents/fractions-operations.pdf" target="_blank">Operations</a>
-                </div>
-            </div>
-            <div class="sub-dropdown">
-                <a href="#">Decimals ▸</a>
-                <div class="sub-dropdown-content">
-                    <a href="/worksheets/fractions-decimals-percents/decimals-basic.pdf" target="_blank">Basic Decimals</a>
-                    <a href="/worksheets/fractions-decimals-percents/decimals-operations.pdf" target="_blank">Operations</a>
-                </div>
-            </div>
-            <div class="sub-dropdown">
-                <a href="#">Percents ▸</a>
-                <div class="sub-dropdown-content">
-                    <a href="/worksheets/fractions-decimals-percents/percents-basic.pdf" target="_blank">Basic Percents</a>
-                    <a href="/worksheets/fractions-decimals-percents/percents-word-problems.pdf" target="_blank">Word Problems</a>
-                </div>
-            </div>
-            <div class="topic-header">📐 Angles</div>
-            <div class="sub-dropdown">
-                <a href="#">Angle Worksheets ▸</a>
-                <div class="sub-dropdown-content">
-                    <a href="/worksheets/angles/angle-types.pdf" target="_blank">Angle Types</a>
-                    <a href="/worksheets/angles/angle-measurement.pdf" target="_blank">Angle Measurement</a>
-                    <a href="/worksheets/angles/complementary-supplementary.pdf" target="_blank">Complementary &amp; Supplementary</a>
-                </div>
-            </div>
-            <div class="topic-header">📏 Area &amp; Perimeter</div>
-            <div class="sub-dropdown">
-                <a href="#">Area Worksheets ▸</a>
-                <div class="sub-dropdown-content">
-                    <a href="/worksheets/area-and-perimeter/area-of-triangles.pdf" target="_blank">Area of Triangles</a>
-                    <a href="/worksheets/area-and-perimeter/area-of-rectangles.pdf" target="_blank">Area of Rectangles</a>
-                    <a href="/worksheets/area-and-perimeter/area-of-circles.pdf" target="_blank">Area of Circles</a>
-                    <a href="/worksheets/area-and-perimeter/area-of-composite.pdf" target="_blank">Composite Shapes</a>
-                </div>
-            </div>
-            <div class="sub-dropdown">
-                <a href="#">Perimeter Worksheets ▸</a>
-                <div class="sub-dropdown-content">
-                    <a href="/worksheets/area-and-perimeter/perimeter-basic.pdf" target="_blank">Basic Perimeter</a>
-                    <a href="/worksheets/area-and-perimeter/perimeter-composite.pdf" target="_blank">Composite Perimeter</a>
-                </div>
-            </div>
-            <div class="topic-header">📦 Volume &amp; Surface Area</div>
-            <div class="sub-dropdown">
-                <a href="#">Volume Worksheets ▸</a>
-                <div class="sub-dropdown-content">
-                    <a href="/worksheets/volume-surface-area/volume-prisms.pdf" target="_blank">Volume of Prisms</a>
-                    <a href="/worksheets/volume-surface-area/volume-cylinders.pdf" target="_blank">Volume of Cylinders</a>
-                    <a href="/worksheets/volume-surface-area/volume-pyramids.pdf" target="_blank">Volume of Pyramids</a>
-                </div>
-            </div>
-            <div class="sub-dropdown">
-                <a href="#">Surface Area ▸</a>
-                <div class="sub-dropdown-content">
-                    <a href="/worksheets/volume-surface-area/surface-area-prisms.pdf" target="_blank">Surface Area of Prisms</a>
-                    <a href="/worksheets/volume-surface-area/surface-area-cylinders.pdf" target="_blank">Surface Area of Cylinders</a>
-                </div>
-            </div>
-            <div class="topic-header">📊 Rates, Ratios &amp; Proportions</div>
-            <div class="sub-dropdown">
-                <a href="#">Ratios ▸</a>
-                <div class="sub-dropdown-content">
-                    <a href="/worksheets/rates-ratios-proportions/ratios-basic.pdf" target="_blank">Basic Ratios</a>
-                    <a href="/worksheets/rates-ratios-proportions/ratios-word-problems.pdf" target="_blank">Word Problems</a>
-                </div>
-            </div>
-            <div class="sub-dropdown">
-                <a href="#">Proportions ▸</a>
-                <div class="sub-dropdown-content">
-                    <a href="/worksheets/rates-ratios-proportions/proportions-basic.pdf" target="_blank">Basic Proportions</a>
-                    <a href="/worksheets/rates-ratios-proportions/proportions-word-problems.pdf" target="_blank">Word Problems</a>
-                </div>
-            </div>
-            <div class="topic-header">✏️ Solving Equations</div>
-            <div class="sub-dropdown">
-                <a href="#">One-Step Equations ▸</a>
-                <div class="sub-dropdown-content">
-                    <a href="/worksheets/solving-equations/one-step-addition.pdf" target="_blank">Addition</a>
-                    <a href="/worksheets/solving-equations/one-step-subtraction.pdf" target="_blank">Subtraction</a>
-                    <a href="/worksheets/solving-equations/one-step-multiplication.pdf" target="_blank">Multiplication</a>
-                    <a href="/worksheets/solving-equations/one-step-division.pdf" target="_blank">Division</a>
-                </div>
-            </div>
-            <div class="sub-dropdown">
-                <a href="#">Two-Step Equations ▸</a>
-                <div class="sub-dropdown-content">
-                    <a href="/worksheets/solving-equations/two-step-basic.pdf" target="_blank">Basic</a>
-                    <a href="/worksheets/solving-equations/two-step-word-problems.pdf" target="_blank">Word Problems</a>
-                </div>
-            </div>
+
+    <!-- ===== TOP HEADER ===== -->
+    <header class="top-header">
+        <div class="logo-area">
+            <h1>SkibidiMath</h1>
+            <p>Play • Learn • Excel</p>
         </div>
-    </div>
-
-    <a href="/privacy.html">🔒 Privacy</a>
-    <a href="/contact.html">📧 Contact</a>
-    <a href="/terms.html">⚖️ Terms</a>
-</nav>
-
-<!-- ===== GAME WRAPPER ===== -->
-<div class="game-wrapper" id="game">
-    <div class="game-container">
-        <div class="kofi-button">
-            <a href='https://ko-fi.com/skibidimath' target='_blank'>
-                <img height='50' style='border:0px; height:50px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Support Me on Ko-fi' />
-            </a>
+        <div class="header-controls">
+            <button class="control-pill">🇦🇪 UAE ▾</button>
+            <button class="control-pill">🌐 EN ▾</button>
         </div>
+    </header>
 
-        <div class="header">
-            <h1>🧮 SKIBIDI MATH</h1>
-            <div class="header-top-row">
-                <div class="badge-container">
-                    <span class="uae-badge">🇦🇪 500+ QUESTIONS</span>
-                    <span class="curriculum-badge uae" id="curriculumBadge">📚 UAE</span>
-                </div>
-                <div class="language-toggle">
-                    <button class="lang-btn active" onclick="setLanguage('en')">🇬🇧 EN</button>
-                    <button class="lang-btn" onclick="setLanguage('ar')">🇦🇪 عربي</button>
+    <!-- ===== MAIN APP CONTAINER ===== -->
+    <main class="app-container" id="menu-screen">
+        
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-text">
+                <h2>Sharpen Your<br><span>Math Skills!</span></h2>
+                <p>Fun. Interactive. Curriculum-Aligned.</p>
+                <button class="btn-play" onclick="scrollToModes()">▶ Start Playing ›</button>
+            </div>
+            <div class="hero-character">
+                <!-- Placeholder for the 3D boy image. Using emoji for now. -->
+                <div class="character-emoji">👦🏽</div> 
+            </div>
+        </section>
+
+        <!-- Ko-fi / Support Bar -->
+        <section class="support-bar">
+            <div class="support-left">
+                <span class="coffee-icon">☕</span>
+                <div>
+                    <h4>Buy me a coffee</h4>
+                    <p>Support our mission ❤️</p>
                 </div>
             </div>
-        </div>
+            <div class="support-right">
+                <span class="logo-mini">Skibidi<br>MATH</span>
+            </div>
+        </section>
 
-        <div class="stats">
-            <div class="stat-box"><span class="stat-label" data-en="Score" data-ar="النتيجة">Score</span><span class="stat-value" id="score">0</span></div>
-            <div class="stat-box"><span class="stat-label" data-en="Level" data-ar="المستوى">Level</span><span class="stat-value" id="level">1</span></div>
-            <div class="stat-box"><span class="stat-label" data-en="Streak" data-ar="التتابع">Streak</span><span class="stat-value" id="streak">0</span></div>
-            <div class="stat-box"><span class="stat-label" data-en="Questions" data-ar="الأسئلة">Questions</span><span class="stat-value" id="questionsDone">0</span></div>
-        </div>
+        <!-- Stats Grid -->
+        <section class="stats-grid">
+            <div class="stat-card stat-score">
+                <span class="stat-icon">🏆</span>
+                <span class="stat-label">Score</span>
+                <span class="stat-value" id="score">0</span>
+            </div>
+            <div class="stat-card stat-level">
+                <span class="stat-icon">⭐</span>
+                <span class="stat-label">Level</span>
+                <span class="stat-value" id="level">1</span>
+            </div>
+            <div class="stat-card stat-streak">
+                <span class="stat-icon">🔥</span>
+                <span class="stat-label">Streak</span>
+                <span class="stat-value" id="streak">0</span>
+            </div>
+            <div class="stat-card stat-questions">
+                <span class="stat-icon">✅</span>
+                <span class="stat-label">Questions</span>
+                <span class="stat-value" id="questionsDone">0</span>
+            </div>
+        </section>
 
-        <!-- NEW: XP progress bar -->
-        <div class="progress-wrap">
-            <div class="progress-fill" id="xpProgress"></div>
-        </div>
+        <!-- Selectors -->
+        <section class="selector-row">
+            <button class="selector-btn">
+                <span class="icon-box">💬</span> English / العربية <span class="arrow">›</span>
+            </button>
+            <button class="selector-btn">
+                <span class="flag-icon">🇦🇪</span> UAE Curriculum <span class="arrow">›</span>
+            </button>
+        </section>
 
-        <div class="curriculum-selector">
-            <button class="curriculum-btn active-uae" onclick="setCurriculum('uae')">🇦🇪 UAE</button>
-            <button class="curriculum-btn" onclick="setCurriculum('us')">🇺🇸 US</button>
-            <button class="curriculum-btn" onclick="setCurriculum('uk')">🇬🇧 UK</button>
-            <button class="curriculum-btn" onclick="setCurriculum('sa')">🇿🇦 SA</button>
-        </div>
+        <!-- Game Modes Title -->
+        <h3 class="section-title">🎮 Choose a Game Mode</h3>
 
-        <div class="mode-selector">
-            <button class="mode-btn active" onclick="setGameMode('classic')"><span>🎮</span><span data-en="Classic" data-ar="كلاسيكي">Classic</span></button>
-            <button class="mode-btn" onclick="setGameMode('suddendeath')"><span>💀</span><span data-en="Sudden Death" data-ar="الموت">Sudden</span></button>
-            <button class="mode-btn" onclick="setGameMode('spacerace')"><span>🚀</span><span data-en="Space Race" data-ar="سباق">Space</span></button>
-            <button class="mode-btn" onclick="setGameMode('adventure')"><span>🗺️</span><span data-en="Adventure" data-ar="مغامرة">Adventure</span></button>
-        </div>
+        <!-- Game Modes Grid -->
+        <section class="modes-grid" id="game-modes">
+            <!-- Classic -->
+            <button class="mode-card card-classic" onclick="startGame('classic')">
+                <div class="mode-img">🏆</div>
+                <div class="mode-footer">Classic <span class="arrow-circle">›</span></div>
+            </button>
+            <!-- Sudden Death -->
+            <button class="mode-card card-sudden" onclick="startGame('suddendeath')">
+                <div class="mode-img">🚀</div>
+                <div class="mode-footer">Sudden <span class="arrow-circle">›</span></div>
+            </button>
+            <!-- Space Race -->
+            <button class="mode-card card-space" onclick="startGame('spacerace')">
+                <div class="mode-img">👨‍🚀</div>
+                <div class="mode-footer">Space <span class="arrow-circle">›</span></div>
+            </button>
+            <!-- Adventure -->
+            <button class="mode-card card-adventure" onclick="startGame('adventure')">
+                <div class="mode-img">⛰️</div>
+                <div class="mode-footer">Adventure <span class="arrow-circle">›</span></div>
+            </button>
+            <!-- Challenge -->
+            <button class="mode-card card-challenge" onclick="startGame('classic')">
+                <div class="mode-img">🎯</div>
+                <div class="mode-footer">Challenge <span class="arrow-circle">›</span></div>
+            </button>
+            <!-- Tournament -->
+            <button class="mode-card card-tournament" onclick="startGame('classic')">
+                <div class="mode-img">👑</div>
+                <div class="mode-footer">Tournament <span class="arrow-circle">›</span></div>
+            </button>
+        </section>
 
-        <div class="grade-selector">
+        <!-- Grade Title -->
+        <h3 class="section-title">🎓 Select Your Grade</h3>
+
+        <!-- Grade Selector -->
+        <section class="grades-row">
             <button class="grade-btn" data-grade="4" onclick="changeGrade(4)">G4</button>
             <button class="grade-btn active" data-grade="5" onclick="changeGrade(5)">G5</button>
             <button class="grade-btn" data-grade="6" onclick="changeGrade(6)">G6</button>
             <button class="grade-btn" data-grade="7" onclick="changeGrade(7)">G7</button>
+        </section>
+
+    </main>
+
+    <!-- ===== ACTIVE GAME SCREEN (Hidden by default) ===== -->
+    <main class="app-container" id="game-screen" style="display: none;">
+        
+        <button class="back-btn" onclick="exitGame()">‹ Back to Menu</button>
+
+        <div class="game-header">
+            <div class="mode-display" id="modeStatus">Classic Mode</div>
+            <div class="xp-bar-wrap"><div class="xp-bar-fill" id="xpProgress"></div></div>
         </div>
 
-        <div class="mode-display" id="modeDisplay">
-            <div id="modeStatus">Classic Mode</div>
-            <div id="modeDetails"></div>
-            <div id="curriculumDisplay" style="font-size: 0.85rem; color: var(--army-green); font-weight: 700; margin-top: 5px;">🇦🇪 UAE Curriculum</div>
-        </div>
+        <div class="question-card" id="question">Loading...</div>
+        
+        <div class="options-grid" id="options"></div>
+        
+        <div class="feedback" id="feedback"></div>
 
-        <div class="game-area">
-            <div class="question-box" id="question">Loading...</div>
-            <div class="options-grid" id="options"></div>
-            <div class="feedback" id="feedback"></div>
-        </div>
-
-        <div style="text-align: center; margin: 15px 0;">
-            <button id="hint-btn">💡 Get Hint</button>
-        </div>
-        <div id="hint-message" style="text-align: center; margin-top: 10px; padding: 10px; background: rgba(255, 243, 205, 0.6); backdrop-filter: blur(4px); border-radius: 12px; color: #856404; font-style: italic; display: none;"></div>
-
+        <button id="hint-btn" class="hint-btn">💡 Get Hint</button>
+        <div id="hint-message" class="hint-box"></div>
+        
         <div class="character-bar">
-            <div class="character-info"><span>Current:</span><strong id="currentCharacterDisplay">🧑 Math Learner</strong></div>
-            <div class="character-info"><span>Next:</span><span id="nextCharacter">🥷 Ninja (100 XP)</span></div>
+            <div class="char-info"><span>Current:</span><strong id="currentCharacterDisplay">🧑 Learner</strong></div>
+            <div class="char-info"><span>Next:</span><span id="nextCharacter">🥷 Ninja (100 XP)</span></div>
         </div>
+    </main>
 
-        <div class="footer-section">
-            <div class="footer-badges">
-                <button onclick="toggleMusic()" class="music-toggle-btn">🔊 Music On</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== SUPPORT US SECTION ===== -->
-    <div class="support-section">
-        <div class="support-content">
-            <div class="support-icon">💚</div>
-            <h2 class="support-title">Keep SkibidiMath Free Forever</h2>
-            <p class="support-description">
-                SkibidiMath will always be free. No ads. No paywalls. No subscriptions.
-                If you believe every child deserves free math education, please consider supporting us.
-            </p>
-            <div class="support-buttons">
-                <a href="https://ko-fi.com/skibidimath" target="_blank" class="support-btn">
-                    ☕ Buy Me a Coffee
-                </a>
-                <span class="support-note">— Even $5 helps!</span>
-            </div>
-            <p class="support-message">
-                Your support keeps this platform running and free for everyone.
-            </p>
-        </div>
-    </div>
-
-    <div class="educational-content">
-        <h2>🎓 Master Math with SkibidiMath</h2>
-        <p>SkibidiMath is a <strong>free, gamified math practice platform</strong> designed for students in grades 4-7. Research shows that gamified learning increases retention by up to 60% compared to traditional worksheets. Our platform combines engaging gameplay with comprehensive math practice to help students build confidence and mastery.</p>
-        <h3>📚 Topics Covered</h3>
-        <div class="topics-grid">
-            <div class="topic-item">✖️ Multiplication (1-4 digit)</div><div class="topic-item">➗ Division with remainders</div>
-            <div class="topic-item">🔢 Fractions & equivalents</div><div class="topic-item">💯 Decimals & percentages</div>
-            <div class="topic-item">📐 Geometry (area, perimeter, volume)</div><div class="topic-item">🔤 Algebraic expressions</div>
-            <div class="topic-item">📝 Word problems</div><div class="topic-item">⚡ Order of operations (PEMDAS)</div>
-            <div class="topic-item">📊 Ratios & proportions</div><div class="topic-item">🎲 Statistics & probability</div>
-            <div class="topic-item">📍 Coordinate plane</div>
-            <div class="topic-item" style="background: rgba(232, 245, 233, 0.5); border-color: var(--army-green);">🌍 4 Curricula: UAE • US • UK • SA</div>
-        </div>
-        <h3>🏆 Game Modes</h3>
-        <p><strong>Classic Mode</strong> - Standard scoring with level progression. <strong>Sudden Death</strong> - One wrong answer ends the game. <strong>Space Race</strong> - Answer correctly to move your rocket forward. <strong>Adventure Mode</strong> - Journey through increasingly difficult math challenges.</p>
-        <h3>⭐ Character Progression System</h3>
-        <p>Earn XP with every correct answer to unlock new characters: Math Learner → Math Ninja (100 XP) → Math Wizard (500 XP) → Math Legend (1000 XP).</p>
-        <h3>🌍 Four Curricula, One Platform</h3>
-        <p>SkibidiMath now proudly supports <strong>UAE National Curriculum, US Common Core, UK Oxford Curriculum, and South African CAPS</strong>. Switch between curricula with one click!</p>
-        <p style="margin-top: 20px; font-style: italic;">Start practicing now—no account required, completely free!</p>
-    </div>
-</div>
-
-<!-- Dark mode toggle (new) -->
-<button class="dark-toggle" id="darkToggle" title="Toggle dark mode">🌙</button>
+    <!-- ===== BOTTOM NAVIGATION ===== -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon">📊</span>
+            <span class="nav-label">Stats</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon">🏆</span>
+            <span class="nav-label">Leaderboard</span>
+        </a>
+        <a href="#" class="nav-item">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-label">Settings</span>
+        </a>
+    </nav>
 
 <script>
 // ============================================
-// AUDIO — synthesized tones (no files needed)
+// APP STATE & LOGIC
 // ============================================
+let gameState = {
+    score: 0, level: 1, streak: 0, questionsDone: 0, currentGrade: 5,
+    currentQuestion: null, canAnswer: true, gameMode: 'classic', lives: 3,
+    character: 'normal', characterXP: 0
+};
+
+// Audio Synth
 let audioCtx = null;
 function playTone(freq, duration, type) {
     try {
@@ -315,492 +215,134 @@ function playTone(freq, duration, type) {
         osc.connect(gain).connect(audioCtx.destination);
         osc.start();
         osc.stop(audioCtx.currentTime + duration);
-    } catch (e) { /* audio not available */ }
+    } catch (e) { }
 }
-function playCorrectSound() { playTone(880, 0.15, 'sine'); setTimeout(() => playTone(1320, 0.2, 'sine'), 120); }
-function playWrongSound() { playTone(200, 0.3, 'sawtooth'); }
+function playCorrect() { playTone(880, 0.15); setTimeout(() => playTone(1320, 0.2), 120); }
+function playWrong() { playTone(200, 0.3, 'sawtooth'); }
 
-// ============================================
-// CONFETTI
-// ============================================
-function fireConfetti() {
-    if (typeof confetti !== 'function') return;
-    confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+// UI Navigation
+function scrollToModes() {
+    document.getElementById('game-modes').scrollIntoView({ behavior: 'smooth' });
 }
 
-// ============================================
-// GAME STATE
-// ============================================
-let currentLanguage = 'en';
-let currentCurriculum = 'uae';
-let gameState = {
-    score: 0, level: 1, streak: 0, questionsDone: 0, currentGrade: 5,
-    currentQuestion: null, canAnswer: true, gameMode: 'classic', lives: 3,
-    timeBonus: 0, racePosition: 0, raceTotal: 10, boardPosition: 1, boardSize: 25,
-    uaeMode: false, character: 'normal', characterXP: 0,
-    characterUnlocked: { ninja: false, wizard: false, legend: false }
-};
-
-const characters = {
-    normal: { name: '🧑 Math Learner', emoji: '🧑', bonus: 1, xpRequired: 0 },
-    ninja:  { name: '🥷 Math Ninja',   emoji: '🥷', bonus: 1.2, xpRequired: 100 },
-    wizard: { name: '🧙 Math Wizard',  emoji: '🧙', bonus: 1.5, xpRequired: 500 },
-    legend: { name: '👑 Math Legend',  emoji: '👑', bonus: 2,   xpRequired: 1000 }
-};
-
-const curriculumInfo = {
-    uae: { name: 'UAE Curriculum',       flag: '🇦🇪', badgeClass: 'uae', gradePrefix: 'Grade' },
-    us:  { name: 'US Common Core',       flag: '🇺🇸', badgeClass: 'us',  gradePrefix: 'Grade' },
-    uk:  { name: 'UK Oxford Curriculum', flag: '🇬🇧', badgeClass: 'uk',  gradePrefix: 'Year'  },
-    sa:  { name: 'SA CAPS',              flag: '🇿🇦', badgeClass: 'sa',  gradePrefix: 'Grade' }
-};
-
-let musicOn = false;
-function toggleMusic() {
-    musicOn = !musicOn;
-    document.querySelector('.music-toggle-btn').textContent = musicOn ? '🔊 Music On' : '🔇 Music Off';
-    if (musicOn) playTone(660, 0.1, 'sine');
+function startGame(mode) {
+    gameState.gameMode = mode;
+    gameState.score = 0;
+    gameState.streak = 0;
+    gameState.level = 1;
+    gameState.questionsDone = 0;
+    document.getElementById('modeStatus').textContent = mode.charAt(0).toUpperCase() + mode.slice(1) + " Mode";
+    
+    document.getElementById('menu-screen').style.display = 'none';
+    document.getElementById('game-screen').style.display = 'block';
+    window.scrollTo(0, 0);
+    
+    updateDisplay();
+    nextQuestion();
 }
 
-// ============================================
-// LANGUAGE
-// ============================================
-function setLanguage(lang) {
-    currentLanguage = lang;
-    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    document.body.classList.toggle('rtl', lang === 'ar');
-    document.querySelectorAll('[data-en][data-ar]').forEach(el => {
-        el.textContent = el.getAttribute(`data-${lang}`);
-    });
-    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-    const buttons = document.querySelectorAll('.lang-btn');
-    if (lang === 'en' && buttons[0]) buttons[0].classList.add('active');
-    else if (lang === 'ar' && buttons[1]) buttons[1].classList.add('active');
+function exitGame() {
+    document.getElementById('game-screen').style.display = 'none';
+    document.getElementById('menu-screen').style.display = 'block';
 }
 
-// ============================================
-// CURRICULUM
-// ============================================
-function setCurriculum(curriculum) {
-    currentCurriculum = curriculum;
-    document.querySelectorAll('.curriculum-btn').forEach(btn => {
-        btn.className = 'curriculum-btn';
-    });
-    const buttons = document.querySelectorAll('.curriculum-btn');
-    const curriculumMap = { uae: 0, us: 1, uk: 2, sa: 3 };
-    if (curriculumMap[curriculum] !== undefined && buttons[curriculumMap[curriculum]]) {
-        buttons[curriculumMap[curriculum]].classList.add(`active-${curriculum}`);
-    }
-
-    const badge = document.getElementById('curriculumBadge');
-    const info = curriculumInfo[curriculum];
-    badge.textContent = `📚 ${info.flag}`;
-    badge.className = `curriculum-badge ${info.badgeClass}`;
-
-    const display = document.getElementById('curriculumDisplay');
-    display.textContent = `${info.flag} ${info.name}`;
-
-    document.querySelectorAll('.grade-btn').forEach(btn => {
-        const grade = parseInt(btn.getAttribute('data-grade') || btn.textContent.replace(/[^0-9]/g, ''));
-        if (curriculum === 'uk') {
-            const ukYearMap = { 4: 5, 5: 6, 6: 7, 7: 8 };
-            btn.textContent = `Y${ukYearMap[grade] || grade + 1}`;
-        } else {
-            btn.textContent = `G${grade}`;
-        }
-        btn.setAttribute('data-grade', grade);
-    });
-
-    changeGrade(gameState.currentGrade);
-}
-
-// ============================================
-// QUESTION GENERATORS
-// ============================================
-function generateQuestionsForGrade(grade) {
-    const questions = [];
-    const topics = ['addition', 'subtraction', 'multiplication', 'division', 'fractions', 'decimals'];
-    const count = 80;
-
-    for (let i = 0; i < count; i++) {
-        const topic = topics[i % topics.length];
-        let q = {};
-        let a, b, answer, symbol, options;
-        let maxNum = grade <= 4 ? 12 : (grade <= 5 ? 20 : (grade <= 6 ? 30 : 50));
-
-        switch (topic) {
-            case 'addition':
-                a = Math.floor(Math.random() * maxNum) + 1;
-                b = Math.floor(Math.random() * maxNum) + 1;
-                answer = a + b; symbol = '+'; break;
-            case 'subtraction':
-                a = Math.floor(Math.random() * maxNum) + maxNum;
-                b = Math.floor(Math.random() * a);
-                answer = a - b; symbol = '−'; break;
-            case 'multiplication':
-                a = Math.floor(Math.random() * (grade <= 4 ? 9 : 12)) + 1;
-                b = Math.floor(Math.random() * (grade <= 4 ? 9 : 12)) + 1;
-                answer = a * b; symbol = '×'; break;
-            case 'division':
-                b = Math.floor(Math.random() * (grade <= 4 ? 9 : 12)) + 1;
-                let c = Math.floor(Math.random() * (grade <= 4 ? 9 : 12)) + 1;
-                a = b * c; answer = c; symbol = '÷'; break;
-            case 'fractions':
-                if (grade >= 5) {
-                    const denom = [2, 3, 4, 5, 6, 8, 10][Math.floor(Math.random() * 7)];
-                    a = Math.floor(Math.random() * (denom - 1)) + 1;
-                    b = Math.floor(Math.random() * (denom - a)) + 1;
-                    answer = `${a + b}/${denom}`;
-                    q = {
-                        question: `${a}/${denom} + ${b}/${denom} = ?`,
-                        options: [answer, `${a + b + 1}/${denom}`, `${a + b - 1}/${denom}`, `${a + b + 2}/${denom}`].sort(() => Math.random() - 0.5),
-                        answer: answer, topic: 'fractions'
-                    };
-                    questions.push(q); continue;
-                } else {
-                    a = Math.floor(Math.random() * 9) + 1;
-                    b = Math.floor(Math.random() * 9) + 1;
-                    answer = a + b; symbol = '+';
-                }
-                break;
-            case 'decimals':
-                if (grade >= 5) {
-                    a = Math.floor(Math.random() * 9) + 1;
-                    b = Math.floor(Math.random() * 9) + 1;
-                    const decAnswer = ((a + b) / 10).toFixed(1);
-                    q = {
-                        question: `0.${a} + 0.${b} = ?`,
-                        options: [decAnswer, ((a + b + 1) / 10).toFixed(1), ((a + b - 1) / 10).toFixed(1), ((a + b + 2) / 10).toFixed(1)].sort(() => Math.random() - 0.5),
-                        answer: decAnswer, topic: 'decimals'
-                    };
-                    questions.push(q); continue;
-                } else {
-                    a = Math.floor(Math.random() * 9) + 1;
-                    b = Math.floor(Math.random() * 9) + 1;
-                    answer = a + b; symbol = '+';
-                }
-                break;
-        }
-
-        if (topic !== 'fractions' && topic !== 'decimals') {
-            const wrongs = new Set();
-            while (wrongs.size < 3) {
-                let w = answer + (Math.floor(Math.random() * 10) - 5);
-                if (w !== answer && w >= 0 && !wrongs.has(w)) wrongs.add(w);
-            }
-            q = {
-                question: `${a} ${symbol} ${b} = ?`,
-                options: [answer.toString(), ...Array.from(wrongs).map(String)].sort(() => Math.random() - 0.5),
-                answer: answer.toString(), topic: topic
-            };
-            questions.push(q);
-        }
-    }
-
-    if (grade >= 6) {
-        for (let i = 0; i < 20; i++) {
-            const num1 = Math.floor(Math.random() * 50) + 10;
-            const num2 = Math.floor(Math.random() * 10) + 2;
-            questions.push({
-                question: `If a school has ${num1} students and each classroom holds ${num2} students, how many classrooms are needed? (Round up)`,
-                options: [Math.ceil(num1 / num2).toString(), (Math.ceil(num1 / num2) + 1).toString(), (Math.ceil(num1 / num2) - 1).toString(), (Math.ceil(num1 / num2) + 2).toString()].sort(() => Math.random() - 0.5),
-                answer: Math.ceil(num1 / num2).toString(),
-                topic: 'word problems'
-            });
-        }
-    }
-
-    return questions;
-}
-
-// ============================================
-// QUESTION BANK
-// ============================================
-const questionBank = {};
-const gradeLevels = ['grade4', 'grade5', 'grade6', 'grade7'];
-const curricula = ['uae', 'us', 'uk', 'sa'];
-
-gradeLevels.forEach(grade => {
-    const gradeNum = parseInt(grade.replace('grade', ''));
-    const questions = generateQuestionsForGrade(gradeNum);
-    curricula.forEach(cur => {
-        questionBank[`${cur}_${grade}`] = questions.map(q => ({ ...q }));
-    });
-});
-
-// ============================================
-// GET QUESTION POOL
-// ============================================
-function getQuestionPool() {
-    const grade = gameState.currentGrade;
-    const curriculum = currentCurriculum;
-    let gradeKey = `${curriculum}_grade${grade}`;
-    let pool = questionBank[gradeKey];
-    if (!pool || pool.length === 0) {
-        const fallback = [];
-        for (let i = 0; i < 20; i++) {
-            const a = Math.floor(Math.random() * 20) + 1;
-            const b = Math.floor(Math.random() * 20) + 1;
-            const answer = a + b;
-            const wrongs = new Set();
-            while (wrongs.size < 3) {
-                let w = answer + (Math.floor(Math.random() * 8) - 4);
-                if (w !== answer && w > 0 && !wrongs.has(w)) wrongs.add(w);
-            }
-            fallback.push({
-                question: `${a} + ${b} = ?`,
-                options: [answer.toString(), ...Array.from(wrongs).map(String)].sort(() => Math.random() - 0.5),
-                answer: answer.toString(), topic: 'addition'
-            });
-        }
-        return fallback;
-    }
-    return pool;
-}
-
-// ============================================
-// NEXT QUESTION
-// ============================================
+// Question Logic
 function nextQuestion() {
     gameState.canAnswer = true;
-    const pool = getQuestionPool();
-    if (!pool || pool.length === 0) {
-        document.getElementById('question').textContent = 'No questions available. Please refresh.';
-        return;
-    }
-    const randomIndex = Math.floor(Math.random() * pool.length);
-    gameState.currentQuestion = pool[randomIndex];
-    document.getElementById('question').textContent = gameState.currentQuestion.question;
+    const grade = gameState.currentGrade;
+    const maxNum = grade <= 4 ? 12 : (grade <= 5 ? 20 : 30);
+    
+    // Simple generator for demo purposes
+    const a = Math.floor(Math.random() * maxNum) + 1;
+    const b = Math.floor(Math.random() * maxNum) + 1;
+    const answer = a + b;
+    
+    gameState.currentQuestion = {
+        question: `${a} + ${b} = ?`,
+        answer: answer.toString(),
+        options: [
+            answer.toString(), 
+            (answer + 1).toString(), 
+            (answer - 1).toString(), 
+            (answer + 2).toString()
+        ].sort(() => Math.random() - 0.5)
+    };
 
+    document.getElementById('question').textContent = gameState.currentQuestion.question;
+    document.getElementById('feedback').textContent = '';
+    
     const optionsContainer = document.getElementById('options');
     optionsContainer.innerHTML = '';
-    const shuffled = [...gameState.currentQuestion.options].sort(() => Math.random() - 0.5);
-    shuffled.forEach(option => {
+    
+    gameState.currentQuestion.options.forEach(opt => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
-        btn.textContent = option;
-        btn.onclick = () => checkAnswer(option);
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(opt);
         optionsContainer.appendChild(btn);
     });
-    document.getElementById('feedback').textContent = '';
 }
 
-// ============================================
-// CHECK ANSWER
-// ============================================
 function checkAnswer(selected) {
-    if (!gameState.canAnswer || !gameState.currentQuestion) return;
+    if (!gameState.canAnswer) return;
     gameState.canAnswer = false;
-
+    
     const isCorrect = selected === gameState.currentQuestion.answer;
+    
     document.querySelectorAll('.option-btn').forEach(btn => {
         btn.style.pointerEvents = 'none';
         if (btn.textContent === gameState.currentQuestion.answer) btn.classList.add('correct');
-        else if (btn.textContent === selected && !isCorrect) btn.classList.add('wrong');
+        else if (btn.textContent === selected) btn.classList.add('wrong');
     });
 
     if (isCorrect) {
-        const points = 10 * gameState.level;
-        gameState.score += points;
+        gameState.score += 10 * gameState.level;
         gameState.streak++;
         gameState.questionsDone++;
-        gameState.characterXP += 5;
-        document.getElementById('feedback').textContent = `✅ Correct! +${points} points!`;
+        gameState.characterXP += 10;
+        document.getElementById('feedback').textContent = '✅ Correct!';
+        document.getElementById('feedback').style.color = '#4a7c2a';
+        playCorrect();
+        confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
         if (gameState.streak % 5 === 0) gameState.level++;
-        playCorrectSound();
-        fireConfetti();
     } else {
         gameState.streak = 0;
         document.getElementById('feedback').textContent = '❌ Try again!';
-        playWrongSound();
-        if (gameState.gameMode === 'suddendeath') {
-            gameState.lives--;
-            if (gameState.lives <= 0) {
-                document.getElementById('feedback').textContent = '💀 Game Over!';
-                gameState.lives = 3;
-            }
-        }
+        document.getElementById('feedback').style.color = '#ff6b6b';
+        playWrong();
     }
-
-    checkCharacterUnlocks();
+    
     updateDisplay();
-    setTimeout(() => nextQuestion(), 1500);
+    setTimeout(nextQuestion, 1500);
 }
 
-// ============================================
-// UPDATE DISPLAY
-// ============================================
 function updateDisplay() {
     document.getElementById('score').textContent = gameState.score;
     document.getElementById('level').textContent = gameState.level;
     document.getElementById('streak').textContent = gameState.streak;
     document.getElementById('questionsDone').textContent = gameState.questionsDone;
-
-    const character = characters[gameState.character] || characters.normal;
-    document.getElementById('currentCharacterDisplay').textContent = `${character.emoji} ${character.name}`;
-
-    // XP progress bar (fills 0 → 1000)
-    const xpBar = document.getElementById('xpProgress');
-    if (xpBar) {
-        const pct = Math.min(100, (gameState.characterXP / 1000) * 100);
-        xpBar.style.width = pct + '%';
-    }
-
-    const nextChar = document.getElementById('nextCharacter');
-    if (!nextChar) return;
-    if (gameState.characterXP < 100) {
-        nextChar.textContent = `🥷 Ninja (${100 - gameState.characterXP} XP needed)`;
-    } else if (gameState.characterXP < 500) {
-        nextChar.textContent = `🧙 Wizard (${500 - gameState.characterXP} XP needed)`;
-    } else if (gameState.characterXP < 1000) {
-        nextChar.textContent = `👑 Legend (${1000 - gameState.characterXP} XP needed)`;
-    } else {
-        nextChar.textContent = `👑 Max Level!`;
-    }
+    
+    // XP Bar
+    const pct = Math.min(100, (gameState.characterXP / 1000) * 100);
+    document.getElementById('xpProgress').style.width = pct + '%';
 }
 
-// ============================================
-// MODE DISPLAY
-// ============================================
-function updateModeDisplay() {
-    const modeStatus = document.getElementById('modeStatus');
-    const modeDetails = document.getElementById('modeDetails');
-    if (!modeStatus) return;
-    const modeNames = {
-        'classic': '🎮 Classic Mode',
-        'suddendeath': '💀 Sudden Death Mode',
-        'spacerace': '🚀 Space Race Mode',
-        'adventure': '🗺️ Adventure Mode'
-    };
-    modeStatus.textContent = modeNames[gameState.gameMode] || 'Classic Mode';
-    if (gameState.gameMode === 'suddendeath') {
-        modeDetails.innerHTML = `❤️ ${gameState.lives} lives left`;
-    } else if (gameState.gameMode === 'spacerace') {
-        modeDetails.innerHTML = `🚀 Position: ${gameState.racePosition}/${gameState.raceTotal}`;
-    } else {
-        modeDetails.innerHTML = '';
-    }
-}
-
-// ============================================
-// CHECK CHARACTER UNLOCKS
-// ============================================
-function checkCharacterUnlocks() {
-    if (gameState.characterXP >= 100 && !gameState.characterUnlocked.ninja) {
-        gameState.characterUnlocked.ninja = true;
-        gameState.character = 'ninja';
-    }
-    if (gameState.characterXP >= 500 && !gameState.characterUnlocked.wizard) {
-        gameState.characterUnlocked.wizard = true;
-        gameState.character = 'wizard';
-    }
-    if (gameState.characterXP >= 1000 && !gameState.characterUnlocked.legend) {
-        gameState.characterUnlocked.legend = true;
-        gameState.character = 'legend';
-    }
-}
-
-// ============================================
-// CHANGE GRADE
-// ============================================
 function changeGrade(grade) {
     gameState.currentGrade = grade;
     document.querySelectorAll('.grade-btn').forEach(btn => {
         btn.classList.remove('active');
         if (parseInt(btn.getAttribute('data-grade')) === grade) btn.classList.add('active');
     });
-    nextQuestion();
 }
 
-// ============================================
-// SET GAME MODE
-// ============================================
-function setGameMode(mode) {
-    gameState.gameMode = mode;
-    gameState.lives = 3;
-    gameState.racePosition = 0;
-    document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
-    const modeMap = { 'classic': 0, 'suddendeath': 1, 'spacerace': 2, 'adventure': 3 };
-    const buttons = document.querySelectorAll('.mode-btn');
-    if (modeMap[mode] !== undefined && buttons[modeMap[mode]]) {
-        buttons[modeMap[mode]].classList.add('active');
-    }
-    updateModeDisplay();
-    nextQuestion();
-}
-
-// ============================================
-// HINT
-// ============================================
-document.getElementById('hint-btn')?.addEventListener('click', function () {
-    const hintMessage = document.getElementById('hint-message');
-    hintMessage.innerHTML = '💡 Break it down one step at a time!';
-    hintMessage.style.display = 'block';
-    setTimeout(() => { hintMessage.style.display = 'none'; }, 4000);
+// Hint
+document.getElementById('hint-btn').addEventListener('click', () => {
+    const hint = document.getElementById('hint-message');
+    hint.textContent = '💡 Try counting on your fingers or drawing it out!';
+    hint.style.display = 'block';
+    setTimeout(() => { hint.style.display = 'none'; }, 4000);
 });
 
-// ============================================
-// DARK MODE (persisted in localStorage)
-// ============================================
-(function initDarkMode() {
-    const saved = localStorage.getItem('skibidi-dark');
-    if (saved === '1') document.body.classList.add('dark');
-    const btn = document.getElementById('darkToggle');
-    if (btn) {
-        btn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
-        btn.addEventListener('click', () => {
-            document.body.classList.toggle('dark');
-            const isDark = document.body.classList.contains('dark');
-            btn.textContent = isDark ? '☀️' : '🌙';
-            localStorage.setItem('skibidi-dark', isDark ? '1' : '0');
-        });
-    }
-})();
-
-// ============================================
-// INIT
-// ============================================
-document.addEventListener('DOMContentLoaded', function () {
-    console.log('🚀 SkibidiMath Initializing...');
-    updateDisplay();
-    updateModeDisplay();
-    nextQuestion();
-    console.log('✅ SkibidiMath Ready!');
-});
-
-// ============================================
-// DROPDOWN TOGGLE (MOBILE)
-// ============================================
-document.querySelectorAll('.dropbtn').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        this.parentElement.classList.toggle('active');
-    });
-});
-document.querySelectorAll('.sub-dropdown > a').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        this.parentElement.classList.toggle('active');
-    });
-});
-document.addEventListener('click', function (e) {
-    if (!e.target.closest('.dropdown')) {
-        document.querySelectorAll('.dropdown').forEach(function (d) {
-            d.classList.remove('active');
-        });
-    }
-});
-
-// ============================================
-// SERVICE WORKER
-// ============================================
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js')
-        .then(function () { console.log('Service Worker registered'); })
-        .catch(function (err) { console.log('Service Worker registration failed:', err); });
-}
 </script>
 </body>
 </html>
