@@ -1,26 +1,21 @@
 /* ============================================
-   SKIBIDIMATH — APP UI STYLESHEET (v6)
+   SKIBIDIMATH — APP UI STYLESHEET (v7)
    ============================================ */
 
 :root {
   --bg-color: #f0f5fb;
   --text-main: #1a2b4c;
   --text-muted: #6b7a99;
-  
   --blue-primary: #0066ff;
   --blue-dark: #004cd1;
   --yellow-primary: #ffcc00;
   --yellow-dark: #e6a800;
-  
   --card-score-bg: #fff8d6;
   --card-level-bg: #e6f0ff;
   --card-streak-bg: #ffe6e6;
   --card-questions-bg: #e6fceb;
-  
   --shadow-sm: 0 4px 6px rgba(0,0,0,0.05);
   --shadow-md: 0 8px 15px rgba(0,0,0,0.08);
-  --shadow-lg: 0 12px 24px rgba(0,0,0,0.12);
-  
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-pill: 50px;
@@ -33,20 +28,21 @@ body {
   background-color: var(--bg-color);
   color: var(--text-main);
   padding-bottom: 90px; 
-  -webkit-tap-highlight-color: transparent;
 }
 
-/* ============ TOP NAVIGATION (Restored) ============ */
+/* ============ TOP NAV & MEGA MENU ============ */
 .top-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   align-items: center;
   justify-content: center;
   background: white;
   padding: 12px 20px;
   box-shadow: var(--shadow-sm);
   border-bottom: 2px solid #eef2f7;
+  position: relative;
+  z-index: 1000;
 }
 
 .top-nav > a, .top-nav .dropbtn {
@@ -58,43 +54,55 @@ body {
   font-size: 0.85rem;
   transition: all .2s ease;
   white-space: nowrap;
+  cursor: pointer;
 }
 .top-nav > a:hover, .top-nav .dropbtn:hover {
   background: var(--blue-primary);
   color: white;
 }
 
-/* Dropdowns */
+/* Dropdown Container */
 .dropdown { position: relative; }
+
 .dropdown-content {
   display: none;
   position: absolute;
   top: 100%;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   background: white;
-  min-width: 260px;
-  max-height: 70vh;
+  min-width: 300px;
+  max-height: 75vh;
   overflow-y: auto;
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
-  padding: 12px;
-  z-index: 999;
+  padding: 16px;
+  z-index: 1001;
+  border: 2px solid #eef2f7;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
-.dropdown.active .dropdown-content,
-.dropdown:hover .dropdown-content { display: block; }
+
+/* Show on hover (desktop) or .active (mobile click) */
+.dropdown:hover .dropdown-content,
+.dropdown.active .dropdown-content { 
+  display: grid; 
+}
 
 .topic-header {
   font-size: 0.8rem;
   font-weight: 900;
   color: var(--blue-dark);
-  padding: 8px 10px;
+  padding: 4px 0;
   text-transform: uppercase;
   letter-spacing: .5px;
-  border-bottom: 1px solid #eef2f7;
-  margin-bottom: 4px;
+  border-bottom: 2px solid #eef2f7;
+  margin-bottom: 6px;
+  grid-column: 1 / -1;
 }
 
-.sub-dropdown { position: relative; }
+.sub-dropdown { position: relative; margin-bottom: 4px; }
+
 .sub-dropdown > a {
   display: block;
   padding: 8px 12px;
@@ -102,18 +110,21 @@ body {
   text-decoration: none;
   border-radius: 8px;
   font-size: 0.9rem;
-  font-weight: 700;
+  font-weight: 800;
+  background: #f8fafc;
+  border: 1px solid #eef2f7;
+  cursor: pointer;
 }
-.sub-dropdown > a:hover { background: #f0f5fb; color: var(--blue-primary); }
+.sub-dropdown > a:hover { background: #eef2f7; color: var(--blue-primary); }
 
 .sub-dropdown-content {
   display: none;
-  padding-left: 16px;
+  padding-left: 12px;
+  margin-top: 4px;
   border-left: 2px solid #eef2f7;
-  margin-left: 12px;
 }
-.sub-dropdown.active .sub-dropdown-content,
-.sub-dropdown:hover .sub-dropdown-content { display: block; }
+.sub-dropdown:hover .sub-dropdown-content,
+.sub-dropdown.active .sub-dropdown-content { display: block; }
 
 .sub-dropdown-content a {
   display: block;
@@ -301,6 +312,14 @@ body {
 .char-info strong { color: var(--text-main); font-weight: 900; display: block; margin-top: 4px; }
 
 /* ============ RESPONSIVE ============ */
+@media (max-width: 900px) {
+  .dropdown-content {
+    grid-template-columns: 1fr;
+    width: 90vw;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
 @media (max-width: 400px) {
   .modes-grid { grid-template-columns: repeat(2, 1fr); }
   .hero-character { opacity: 0.3; right: -20px; }
