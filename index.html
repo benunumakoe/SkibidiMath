@@ -18,11 +18,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     
-    <link rel="stylesheet" href="/style.css?v=8">
+    <link rel="stylesheet" href="/style.css?v=9">
 </head>
 <body>
 
-    <!-- ===== TOP NAVIGATION & DROPDOWNS (Fully Restored) ===== -->
+    <!-- ===== TOP NAVIGATION & DROPDOWNS ===== -->
     <nav class="top-nav">
         <a href="/">🏠 Home</a>
         <a href="/about.html">📖 About</a>
@@ -169,7 +169,7 @@
             <p>Play • Learn • Excel</p>
         </div>
         <div class="header-controls">
-            <button class="control-pill">🇦🇪 UAE ▾</button>
+            <!-- Removed UAE Button -->
             <button class="control-pill">🌐 EN ▾</button>
         </div>
     </header>
@@ -189,7 +189,7 @@
             </div>
         </section>
 
-        <!-- Ko-fi / Support Bar (Now Clickable!) -->
+        <!-- Ko-fi / Support Bar -->
         <a href="https://ko-fi.com/skibidimath" target="_blank" class="support-bar" style="text-decoration: none; display: flex;">
             <div class="support-left">
                 <span class="coffee-icon">☕</span>
@@ -227,13 +227,10 @@
             </div>
         </section>
 
-        <!-- Selectors -->
-        <section class="selector-row">
+        <!-- Selectors (Now just one full-width button) -->
+        <section class="selector-row" style="grid-template-columns: 1fr;">
             <button class="selector-btn">
                 <span class="icon-box">💬</span> English / العربية <span class="arrow">›</span>
-            </button>
-            <button class="selector-btn">
-                <span class="flag-icon">🇦🇪</span> UAE Curriculum <span class="arrow">›</span>
             </button>
         </section>
 
