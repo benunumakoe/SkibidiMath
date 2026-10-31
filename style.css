@@ -72,16 +72,16 @@ body {
 .app-container { max-width: 600px; margin: 0 auto; padding: 16px; animation: fadeIn 0.3s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ============ HERO ============ */
+/* ============ HERO SECTION ============ */
 .hero-section {
   background: linear-gradient(135deg, #1e73ff, #004cd1);
   border-radius: var(--radius-lg);
-  padding: 30px 20px;
+  padding: 24px 20px;
   position: relative;
-  overflow: hidden; /* This keeps the image inside the rounded corners */
+  overflow: hidden;
   box-shadow: var(--shadow-md);
   margin-bottom: 16px;
-  min-height: 180px; /* Gives the banner height */
+  min-height: 200px; 
   display: flex;
   align-items: center;
 }
@@ -95,8 +95,8 @@ body {
 
 .hero-text { 
   position: relative; 
-  z-index: 3; /* Keeps text above the image */
-  width: 65%; 
+  z-index: 3; 
+  max-width: 60%; 
 }
 
 .hero-text h2 { color: white; font-size: 1.8rem; font-weight: 900; line-height: 1.1; margin-bottom: 8px; }
@@ -121,20 +121,19 @@ body {
 }
 .btn-play:active { transform: translateY(4px); box-shadow: 0 0 0 #b88a00; }
 
-/* This is the magic part for the background image */
+/* Image Positioning */
 .hero-bg-img {
   position: absolute;
-  right: -10px;
+  right: 0;
   bottom: 0;
-  height: 100%; /* Fills the height of the banner */
+  height: 100%;
   width: auto;
-  max-width: 55%; /* Prevents it from covering the text */
+  max-width: 50%; 
   object-fit: cover;
   object-position: left bottom;
   z-index: 2;
-  /* This fade effect makes it blend beautifully into the blue background */
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 40%);
-  mask-image: linear-gradient(to right, transparent 0%, black 40%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%);
+  mask-image: linear-gradient(to right, transparent 0%, black 30%);
 }
 
 /* ============ SUPPORT BAR ============ */
@@ -209,5 +208,6 @@ body {
 
 @media (max-width: 400px) {
   .modes-grid { grid-template-columns: repeat(2, 1fr); }
-  .hero-character { opacity: 0.3; right: -20px; }
+  .hero-text { max-width: 100%; }
+  .hero-bg-img, #fallback-emoji { opacity: 0.2; right: -20px; }
 }
