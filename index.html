@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     
-    <link rel="stylesheet" href="/style.css?v=14">
+    <link rel="stylesheet" href="/style.css?v=15">
 </head>
 <body>
 
@@ -41,17 +41,20 @@
     <!-- ===== MAIN APP CONTAINER ===== -->
     <main class="app-container" id="menu-screen">
         
-        <!-- Hero Section -->
+        <!-- Cinematic Hero Section -->
         <section class="hero-section">
+            <!-- The text sits on top of the image -->
             <div class="hero-text">
                 <h2>Sharpen Your<br><span>Math Skills!</span></h2>
                 <p>Fun. Interactive. Curriculum-Aligned.</p>
                 <button class="btn-play" onclick="scrollToModes()">▶ Start Playing ›</button>
             </div>
             
-            <!-- 3D Image loads here. If it fails, the emoji shows instead. -->
-            <img src="/hero-girl.png" alt="Student" class="hero-bg-img" onerror="this.style.display='none'; document.getElementById('fallback-emoji').style.display='block';">
-            <div id="fallback-emoji" style="display:none; position: absolute; right: 20px; bottom: 0; font-size: 8rem; z-index: 2;">👦🏽</div>
+            <!-- The image is now the absolute background of this section -->
+            <img src="/school-boy.png" alt="Student" class="hero-full-img" onerror="this.style.display='none'; document.getElementById('fallback-emoji').style.display='block';">
+            
+            <!-- Fallback if image breaks -->
+            <div id="fallback-emoji" style="display:none; position: absolute; right: 20px; bottom: 0; font-size: 8rem; z-index: 0;">👦🏽</div>
         </section>
 
         <!-- Ko-fi / Support Bar -->
@@ -187,7 +190,6 @@ let gameState = {
     character: 'normal', characterXP: 0
 };
 
-// YOUR PDF QUESTIONS
 const questionBank = [
     { question: "Write in figures: three hundred and ninety-five", answer: "395", options: ["395", "359", "305", "495"] },
     { question: "Write in figures: four thousand one hundred and forty-two", answer: "4142", options: ["4142", "4124", "4014", "4412"] },
