@@ -13,11 +13,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     
-    <link rel="stylesheet" href="/style.css?v=12">
+    <link rel="stylesheet" href="/style.css?v=13">
 </head>
 <body>
 
-    <!-- ===== TOP HEADER ===== -->
+    <!-- ===== TOP NAVIGATION (Restored) ===== -->
+    <nav class="main-nav">
+        <a href="/">🏠 Home</a>
+        <a href="/about.html">📖 About</a>
+        <a href="/blog?ver=2">📝 Blog</a>
+        <a href="/privacy.html">🔒 Privacy</a>
+        <a href="/contact.html">📧 Contact</a>
+    </nav>
+
+    <!-- ===== TOP HEADER (Logo Area) ===== -->
     <header class="top-header">
         <div class="logo-area">
             <h1>SkibidiMath</h1>
@@ -177,21 +186,31 @@ let gameState = {
     character: 'normal', characterXP: 0
 };
 
+// YOUR PDF QUESTIONS
 const questionBank = [
     { question: "Write in figures: three hundred and ninety-five", answer: "395", options: ["395", "359", "305", "495"] },
     { question: "Write in figures: four thousand one hundred and forty-two", answer: "4142", options: ["4142", "4124", "4014", "4412"] },
     { question: "Write in figures: nine hundred and thirty-seven", answer: "937", options: ["937", "973", "907", "939"] },
     { question: "Write in figures: two thousand five hundred and ten", answer: "2510", options: ["2510", "2150", "2501", "2050"] },
+    { question: "Write in figures: one thousand and sixty-eight", answer: "1068", options: ["1068", "168", "1608", "1006"] },
+    { question: "Write in figures: six thousand seven hundred and four", answer: "6704", options: ["6704", "674", "6074", "6407"] },
     { question: "What is the value of the 7 in 1783?", answer: "700", options: ["700", "70", "7000", "7"] },
     { question: "What is the value of the 2 in 5297?", answer: "200", options: ["200", "20", "2000", "2"] },
+    { question: "What is the value of the 6 in 2638?", answer: "600", options: ["600", "60", "6000", "6"] },
+    { question: "What is the value of the 4 in 9041?", answer: "40", options: ["40", "400", "4000", "4"] },
     { question: "7254 + 60 = ?", answer: "7314", options: ["7314", "7324", "7304", "7414"] },
+    { question: "3847 - 3000 = ?", answer: "847", options: ["847", "874", "807", "947"] },
     { question: "8406 - 600 = ?", answer: "7806", options: ["7806", "7860", "7800", "8006"] },
     { question: "Round 1723 to the nearest 10.", answer: "1720", options: ["1720", "1730", "1700", "1800"] },
+    { question: "Round 2438 to the nearest 100.", answer: "2400", options: ["2400", "2500", "2430", "2000"] },
     { question: "Round 5395 to the nearest 1000.", answer: "5000", options: ["5000", "6000", "5400", "5500"] },
     { question: "Write XLVIII as a number.", answer: "48", options: ["48", "58", "42", "68"] },
-    { question: "Write 35 as a Roman numeral.", answer: "XXXV", options: ["XXXV", "XXVV", "XXXXV", "XLV"] }
+    { question: "Write LXXVII as a number.", answer: "77", options: ["77", "67", "87", "72"] },
+    { question: "Write 35 as a Roman numeral.", answer: "XXXV", options: ["XXXV", "XXVV", "XXXXV", "XLV"] },
+    { question: "Write 28 as a Roman numeral.", answer: "XXVIII", options: ["XXVIII", "XXIIX", "XXXVIII", "XXIV"] }
 ];
 
+// Audio Synth
 let audioCtx = null;
 function playTone(freq, duration, type) {
     try {
