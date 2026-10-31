@@ -1,6 +1,5 @@
 const questionBank = {
     grade4: [
-        // NBF Textbook - Whole Numbers & Place Value
         { question: "Write in standard form: 20,000 + 1,000 + 100 + 70 + 1", answer: "21,171", options: ["21,171", "21,117", "20,171", "21,071"] },
         { question: "Write in standard form: 60,000 + 5,000 + 300 + 40 + 3", answer: "65,343", options: ["65,343", "65,334", "60,343", "65,043"] },
         { question: "What is the place value of the 7 in 76,102?", answer: "Ten Thousands", options: ["Ten Thousands", "Thousands", "Hundreds", "Tens"] },
@@ -23,13 +22,10 @@ const questionBank = {
         { question: "Find the difference: 97,843 - 61,732", answer: "36,111", options: ["36,111", "35,111", "36,211", "46,111"] }
     ],
     grade5: [
-        // Reveal Math - Unit 3: Place Value and Number Relationships
         { question: "How does the value of the 7 in the thousands place relate to the 7 in the hundreds place in 7,777?", answer: "It is 10 times greater", options: ["It is 10 times greater", "It is 1/10 the value", "It is the same", "It is 100 times greater"] },
         { question: "In the number 447,699, how does the value of the 4 in the ten thousands place relate to the 4 in the hundred thousands place?", answer: "It is 1/10 the value", options: ["It is 1/10 the value", "It is 10 times greater", "It is the same", "It is 100 times greater"] },
-        { question: "True or False: The digit 3 in 5,630 is 10 times the value of the 3 in 342.", answer: "True", options: ["True", "False"] },
         { question: "Complete the sentence: 0.009 is ____ 0.09.", answer: "1/10 of", options: ["1/10 of", "10 times", "100 times", "equal to"] },
         { question: "Complete the sentence: 0.09 is ____ 0.009.", answer: "10 times", options: ["10 times", "1/10 of", "100 times", "equal to"] },
-        { question: "What is the relationship between the 4s in 3.244?", answer: "The first 4 is 10 times the second 4", options: ["The first 4 is 10 times the second 4", "The first 4 is 1/10 of the second 4", "They are equal", "The second 4 is 100 times the first 4"] },
         { question: "What is 34.618 written in expanded form?", answer: "30 + 4 + 0.6 + 0.01 + 0.008", options: ["30 + 4 + 0.6 + 0.01 + 0.008", "30 + 4 + 6 + 1 + 8", "3 + 4 + 0.6 + 0.1 + 0.08", "30 + 4 + 0.06 + 0.01 + 0.008"] },
         { question: "What is 34.618 in word form?", answer: "thirty-four and six hundred eighteen thousandths", options: ["thirty-four and six hundred eighteen thousandths", "thirty-four and six hundred eighteen hundredths", "thirty-four point six one eight", "thirty-four and sixty-one tenths"] },
         { question: "What is the standard form of 0.9 + 0.03 + 0.007?", answer: "0.937", options: ["0.937", "0.973", "9.37", "0.0937"] },
@@ -50,6 +46,45 @@ const questionBank = {
         { question: "Round 16.12 to the nearest tenth.", answer: "16.1", options: ["16.1", "16.2", "16.0", "17.0"] },
         { question: "Round 98.17 to the nearest tenth.", answer: "98.2", options: ["98.2", "98.1", "98.0", "99.0"] }
     ],
-    grade6: [],
-    grade7: []
+    grade6: [
+        // Ratios & Rates
+        { question: "If there are 3 apples and 4 oranges, what is the ratio of apples to oranges?", answer: "3:4", options: ["3:4", "4:3", "3:7", "4:7"] },
+        { question: "If you travel 150 miles in 3 hours, what is your unit rate?", answer: "50 mph", options: ["50 mph", "45 mph", "60 mph", "150 mph"] },
+        { question: "What is 45% written as a decimal?", answer: "0.45", options: ["0.45", "4.5", "0.045", "45.0"] },
+        { question: "If 5 pens cost $10, what is the unit price?", answer: "$2", options: ["$2", "$5", "$1", "$10"] },
+        { question: "Find 30% of 150.", answer: "45", options: ["45", "50", "30", "15"] },
+        // Absolute Value & Integers
+        { question: "What is the absolute value of -5?", answer: "5", options: ["5", "-5", "0", "10"] },
+        { question: "What is the absolute value of -12?", answer: "12", options: ["12", "-12", "0", "24"] },
+        // Dividing Fractions
+        { question: "Calculate: 3/4 ÷ 1/2", answer: "3/2", options: ["3/2", "3/8", "1/2", "2/3"] },
+        { question: "Calculate: 5/8 ÷ 3/4", answer: "5/6", options: ["5/6", "15/32", "3/4", "5/8"] },
+        // Algebra
+        { question: "Evaluate 3x + 2 when x = 4.", answer: "14", options: ["14", "12", "10", "16"] },
+        { question: "Evaluate 5y - 3 when y = 6.", answer: "27", options: ["27", "33", "15", "30"] },
+        { question: "Solve for x: x - 5 = 12", answer: "17", options: ["17", "7", "12", "-17"] },
+        { question: "Solve for x: 4x = 24", answer: "6", options: ["6", "4", "8", "20"] },
+        { question: "Solve for m: m + 14 = 30", answer: "16", options: ["16", "14", "44", "26"] },
+        // Geometry & Stats
+        { question: "Find the area of a triangle with base 10 cm and height 6 cm.", answer: "30 cm²", options: ["30 cm²", "60 cm²", "16 cm²", "20 cm²"] },
+        { question: "Find the mean of the data set: 4, 8, 6, 10, 2.", answer: "6", options: ["6", "8", "5", "10"] }
+    ],
+    grade7: [
+        // Proportions & Percent
+        { question: "Solve the proportion: x/12 = 5/3", answer: "20", options: ["20", "15", "12", "25"] },
+        { question: "A jacket originally cost $80. It is on sale for 20% off. What is the sale price?", answer: "$64", options: ["$64", "$60", "$70", "$16"] },
+        { question: "If 3 shirts cost $45, what is the constant of proportionality (unit price)?", answer: "$15", options: ["$15", "$3", "$45", "$12"] },
+        // Rational Numbers (Integers)
+        { question: "Evaluate: -15 + 8", answer: "-7", options: ["-7", "7", "23", "-23"] },
+        { question: "Evaluate: -4 × (-7)", answer: "28", options: ["28", "-28", "11", "-11"] },
+        { question: "Evaluate: 5 - (-3)", answer: "8", options: ["8", "2", "-8", "-2"] },
+        // Equations & Inequalities
+        { question: "Solve for x: 2x - 5 = 11", answer: "8", options: ["8", "3", "6", "16"] },
+        { question: "Solve for y: 4y + 7 = -13", answer: "-5", options: ["-5", "5", "-1.5", "-20"] },
+        { question: "If -3x < 12, what is the solution?", answer: "x > -4", options: ["x > -4", "x < -4", "x > 4", "x < 4"] },
+        // Geometry & Probability
+        { question: "Find the area of a circle with a radius of 5cm. (Leave answer in terms of π)", answer: "25π", options: ["25π", "10π", "5π", "50π"] },
+        { question: "Find the circumference of a circle with a radius of 5cm. (Leave answer in terms of π)", answer: "10π", options: ["10π", "25π", "5π", "20π"] },
+        { question: "If you roll a standard 6-sided die, what is the probability of rolling a number greater than 4?", answer: "2/6 or 1/3", options: ["2/6 or 1/3", "4/6 or 2/3", "1/6", "5/6"] }
+    ]
 };
