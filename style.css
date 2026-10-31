@@ -1,23 +1,15 @@
-/* ============================================
-   SKIBIDIMATH — EXACT MOCKUP MATCH (v10)
-   ============================================ */
-
 :root {
   --bg-color: #f0f5fb;
   --text-main: #1a2b4c;
   --text-muted: #6b7a99;
-  
   --blue-primary: #0066ff;
   --blue-dark: #004cd1;
   --yellow-primary: #ffcc00;
   --yellow-dark: #e6a800;
-  
-  /* Soft Card Colors from Mockup */
   --card-score-bg: #fff8d6;
   --card-level-bg: #e6f0ff;
   --card-streak-bg: #ffe6e6;
   --card-questions-bg: #e6fceb;
-  
   --shadow-sm: 0 4px 6px rgba(0,0,0,0.05);
   --shadow-md: 0 8px 15px rgba(0,0,0,0.08);
   --radius-md: 16px;
@@ -35,7 +27,6 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ============ TOP HEADER (Logo Area) ============ */
 .top-header {
   display: flex;
   justify-content: space-between;
@@ -82,7 +73,6 @@ body {
   gap: 6px;
 }
 
-/* ============ APP CONTAINER ============ */
 .app-container {
   max-width: 600px;
   margin: 0 auto;
@@ -91,7 +81,6 @@ body {
 }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* ============ HERO SECTION ============ */
 .hero-section {
   background: linear-gradient(135deg, #1e73ff, #004cd1);
   border-radius: var(--radius-lg);
@@ -105,7 +94,6 @@ body {
   margin-bottom: 16px;
 }
 
-/* Decorative background circles for Hero */
 .hero-section::before {
   content: ''; position: absolute; top: -50px; left: -50px;
   width: 150px; height: 150px; background: rgba(255,255,255,0.1);
@@ -138,7 +126,6 @@ body {
 .hero-character { position: absolute; right: -10px; bottom: -20px; width: 160px; height: 180px; display: flex; align-items: center; justify-content: center; z-index: 1; }
 .character-emoji { font-size: 8rem; filter: drop-shadow(0 10px 10px rgba(0,0,0,0.3)); }
 
-/* ============ SUPPORT BAR (Ko-fi) ============ */
 .support-bar {
   background: white;
   border-radius: var(--radius-lg);
@@ -160,7 +147,6 @@ body {
 .support-right { border-left: 2px solid #eef2f7; padding-left: 12px; text-align: center; }
 .logo-mini { font-size: 0.8rem; font-weight: 900; color: var(--blue-primary); line-height: 1; display: block; }
 
-/* ============ STATS GRID ============ */
 .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
 .stat-card { padding: 16px 8px; border-radius: var(--radius-md); display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.04); border: 2px solid transparent; }
 .stat-score { background: var(--card-score-bg); border-color: #ffeb99; }
@@ -171,40 +157,24 @@ body {
 .stat-label { font-size: 0.65rem; font-weight: 800; color: var(--text-main); text-transform: uppercase; margin-bottom: 2px; }
 .stat-value { font-size: 1.4rem; font-weight: 900; color: var(--text-main); }
 
-/* ============ SELECTORS ============ */
 .selector-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
 .selector-btn { background: white; border: 2px solid #eef2f7; padding: 12px 16px; border-radius: var(--radius-pill); font-family: inherit; font-weight: 800; font-size: 0.85rem; color: var(--text-main); display: flex; align-items: center; justify-content: space-between; cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.03); }
 .icon-box { background: var(--blue-primary); color: white; padding: 2px 6px; border-radius: 6px; font-size: 0.75rem; }
 .flag-icon { font-size: 1.1rem; }
 .arrow { color: #cbd5e1; font-size: 1.2rem; font-weight: 900; }
 
-/* ============ SECTION TITLES ============ */
 .section-title { text-align: center; font-size: 1.3rem; font-weight: 900; color: var(--blue-dark); margin-bottom: 16px; }
 
-/* ============ GAME MODES GRID ============ */
 .modes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
-
 .mode-card {
-  border: none;
-  border-radius: var(--radius-md);
-  padding: 0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  /* This creates the chunky 3D pressable button look */
-  box-shadow: 0 6px 0 rgba(0,0,0,0.15);
-  transition: transform 0.1s, box-shadow 0.1s;
-  position: relative;
-  aspect-ratio: 1 / 1.1;
+  border: none; border-radius: var(--radius-md); padding: 0; overflow: hidden; display: flex; flex-direction: column; cursor: pointer;
+  box-shadow: 0 6px 0 rgba(0,0,0,0.15); transition: transform 0.1s, box-shadow 0.1s; position: relative; aspect-ratio: 1 / 1.1;
 }
 .mode-card:active { transform: translateY(6px); box-shadow: 0 0 0 rgba(0,0,0,0.15); }
-
 .mode-img { flex: 1; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.2)); }
 .mode-footer { background: rgba(0,0,0,0.15); color: white; padding: 10px; font-size: 0.85rem; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
 .arrow-circle { background: white; color: var(--text-main); width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 900; }
 
-/* Mode Colors (Matching your screenshot) */
 .card-classic { background: linear-gradient(180deg, #ffd700, #f0a500); }
 .card-sudden { background: linear-gradient(180deg, #00c6ff, #0072ff); }
 .card-space { background: linear-gradient(180deg, #8a2be2, #4b0082); }
@@ -212,12 +182,10 @@ body {
 .card-challenge { background: linear-gradient(180deg, #ff6a5b, #cc0000); }
 .card-tournament { background: linear-gradient(180deg, #8a2be2, #320099); }
 
-/* ============ GRADES ROW ============ */
 .grades-row { display: flex; gap: 10px; justify-content: center; margin-bottom: 24px; }
 .grade-btn { background: white; border: 2px solid #eef2f7; color: var(--text-main); padding: 14px 0; flex: 1; border-radius: var(--radius-pill); font-family: inherit; font-size: 1.1rem; font-weight: 900; cursor: pointer; box-shadow: 0 4px 0 #eef2f7; transition: all 0.1s; }
 .grade-btn.active { background: var(--blue-primary); color: white; border-color: var(--blue-dark); box-shadow: 0 4px 0 var(--blue-dark); }
 
-/* ============ BOTTOM NAV ============ */
 .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 12px 0 20px; border-top: 2px solid #eef2f7; border-radius: 24px 24px 0 0; box-shadow: 0 -4px 20px rgba(0,0,0,0.05); z-index: 1000; }
 .nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--text-muted); gap: 4px; }
 .nav-icon { font-size: 1.4rem; opacity: 0.5; transition: all 0.2s; }
@@ -225,15 +193,14 @@ body {
 .nav-item.active .nav-icon { opacity: 1; transform: translateY(-2px); }
 .nav-item.active .nav-label { color: var(--blue-primary); }
 
-/* ============ ACTIVE GAME SCREEN ============ */
 .back-btn { background: white; border: 2px solid #eef2f7; padding: 10px 16px; border-radius: var(--radius-pill); font-family: inherit; font-weight: 800; color: var(--text-muted); margin-bottom: 20px; cursor: pointer; }
 .game-header { margin-bottom: 20px; }
 .mode-display { font-size: 1.2rem; font-weight: 900; margin-bottom: 8px; color: var(--text-main); }
 .xp-bar-wrap { height: 12px; background: #e1e8f0; border-radius: 10px; overflow: hidden; }
 .xp-bar-fill { height: 100%; background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); width: 0%; transition: width 0.3s; }
-.question-card { background: white; padding: 40px 20px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); text-align: center; font-size: 2rem; font-weight: 900; color: var(--blue-dark); margin-bottom: 20px; border: 3px solid #eef2f7; }
+.question-card { background: white; padding: 40px 20px; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); text-align: center; font-size: 1.6rem; font-weight: 900; color: var(--blue-dark); margin-bottom: 20px; border: 3px solid #eef2f7; }
 .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
-.option-btn { background: white; border: 3px solid #e1e8f0; padding: 20px; border-radius: var(--radius-md); font-family: inherit; font-size: 1.5rem; font-weight: 900; color: var(--text-main); cursor: pointer; box-shadow: 0 4px 0 #e1e8f0; transition: all 0.1s; }
+.option-btn { background: white; border: 3px solid #e1e8f0; padding: 20px 10px; border-radius: var(--radius-md); font-family: inherit; font-size: 1.2rem; font-weight: 900; color: var(--text-main); cursor: pointer; box-shadow: 0 4px 0 #e1e8f0; transition: all 0.1s; }
 .option-btn:active { transform: translateY(4px); box-shadow: none; }
 .option-btn.correct { background: #d4edda; border-color: #28a745; color: #155724; box-shadow: 0 4px 0 #28a745; }
 .option-btn.wrong { background: #f8d7da; border-color: #dc3545; color: #721c24; box-shadow: 0 4px 0 #dc3545; }
@@ -241,7 +208,6 @@ body {
 .hint-btn { display: block; width: 100%; background: #fff3cd; border: 2px solid #ffeeba; color: #856404; padding: 16px; border-radius: var(--radius-md); font-family: inherit; font-weight: 900; font-size: 1rem; cursor: pointer; margin-bottom: 12px; }
 .hint-box { display: none; text-align: center; padding: 16px; background: #e2e3e5; border-radius: var(--radius-md); color: #383d41; font-weight: 700; margin-bottom: 20px; }
 
-/* ============ RESPONSIVE ============ */
 @media (max-width: 400px) {
   .modes-grid { grid-template-columns: repeat(2, 1fr); }
   .hero-character { opacity: 0.3; right: -20px; }
