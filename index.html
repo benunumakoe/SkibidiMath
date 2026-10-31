@@ -7,17 +7,15 @@
     <meta name="theme-color" content="#101a3b">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
     
-    <!-- Fonts & Scripts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     
-    <link rel="stylesheet" href="/style.css?v=18">
+    <link rel="stylesheet" href="/style.css?v=20">
 </head>
 <body>
 
-    <!-- ===== TOP NAVIGATION ===== -->
     <nav class="main-nav">
         <a href="/">🏠 Home</a>
         <a href="/about.html">📖 About</a>
@@ -26,7 +24,6 @@
         <a href="/contact.html">📧 Contact</a>
     </nav>
 
-    <!-- ===== TOP HEADER ===== -->
     <header class="top-header">
         <div class="logo-area">
             <h1>SkibidiMath</h1>
@@ -38,22 +35,17 @@
         </div>
     </header>
 
-    <!-- ===== MAIN APP CONTAINER ===== -->
     <main class="app-container" id="menu-screen">
-        
-        <!-- Cinematic Hero Section -->
         <section class="hero-section">
             <div class="hero-text">
                 <h2>Sharpen Your<br><span>Math Skills!</span></h2>
                 <p>Fun. Interactive. Curriculum-Aligned.</p>
                 <button class="btn-play" onclick="scrollToModes()">▶ Start Playing ›</button>
             </div>
-            
-                       <img src="/school-boy.png" alt="Student" class="hero-full-img" onerror="this.style.display='none'; document.getElementById('fallback-emoji').style.display='block';">
+            <img src="/school-boy.png" alt="Student" class="hero-full-img" onerror="this.style.display='none'; document.getElementById('fallback-emoji').style.display='block';">
             <div id="fallback-emoji" style="display:none; position: absolute; right: 20px; bottom: 0; font-size: 8rem; z-index: 0;">👦🏽</div>
         </section>
 
-        <!-- Ko-fi / Support Bar -->
         <a href="https://ko-fi.com/skibidimath" target="_blank" class="support-bar">
             <div class="support-left">
                 <span class="coffee-icon">☕</span>
@@ -67,7 +59,6 @@
             </div>
         </a>
 
-        <!-- Stats Grid -->
         <section class="stats-grid">
             <div class="stat-card stat-score">
                 <span class="stat-icon">🏆</span>
@@ -91,20 +82,17 @@
             </div>
         </section>
 
-        <!-- Selectors -->
         <section class="selector-row">
             <button class="selector-btn">
                 <span class="icon-box">💬</span> English / العربية <span class="arrow">›</span>
             </button>
             <button class="selector-btn">
-                <span class="flag-icon">🇦🇪</span> UAE Curriculum <span class="arrow">›</span>
+                <span class="flag-icon">🇦🇪</span> Grade 4 Math <span class="arrow">›</span>
             </button>
         </section>
 
-        <!-- Game Modes Title -->
         <h3 class="section-title">🎮 Choose a Game Mode</h3>
 
-        <!-- Game Modes Grid -->
         <section class="modes-grid" id="game-modes">
             <button class="mode-card card-classic" onclick="startGame('classic')">
                 <div class="mode-img">🏆</div>
@@ -132,20 +120,16 @@
             </button>
         </section>
 
-        <!-- Grade Title -->
         <h3 class="section-title">🎓 Select Your Grade</h3>
 
-        <!-- Grade Selector -->
         <section class="grades-row">
-            <button class="grade-btn" data-grade="4" onclick="changeGrade(4)">G4</button>
-            <button class="grade-btn active" data-grade="5" onclick="changeGrade(5)">G5</button>
+            <button class="grade-btn active" data-grade="4" onclick="changeGrade(4)">G4</button>
+            <button class="grade-btn" data-grade="5" onclick="changeGrade(5)">G5</button>
             <button class="grade-btn" data-grade="6" onclick="changeGrade(6)">G6</button>
             <button class="grade-btn" data-grade="7" onclick="changeGrade(7)">G7</button>
         </section>
-
     </main>
 
-    <!-- ===== ACTIVE GAME SCREEN ===== -->
     <main class="app-container" id="game-screen" style="display: none;">
         <button class="back-btn" onclick="exitGame()">‹ Back to Menu</button>
         <div class="game-header">
@@ -159,7 +143,6 @@
         <div id="hint-message" class="hint-box"></div>
     </main>
 
-    <!-- ===== BOTTOM NAVIGATION ===== -->
     <nav class="bottom-nav">
         <a href="/" class="nav-item active">
             <span class="nav-icon">🏠</span>
@@ -179,158 +162,139 @@
         </a>
     </nav>
 
-<script>
-let gameState = {
-    score: 0, level: 1, streak: 0, questionsDone: 0, currentGrade: 4,
-    currentQuestion: null, canAnswer: true, gameMode: 'classic', lives: 3,
-    character: 'normal', characterXP: 0
-};
+    <!-- THIS IS THE MAGIC LINE THAT CONNECTS YOUR QUESTIONS FILE -->
+    <script src="/questions.js"></script>
 
-const questionBank = [
-    { question: "Write in figures: three hundred and ninety-five", answer: "395", options: ["395", "359", "305", "495"] },
-    { question: "Write in figures: four thousand one hundred and forty-two", answer: "4142", options: ["4142", "4124", "4014", "4412"] },
-    { question: "Write in figures: nine hundred and thirty-seven", answer: "937", options: ["937", "973", "907", "939"] },
-    { question: "Write in figures: two thousand five hundred and ten", answer: "2510", options: ["2510", "2150", "2501", "2050"] },
-    { question: "Write in figures: one thousand and sixty-eight", answer: "1068", options: ["1068", "168", "1608", "1006"] },
-    { question: "Write in figures: six thousand seven hundred and four", answer: "6704", options: ["6704", "674", "6074", "6407"] },
-    { question: "What is the value of the 7 in 1783?", answer: "700", options: ["700", "70", "7000", "7"] },
-    { question: "What is the value of the 2 in 5297?", answer: "200", options: ["200", "20", "2000", "2"] },
-    { question: "What is the value of the 6 in 2638?", answer: "600", options: ["600", "60", "6000", "6"] },
-    { question: "What is the value of the 4 in 9041?", answer: "40", options: ["40", "400", "4000", "4"] },
-    { question: "7254 + 60 = ?", answer: "7314", options: ["7314", "7324", "7304", "7414"] },
-    { question: "3847 - 3000 = ?", answer: "847", options: ["847", "874", "807", "947"] },
-    { question: "8406 - 600 = ?", answer: "7806", options: ["7806", "7860", "7800", "8006"] },
-    { question: "Round 1723 to the nearest 10.", answer: "1720", options: ["1720", "1730", "1700", "1800"] },
-    { question: "Round 2438 to the nearest 100.", answer: "2400", options: ["2400", "2500", "2430", "2000"] },
-    { question: "Round 5395 to the nearest 1000.", answer: "5000", options: ["5000", "6000", "5400", "5500"] },
-    { question: "Write XLVIII as a number.", answer: "48", options: ["48", "58", "42", "68"] },
-    { question: "Write LXXVII as a number.", answer: "77", options: ["77", "67", "87", "72"] },
-    { question: "Write 35 as a Roman numeral.", answer: "XXXV", options: ["XXXV", "XXVV", "XXXXV", "XLV"] },
-    { question: "Write 28 as a Roman numeral.", answer: "XXVIII", options: ["XXVIII", "XXIIX", "XXXVIII", "XXIV"] }
-];
+    <!-- APP LOGIC -->
+    <script>
+    let gameState = {
+        score: 0, level: 1, streak: 0, questionsDone: 0, currentGrade: 4,
+        currentQuestion: null, canAnswer: true, gameMode: 'classic', lives: 3,
+        character: 'normal', characterXP: 0
+    };
 
-let audioCtx = null;
-function playTone(freq, duration, type) {
-    try {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.type = type || 'sine';
-        osc.frequency.value = freq;
-        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-        osc.connect(gain).connect(audioCtx.destination);
-        osc.start();
-        osc.stop(audioCtx.currentTime + duration);
-    } catch (e) { }
-}
-function playCorrect() { playTone(880, 0.15); setTimeout(() => playTone(1320, 0.2), 120); }
-function playWrong() { playTone(200, 0.3, 'sawtooth'); }
-
-function scrollToModes() {
-    document.getElementById('game-modes').scrollIntoView({ behavior: 'smooth' });
-}
-
-function startGame(mode) {
-    gameState.gameMode = mode;
-    gameState.score = 0;
-    gameState.streak = 0;
-    gameState.level = 1;
-    gameState.questionsDone = 0;
-    document.getElementById('modeStatus').textContent = mode.charAt(0).toUpperCase() + mode.slice(1) + " Mode";
-    
-    document.getElementById('menu-screen').style.display = 'none';
-    document.getElementById('game-screen').style.display = 'block';
-    window.scrollTo(0, 0);
-    
-    updateDisplay();
-    nextQuestion();
-}
-
-function exitGame() {
-    document.getElementById('game-screen').style.display = 'none';
-    document.getElementById('menu-screen').style.display = 'block';
-}
-
-function nextQuestion() {
-    gameState.canAnswer = true;
-    const randomIndex = Math.floor(Math.random() * questionBank.length);
-    const q = questionBank[randomIndex];
-    
-    gameState.currentQuestion = q;
-    document.getElementById('question').textContent = q.question;
-    document.getElementById('feedback').textContent = '';
-    
-    const optionsContainer = document.getElementById('options');
-    optionsContainer.innerHTML = '';
-    
-    const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
-    shuffledOptions.forEach(opt => {
-        const btn = document.createElement('button');
-        btn.className = 'option-btn';
-        btn.textContent = opt;
-        btn.onclick = () => checkAnswer(opt);
-        optionsContainer.appendChild(btn);
-    });
-}
-
-function checkAnswer(selected) {
-    if (!gameState.canAnswer) return;
-    gameState.canAnswer = false;
-    
-    const isCorrect = selected === gameState.currentQuestion.answer;
-    
-    document.querySelectorAll('.option-btn').forEach(btn => {
-        btn.style.pointerEvents = 'none';
-        if (btn.textContent === gameState.currentQuestion.answer) btn.classList.add('correct');
-        else if (btn.textContent === selected) btn.classList.add('wrong');
-    });
-
-    if (isCorrect) {
-        gameState.score += 10 * gameState.level;
-        gameState.streak++;
-        gameState.questionsDone++;
-        gameState.characterXP += 10;
-        document.getElementById('feedback').textContent = '✅ Correct!';
-        document.getElementById('feedback').style.color = '#4a7c2a';
-        playCorrect();
-        confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
-        if (gameState.streak % 5 === 0) gameState.level++;
-    } else {
-        gameState.streak = 0;
-        document.getElementById('feedback').textContent = '❌ Try again!';
-        document.getElementById('feedback').style.color = '#ff6b6b';
-        playWrong();
+    let audioCtx = null;
+    function playTone(freq, duration, type) {
+        try {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = type || 'sine';
+            osc.frequency.value = freq;
+            gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+            osc.connect(gain).connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        } catch (e) { }
     }
-    
-    updateDisplay();
-    setTimeout(nextQuestion, 1500);
-}
+    function playCorrect() { playTone(880, 0.15); setTimeout(() => playTone(1320, 0.2), 120); }
+    function playWrong() { playTone(200, 0.3, 'sawtooth'); }
 
-function updateDisplay() {
-    document.getElementById('score').textContent = gameState.score;
-    document.getElementById('level').textContent = gameState.level;
-    document.getElementById('streak').textContent = gameState.streak;
-    document.getElementById('questionsDone').textContent = gameState.questionsDone;
-    
-    const pct = Math.min(100, (gameState.characterXP / 1000) * 100);
-    document.getElementById('xpProgress').style.width = pct + '%';
-}
+    function scrollToModes() {
+        document.getElementById('game-modes').scrollIntoView({ behavior: 'smooth' });
+    }
 
-function changeGrade(grade) {
-    gameState.currentGrade = grade;
-    document.querySelectorAll('.grade-btn').forEach(btn => {
-        btn.classList.remove('active');
-        if (parseInt(btn.getAttribute('data-grade')) === grade) btn.classList.add('active');
+    function startGame(mode) {
+        gameState.gameMode = mode;
+        gameState.score = 0;
+        gameState.streak = 0;
+        gameState.level = 1;
+        gameState.questionsDone = 0;
+        document.getElementById('modeStatus').textContent = mode.charAt(0).toUpperCase() + mode.slice(1) + " Mode";
+        
+        document.getElementById('menu-screen').style.display = 'none';
+        document.getElementById('game-screen').style.display = 'block';
+        window.scrollTo(0, 0);
+        
+        updateDisplay();
+        nextQuestion();
+    }
+
+    function exitGame() {
+        document.getElementById('game-screen').style.display = 'none';
+        document.getElementById('menu-screen').style.display = 'block';
+    }
+
+    function nextQuestion() {
+        gameState.canAnswer = true;
+        const randomIndex = Math.floor(Math.random() * questionBank.length);
+        const q = questionBank[randomIndex];
+        
+        gameState.currentQuestion = q;
+        document.getElementById('question').textContent = q.question;
+        document.getElementById('feedback').textContent = '';
+        
+        const optionsContainer = document.getElementById('options');
+        optionsContainer.innerHTML = '';
+        
+        const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+        shuffledOptions.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.textContent = opt;
+            btn.onclick = () => checkAnswer(opt);
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    function checkAnswer(selected) {
+        if (!gameState.canAnswer) return;
+        gameState.canAnswer = false;
+        
+        const isCorrect = selected === gameState.currentQuestion.answer;
+        
+        document.querySelectorAll('.option-btn').forEach(btn => {
+            btn.style.pointerEvents = 'none';
+            if (btn.textContent === gameState.currentQuestion.answer) btn.classList.add('correct');
+            else if (btn.textContent === selected) btn.classList.add('wrong');
+        });
+
+        if (isCorrect) {
+            gameState.score += 10 * gameState.level;
+            gameState.streak++;
+            gameState.questionsDone++;
+            gameState.characterXP += 10;
+            document.getElementById('feedback').textContent = '✅ Correct!';
+            document.getElementById('feedback').style.color = '#4a7c2a';
+            playCorrect();
+            confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
+            if (gameState.streak % 5 === 0) gameState.level++;
+        } else {
+            gameState.streak = 0;
+            document.getElementById('feedback').textContent = '❌ Try again!';
+            document.getElementById('feedback').style.color = '#ff6b6b';
+            playWrong();
+        }
+        
+        updateDisplay();
+        setTimeout(nextQuestion, 1500);
+    }
+
+    function updateDisplay() {
+        document.getElementById('score').textContent = gameState.score;
+        document.getElementById('level').textContent = gameState.level;
+        document.getElementById('streak').textContent = gameState.streak;
+        document.getElementById('questionsDone').textContent = gameState.questionsDone;
+        
+        const pct = Math.min(100, (gameState.characterXP / 1000) * 100);
+        document.getElementById('xpProgress').style.width = pct + '%';
+    }
+
+    function changeGrade(grade) {
+        gameState.currentGrade = grade;
+        document.querySelectorAll('.grade-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (parseInt(btn.getAttribute('data-grade')) === grade) btn.classList.add('active');
+        });
+    }
+
+    document.getElementById('hint-btn').addEventListener('click', () => {
+        const hint = document.getElementById('hint-message');
+        hint.textContent = '💡 Think about the place value (hundreds, tens, units)!';
+        hint.style.display = 'block';
+        setTimeout(() => { hint.style.display = 'none'; }, 4000);
     });
-}
-
-document.getElementById('hint-btn').addEventListener('click', () => {
-    const hint = document.getElementById('hint-message');
-    hint.textContent = '💡 Think about the place value (hundreds, tens, units)!';
-    hint.style.display = 'block';
-    setTimeout(() => { hint.style.display = 'none'; }, 4000);
-});
-</script>
+    </script>
 </body>
 </html>
