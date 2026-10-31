@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     
-    <link rel="stylesheet" href="/style.css?v=10">
+    <link rel="stylesheet" href="/style.css?v=12">
 </head>
 <body>
 
@@ -40,7 +40,6 @@
                 <button class="btn-play" onclick="scrollToModes()">▶ Start Playing ›</button>
             </div>
             <div class="hero-character">
-                <!-- REPLACE WITH 3D BOY IMAGE -->
                 <div class="character-emoji">👦🏽</div> 
             </div>
         </section>
@@ -48,7 +47,6 @@
         <!-- Ko-fi / Support Bar -->
         <a href="https://ko-fi.com/skibidimath" target="_blank" class="support-bar">
             <div class="support-left">
-                <!-- REPLACE WITH 3D COFFEE CUP IMAGE -->
                 <span class="coffee-icon">☕</span>
                 <div>
                     <h4>Buy me a coffee</h4>
@@ -173,16 +171,27 @@
     </nav>
 
 <script>
-// ============================================
-// APP STATE & LOGIC
-// ============================================
 let gameState = {
-    score: 0, level: 1, streak: 0, questionsDone: 0, currentGrade: 5,
+    score: 0, level: 1, streak: 0, questionsDone: 0, currentGrade: 4,
     currentQuestion: null, canAnswer: true, gameMode: 'classic', lives: 3,
     character: 'normal', characterXP: 0
 };
 
-// Audio Synth
+const questionBank = [
+    { question: "Write in figures: three hundred and ninety-five", answer: "395", options: ["395", "359", "305", "495"] },
+    { question: "Write in figures: four thousand one hundred and forty-two", answer: "4142", options: ["4142", "4124", "4014", "4412"] },
+    { question: "Write in figures: nine hundred and thirty-seven", answer: "937", options: ["937", "973", "907", "939"] },
+    { question: "Write in figures: two thousand five hundred and ten", answer: "2510", options: ["2510", "2150", "2501", "2050"] },
+    { question: "What is the value of the 7 in 1783?", answer: "700", options: ["700", "70", "7000", "7"] },
+    { question: "What is the value of the 2 in 5297?", answer: "200", options: ["200", "20", "2000", "2"] },
+    { question: "7254 + 60 = ?", answer: "7314", options: ["7314", "7324", "7304", "7414"] },
+    { question: "8406 - 600 = ?", answer: "7806", options: ["7806", "7860", "7800", "8006"] },
+    { question: "Round 1723 to the nearest 10.", answer: "1720", options: ["1720", "1730", "1700", "1800"] },
+    { question: "Round 5395 to the nearest 1000.", answer: "5000", options: ["5000", "6000", "5400", "5500"] },
+    { question: "Write XLVIII as a number.", answer: "48", options: ["48", "58", "42", "68"] },
+    { question: "Write 35 as a Roman numeral.", answer: "XXXV", options: ["XXXV", "XXVV", "XXXXV", "XLV"] }
+];
+
 let audioCtx = null;
 function playTone(freq, duration, type) {
     try {
@@ -201,7 +210,6 @@ function playTone(freq, duration, type) {
 function playCorrect() { playTone(880, 0.15); setTimeout(() => playTone(1320, 0.2), 120); }
 function playWrong() { playTone(200, 0.3, 'sawtooth'); }
 
-// UI Navigation
 function scrollToModes() {
     document.getElementById('game-modes').scrollIntoView({ behavior: 'smooth' });
 }
@@ -227,34 +235,20 @@ function exitGame() {
     document.getElementById('menu-screen').style.display = 'block';
 }
 
-// Question Logic
 function nextQuestion() {
     gameState.canAnswer = true;
-    const grade = gameState.currentGrade;
-    const maxNum = grade <= 4 ? 12 : (grade <= 5 ? 20 : 30);
+    const randomIndex = Math.floor(Math.random() * questionBank.length);
+    const q = questionBank[randomIndex];
     
-    const a = Math.floor(Math.random() * maxNum) + 1;
-    const b = Math.floor(Math.random() * maxNum) + 1;
-    const answer = a + b;
-    
-    gameState.currentQuestion = {
-        question: `${a} + ${b} = ?`,
-        answer: answer.toString(),
-        options: [
-            answer.toString(), 
-            (answer + 1).toString(), 
-            (answer - 1).toString(), 
-            (answer + 2).toString()
-        ].sort(() => Math.random() - 0.5)
-    };
-
-    document.getElementById('question').textContent = gameState.currentQuestion.question;
+    gameState.currentQuestion = q;
+    document.getElementById('question').textContent = q.question;
     document.getElementById('feedback').textContent = '';
     
     const optionsContainer = document.getElementById('options');
     optionsContainer.innerHTML = '';
     
-    gameState.currentQuestion.options.forEach(opt => {
+    const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+    shuffledOptions.forEach(opt => {
         const btn = document.createElement('button');
         btn.className = 'option-btn';
         btn.textContent = opt;
@@ -316,7 +310,7 @@ function changeGrade(grade) {
 
 document.getElementById('hint-btn').addEventListener('click', () => {
     const hint = document.getElementById('hint-message');
-    hint.textContent = '💡 Try counting on your fingers or drawing it out!';
+    hint.textContent = '💡 Think about the place value (hundreds, tens, units)!';
     hint.style.display = 'block';
     setTimeout(() => { hint.style.display = 'none'; }, 4000);
 });
