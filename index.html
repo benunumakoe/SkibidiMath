@@ -7,15 +7,17 @@
     <meta name="theme-color" content="#101a3b">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧮</text></svg>">
     
+    <!-- Fonts & Scripts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     
-    <link rel="stylesheet" href="/style.css?v=20">
+    <link rel="stylesheet" href="/style.css?v=21">
 </head>
 <body>
 
+    <!-- ===== TOP NAVIGATION ===== -->
     <nav class="main-nav">
         <a href="/">🏠 Home</a>
         <a href="/about.html">📖 About</a>
@@ -24,6 +26,7 @@
         <a href="/contact.html">📧 Contact</a>
     </nav>
 
+    <!-- ===== TOP HEADER ===== -->
     <header class="top-header">
         <div class="logo-area">
             <h1>SkibidiMath</h1>
@@ -35,17 +38,22 @@
         </div>
     </header>
 
+    <!-- ===== MAIN APP CONTAINER ===== -->
     <main class="app-container" id="menu-screen">
+        
+        <!-- Hero Section -->
         <section class="hero-section">
             <div class="hero-text">
                 <h2>Sharpen Your<br><span>Math Skills!</span></h2>
                 <p>Fun. Interactive. Curriculum-Aligned.</p>
                 <button class="btn-play" onclick="scrollToModes()">▶ Start Playing ›</button>
             </div>
+            
             <img src="/school-boy.png" alt="Student" class="hero-full-img" onerror="this.style.display='none'; document.getElementById('fallback-emoji').style.display='block';">
             <div id="fallback-emoji" style="display:none; position: absolute; right: 20px; bottom: 0; font-size: 8rem; z-index: 0;">👦🏽</div>
         </section>
 
+        <!-- Ko-fi / Support Bar -->
         <a href="https://ko-fi.com/skibidimath" target="_blank" class="support-bar">
             <div class="support-left">
                 <span class="coffee-icon">☕</span>
@@ -59,6 +67,7 @@
             </div>
         </a>
 
+        <!-- Stats Grid -->
         <section class="stats-grid">
             <div class="stat-card stat-score">
                 <span class="stat-icon">🏆</span>
@@ -82,17 +91,20 @@
             </div>
         </section>
 
+        <!-- Selectors -->
         <section class="selector-row">
             <button class="selector-btn">
                 <span class="icon-box">💬</span> English / العربية <span class="arrow">›</span>
             </button>
             <button class="selector-btn">
-                <span class="flag-icon">🇦🇪</span> Grade 4 Math <span class="arrow">›</span>
+                <span class="flag-icon">🇦🇪</span> Curriculum <span class="arrow">›</span>
             </button>
         </section>
 
+        <!-- Game Modes Title -->
         <h3 class="section-title">🎮 Choose a Game Mode</h3>
 
+        <!-- Game Modes Grid -->
         <section class="modes-grid" id="game-modes">
             <button class="mode-card card-classic" onclick="startGame('classic')">
                 <div class="mode-img">🏆</div>
@@ -120,16 +132,20 @@
             </button>
         </section>
 
+        <!-- Grade Title -->
         <h3 class="section-title">🎓 Select Your Grade</h3>
 
+        <!-- Grade Selector -->
         <section class="grades-row">
             <button class="grade-btn active" data-grade="4" onclick="changeGrade(4)">G4</button>
             <button class="grade-btn" data-grade="5" onclick="changeGrade(5)">G5</button>
             <button class="grade-btn" data-grade="6" onclick="changeGrade(6)">G6</button>
             <button class="grade-btn" data-grade="7" onclick="changeGrade(7)">G7</button>
         </section>
+
     </main>
 
+    <!-- ===== ACTIVE GAME SCREEN ===== -->
     <main class="app-container" id="game-screen" style="display: none;">
         <button class="back-btn" onclick="exitGame()">‹ Back to Menu</button>
         <div class="game-header">
@@ -143,6 +159,7 @@
         <div id="hint-message" class="hint-box"></div>
     </main>
 
+    <!-- ===== BOTTOM NAVIGATION ===== -->
     <nav class="bottom-nav">
         <a href="/" class="nav-item active">
             <span class="nav-icon">🏠</span>
@@ -162,7 +179,7 @@
         </a>
     </nav>
 
-    <!-- THIS IS THE MAGIC LINE THAT CONNECTS YOUR QUESTIONS FILE -->
+    <!-- CONNECT TO THE QUESTIONS FILE -->
     <script src="/questions.js"></script>
 
     <!-- APP LOGIC -->
@@ -218,8 +235,15 @@
 
     function nextQuestion() {
         gameState.canAnswer = true;
-        const randomIndex = Math.floor(Math.random() * questionBank.length);
-        const q = questionBank[randomIndex];
+        
+        // This logic picks the right list based on the grade you clicked!
+        let activeBank = questionBank.grade4; 
+        if (gameState.currentGrade === 5 && questionBank.grade5.length > 0) activeBank = questionBank.grade5;
+        if (gameState.currentGrade === 6 && questionBank.grade6.length > 0) activeBank = questionBank.grade6;
+        if (gameState.currentGrade === 7 && questionBank.grade7.length > 0) activeBank = questionBank.grade7;
+
+        const randomIndex = Math.floor(Math.random() * activeBank.length);
+        const q = activeBank[randomIndex];
         
         gameState.currentQuestion = q;
         document.getElementById('question').textContent = q.question;
