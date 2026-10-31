@@ -107,6 +107,9 @@
 
         <div class="content-card">
             <h1>⚖️ Terms of Service</h1>
+            <p style="font-weight: 800; color: #666; font-style: italic; margin-bottom: 20px;">
+    Last Updated: <span id="update-date"></span>
+</p>
             
             <div class="effective-date">
                 <strong>Effective Date:</strong> January 15, 2026 | <strong>Last Updated:</strong> January 15, 2026
@@ -263,5 +266,11 @@
             <p>© 2026 SkibidiMath.com | Making Math Fun, One Game at a Time</p>
         </div>
     </div>
+    <script>
+    // This automatically updates the date to whenever the user visits the page
+    const date = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('update-date').textContent = date.toLocaleDateString('en-US', options);
+</script>
 </body>
 </html>
