@@ -1,29 +1,55 @@
-const questionBank = [
-    // Place Value
-    { question: "Write in standard form: 20,000 + 1,000 + 100 + 70 + 1", answer: "21,171", options: ["21,171", "21,117", "20,171", "21,071"] },
-    { question: "Write in standard form: 60,000 + 5,000 + 300 + 40 + 3", answer: "65,343", options: ["65,343", "65,334", "60,343", "65,043"] },
-    { question: "What is the place value of the 7 in 76,102?", answer: "Ten Thousands", options: ["Ten Thousands", "Thousands", "Hundreds", "Tens"] },
-    { question: "What is the place value of the 4 in 24,360?", answer: "Thousands", options: ["Thousands", "Ten Thousands", "Hundreds", "Tens"] },
-    { question: "What is the place value of the 9 in 90,496?", answer: "Ten Thousands", options: ["Ten Thousands", "Thousands", "Hundreds", "Tens"] },
-    { question: "Write in figures: Eighty-one thousand, six hundred.", answer: "81,600", options: ["81,600", "80,600", "81,060", "81,006"] },
-    { question: "Write in figures: Sixty thousand, sixty-one.", answer: "60,061", options: ["60,061", "60,601", "66,001", "60,060"] },
-    
-    // Comparing & Rounding
-    { question: "Which symbol makes this true? 84,325 ___ 93,417", answer: "<", options: ["<", ">", "="] },
-    { question: "Round 9,871 to the nearest 10.", answer: "9,870", options: ["9,870", "9,880", "9,900", "10,000"] },
-    { question: "Round 5,555 to the nearest 100.", answer: "5,600", options: ["5,600", "5,500", "5,550", "6,000"] },
-    { question: "Round 3,498 to the nearest 1,000.", answer: "3,000", options: ["3,000", "3,500", "4,000", "3,400"] },
-    
-    // Roman Numerals
-    { question: "Write 9 as a Roman numeral.", answer: "IX", options: ["IX", "XI", "IV", "VX"] },
-    { question: "Write 21 as a Roman numeral.", answer: "XXI", options: ["XXI", "XIX", "IXX", "XXV"] },
-    { question: "Write 37 as a Roman numeral.", answer: "XXXVII", options: ["XXXVII", "XXVII", "XXXIV", "XXXXVII"] },
-    { question: "Write XXIV as a standard number.", answer: "24", options: ["24", "14", "26", "44"] },
-    { question: "Write LVI as a standard number.", answer: "56", options: ["56", "46", "66", "54"] },
-
-    // Addition & Subtraction (NBF Book)
-    { question: "Add: 51,292 + 32,602", answer: "83,894", options: ["83,894", "83,984", "73,894", "83,794"] },
-    { question: "Find the sum: 25,575 + 42,915", answer: "68,490", options: ["68,490", "68,590", "67,490", "68,480"] },
-    { question: "Find the difference: 45,158 - 34,756", answer: "10,402", options: ["10,402", "11,402", "10,502", "10,392"] },
-    { question: "Find the difference: 97,843 - 61,732", answer: "36,111", options: ["36,111", "35,111", "36,211", "46,111"] }
-];
+const questionBank = {
+    grade4: [
+        // NBF Textbook - Whole Numbers & Place Value
+        { question: "Write in standard form: 20,000 + 1,000 + 100 + 70 + 1", answer: "21,171", options: ["21,171", "21,117", "20,171", "21,071"] },
+        { question: "Write in standard form: 60,000 + 5,000 + 300 + 40 + 3", answer: "65,343", options: ["65,343", "65,334", "60,343", "65,043"] },
+        { question: "What is the place value of the 7 in 76,102?", answer: "Ten Thousands", options: ["Ten Thousands", "Thousands", "Hundreds", "Tens"] },
+        { question: "What is the place value of the 4 in 24,360?", answer: "Thousands", options: ["Thousands", "Ten Thousands", "Hundreds", "Tens"] },
+        { question: "What is the place value of the 9 in 90,496?", answer: "Ten Thousands", options: ["Ten Thousands", "Thousands", "Hundreds", "Tens"] },
+        { question: "Write in figures: Eighty-one thousand, six hundred.", answer: "81,600", options: ["81,600", "80,600", "81,060", "81,006"] },
+        { question: "Write in figures: Sixty thousand, sixty-one.", answer: "60,061", options: ["60,061", "60,601", "66,001", "60,060"] },
+        { question: "Which symbol makes this true? 84,325 ___ 93,417", answer: "<", options: ["<", ">", "="] },
+        { question: "Round 9,871 to the nearest 10.", answer: "9,870", options: ["9,870", "9,880", "9,900", "10,000"] },
+        { question: "Round 5,555 to the nearest 100.", answer: "5,600", options: ["5,600", "5,500", "5,550", "6,000"] },
+        { question: "Round 3,498 to the nearest 1,000.", answer: "3,000", options: ["3,000", "3,500", "4,000", "3,400"] },
+        { question: "Write 9 as a Roman numeral.", answer: "IX", options: ["IX", "XI", "IV", "VX"] },
+        { question: "Write 21 as a Roman numeral.", answer: "XXI", options: ["XXI", "XIX", "IXX", "XXV"] },
+        { question: "Write 37 as a Roman numeral.", answer: "XXXVII", options: ["XXXVII", "XXVII", "XXXIV", "XXXXVII"] },
+        { question: "Write XXIV as a standard number.", answer: "24", options: ["24", "14", "26", "44"] },
+        { question: "Write LVI as a standard number.", answer: "56", options: ["56", "46", "66", "54"] },
+        { question: "Add: 51,292 + 32,602", answer: "83,894", options: ["83,894", "83,984", "73,894", "83,794"] },
+        { question: "Find the sum: 25,575 + 42,915", answer: "68,490", options: ["68,490", "68,590", "67,490", "68,480"] },
+        { question: "Find the difference: 45,158 - 34,756", answer: "10,402", options: ["10,402", "11,402", "10,502", "10,392"] },
+        { question: "Find the difference: 97,843 - 61,732", answer: "36,111", options: ["36,111", "35,111", "36,211", "46,111"] }
+    ],
+    grade5: [
+        // Reveal Math - Unit 3: Place Value and Number Relationships
+        { question: "How does the value of the 7 in the thousands place relate to the 7 in the hundreds place in 7,777?", answer: "It is 10 times greater", options: ["It is 10 times greater", "It is 1/10 the value", "It is the same", "It is 100 times greater"] },
+        { question: "In the number 447,699, how does the value of the 4 in the ten thousands place relate to the 4 in the hundred thousands place?", answer: "It is 1/10 the value", options: ["It is 1/10 the value", "It is 10 times greater", "It is the same", "It is 100 times greater"] },
+        { question: "True or False: The digit 3 in 5,630 is 10 times the value of the 3 in 342.", answer: "True", options: ["True", "False"] },
+        { question: "Complete the sentence: 0.009 is ____ 0.09.", answer: "1/10 of", options: ["1/10 of", "10 times", "100 times", "equal to"] },
+        { question: "Complete the sentence: 0.09 is ____ 0.009.", answer: "10 times", options: ["10 times", "1/10 of", "100 times", "equal to"] },
+        { question: "What is the relationship between the 4s in 3.244?", answer: "The first 4 is 10 times the second 4", options: ["The first 4 is 10 times the second 4", "The first 4 is 1/10 of the second 4", "They are equal", "The second 4 is 100 times the first 4"] },
+        { question: "What is 34.618 written in expanded form?", answer: "30 + 4 + 0.6 + 0.01 + 0.008", options: ["30 + 4 + 0.6 + 0.01 + 0.008", "30 + 4 + 6 + 1 + 8", "3 + 4 + 0.6 + 0.1 + 0.08", "30 + 4 + 0.06 + 0.01 + 0.008"] },
+        { question: "What is 34.618 in word form?", answer: "thirty-four and six hundred eighteen thousandths", options: ["thirty-four and six hundred eighteen thousandths", "thirty-four and six hundred eighteen hundredths", "thirty-four point six one eight", "thirty-four and sixty-one tenths"] },
+        { question: "What is the standard form of 0.9 + 0.03 + 0.007?", answer: "0.937", options: ["0.937", "0.973", "9.37", "0.0937"] },
+        { question: "What is 20 + 0.7 + 0.08 + 0.006 in standard form?", answer: "20.786", options: ["20.786", "20.768", "2.786", "20.00786"] },
+        { question: "Write 'ninety-three and six thousandths' in standard form.", answer: "93.006", options: ["93.006", "93.6", "93.060", "9.3006"] },
+        { question: "Which symbol makes this true? 3.281 ___ 3.095", answer: ">", options: [">", "<", "="] },
+        { question: "Which symbol makes this true? 7.790 ___ 8.7", answer: "<", options: ["<", ">", "="] },
+        { question: "Which symbol makes this true? 1.021 ___ 1.095", answer: "<", options: ["<", ">", "="] },
+        { question: "Which symbol makes this true? 6.55 ___ 5.66", answer: ">", options: [">", "<", "="] },
+        { question: "Which symbol makes this true? 9.9 ___ 0.99", answer: ">", options: [">", "<", "="] },
+        { question: "Which is greater: 0.04 or 0.4?", answer: "0.4", options: ["0.4", "0.04", "They are equal"] },
+        { question: "Round 78.39 to the nearest whole number.", answer: "78", options: ["78", "79", "78.4", "80"] },
+        { question: "Round 4.07 to the nearest whole number.", answer: "4", options: ["4", "5", "4.1", "0"] },
+        { question: "Round 12.7 to the nearest whole number.", answer: "13", options: ["13", "12", "12.5", "14"] },
+        { question: "Round 15.55 to the nearest whole number.", answer: "16", options: ["16", "15", "15.5", "17"] },
+        { question: "Round 42.89 to the nearest tenth.", answer: "42.9", options: ["42.9", "42.8", "43.0", "42.0"] },
+        { question: "Round 3.65 to the nearest tenth.", answer: "3.7", options: ["3.7", "3.6", "4.0", "3.0"] },
+        { question: "Round 16.12 to the nearest tenth.", answer: "16.1", options: ["16.1", "16.2", "16.0", "17.0"] },
+        { question: "Round 98.17 to the nearest tenth.", answer: "98.2", options: ["98.2", "98.1", "98.0", "99.0"] }
+    ],
+    grade6: [],
+    grade7: []
+};
